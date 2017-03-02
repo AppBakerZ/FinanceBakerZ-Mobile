@@ -3,7 +3,7 @@ import {
     Text
 } from 'react-native';
 
-export default class ForgotPassword extends Component {
+export default class ForgotPasswordScreen extends Component {
     render() {
         return (
             <Text>

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { NavigationExperimental, PixelRatio, StyleSheet, Text, TouchableHighlight } from 'react-native';
 
-import Login from './screens/auth/Login.js';
-import Register from './screens/auth/Register.js';
+import LoginScreen from './screens/auth/Login.js';
+import RegisterScreen from './screens/auth/Register.js';
 
 const {
     CardStack: NavigationCardStack,
@@ -43,13 +43,13 @@ export default class ExNavigator extends Component {
 
         switch (sceneProps.scene.key) {
             case 'scene_login':
-                scene = <Login
+                scene = <LoginScreen
                     onPushRoute={this.props.onNavigationChange}
                     onPopRoute={this._onPopRoute}
                     />;
                 break;
             case 'scene_register':
-                scene = <Register
+                scene = <RegisterScreen
                     onPushRoute={this.props.onNavigationChange}
                     onPopRoute={this._onPopRoute}
                     />;

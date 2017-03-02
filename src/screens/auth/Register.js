@@ -5,7 +5,7 @@ import {
     Text
 } from 'react-native';
 
-export default class Register extends Component {
+export default class RegisterScreen extends Component {
     render() {
         return (
             <View style={{backgroundColor: 'darkgreen', flex: 1}}>

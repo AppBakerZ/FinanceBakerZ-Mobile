@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { NavigationExperimental, PixelRatio, StyleSheet, Text, TouchableHighlight } from 'react-native';
+import { NavigationExperimental } from 'react-native';
 
-import LoginScreen from './screens/auth/Login.js';
-import RegisterScreen from './screens/auth/Register.js';
+import LoginScreen from 'FinanceBakerZ/src/screens/auth/Login';
+import RegisterScreen from 'FinanceBakerZ/src/screens/auth/Register';
+import ForgotPasswordScreen from 'FinanceBakerZ/src/screens/auth/ForgotPassword';
 
 const {
     CardStack: NavigationCardStack,
@@ -18,7 +19,6 @@ export default class ExNavigator extends Component {
 
         this._onPopRoute = this.props.onNavigationChange.bind(null, {type: 'pop', key: 'login'});
 
-        this._renderScene = this._renderScene.bind(this);
     }
 
     // Now we finally get to use the `NavigationCardStack` to render the scenes.
@@ -27,8 +27,7 @@ export default class ExNavigator extends Component {
             <NavigationCardStack
                 onNavigateBack={this._onPopRoute}
                 navigationState={this.props.navigationState}
-                renderScene={this._renderScene}
-                style={styles.navigator}
+                renderScene={this._renderScene.bind(this)}
                 />
         );
     }
@@ -53,13 +52,14 @@ export default class ExNavigator extends Component {
                     onPushRoute={this.props.onNavigationChange}
                     onPopRoute={this._onPopRoute}
                     />;
+                break;
+            case 'scene_forgotPassword':
+                scene = <ForgotPasswordScreen
+                    onPushRoute={this.props.onNavigationChange}
+                    onPopRoute={this._onPopRoute}
+                    />;
+                break;
         }
         return scene
     }
 }
-
-const styles = StyleSheet.create({
-    navigator: {
-        flex: 1
-    }
-});

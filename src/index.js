@@ -7,7 +7,7 @@ import {
 export default class FinanceBakerZ extends Component {
     render() {
         return (
-            <Router />
+            <Routes />
         );
     }
 }

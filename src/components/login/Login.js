@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { Image } from 'react-native';
 import { LoginStyles } from 'FinanceBakerZ/src/components/login/LoginStyle'
-import {Button, Container, Content, Form, Item, Input, Label, Text} from 'native-base';
+import { Button, Container, Content, Form, Item, Input, Label, Text} from 'native-base';
 
 export default class Login extends Component {
     render() {
         return (
+        <Image source={require('FinanceBakerZ/src/images/app-background.png')} style={LoginStyles.backgroundImage} >
           <Container>
             <Content>
-              <Image source={require('FinanceBakerZ/src/images/app-background.png')} style={LoginStyles.backgroundImage} >
                 <Content contentContainerStyle={{alignItems: 'center'}}  style={{marginTop: 100 }} >
                   <Image source={require('FinanceBakerZ/src/images/logo-final.png')} style={LoginStyles.logo} />
                 </Content>
@@ -22,15 +22,20 @@ export default class Login extends Component {
                       <Label>Password</Label>
                       <Input />
                     </Item>
-                    <Text style={{textAlign: 'right', marginTop: 20, marginBottom: 20}}>Forgot Password</Text>
+                    <Text style={{textAlign: 'right', marginTop: 20, marginBottom: 20, marginRight: 15, fontWeight: 'bold'}}>Forgot Password</Text>
                     <Button success full large>
                       <Text>SIGN IN</Text>
                     </Button>
+                    <Text style={{textAlign: 'center', marginTop: 20}}>
+                      Don't have an account?
+                      <Text style={{fontWeight: 'bold'}}> Sign Up</Text>
+                    </Text>
                   </Form>
                 </Content>
-              </Image>
             </Content>
           </Container>
+        </Image>
+
           );
     }
 }

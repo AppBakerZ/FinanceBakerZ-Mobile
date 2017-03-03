@@ -12,40 +12,35 @@ export default class Login extends Component {
                 <Content contentContainerStyle={{alignItems: 'center'}}  style={{marginTop: 100 }} >
                   <Image source={require('FinanceBakerZ/src/images/logo-final.png')} style={LoginStyles.logo} />
                 </Content>
-                <Content style={{marginTop: 50}} >
-                  <Form>
-                    <Item floatingLabel last>
-                      <Label>Username</Label>
-                      <Input />
-                    </Item>
-                    <Item floatingLabel last>
-                      <Label>Password</Label>
-                      <Input />
-                    </Item>
-                    <Text style={{textAlign: 'right', marginTop: 20, marginBottom: 20, marginRight: 15, fontWeight: 'bold'}}>Forgot Password</Text>
-                    <Button success full large>
-                      <Text>SIGN IN</Text>
-                    </Button>
-                    <Text style={{textAlign: 'center', marginTop: 20}}>
-                      Don't have an account?
-                      <Text style={{fontWeight: 'bold'}}> Sign Up</Text>
-                    </Text>
-                  </Form>
-                </Content>
-            </Content>
+                  <Content style={{marginTop: 50}} >
+                    <Form>
+                      <Item floatingLabel last>
+                        <Label>Username</Label>
+                        <Input />
+                      </Item>
+                      <Item floatingLabel last>
+                        <Label>Password</Label>
+                        <Input
+                          secureTextEntry
+                        />
+                      </Item>
+                      <Text style={{textAlign: 'right', marginTop: 20, marginBottom: 20, marginRight: 15, fontWeight: 'bold'}}>Forgot Password</Text>
+                      <Button success full large>
+                        <Text>Sign In</Text>
+                      </Button>
+                      <Text style={{textAlign: 'center', marginTop: 20}}>
+                        Don't have an account?
+                        <Text style={{fontWeight: 'bold'}}
+                              onPress={this.props.onPushRoute.bind(null, {type: 'push', key: 'register'})}
+                        >
+                           &nbsp;Sign Up
+                        </Text>
+                      </Text>
+                    </Form>
+                  </Content>
+              </Content>
           </Container>
         </Image>
-
           );
     }
 }
-
-/*
-
-<TouchableHighlight
-onPress={this.props.onPushRoute.bind(null, {type: 'push', key: 'register'})}>
-<Text>
-  Register
-</Text>
-</TouchableHighlight >
-*/

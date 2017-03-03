@@ -1,8 +1,11 @@
 import {StyleSheet} from 'react-native';
 
 export const RegisterStyles = StyleSheet.create({
-    container: {
-        backgroundColor: 'green',
-        flex: 1
-    }
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover',
+    width: null,
+    height: null
+  },
+
 });

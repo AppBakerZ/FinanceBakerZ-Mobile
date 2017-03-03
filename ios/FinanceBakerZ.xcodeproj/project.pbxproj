@@ -69,6 +69,12 @@
 		27C55BE1529241B5BBD689FC /* Skia.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0B51D0E3D3C4473C960088EE /* Skia.ttf */; };
 		DBDC9BB6CB434C3EAF4BC347 /* Times New Roman.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1D6F5BD55DCF41DC8A1ECE9D /* Times New Roman.ttf */; };
 		EA206169147F43FEBBA64938 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 08F8720CF2C84765AE5AC5B5 /* Zocial.ttf */; };
+		2D1EA6C2C83546319D30E613 /* Quicksand_Bold_Oblique.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8DA2F6043A644FF2A2F48032 /* Quicksand_Bold_Oblique.otf */; };
+		063433329F1A4F88B0152DDB /* Quicksand_Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3816369C14E84E0BB207FE3F /* Quicksand_Bold.otf */; };
+		E3C47753C8234401A7479F3D /* Quicksand_Book_Oblique.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C138A4CF246D2A567D40E /* Quicksand_Book_Oblique.otf */; };
+		AF1B8D8B07C14201973C4E41 /* Quicksand_Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2C95F6C3A04E46889CA28AC7 /* Quicksand_Book.otf */; };
+		841497FD9B334F8CBBD2093A /* Quicksand_Light_Oblique.otf in Resources */ = {isa = PBXBuildFile; fileRef = 32AFB116A59843BAA8C5CF2F /* Quicksand_Light_Oblique.otf */; };
+		7B00117B40714BD6A9EAF3B0 /* Quicksand_Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = B0F5A6A5856C494AB01D533C /* Quicksand_Light.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -322,6 +328,12 @@
 		0B51D0E3D3C4473C960088EE /* Skia.ttf */ = {isa = PBXFileReference; name = "Skia.ttf"; path = "../node_modules/native-base/Fonts/Skia.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		1D6F5BD55DCF41DC8A1ECE9D /* Times New Roman.ttf */ = {isa = PBXFileReference; name = "Times New Roman.ttf"; path = "../node_modules/native-base/Fonts/Times New Roman.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		08F8720CF2C84765AE5AC5B5 /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/native-base/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		8DA2F6043A644FF2A2F48032 /* Quicksand_Bold_Oblique.otf */ = {isa = PBXFileReference; name = "Quicksand_Bold_Oblique.otf"; path = "../src/fonts/Quicksand_Bold_Oblique.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		3816369C14E84E0BB207FE3F /* Quicksand_Bold.otf */ = {isa = PBXFileReference; name = "Quicksand_Bold.otf"; path = "../src/fonts/Quicksand_Bold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6F9C138A4CF246D2A567D40E /* Quicksand_Book_Oblique.otf */ = {isa = PBXFileReference; name = "Quicksand_Book_Oblique.otf"; path = "../src/fonts/Quicksand_Book_Oblique.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		2C95F6C3A04E46889CA28AC7 /* Quicksand_Book.otf */ = {isa = PBXFileReference; name = "Quicksand_Book.otf"; path = "../src/fonts/Quicksand_Book.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		32AFB116A59843BAA8C5CF2F /* Quicksand_Light_Oblique.otf */ = {isa = PBXFileReference; name = "Quicksand_Light_Oblique.otf"; path = "../src/fonts/Quicksand_Light_Oblique.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		B0F5A6A5856C494AB01D533C /* Quicksand_Light.otf */ = {isa = PBXFileReference; name = "Quicksand_Light.otf"; path = "../src/fonts/Quicksand_Light.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -588,6 +600,12 @@
 				0B51D0E3D3C4473C960088EE /* Skia.ttf */,
 				1D6F5BD55DCF41DC8A1ECE9D /* Times New Roman.ttf */,
 				08F8720CF2C84765AE5AC5B5 /* Zocial.ttf */,
+				8DA2F6043A644FF2A2F48032 /* Quicksand_Bold_Oblique.otf */,
+				3816369C14E84E0BB207FE3F /* Quicksand_Bold.otf */,
+				6F9C138A4CF246D2A567D40E /* Quicksand_Book_Oblique.otf */,
+				2C95F6C3A04E46889CA28AC7 /* Quicksand_Book.otf */,
+				32AFB116A59843BAA8C5CF2F /* Quicksand_Light_Oblique.otf */,
+				B0F5A6A5856C494AB01D533C /* Quicksand_Light.otf */,
 			);
 			name = Resources;
 			path = "";
@@ -985,6 +1003,12 @@
 				27C55BE1529241B5BBD689FC /* Skia.ttf in Resources */,
 				DBDC9BB6CB434C3EAF4BC347 /* Times New Roman.ttf in Resources */,
 				EA206169147F43FEBBA64938 /* Zocial.ttf in Resources */,
+				2D1EA6C2C83546319D30E613 /* Quicksand_Bold_Oblique.otf in Resources */,
+				063433329F1A4F88B0152DDB /* Quicksand_Bold.otf in Resources */,
+				E3C47753C8234401A7479F3D /* Quicksand_Book_Oblique.otf in Resources */,
+				AF1B8D8B07C14201973C4E41 /* Quicksand_Book.otf in Resources */,
+				841497FD9B334F8CBBD2093A /* Quicksand_Light_Oblique.otf in Resources */,
+				7B00117B40714BD6A9EAF3B0 /* Quicksand_Light.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

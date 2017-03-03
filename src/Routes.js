@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { NavigationExperimental } from 'react-native';
 
 import Header from 'FinanceBakerZ/src/components/header/Header';
-
 import LoginScreen from 'FinanceBakerZ/src/screens/auth/Login';
 import RegisterScreen from 'FinanceBakerZ/src/screens/auth/Register';
 import ForgotPasswordScreen from 'FinanceBakerZ/src/screens/auth/ForgotPassword';

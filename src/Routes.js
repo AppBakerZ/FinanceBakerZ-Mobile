@@ -25,7 +25,7 @@ export default class Routes extends Component {
         if (!state) {
             return {
                 index: 0,
-                routes: [{ key: 'Login' }]
+                routes: [{ key: 'Login', hideHeader: true }]
             };
         }
         switch (action) {

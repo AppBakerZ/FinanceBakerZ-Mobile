@@ -18,13 +18,11 @@ export default class Header extends Component {
         );
     }
     render() {
-        return (
-            <NavigationHeader
-                {...this.props}
-                renderTitleComponent={this._renderTitleComponent.bind(this)}
-                onNavigateBack={this._back.bind(this)}
-                />
-        );
+        return this.props.scene.route.hideHeader ? null : <NavigationHeader
+            {...this.props}
+            renderTitleComponent={this._renderTitleComponent.bind(this)}
+            onNavigateBack={this._back.bind(this)}
+            />
     }
 }
 

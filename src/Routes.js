@@ -1,67 +1,64 @@
 import React, { Component } from 'react';
 import { NavigationExperimental } from 'react-native';
 
-import ExNavigator from './ExNavigator.js';
+import LoginScreen from 'FinanceBakerZ/src/screens/auth/Login';
+import RegisterScreen from 'FinanceBakerZ/src/screens/auth/Register';
+import ForgotPasswordScreen from 'FinanceBakerZ/src/screens/auth/ForgotPassword';
 
 const {
     CardStack: NavigationCardStack,
     StateUtils: NavigationStateUtils,
-
     } = NavigationExperimental;
 
 
-
-
 export default class Routes extends Component {
+
     constructor(props, context) {
         super(props, context);
-
         this.state = {
-            // This defines the initial navigation state.
-            navigationState: {
-                index: 0, // Starts with first route focused.
-                routes: [{key: 'login'}] // Starts with only one route.
+            navState: this.reducer()
+        }
+    }
+
+    reducer(state, action, route) {
+        if (!state) {
+            return {
+                index: 0,
+                routes: [{ key: 'Login' }]
+            };
+        }
+        switch (action) {
+            case 'push': {
+                return NavigationStateUtils.push(state, route);
             }
-        };
-
-        // We'll define this function later - hang on
-        this._onNavigationChange = this._onNavigationChange.bind(this);
-    }
-
-    _onNavigationChange(route) {
-        console.log('type :', route);
-        // Extract the navigationState from the current state:
-        let {navigationState} = this.state;
-
-        switch (route.type) {
-            case 'push':
-                // Use the push reducer provided by NavigationStateUtils
-                navigationState = NavigationStateUtils.push(navigationState, route);
-                break;
-
-            case 'pop':
-                // Pop the current route using the pop reducer.
-                navigationState = NavigationStateUtils.pop(navigationState);
-                break;
-        }
-
-        // NavigationStateUtils gives you back the same `navigationState` if nothing
-        // has changed. We will only update state if it has changed.
-        if (this.state.navigationState !== navigationState) {
-            // Always use setState() when setting a new state!
-            this.setState({navigationState});
-            // If you are new to ES6, the above is equivalent to:
-            // this.setState({navigationState: navigationState});
+            case 'pop': {
+                return NavigationStateUtils.pop(state);
+            }
+            default:
+                return state
         }
     }
-
+    _navigate (action, route) {
+        const navState = this.reducer(this.state.navState, action, route);
+        this.setState({
+            navState
+        })
+    }
+    _renderScene (props) {
+        switch(props.scene.route.key) {
+            case 'Login':
+                return <LoginScreen navigate={this._navigate.bind(this)} />;
+            case 'Register':
+                return <RegisterScreen navigate={this._navigate.bind(this)} />
+        }
+    }
     render() {
+        const { navState } = this.state;
         return (
-            <ExNavigator
-                navigationState={this.state.navigationState}
-                onNavigationChange={this._onNavigationChange}
-                onExit={this._exit}
+            <NavigationCardStack
+                navigationState={navState}
+                renderScene={this._renderScene.bind(this)}
                 />
-        );
+        )
     }
 }

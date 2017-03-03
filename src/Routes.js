@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { NavigationExperimental } from 'react-native';
 
+import Header from 'FinanceBakerZ/src/components/header/Header';
+
 import LoginScreen from 'FinanceBakerZ/src/screens/auth/Login';
 import RegisterScreen from 'FinanceBakerZ/src/screens/auth/Register';
 import ForgotPasswordScreen from 'FinanceBakerZ/src/screens/auth/ForgotPassword';
@@ -9,7 +11,6 @@ const {
     CardStack: NavigationCardStack,
     StateUtils: NavigationStateUtils,
     } = NavigationExperimental;
-
 
 export default class Routes extends Component {
 
@@ -52,10 +53,19 @@ export default class Routes extends Component {
                 return <RegisterScreen navigate={this._navigate.bind(this)} />
         }
     }
+    _renderHeader (sceneProps) {
+        return (
+            <Header
+                navigate={this._navigate.bind(this)}
+                {...sceneProps}
+                />
+        )
+    }
     render() {
         const { navState } = this.state;
         return (
             <NavigationCardStack
+                renderHeader={this._renderHeader.bind(this)}
                 navigationState={navState}
                 renderScene={this._renderScene.bind(this)}
                 />

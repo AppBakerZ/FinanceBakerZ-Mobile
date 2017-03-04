@@ -20,7 +20,7 @@ export const LoginStyles = StyleSheet.create({
   },
 
   formContainer:{
-    marginTop: 70
+    marginTop: 70,
   },
 
   textRight: {
@@ -37,18 +37,24 @@ export const LoginStyles = StyleSheet.create({
 
   },
 
+  bottomTextContainer: {
+    flex: 2,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+
   bottomText:{
     fontFamily: 'Quicksand_Book',
-    marginTop: 20,
-    textAlign: 'center'
   },
 
   textBold:{
     fontFamily: 'Quicksand_Bold',
+
   },
 
-  addons: {
-
+  input: {
+    fontFamily: 'Quicksand_Book'
   }
 
 

@@ -20,21 +20,25 @@ export const LoginStyles = StyleSheet.create({
   },
 
   formContainer:{
-    marginTop: 70,
+    marginTop: 50,
+  },
+
+  textRightContainer: {
+    alignItems: 'flex-end',
   },
 
   textRight: {
-    textAlign: 'right',
+    paddingTop: 10,
+    paddingBottom: 10,
     marginRight: 20,
     marginTop: 10,
-    fontFamily: 'Quicksand_Bold',
+    fontFamily: 'Quicksand_Bold'
   },
 
   btn:{
     backgroundColor: '#00562f',
     marginTop: 80,
     padding: 30,
-
   },
 
   bottomTextContainer: {
@@ -50,6 +54,8 @@ export const LoginStyles = StyleSheet.create({
 
   textBold:{
     fontFamily: 'Quicksand_Bold',
+    paddingTop: 18,
+    paddingBottom: 18
 
   },
 

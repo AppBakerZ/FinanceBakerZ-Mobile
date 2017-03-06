@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Image, Text, TextInput, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Image, Text, TextInput, ScrollView, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 
 import { RegisterStyles } from 'FinanceBakerZ/src/components/register/RegisterStyle'
 import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
@@ -7,12 +7,13 @@ import Button from 'FinanceBakerZ/src/components/button/Button';
 
 export default class Register extends Component {
     render() {
-        return (
+      return (
             <ViewContainer>
                 <Image source={require('FinanceBakerZ/src/images/app-background.png')} style={RegisterStyles.backgroundImage} >
                     <View>
                         <Text style={RegisterStyles.topHeading}>Sign Up</Text>
                     </View>
+                    <KeyboardAvoidingView>
                     <ScrollView style={RegisterStyles.formContainer}>
                         <TextInput
                           placeholder='Username'
@@ -40,28 +41,27 @@ export default class Register extends Component {
                           ref={(ref) => {this.pass = ref}}
 
                         />
-
-                    </ScrollView>
-                    <View style={RegisterStyles.btnContainer}>
-                        <Button
-                          title="Sign Up"
-                          style={RegisterStyles.btn}
-                        />
-                    </View>
-                    <View style={RegisterStyles.bottomTextContainer}>
-                        <Text style={RegisterStyles.bottomText}>
-                            Already have an account?
-                        </Text>
-                        <TouchableOpacity>
-                            <Text
-                              style={RegisterStyles.textBold}
-                              onPress={this.props.navigate.bind(null, 'pop')}
-                            > Sign In
+                        </ScrollView>
+                    </KeyboardAvoidingView>
+                        <View style={RegisterStyles.btnContainer}>
+                            <Button
+                              title="Sign Up"
+                              style={RegisterStyles.btn}
+                            />
+                        </View>
+                        <View style={RegisterStyles.bottomTextContainer}>
+                            <Text style={RegisterStyles.bottomText}>
+                                Already have an account?
                             </Text>
-                        </TouchableOpacity>
-                    </View>
-                </Image>
-            </ViewContainer>
+                            <TouchableOpacity onPress={this.props.navigate.bind(null, 'pop')}>
+                                <Text
+                                  style={RegisterStyles.textBold}
+                                > Sign In
+                                </Text>
+                            </TouchableOpacity>
+                        </View>
+                    </Image>
+                </ViewContainer>
 
 
         );

@@ -18,13 +18,12 @@ export const RegisterStyles = StyleSheet.create({
   },
 
   formContainer: {
-    flex: 1,
-    flexDirection: 'column',
+    flex: 0,
     marginTop: 70
   },
 
   btn:{
-    marginTop: 50,
+    marginTop: 130,
     backgroundColor: '#00562f',
     padding: 30,
   },
@@ -43,6 +42,8 @@ export const RegisterStyles = StyleSheet.create({
 
   bottomText:{
     fontFamily: 'Quicksand_Book',
+    paddingTop: 20,
+    paddingBottom: 20
   },
 
   textBold:{

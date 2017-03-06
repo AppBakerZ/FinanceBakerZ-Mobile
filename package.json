@@ -7,9 +7,9 @@
     "test": "jest"
   },
   "dependencies": {
-    "native-base": "^2.0.11",
     "react": "15.4.2",
-    "react-native": "0.41.2"
+    "react-native": "0.41.2",
+    "react-native-meteor": "^1.0.3"
   },
   "devDependencies": {
     "babel-jest": "19.0.0",
@@ -21,6 +21,8 @@
     "preset": "react-native"
   },
   "rnpm": {
-  "assets": ["./src/fonts"]
-}
+    "assets": [
+      "./src/fonts"
+    ]
+  }
 }

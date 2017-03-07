@@ -5,6 +5,8 @@ import { RegisterStyles } from 'FinanceBakerZ/src/components/register/RegisterSt
 import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
 import Button from 'FinanceBakerZ/src/components/button/Button';
 
+import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
+
 export default class Register extends Component {
     render() {
       return (
@@ -15,32 +17,41 @@ export default class Register extends Component {
                     </View>
                     <KeyboardAvoidingView>
                     <ScrollView style={RegisterStyles.formContainer}>
-                        <TextInput
-                          placeholder='Username'
-                          style={RegisterStyles.input}
-                          placeholderStyle={RegisterStyles.input}
-                          autoCorrect={false}
-                          onSubmitEditing={()=> {this.email.focus()}}
-                        />
-                        <TextInput
-                          placeholder='Email'
-                          keyboardType="email-address"
-                          style={RegisterStyles.input}
-                          placeholderStyle={RegisterStyles.input}
-                          autoCorrect={false}
-                          ref={(ref) => {this.email = ref}}
-                          onSubmitEditing={()=> {this.pass.focus()}}
+                       <View>
+                           <Icon size={15} name="Person" style={RegisterStyles.inputIcon} ></Icon>
+                           <TextInput
+                             placeholder='Username'
+                             style={RegisterStyles.input}
+                             placeholderStyle={RegisterStyles.input}
+                             autoCorrect={false}
+                             onSubmitEditing={()=> {this.email.focus()}}
+                           />
+                       </View>
+                       <View>
+                           <Icon size={15} name="Email" style={RegisterStyles.inputIcon} ></Icon>
+                           <TextInput
+                             placeholder='Email'
+                             keyboardType="email-address"
+                             style={RegisterStyles.input}
+                             placeholderStyle={RegisterStyles.input}
+                             autoCorrect={false}
+                             ref={(ref) => {this.email = ref}}
+                             onSubmitEditing={()=> {this.pass.focus()}}
 
-                        />
-                        <TextInput
-                          placeholder='Password'
-                          secureTextEntry
-                          autoCorrect={false}
-                          style={RegisterStyles.input}
-                          placeholderStyle={RegisterStyles.input}
-                          ref={(ref) => {this.pass = ref}}
+                           />
+                       </View>
+                       <View>
+                           <Icon size={15} name="Password" style={RegisterStyles.inputIcon} ></Icon>
+                           <TextInput
+                             placeholder='Password'
+                             secureTextEntry
+                             autoCorrect={false}
+                             style={RegisterStyles.input}
+                             placeholderStyle={RegisterStyles.input}
+                             ref={(ref) => {this.pass = ref}}
 
-                        />
+                           />
+                       </View>
                         </ScrollView>
                     </KeyboardAvoidingView>
                         <View style={RegisterStyles.btnContainer}>

@@ -60,7 +60,14 @@ export const LoginStyles = StyleSheet.create({
   },
 
   input: {
-    fontFamily: 'Quicksand_Book'
+    fontFamily: 'Quicksand_Book',
+    paddingLeft: 50,
+  },
+
+  inputIcon:{
+    position: 'absolute',
+    top: 12,
+    left: 20
   }
 
 

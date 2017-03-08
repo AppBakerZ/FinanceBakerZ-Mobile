@@ -9,35 +9,27 @@ export const RegisterStyles = StyleSheet.create({
     height: null
   },
 
-  topHeading: {
-    fontSize: 45,
-    marginTop: 45,
-    marginLeft: 30,
-    color: '#00562f',
-    fontFamily: 'Quicksand_Bold'
-  },
-
   formContainer: {
-    flex: 0,
-    marginTop: 70
+    flex: 1.7,
+    justifyContent: 'flex-end'
   },
 
   btn:{
-    marginTop: 130,
     backgroundColor: '#00562f',
     padding: 30,
   },
 
   btnContainer: {
-    flex: 0
+    flex: 1.5,
+    justifyContent: 'flex-end',
+    alignItems: 'center'
   },
 
   bottomTextContainer: {
-    flex: 0.2,
+    flex: 0.5,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-
   },
 
   bottomText:{
@@ -53,11 +45,13 @@ export const RegisterStyles = StyleSheet.create({
   input: {
     fontFamily: 'Quicksand_Book',
     paddingLeft: 65,
+    fontSize: 15,
+    paddingBottom: 15
   },
 
   inputIcon:{
     position: 'absolute',
-    top: 12,
+    top: 13,
     left: 35
   }
 

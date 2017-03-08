@@ -6,7 +6,8 @@ import Button from 'FinanceBakerZ/src/components/button/Button';
 
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
 
-import Meteor, { createContainer } from 'react-native-meteor';
+import Meteor from 'react-native-meteor';
+
 export default class Login extends Component {
 
 
@@ -16,7 +17,7 @@ export default class Login extends Component {
     this.state = {
       usernameOrEmail: '',
       password: '',
-      loading: false,
+      loading: false
     }
   }
 
@@ -39,6 +40,7 @@ export default class Login extends Component {
 
   onSubmit(){
     const {usernameOrEmail, password} = this.state;
+    this.setState({loading: true});
 
     if(usernameOrEmail.length && password.length){
       let user;
@@ -48,11 +50,14 @@ export default class Login extends Component {
         else
           user = {email: usernameOrEmail};
 
-
       Meteor.loginWithPassword(user, password, (err) => {
         if(err){
-          console.log('err1:', err);
+          console.log('err: ', err);
+          this.showAlert('Error', err.reason);
+          this.setState({loading: false});
         }else{
+          this.showAlert('Welcome', 'Hello '+usernameOrEmail + '.');
+          this.setState({loading: false});
           var useraccount = {account: {owner: Meteor.user()._id}};
           Meteor.call('profileAssets', useraccount, function (err, result) {
               console.log('err:', err);
@@ -63,10 +68,9 @@ export default class Login extends Component {
           }, 1000);
         }
       });
-
-
     }else {
       this.showAlert('Warning', 'All fields are required.');
+      this.setState({loading: false});
     }
 
   }
@@ -78,9 +82,9 @@ export default class Login extends Component {
                   <View style={LoginStyles.logoContainer} >
                       <Image source={require('FinanceBakerZ/src/images/logo-final.png')} style={LoginStyles.logo} />
                     </View>
-                  <KeyboardAvoidingView>
-                    <ScrollView style={LoginStyles.formContainer}>
-                    <View >
+                  <View style={LoginStyles.formContainer}>
+                      <KeyboardAvoidingView>
+                        <View >
                       <Icon size={15} name="Person" style={LoginStyles.inputIcon} ></Icon>
                       <TextInput
                       placeholder='Username'
@@ -91,6 +95,7 @@ export default class Login extends Component {
                       value={this.state.usernameOrEmail}
                       autoCorrect={false}
                       onChangeText={this.onChange.bind(this, 'usernameOrEmail')}
+                      ref={(ref) => this.username = ref}
                       />
                     </View>
                     <View>
@@ -105,26 +110,30 @@ export default class Login extends Component {
                         maxLength = {20}
                         autoCorrect={false}
                         onChangeText={this.onChange.bind(this, 'password')}
-                        onSubmitEditing={() => this.onSubmit.bind(this)()}
+                        onSubmitEditing={() => this.onSubmit.bind(this)() }
                       />
                     </View>
-                      <View style={LoginStyles.textRightContainer}>
-                      <TouchableOpacity>
+                      </KeyboardAvoidingView>
+                    </View>
+                <View style={LoginStyles.textRightContainer}>
+                    <TouchableOpacity  disabled={this.state.loading} onPress={this.props.navigate.bind(null, 'push', {key: 'Forget Password'})} >
                       <Text style={LoginStyles.textRight} >Forgot Password</Text>
-                      </TouchableOpacity>
-                      </View>
-                    </ScrollView>
-                  </KeyboardAvoidingView>
+                    </TouchableOpacity>
+                  </View>
+                  <View style={LoginStyles.btnContainer}>
                   <Button
                       title="Sign In"
                       style={LoginStyles.btn}
                       onPress={this.onSubmit.bind(this)}
+                      loading={this.state.loading}
+                      disabled={this.state.loading}
                     />
+                  </View>
                     <View style={LoginStyles.bottomTextContainer}>
                       <Text style={LoginStyles.bottomText}>
                         Don't have an account?
                       </Text>
-                      <TouchableOpacity onPress={this.props.navigate.bind(null, 'push', {key: 'Register'})}>
+                      <TouchableOpacity disabled={this.state.loading} onPress={this.props.navigate.bind(null, 'push', {key: 'Register'})}>
                         <Text
                           style={LoginStyles.textBold}
                         > Sign Up

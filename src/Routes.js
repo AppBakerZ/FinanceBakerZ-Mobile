@@ -7,7 +7,7 @@ import RegisterScreen from 'FinanceBakerZ/src/screens/auth/Register';
 import ForgotPasswordScreen from 'FinanceBakerZ/src/screens/auth/ForgotPassword';
 import Meteor from 'react-native-meteor';
 
-Meteor.connect('ws://development-financebakerz.herokuapp.com/websocket');
+    Meteor.connect('ws://development-financebakerz.herokuapp.com/websocket');
 
 const {
     CardStack: NavigationCardStack,
@@ -53,6 +53,8 @@ export default class Routes extends Component {
                 return <LoginScreen navigate={this._navigate.bind(this)} />;
             case 'Register':
                 return <RegisterScreen navigate={this._navigate.bind(this)} />
+          case 'Forget Password':
+            return <ForgotPasswordScreen navigate={this._navigate.bind(this)} />
         }
     }
     _renderHeader (sceneProps) {

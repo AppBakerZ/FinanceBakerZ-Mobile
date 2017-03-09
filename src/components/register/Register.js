@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import { View, Image, Text, TextInput, ScrollView, TouchableOpacity, KeyboardAvoidingView, Alert } from 'react-native';
+import { View, Image, Text, TextInput, ScrollView, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 
 import { RegisterStyles } from 'FinanceBakerZ/src/components/register/RegisterStyle'
 import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
 import Button from 'FinanceBakerZ/src/components/button/Button';
+import {validateEmail, showAlert} from 'FinanceBakerZ/src/customLibrary';
 
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
 
-import Meteor, {Accounts} from 'react-native-meteor';
+import  {Accounts} from 'react-native-meteor';
 
 
 export default class Register extends Component {
@@ -27,49 +28,34 @@ export default class Register extends Component {
     this.setState({[stateName]: val});
   }
 
-  showAlert(title, message){
-    Alert.alert(
-      title,
-      message,
-      [
-        {text: 'OK'},
-      ],
-      {
-        cancelable: false,
-      }
-    )
-  }
-
-
   onSubmit(){
     this.setState({loading: true});
     const {fullName, usernameOrEmail, password} = this.state;
-    let selector;
-    if (typeof usernameOrEmail === 'string')
-      if (usernameOrEmail.indexOf('@') === -1)
-        selector = {username: usernameOrEmail};
-      else
-        selector = {email: usernameOrEmail};
-
-    const key = Object.keys(selector)[0];
-    let currency = {symbol: "$", name: "Dollar", symbol_native: "$", decimal_digits: 2, rounding: 0},
-      emailNotification = true;
-
-    Accounts.createUser({
-      [key]: selector[key],
-      password,
-      profile: {fullName, currency, emailNotification }
-    }, (err) => {
-      console.log('err1: ', err);
-      if(err){
-        this.setState({loading: false});
-        this.showAlert('Error', err.reason);
-      }else{
-        this.setState({loading: false});
-        this.showAlert('Congratulation', selector.username + ' you have registered!');
-      }
-    });
+    if(validateEmail(usernameOrEmail)){
+      let selector;
+      selector = {email: usernameOrEmail};
+      const key = Object.keys(selector)[0];
+      let currency = {symbol: "$", name: "Dollar", symbol_native: "$", decimal_digits: 2, rounding: 0},
+        emailNotification = true;
+      Accounts.createUser({
+        [key]: selector[key],
+        password,
+        profile: {fullName, currency, emailNotification }
+      }, (err) => {
+        if(err){
+          this.setState({loading: false});
+          showAlert('Error', err.reason);
+        }else{
+          this.setState({loading: false});
+          showAlert('Congratulation', 'You have registered at ' + selector.email);
+        }
+      });
+    }else {
+      showAlert('Invalid format', 'Invalid email format.');
+      this.setState({loading: false});
+    }
   }
+
 
   render() {
       return (
@@ -81,13 +67,12 @@ export default class Register extends Component {
                       <View>
                            <Icon size={15} name="Person" style={RegisterStyles.inputIcon} ></Icon>
                            <TextInput
-                             placeholder='Username'
+                             placeholder='Full Name'
                              style={RegisterStyles.input}
                              autoCorrect={false}
-                             onSubmitEditing={()=> {this.email.focus()}}
+                             onSubmitEditing={() => this.usernameOrEmail.focus()}
                              maxLength={ 30 }
                              onChangeText={this.onChange.bind(this, 'fullName')}
-
                            />
                        </View>
                        <View>
@@ -98,10 +83,10 @@ export default class Register extends Component {
                              style={RegisterStyles.input}
                              placeholderStyle={RegisterStyles.input}
                              autoCorrect={false}
-                             ref={(ref) => {this.email = ref}}
-                             onSubmitEditing={()=> {this.pass.focus();}}
+                             onSubmitEditing={() => this.password.focus()}
                              maxLength={ 30 }
                              onChangeText={this.onChange.bind(this, 'usernameOrEmail')}
+                             ref={(ref) => {this.usernameOrEmail = ref}}
 
                            />
                        </View>
@@ -113,7 +98,7 @@ export default class Register extends Component {
                              autoCorrect={false}
                              style={RegisterStyles.input}
                              placeholderStyle={RegisterStyles.input}
-                             ref={(ref) => {this.pass = ref}}
+                             ref={(ref) => {this.password = ref}}
                              maxLength={ 20 }
                              onChangeText={this.onChange.bind(this, 'password')}
                            />

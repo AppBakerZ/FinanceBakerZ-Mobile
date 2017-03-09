@@ -3,13 +3,56 @@ import { View, Text, Image, KeyboardAvoidingView, TextInput, TouchableOpacity } 
 import {ForgotPasswordStyle}  from 'FinanceBakerZ/src/components/forgotPassword/ForgotPasswordStyle'
 import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
 import Button from 'FinanceBakerZ/src/components/button/Button';
+import {validateEmail, showAlert} from 'FinanceBakerZ/src/customLibrary';
+
 
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
-
+import {Accounts} from 'react-native-meteor';
 
 
 export default class ForgotPassword extends Component {
-    render() {
+
+
+  constructor(){
+    super();
+    this.state = {
+      email : '',
+      loading: false
+    };
+
+
+  }
+
+  onChange(val){
+    this.setState({email: val})
+  }
+
+
+  onSubmit(){
+    const {email} = this.state;
+   this.setState({loading: true});
+    if(email.length){
+      if(validateEmail(email)){
+        Accounts.forgotPassword({email}, (err) => {
+          if(!err){
+           showAlert('Success', 'Please check your inbox at ' + email);
+            this.setState({loading: false});
+          }else{
+            showAlert('Error', email + ' does not exist.');
+            this.setState({loading: false});
+          }
+        });
+      }else {
+        showAlert('Invalid format', 'Invalid email format.');
+        this.setState({loading: false});
+      }
+    }else{
+      showAlert('Validation', 'Email is required!');
+      this.setState({loading: false});
+    }
+  }
+
+  render() {
         return (
           <ViewContainer>
             <Image source={require('FinanceBakerZ/src/images/app-background.png')} style={ForgotPasswordStyle.backgroundImage} >
@@ -25,6 +68,7 @@ export default class ForgotPassword extends Component {
                       returnKeyType="next"
                       maxLength = {30}
                       autoCorrect={false}
+                      onChangeText={this.onChange.bind(this)}
                     />
                   </View>
                 </View>
@@ -32,13 +76,16 @@ export default class ForgotPassword extends Component {
                   <Button
                     title="Send"
                     style={ForgotPasswordStyle.btn}
+                    onPress={this.onSubmit.bind(this)}
+                    loading={this.state.loading}
+                    disabled={this.state.loading}
                   />
                 </View>
                 <View style={ForgotPasswordStyle.bottomTextContainer}>
                   <Text style={ForgotPasswordStyle.bottomText}>
                     Already have an account?
                   </Text>
-                  <TouchableOpacity onPress={this.props.navigate.bind(null, 'pop')}>
+                  <TouchableOpacity disabled={this.state.loading} onPress={this.props.navigate.bind(null, 'pop')}>
                     <Text
                       style={ForgotPasswordStyle.textBold}
                     > Sign In

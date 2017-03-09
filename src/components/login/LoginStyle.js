@@ -52,7 +52,7 @@ export const LoginStyles = StyleSheet.create({
   },
 
   bottomTextContainer: {
-    flex: 2,
+    flex: 1.8,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center'

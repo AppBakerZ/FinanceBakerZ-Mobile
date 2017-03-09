@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { NavigationExperimental } from 'react-native';
-import { HeaderStyle } from 'FinanceBakerZ/src/components/header/HeaderStyle'
+import { NavigationExperimental, Text } from 'react-native';
+import { HeaderStyles } from 'FinanceBakerZ/src/components/header/HeaderStyle'
 
 const {
     Header: NavigationHeader,
@@ -12,8 +12,8 @@ export default class Header extends Component {
     }
     _renderTitleComponent (props) {
         return (
-            <NavigationHeader.Title>
-                {props.scene.route.key}
+            <NavigationHeader.Title style={HeaderStyles.title} >
+                <Text style={HeaderStyles.text}>{props.scene.route.key}</Text>
             </NavigationHeader.Title>
         );
     }
@@ -22,7 +22,7 @@ export default class Header extends Component {
             {...this.props}
             renderTitleComponent={this._renderTitleComponent.bind(this)}
             onNavigateBack={this._back.bind(this)}
-            />
+          />
     }
 }
 

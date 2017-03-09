@@ -14,7 +14,7 @@ export default class Button extends Component {
 
     let activityIndicator;
     if(this.props.loading){
-      activityIndicator = (<ActivityIndicator color="#DEB342"  size="small" style={styles.activityIndicator}/>);
+      activityIndicator = (<ActivityIndicator color="#DEB342"  size="small" />);
     }
 
 

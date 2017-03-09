@@ -51,7 +51,7 @@ export default class Routes extends Component {
         switch(props.scene.route.key) {
             case 'Login':
                 return <LoginScreen navigate={this._navigate.bind(this)} />;
-            case 'Register':
+            case 'Sign Up':
                 return <RegisterScreen navigate={this._navigate.bind(this)} />
           case 'Forget Password':
             return <ForgotPasswordScreen navigate={this._navigate.bind(this)} />

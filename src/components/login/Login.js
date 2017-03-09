@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Alert, View, Text, Image,  TextInput, ScrollView, TouchableOpacity, KeyboardAvoidingView, Keyboard, ActivityIndicator  } from 'react-native';
+import { View, Text, Image,  TextInput, ScrollView, TouchableOpacity, KeyboardAvoidingView, Keyboard, ActivityIndicator  } from 'react-native';
 import { LoginStyles } from 'FinanceBakerZ/src/components/login/LoginStyle';
 import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
 import Button from 'FinanceBakerZ/src/components/button/Button';
+import {showAlert} from 'FinanceBakerZ/src/customLibrary';
 
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
 
@@ -18,21 +19,10 @@ export default class Login extends Component {
       usernameOrEmail: '',
       password: '',
       loading: false
-    }
+    };
+
   }
 
-  showAlert(title, message){
-    Alert.alert(
-      title,
-      message,
-      [
-        {text: 'OK', onPress: () => console.log('OK Pressed!')},
-      ],
-      {
-        cancelable: false,
-      }
-    )
-  }
 
   onChange(stateName, val){
        this.setState({[stateName]: val});
@@ -52,11 +42,10 @@ export default class Login extends Component {
 
       Meteor.loginWithPassword(user, password, (err) => {
         if(err){
-          console.log('err: ', err);
-          this.showAlert('Error', err.reason);
+          showAlert('Error', err.reason);
           this.setState({loading: false});
         }else{
-          this.showAlert('Welcome', 'Hello '+usernameOrEmail + '.');
+          showAlert('Welcome', 'Hello '+usernameOrEmail + '.');
           this.setState({loading: false});
           var useraccount = {account: {owner: Meteor.user()._id}};
           Meteor.call('profileAssets', useraccount, function (err, result) {
@@ -69,7 +58,7 @@ export default class Login extends Component {
         }
       });
     }else {
-      this.showAlert('Warning', 'All fields are required.');
+      showAlert('Warning', 'All fields are required.');
       this.setState({loading: false});
     }
 
@@ -90,7 +79,7 @@ export default class Login extends Component {
                       placeholder='Username'
                       style={[LoginStyles.input]}
                       returnKeyType="next"
-                      onSubmitEditing={() => {this.pass.focus()}}
+                      onSubmitEditing={() => {(this.state.password.length ?  this.onSubmit.bind(this)() : this.pass.focus() )}}
                       maxLength = {30}
                       value={this.state.usernameOrEmail}
                       autoCorrect={false}
@@ -110,36 +99,36 @@ export default class Login extends Component {
                         maxLength = {20}
                         autoCorrect={false}
                         onChangeText={this.onChange.bind(this, 'password')}
-                        onSubmitEditing={() => this.onSubmit.bind(this)() }
+                        onSubmitEditing={() => {(this.state.usernameOrEmail.length ? this.onSubmit.bind(this)() : this.username.focus() )}}
                       />
                     </View>
                       </KeyboardAvoidingView>
                     </View>
-                <View style={LoginStyles.textRightContainer}>
-                    <TouchableOpacity  disabled={this.state.loading} onPress={this.props.navigate.bind(null, 'push', {key: 'Forget Password'})} >
-                      <Text style={LoginStyles.textRight} >Forgot Password</Text>
-                    </TouchableOpacity>
-                  </View>
-                  <View style={LoginStyles.btnContainer}>
-                  <Button
-                      title="Sign In"
-                      style={LoginStyles.btn}
-                      onPress={this.onSubmit.bind(this)}
-                      loading={this.state.loading}
-                      disabled={this.state.loading}
-                    />
-                  </View>
-                    <View style={LoginStyles.bottomTextContainer}>
-                      <Text style={LoginStyles.bottomText}>
-                        Don't have an account?
-                      </Text>
-                      <TouchableOpacity disabled={this.state.loading} onPress={this.props.navigate.bind(null, 'push', {key: 'Register'})}>
-                        <Text
-                          style={LoginStyles.textBold}
-                        > Sign Up
-                        </Text>
-                      </TouchableOpacity>
-                    </View>
+                    <View style={LoginStyles.textRightContainer}>
+                        <TouchableOpacity  disabled={this.state.loading} onPress={this.props.navigate.bind(null, 'push', {key: 'Forget Password'})} >
+                          <Text style={LoginStyles.textRight} >Forgot Password</Text>
+                        </TouchableOpacity>
+                      </View>
+                      <View style={LoginStyles.btnContainer}>
+                      <Button
+                          title="Sign In"
+                          style={LoginStyles.btn}
+                          onPress={this.onSubmit.bind(this)}
+                          loading={this.state.loading}
+                          disabled={this.state.loading}
+                        />
+                      </View>
+                        <View style={LoginStyles.bottomTextContainer}>
+                          <Text style={LoginStyles.bottomText}>
+                            Don't have an account?
+                          </Text>
+                          <TouchableOpacity disabled={this.state.loading} onPress={this.props.navigate.bind(null, 'push', {key: 'Sign Up'})}>
+                            <Text
+                              style={LoginStyles.textBold}
+                            > Sign Up
+                            </Text>
+                          </TouchableOpacity>
+                        </View>
                    </Image>
               </ViewContainer>
         );

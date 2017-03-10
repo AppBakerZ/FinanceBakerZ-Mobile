@@ -10,8 +10,6 @@ import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
 import Meteor from 'react-native-meteor';
 
 export default class Login extends Component {
-
-
     constructor(props) {
         super(props);
 
@@ -20,14 +18,10 @@ export default class Login extends Component {
             password: '',
             loading: false
         };
-
     }
-
-
     onChange(stateName, val){
         this.setState({[stateName]: val});
     }
-
     onSubmit(){
         const {usernameOrEmail, password} = this.state;
         this.setState({loading: true});
@@ -65,6 +59,8 @@ export default class Login extends Component {
     }
 
     render() {
+        const { navigate } = this.props.navigation;
+
         return (
             <ViewContainer>
                 <Image source={require('FinanceBakerZ/src/images/app-background.png')} style={LoginStyles.backgroundImage} >
@@ -81,7 +77,7 @@ export default class Login extends Component {
                                     returnKeyType="next"
                                     onSubmitEditing={() => {(this.state.password.length ?  this.onSubmit.bind(this)() : this.pass.focus() )}}
                                     maxLength = {30}
-                                    value={this.state.usernameOrEmail}
+                                    value='asdasd'
                                     autoCorrect={false}
                                     onChangeText={this.onChange.bind(this, 'usernameOrEmail')}
                                     ref={(ref) => this.username = ref}
@@ -105,7 +101,9 @@ export default class Login extends Component {
                         </KeyboardAvoidingView>
                     </View>
                     <View style={LoginStyles.textRightContainer}>
-                        <TouchableOpacity  disabled={this.state.loading} onPress={this.props.navigate.bind(null, 'push', {key: 'Forget Password'})} >
+                        <TouchableOpacity
+                            disabled={this.state.loading}
+                            onPress={() => navigate('ForgotPassword')}>
                             <Text style={LoginStyles.textRight} >Forgot Password</Text>
                         </TouchableOpacity>
                     </View>
@@ -122,7 +120,9 @@ export default class Login extends Component {
                         <Text style={LoginStyles.bottomText}>
                             Don't have an account?
                         </Text>
-                        <TouchableOpacity disabled={this.state.loading} onPress={this.props.navigate.bind(null, 'push', {key: 'Sign Up'})}>
+                        <TouchableOpacity
+                            disabled={this.state.loading}
+                            onPress={() => navigate('Register')}>
                             <Text
                                 style={LoginStyles.textBold}
                                 > Sign Up

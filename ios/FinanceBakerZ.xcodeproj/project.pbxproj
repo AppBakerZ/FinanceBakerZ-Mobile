@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -56,6 +55,8 @@
 		E2E54B11E5DB4D27999642D3 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 27913876CCC24C6481F36757 /* EvilIcons.ttf */; };
 		F2FF77E2390C467BA0E385D0 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3193E37AAEED4D418CEE340A /* MaterialCommunityIcons.ttf */; };
 		F4F793510F534F779B622164 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2E18B5D5F4D54F7BA078FB3B /* SimpleLineIcons.ttf */; };
+		AEEDB169E12340B3BF44D9B9 /* QuicksandBook-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 01F8E1894DD64CFD9ADEFD06 /* QuicksandBook-Regular.otf */; };
+		2EBA23A7E8D74E6F8DD47DEC /* QuicksandBold-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 26615D118A8146D48415815D /* QuicksandBold-Regular.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -343,6 +344,8 @@
 		E8FA2FA6FB834E3FBF1DB66A /* SanFrancisco.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SanFrancisco.ttf; path = "../node_modules/native-base/Fonts/SanFrancisco.ttf"; sourceTree = "<group>"; };
 		F1113805F161445B94716BC3 /* Georgia.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Georgia.ttf; path = "../node_modules/native-base/Fonts/Georgia.ttf"; sourceTree = "<group>"; };
 		F6ACED63CD3B471889C25E92 /* Courier New.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Courier New.ttf"; path = "../node_modules/native-base/Fonts/Courier New.ttf"; sourceTree = "<group>"; };
+		01F8E1894DD64CFD9ADEFD06 /* QuicksandBook-Regular.otf */ = {isa = PBXFileReference; name = "QuicksandBook-Regular.otf"; path = "../src/fonts/QuicksandBook-Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		26615D118A8146D48415815D /* QuicksandBold-Regular.otf */ = {isa = PBXFileReference; name = "QuicksandBold-Regular.otf"; path = "../src/fonts/QuicksandBold-Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -569,6 +572,8 @@
 				0942AA4DEF26455FA1D5C573 /* Quicksand_Book.otf */,
 				4BBED428EFA0464AA5A12F04 /* Quicksand_Light_Oblique.otf */,
 				B54E1D18084240BF8208F379 /* Quicksand_Light.otf */,
+				01F8E1894DD64CFD9ADEFD06 /* QuicksandBook-Regular.otf */,
+				26615D118A8146D48415815D /* QuicksandBold-Regular.otf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1036,6 +1041,8 @@
 				25EC3BEF17564CD1A97E5DF0 /* Application-icon.ttf in Resources */,
 				1870388E5399466CAA92EAEC /* CustomIcons.js in Resources */,
 				86AB9F138BD141B989606BAA /* selection.json in Resources */,
+				AEEDB169E12340B3BF44D9B9 /* QuicksandBook-Regular.otf in Resources */,
+				2EBA23A7E8D74E6F8DD47DEC /* QuicksandBold-Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

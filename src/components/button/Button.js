@@ -20,16 +20,16 @@ export default class Button extends Component {
 
     return (
       <TouchableOpacity disabled={this.props.disabled} style={[styles.button, this.props.style]} onPress={this.props.onPress} activeOpacity={0.85}>
-      <View style={styles.btnContainer}>
-        <Text style={styles.title}>
-          {this.props.title || 'Button'}
-        </Text>
-      </View>
+        <View style={styles.btnContainer}>
+          <Text style={styles.title}>
+            {this.props.title || 'Button'}
+          </Text>
+        </View>
         <View style={styles.activityIndicatorContainer}>
           {activityIndicator}
         </View>
       </TouchableOpacity>
-      );
+    );
   }
 }
 
@@ -37,16 +37,17 @@ const styles = StyleSheet.create({
 
 
   btnContainer: {
-    flex: 1.5,
+    flex: 1,
     flexDirection: 'row',
-    justifyContent: 'flex-end'
+    justifyContent: 'center'
   },
 
   activityIndicatorContainer:{
-    flex: 1,
+    position: 'absolute',
+    right: 30,
     flexDirection: 'row',
     justifyContent: 'flex-end'
-    },
+  },
 
   button: {
     backgroundColor: '#00719b',

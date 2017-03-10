@@ -22,6 +22,7 @@ export default class ViewContainer extends Component {
 
 const styles = StyleSheet.create({
   viewContainer: {
-    flex: 1
+    flex: 1,
+    backgroundColor: 'transparent'
   }
 });

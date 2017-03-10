@@ -47,7 +47,7 @@ export default class ForgotPassword extends Component {
         this.setState({loading: false});
       }
     }else{
-      showAlert('Validation', 'Email is required!');
+      showAlert('Required Field', 'Email is required!');
       this.setState({loading: false});
     }
   }

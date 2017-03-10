@@ -9,7 +9,7 @@ export const LoginStyles = StyleSheet.create({
   },
 
   logoContainer: {
-    flex: 6,
+    flex: 5,
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -21,21 +21,20 @@ export const LoginStyles = StyleSheet.create({
   },
 
   formContainer:{
-    flex: 2.2,
+    flex: 4,
     flexDirection: 'column',
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
     },
 
   textRightContainer: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'flex-end',
   },
 
   textRight: {
     fontFamily: 'QuicksandBook-Regular',
     paddingRight: 15,
-    paddingTop: 15,
     paddingBottom: 15
 
   },
@@ -73,7 +72,8 @@ export const LoginStyles = StyleSheet.create({
     fontFamily: 'QuicksandBook-Regular',
     paddingLeft: 50,
     fontSize: 15,
-    paddingBottom: 15
+    paddingBottom: 15,
+    marginBottom: 15
   },
 
   inputIcon:{

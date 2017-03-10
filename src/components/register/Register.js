@@ -31,6 +31,7 @@ export default class Register extends Component {
   onSubmit(){
     this.setState({loading: true});
     const {fullName, usernameOrEmail, password} = this.state;
+   if(fullName.length && usernameOrEmail.length && password.length){
     if(validateEmail(usernameOrEmail)){
       let selector;
       selector = {email: usernameOrEmail};
@@ -54,6 +55,10 @@ export default class Register extends Component {
       showAlert('Invalid format', 'Invalid email format.');
       this.setState({loading: false});
     }
+   }else{
+     showAlert('User Authentication', 'All fields are required!');
+     this.setState({loading: false});
+   }
   }
 
 

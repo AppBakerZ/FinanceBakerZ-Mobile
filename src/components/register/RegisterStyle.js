@@ -10,8 +10,8 @@ export const RegisterStyles = StyleSheet.create({
   },
 
   formContainer: {
-    flex: 1.7,
-    justifyContent: 'flex-end'
+    flex: 1.5,
+    justifyContent: 'center'
   },
 
   btn:{
@@ -20,7 +20,7 @@ export const RegisterStyles = StyleSheet.create({
   },
 
   btnContainer: {
-    flex: 1.5,
+    flex: 1.8,
     justifyContent: 'flex-end',
     alignItems: 'center'
   },
@@ -46,7 +46,8 @@ export const RegisterStyles = StyleSheet.create({
     fontFamily: 'QuicksandBook-Regular',
     paddingLeft: 65,
     fontSize: 15,
-    paddingBottom: 15
+    paddingBottom: 15,
+    marginBottom: 15
   },
 
   inputIcon:{

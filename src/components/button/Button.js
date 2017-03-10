@@ -37,15 +37,16 @@ const styles = StyleSheet.create({
 
 
   btnContainer: {
-    flex: 1.5,
+    flex: 1,
     flexDirection: 'row',
-    justifyContent: 'flex-end'
+    justifyContent: 'center',
   },
 
   activityIndicatorContainer:{
-    flex: 1,
+    position: 'absolute',
+    right: 30,
     flexDirection: 'row',
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
     },
 
   button: {
@@ -53,12 +54,12 @@ const styles = StyleSheet.create({
     width: null,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   title: {
     backgroundColor: 'transparent',
     color: '#fff',
     fontSize: 18,
-    fontFamily: 'QuicksandBook-Regular'
+    fontFamily: 'Quicksand_Book',
   }
 });

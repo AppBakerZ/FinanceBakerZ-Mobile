@@ -58,7 +58,7 @@ export default class Login extends Component {
         }
       });
     }else {
-      showAlert('Warning', 'All fields are required.');
+      showAlert('User Authentication', 'All fields are required!');
       this.setState({loading: false});
     }
 

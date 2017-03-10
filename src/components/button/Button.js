@@ -20,16 +20,16 @@ export default class Button extends Component {
 
     return (
       <TouchableOpacity disabled={this.props.disabled} style={[styles.button, this.props.style]} onPress={this.props.onPress} activeOpacity={0.85}>
-      <View style={styles.btnContainer}>
-        <Text style={styles.title}>
-          {this.props.title || 'Button'}
-        </Text>
-      </View>
+        <View style={styles.btnContainer}>
+          <Text style={styles.title}>
+            {this.props.title || 'Button'}
+          </Text>
+        </View>
         <View style={styles.activityIndicatorContainer}>
           {activityIndicator}
         </View>
       </TouchableOpacity>
-      );
+    );
   }
 }
 
@@ -39,27 +39,27 @@ const styles = StyleSheet.create({
   btnContainer: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
 
   activityIndicatorContainer:{
     position: 'absolute',
     right: 30,
     flexDirection: 'row',
-    justifyContent: 'flex-end',
-    },
+    justifyContent: 'flex-end'
+  },
 
   button: {
     backgroundColor: '#00719b',
     width: null,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   title: {
     backgroundColor: 'transparent',
     color: '#fff',
     fontSize: 18,
-    fontFamily: 'Quicksand_Book',
+    fontFamily: 'QuicksandBook-Regular'
   }
 });

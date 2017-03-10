@@ -16,24 +16,24 @@ export const LoginStyles = StyleSheet.create({
 
   logo: {
     resizeMode: 'center',
-    width: 200,
-    height: 200,
+    width: 220,
+    height: 220
   },
 
   formContainer:{
     flex: 4,
     flexDirection: 'column',
-    justifyContent: 'flex-end',
-    },
+    justifyContent: 'flex-end'
+  },
 
   textRightContainer: {
     flex: 1,
     justifyContent: 'flex-start',
-    alignItems: 'flex-end',
+    alignItems: 'flex-end'
   },
 
   textRight: {
-    fontFamily: 'QuicksandBook-Regular',
+    fontFamily: 'QuicksandBold-Regular',
     paddingRight: 15,
     paddingBottom: 15
 
@@ -47,7 +47,7 @@ export const LoginStyles = StyleSheet.create({
 
   btn:{
     backgroundColor: '#00562f',
-    padding: 30,
+    padding: 30
   },
 
   bottomTextContainer: {
@@ -62,7 +62,7 @@ export const LoginStyles = StyleSheet.create({
   },
 
   textBold:{
-    fontFamily: 'QuicksandBook-Regular',
+    fontFamily: 'QuicksandBold-Regular',
     paddingTop: 18,
     paddingBottom: 18
 

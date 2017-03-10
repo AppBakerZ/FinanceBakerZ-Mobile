@@ -10,13 +10,13 @@ export const RegisterStyles = StyleSheet.create({
   },
 
   formContainer: {
-    flex: 1.5,
+    flex: 1.6,
     justifyContent: 'center'
   },
 
   btn:{
     backgroundColor: '#00562f',
-    padding: 30,
+    padding: 30
   },
 
   btnContainer: {
@@ -29,7 +29,7 @@ export const RegisterStyles = StyleSheet.create({
     flex: 0.5,
     flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
 
   bottomText:{
@@ -39,7 +39,7 @@ export const RegisterStyles = StyleSheet.create({
   },
 
   textBold:{
-    fontFamily: 'QuicksandBook-Regular',
+    fontFamily: 'QuicksandBold-Regular',
   },
 
   input: {

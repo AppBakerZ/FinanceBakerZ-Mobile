@@ -9,30 +9,30 @@ export const ForgotPasswordStyle = StyleSheet.create({
   },
 
   container:{
-      flex: 1,
-      justifyContent: 'center',
+    flex: 1,
+    justifyContent: 'center'
   },
 
   textEmail:{
-      fontFamily: 'QuicksandBook-Regular',
-      paddingLeft: 20,
-      paddingRight: 60,
-      fontSize: 16
+    fontFamily: 'QuicksandBook-Regular',
+    paddingLeft: 20,
+    paddingRight: 60,
+    fontSize: 16
 
   },
 
   inputContainer: {
-      flex: 4,
+    flex: 4
   },
 
   btnContainer: {
-      flex: 1.5,
-      justifyContent: 'flex-end'
+    flex: 1.8,
+    justifyContent: 'flex-end'
   },
 
   btn: {
     backgroundColor: '#00562f',
-    padding: 30,
+    padding: 30
   },
 
   input: {

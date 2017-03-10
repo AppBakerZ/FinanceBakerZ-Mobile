@@ -39,13 +39,13 @@ const styles = StyleSheet.create({
   btnContainer: {
     flex: 1.5,
     flexDirection: 'row',
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-end'
   },
 
   activityIndicatorContainer:{
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-end'
     },
 
   button: {
@@ -59,6 +59,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     color: '#fff',
     fontSize: 18,
-    fontFamily: 'Quicksand_Book',
+    fontFamily: 'QuicksandBook-Regular'
   }
 });

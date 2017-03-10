@@ -5,7 +5,7 @@ const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
 
 export const HeaderStyles = StyleSheet.create({
     text: {
-      fontFamily: 'Quicksand_Bold'
+      fontFamily: 'QuicksandBold-Regular'
     },
 
     title: {

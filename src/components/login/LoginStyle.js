@@ -33,7 +33,7 @@ export const LoginStyles = StyleSheet.create({
   },
 
   textRight: {
-    fontFamily: 'Quicksand_Bold',
+    fontFamily: 'QuicksandBook-Regular',
     paddingRight: 15,
     paddingTop: 15,
     paddingBottom: 15
@@ -59,18 +59,18 @@ export const LoginStyles = StyleSheet.create({
   },
 
   bottomText:{
-    fontFamily: 'Quicksand_Book',
+    fontFamily: 'QuicksandBook-Regular',
   },
 
   textBold:{
-    fontFamily: 'Quicksand_Bold',
+    fontFamily: 'QuicksandBook-Regular',
     paddingTop: 18,
     paddingBottom: 18
 
   },
 
   input: {
-    fontFamily: 'Quicksand_Book',
+    fontFamily: 'QuicksandBook-Regular',
     paddingLeft: 50,
     fontSize: 15,
     paddingBottom: 15

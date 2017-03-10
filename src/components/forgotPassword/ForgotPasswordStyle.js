@@ -14,7 +14,7 @@ export const ForgotPasswordStyle = StyleSheet.create({
   },
 
   textEmail:{
-      fontFamily: 'Quicksand_Book',
+      fontFamily: 'QuicksandBook-Regular',
       paddingLeft: 20,
       paddingRight: 60,
       fontSize: 16
@@ -36,7 +36,7 @@ export const ForgotPasswordStyle = StyleSheet.create({
   },
 
   input: {
-    fontFamily: 'Quicksand_Book',
+    fontFamily: 'QuicksandBook-Regular',
     paddingLeft: 53,
     fontSize: 15,
     paddingBottom: 15
@@ -53,18 +53,18 @@ export const ForgotPasswordStyle = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
 
   bottomText:{
-    fontFamily: 'Quicksand_Book',
+    fontFamily: 'QuicksandBook-Regular',
     paddingTop: 20,
     paddingBottom: 20
   },
 
   textBold:{
-    fontFamily: 'Quicksand_Bold',
-  },
+    fontFamily: 'QuicksandBold-Regular'
+  }
 
 
 });

@@ -33,17 +33,17 @@ export const RegisterStyles = StyleSheet.create({
   },
 
   bottomText:{
-    fontFamily: 'Quicksand_Book',
+    fontFamily: 'QuicksandBook-Regular',
     paddingTop: 20,
     paddingBottom: 20
   },
 
   textBold:{
-    fontFamily: 'Quicksand_Bold',
+    fontFamily: 'QuicksandBook-Regular',
   },
 
   input: {
-    fontFamily: 'Quicksand_Book',
+    fontFamily: 'QuicksandBook-Regular',
     paddingLeft: 65,
     fontSize: 15,
     paddingBottom: 15

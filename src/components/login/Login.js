@@ -14,8 +14,8 @@ export default class Login extends Component {
         super(props);
 
         this.state = {
-            usernameOrEmail: '',
-            password: '',
+            usernameOrEmail: 'furqan',
+            password: '1234',
             loading: false
         };
     }
@@ -77,7 +77,7 @@ export default class Login extends Component {
                                     returnKeyType="next"
                                     onSubmitEditing={() => {(this.state.password.length ?  this.onSubmit.bind(this)() : this.pass.focus() )}}
                                     maxLength = {30}
-                                    value='asdasd'
+                                    value={this.state.usernameOrEmail}
                                     autoCorrect={false}
                                     onChangeText={this.onChange.bind(this, 'usernameOrEmail')}
                                     ref={(ref) => this.username = ref}

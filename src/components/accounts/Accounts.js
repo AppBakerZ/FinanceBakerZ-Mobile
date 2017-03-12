@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text} from 'react-native';
-import { DashboardStyles } from 'FinanceBakerZ/src/components/dashboard/DashboardStyle';
+import { AccountsStyles } from 'FinanceBakerZ/src/components/accounts/AccountsStyle';
 import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
 
-export default class Dashboard extends Component {
+export default class Accounts extends Component {
     constructor(props) {
         super(props);
 
@@ -18,11 +18,7 @@ export default class Dashboard extends Component {
 
         return (
             <ViewContainer>
-                <View>
-                    <Text>
-                        Dashboard
-                    </Text>
-                </View>
+                <Text>Accounts</Text>
             </ViewContainer>
         );
     }

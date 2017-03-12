@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -38,6 +39,7 @@
 		2D02E4C81E0B4AEC006451C7 /* libRCTWebSocket-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3E991DF850E9000B6D8A /* libRCTWebSocket-tvOS.a */; };
 		2D02E4C91E0B4AEC006451C7 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* FinanceBakerZTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* FinanceBakerZTests.m */; };
+		2EBA23A7E8D74E6F8DD47DEC /* QuicksandBold-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 26615D118A8146D48415815D /* QuicksandBold-Regular.otf */; };
 		3911551D61944C6B8420B579 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4CE72C436CA7484B9DBF005A /* FontAwesome.ttf */; };
 		4A53311A0A804597815574A6 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4AA8D4F0ED47480DA6DB4A86 /* Zocial.ttf */; };
 		4EBD84C1AA304A5C9A5C179D /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 415F5ADB934045F78149EAC3 /* Foundation.ttf */; };
@@ -51,12 +53,11 @@
 		844429371E72CAF000FC00BD /* Quicksand_Light_Oblique.otf in Resources */ = {isa = PBXBuildFile; fileRef = 844429331E72CAF000FC00BD /* Quicksand_Light_Oblique.otf */; };
 		844429381E72CAF000FC00BD /* Quicksand_Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 844429341E72CAF000FC00BD /* Quicksand_Light.otf */; };
 		86AB9F138BD141B989606BAA /* selection.json in Resources */ = {isa = PBXBuildFile; fileRef = B9855D79F47C4FCCBACCA8F6 /* selection.json */; };
+		AEEDB169E12340B3BF44D9B9 /* QuicksandBook-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 01F8E1894DD64CFD9ADEFD06 /* QuicksandBook-Regular.otf */; };
 		C377F47A3AC447619B8E5398 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6373E41443FC460BAA3F7D3D /* Octicons.ttf */; };
 		E2E54B11E5DB4D27999642D3 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 27913876CCC24C6481F36757 /* EvilIcons.ttf */; };
 		F2FF77E2390C467BA0E385D0 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3193E37AAEED4D418CEE340A /* MaterialCommunityIcons.ttf */; };
 		F4F793510F534F779B622164 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2E18B5D5F4D54F7BA078FB3B /* SimpleLineIcons.ttf */; };
-		AEEDB169E12340B3BF44D9B9 /* QuicksandBook-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 01F8E1894DD64CFD9ADEFD06 /* QuicksandBook-Regular.otf */; };
-		2EBA23A7E8D74E6F8DD47DEC /* QuicksandBold-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 26615D118A8146D48415815D /* QuicksandBold-Regular.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -268,6 +269,7 @@
 		00E356EE1AD99517003FC87E /* FinanceBakerZTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FinanceBakerZTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* FinanceBakerZTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FinanceBakerZTests.m; sourceTree = "<group>"; };
+		01F8E1894DD64CFD9ADEFD06 /* QuicksandBook-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "QuicksandBook-Regular.otf"; path = "../src/fonts/QuicksandBook-Regular.otf"; sourceTree = "<group>"; };
 		08F8720CF2C84765AE5AC5B5 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/native-base/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		0942AA4DEF26455FA1D5C573 /* Quicksand_Book.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Quicksand_Book.otf; path = ../src/fonts/Quicksand_Book.otf; sourceTree = "<group>"; };
 		0B51D0E3D3C4473C960088EE /* Skia.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Skia.ttf; path = "../node_modules/native-base/Fonts/Skia.ttf"; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 		1D6F5BD55DCF41DC8A1ECE9D /* Times New Roman.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Times New Roman.ttf"; path = "../node_modules/native-base/Fonts/Times New Roman.ttf"; sourceTree = "<group>"; };
 		2217F0F2981B451CB0473C5D /* Roboto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto.ttf; path = "../node_modules/native-base/Fonts/Roboto.ttf"; sourceTree = "<group>"; };
 		22737C3607344ADCAFDC59A6 /* Comic Sans MS.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Comic Sans MS.ttf"; path = "../node_modules/native-base/Fonts/Comic Sans MS.ttf"; sourceTree = "<group>"; };
+		26615D118A8146D48415815D /* QuicksandBold-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "QuicksandBold-Regular.otf"; path = "../src/fonts/QuicksandBold-Regular.otf"; sourceTree = "<group>"; };
 		27913876CCC24C6481F36757 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		279FE79F001641F98639F047 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/native-base/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		2BDD8992F1024736B2FE4127 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
@@ -344,8 +347,6 @@
 		E8FA2FA6FB834E3FBF1DB66A /* SanFrancisco.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SanFrancisco.ttf; path = "../node_modules/native-base/Fonts/SanFrancisco.ttf"; sourceTree = "<group>"; };
 		F1113805F161445B94716BC3 /* Georgia.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Georgia.ttf; path = "../node_modules/native-base/Fonts/Georgia.ttf"; sourceTree = "<group>"; };
 		F6ACED63CD3B471889C25E92 /* Courier New.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Courier New.ttf"; path = "../node_modules/native-base/Fonts/Courier New.ttf"; sourceTree = "<group>"; };
-		01F8E1894DD64CFD9ADEFD06 /* QuicksandBook-Regular.otf */ = {isa = PBXFileReference; name = "QuicksandBook-Regular.otf"; path = "../src/fonts/QuicksandBook-Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		26615D118A8146D48415815D /* QuicksandBold-Regular.otf */ = {isa = PBXFileReference; name = "QuicksandBold-Regular.otf"; path = "../src/fonts/QuicksandBold-Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1209,6 +1210,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				INFOPLIST_FILE = FinanceBakerZ/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1226,6 +1228,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = FinanceBakerZ/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",

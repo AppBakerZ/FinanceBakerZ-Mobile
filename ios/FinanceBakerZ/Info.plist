@@ -97,7 +97,6 @@
       <string>Octicons.ttf</string>
       <string>SimpleLineIcons.ttf</string>
       <string>Zocial.ttf</string>
-      <string>Application-icon.ttf</string>
       <string>Quicksand_Bold_Oblique.otf</string>
       <string>Quicksand_Bold.otf</string>
       <string>Quicksand_Book_Oblique.otf</string>
@@ -106,6 +105,7 @@
       <string>Quicksand_Light.otf</string>
       <string>QuicksandBook-Regular.otf</string>
       <string>QuicksandBold-Regular.otf</string>
+      <string>application-icon.ttf</string>
     </array>
   </dict>
 </plist>

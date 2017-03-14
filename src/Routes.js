@@ -13,7 +13,7 @@ import AccountsScreen from 'FinanceBakerZ/src/screens/Accounts';
 import CategoriesScreen from 'FinanceBakerZ/src/screens/Categories';
 import SettingsScreen from 'FinanceBakerZ/src/screens/Settings';
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
-import {drawer} from 'FinanceBakerZ/src/components/drawerItems/DrawerItems';
+import DrawerItems from 'FinanceBakerZ/src/components/drawerItems/DrawerItems';
 
 
 import { StackNavigator, DrawerNavigator } from 'react-navigation';
@@ -42,7 +42,7 @@ const header = ({ state, navigate }) => {
     <Icon  name="menu-options"
            size={32}
            color="#00562f"
-           style={{marginLeft: 10}}
+           style={{marginLeft: 5, padding: 10}}
            onPress={() => {
                navigate('DrawerOpen')
                 }}
@@ -67,8 +67,7 @@ const DashboardStack = StackNavigator({
   Dashboard: {
     screen: DashboardScreen,
     navigationOptions: {
-      header: header,
-      drawer: drawer('DASHBOARD', 'ic_dashboard_black_48px')
+      header: header
     }
   }
 });
@@ -77,9 +76,7 @@ const ProjectsStack = StackNavigator({
   Projects: {
     screen: ProjectsScreen,
     navigationOptions: {
-      header: header,
-      drawer: drawer('PROJECTS', 'ic_timeline_black_48px')
-
+      header: header
     }
   }
 });
@@ -88,8 +85,7 @@ const TransactionsStack = StackNavigator({
   Transactions: {
     screen: TransactionsScreen,
     navigationOptions: {
-      header: header,
-      drawer: drawer('TRANSACTIONS', 'ic_monetization_on_black_48px')
+      header: header
     }
   }
 });
@@ -98,8 +94,7 @@ const AccountsStack = StackNavigator({
   Accounts: {
     screen: AccountsScreen,
     navigationOptions: {
-      header: header,
-      drawer: drawer('ACCOUNTS', 'ic_account_balance_black_48px')
+      header: header
     }
   }
 });
@@ -108,8 +103,7 @@ const CategoriesStack = StackNavigator({
   Categories: {
     screen: CategoriesScreen,
     navigationOptions: {
-      header: header,
-      drawer: drawer('CATEGORIES', 'ic_view_module_black_48px')
+      header: header
     }
   }
 });
@@ -118,8 +112,7 @@ const SettingsStack = StackNavigator({
   Settings: {
     screen: SettingsScreen,
     navigationOptions: {
-      header: header,
-      drawer: drawer('SETTINGS', 'ic_settings_black_48px')
+      header: header
     }
   }
 });
@@ -145,9 +138,5 @@ export const Drawer = DrawerNavigator({
     screen: SettingsStack
   }
 }, {
-  contentOptions: {
-    activeBackgroundColor : '#00562f',
-    activeTintColor: '#fff',
-    inactiveTintColor: '#000'
-  }
+  contentComponent: DrawerItems
 });

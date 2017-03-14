@@ -1,18 +1,32 @@
-import React from 'react';
-import {Text} from 'react-native';
+import React, {Component} from 'react';
+import {Text, View, TouchableOpacity } from 'react-native';
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
 import {DrawerItemsStyles} from 'FinanceBakerZ/src/components/drawerItems/DrawerItemsStyles';
 
-exports.drawer = (labelText, iconName) => {
 
-  let label = (tintColor ) => {
-    return (<Text style={[{color: tintColor.tintColor}, DrawerItemsStyles.drawerText]}>{labelText}</Text>);
-  };
-  let icon = (tintColor) => {
-    return(<Icon  color={tintColor.tintColor} size={25} name={iconName} />);
-  };
+export default class DrawerItems extends Component {
 
+  render(){
 
+    const {routes} = this.props.navigation.state;
+    const {state} = this.props.navigation;
+    const { navigate } = this.props.navigation;
+    const Icons = ['ic_dashboard_black_48px', 'ic_timeline_black_48px', 'ic_monetization_on_black_48px', 'ic_account_balance_black_48px', 'ic_view_module_black_48px', 'ic_settings_black_48px'];
 
-  return{icon, label};
-};
+    return(
+      <View style={DrawerItemsStyles.container}>
+        {routes.map((route, index) => {
+          return(
+            <TouchableOpacity key={index} style={[DrawerItemsStyles.item, {backgroundColor: state.index == index ? '#00562f' : 'white'}]} onPress={() => navigate(route.routeName)} activeOpacity={0.6}>
+              <Icon style={DrawerItemsStyles.icon} color={state.index == index ? 'white' : 'black' } name={Icons[index]} size={28}></Icon>
+              <Text style={[DrawerItemsStyles.drawerText, {color: state.index == index ? 'white' : 'black'}]}>{route.routeName.toUpperCase()}</Text>
+            </TouchableOpacity>
+          )
+        })}
+        <View style={DrawerItemsStyles.bottomContainer}>
+        </View>
+      </View>
+
+    )
+  }
+}

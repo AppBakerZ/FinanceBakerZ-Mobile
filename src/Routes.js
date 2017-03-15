@@ -6,14 +6,14 @@ import LoginScreen from 'FinanceBakerZ/src/screens/auth/Login';
 import RegisterScreen from 'FinanceBakerZ/src/screens/auth/Register';
 import ForgotPasswordScreen from 'FinanceBakerZ/src/screens/auth/ForgotPassword';
 
-import DashboardScreen from 'FinanceBakerZ/src/screens/Dashboard';
+import DashboardScreen, {DashboardTabNavigator} from 'FinanceBakerZ/src/screens/Dashboard';
 import ProjectsScreen from 'FinanceBakerZ/src/screens/Projects';
 import TransactionsScreen from 'FinanceBakerZ/src/screens/Transactions';
 import AccountsScreen from 'FinanceBakerZ/src/screens/Accounts';
 import CategoriesScreen from 'FinanceBakerZ/src/screens/Categories';
 import SettingsScreen from 'FinanceBakerZ/src/screens/Settings';
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
-import DrawerItems from 'FinanceBakerZ/src/components/drawerItems/DrawerItems';
+import DrawerItems, {DrawerItemIcon} from 'FinanceBakerZ/src/components/drawerItems/DrawerItems';
 
 
 import { StackNavigator, DrawerNavigator } from 'react-navigation';
@@ -120,22 +120,32 @@ const SettingsStack = StackNavigator({
 //Left Menu that will use Many Stack
 export const Drawer = DrawerNavigator({
   Dashboard: {
-    screen: DashboardStack
+    screen: DashboardStack,
+    drawer: DrawerItemIcon('ic_dashboard_black_48px')
   },
   Projects: {
-    screen: ProjectsStack
+    screen: ProjectsStack,
+    drawer: DrawerItemIcon('ic_timeline_black_48px')
   },
   Transactions: {
-    screen: TransactionsStack
+    screen: TransactionsStack,
+    drawer: DrawerItemIcon('ic_monetization_on_black_48px')
   },
   Accounts: {
-    screen: AccountsStack
+    screen: AccountsStack,
+    drawer: DrawerItemIcon('ic_account_balance_black_48px')
   },
   Categories: {
-    screen: CategoriesStack
+    screen: CategoriesStack,
+    drawer: DrawerItemIcon('ic_view_module_black_48px')
   },
   Settings: {
-    screen: SettingsStack
+    screen: SettingsStack,
+    drawer: DrawerItemIcon('ic_settings_black_48px')
+  },
+  Logout: {
+    screen: SettingsStack,
+    drawer: DrawerItemIcon('ic_power_settings_new_black_48px')
   }
 }, {
   contentComponent: DrawerItems

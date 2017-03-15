@@ -12,9 +12,7 @@ export default class ViewContainer extends Component {
 
     return (
       <View style={[styles.viewContainer, this.props.style]}>
-        <TouchableWithoutFeedback onPress={ () => { Keyboard.dismiss() } }>
         {this.props.children}
-        </TouchableWithoutFeedback>
       </View>
     );
   }

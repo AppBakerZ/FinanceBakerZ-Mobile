@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native';
 
 export const DrawerItemsStyles = StyleSheet.create({
 
-  container:{
+  container: {
     flex: 1
   },
 
@@ -28,6 +28,5 @@ export const DrawerItemsStyles = StyleSheet.create({
   bottomContainer: {
     flex: 12
   }
-
 
 });

@@ -18,7 +18,7 @@ export default class Transactions extends Component {
 
         return (
             <ViewContainer>
-                <Text>Transactions</Text>
+                <Text>welcome to trasnsition</Text>
             </ViewContainer>
         );
     }

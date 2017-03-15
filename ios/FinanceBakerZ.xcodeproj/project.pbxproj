@@ -59,6 +59,7 @@
 		F4F793510F534F779B622164 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2E18B5D5F4D54F7BA078FB3B /* SimpleLineIcons.ttf */; };
 		D76A15E2F2384273A45DEF14 /* libRCTSplashScreen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19247E20E5E24E15B1CF64A2 /* libRCTSplashScreen.a */; };
 		C1757B798DB6401FB8FF3FE2 /* application-icon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6BB3BA97B1CD499E8232DBF6 /* application-icon.ttf */; };
+		E4006DB220D94C2EB16A0064 /* category-icon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F76999AB1B340A0945B6A85 /* category-icon.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -351,6 +352,7 @@
 		B49344077C2849888128B38C /* RCTSplashScreen.xcodeproj */ = {isa = PBXFileReference; name = "RCTSplashScreen.xcodeproj"; path = "../node_modules/react-native-smart-splash-screen/ios/RCTSplashScreen/RCTSplashScreen.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		19247E20E5E24E15B1CF64A2 /* libRCTSplashScreen.a */ = {isa = PBXFileReference; name = "libRCTSplashScreen.a"; path = "libRCTSplashScreen.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		6BB3BA97B1CD499E8232DBF6 /* application-icon.ttf */ = {isa = PBXFileReference; name = "application-icon.ttf"; path = "../src/icons/application-icon.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		3F76999AB1B340A0945B6A85 /* category-icon.ttf */ = {isa = PBXFileReference; name = "category-icon.ttf"; path = "../src/icons/category-icon.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -581,6 +583,7 @@
 				01F8E1894DD64CFD9ADEFD06 /* QuicksandBook-Regular.otf */,
 				26615D118A8146D48415815D /* QuicksandBold-Regular.otf */,
 				6BB3BA97B1CD499E8232DBF6 /* application-icon.ttf */,
+				3F76999AB1B340A0945B6A85 /* category-icon.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1051,6 +1054,7 @@
 				AEEDB169E12340B3BF44D9B9 /* QuicksandBook-Regular.otf in Resources */,
 				2EBA23A7E8D74E6F8DD47DEC /* QuicksandBold-Regular.otf in Resources */,
 				C1757B798DB6401FB8FF3FE2 /* application-icon.ttf in Resources */,
+				E4006DB220D94C2EB16A0064 /* category-icon.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

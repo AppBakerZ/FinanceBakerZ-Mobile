@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
-import {Text, View, ScrollView, ListView, TouchableOpacity } from 'react-native';
+import {Text, View, TouchableOpacity } from 'react-native';
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
 import {DrawerItemsStyles} from 'FinanceBakerZ/src/components/drawerItems/DrawerItemsStyles';
-
-let Icons = [];
-
 import Meteor from 'react-native-meteor';
 
+let Icons = [];
 
 export default class DrawerItems extends Component {
 

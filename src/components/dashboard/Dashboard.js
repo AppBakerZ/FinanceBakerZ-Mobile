@@ -3,8 +3,8 @@ import { View, Text, Image} from 'react-native';
 import { DashboardStyles } from 'FinanceBakerZ/src/components/dashboard/DashboardStyle';
 import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
 import DashboardTabScreen from 'FinanceBakerZ/src/components/dashboard/DashboardTabScreen';
+import DashboardTabBottomScreen from 'FinanceBakerZ/src/components/dashboard/DashboardTabBottomScreen';
 import { TabNavigator } from 'react-navigation';
-
 
 
 export default class Dashboard extends Component {
@@ -16,10 +16,8 @@ export default class Dashboard extends Component {
     };
   }
 
-
   render() {
     const { navigate } = this.props.navigation;
-
     console.log(this.props);
 
     return (
@@ -33,16 +31,27 @@ export default class Dashboard extends Component {
         <View style={DashboardStyles.dateTabContainer}>
           <DashboardTabNavigator />
         </View>
+        <View style={DashboardStyles.bottomTabContainer}>
+          <DashboardBottomTabNavigator />
+        </View>
       </ViewContainer>
     );
   }
 }
 
 const DashboardTabNavigator = TabNavigator({
-  'TODAY': { screen: DashboardTabScreen, path: 'checking!' },
-  'THIS WEEK': { screen: DashboardTabScreen },
-  'THIS MONTH': { screen: DashboardTabScreen },
-  'THIS YEAR': { screen: DashboardTabScreen }
+  'TODAY': {
+    screen: DashboardTabScreen
+  },
+  'THIS WEEK': {
+    screen: DashboardTabScreen
+  },
+  'THIS MONTH': {
+    screen: DashboardTabScreen
+  },
+  'THIS YEAR': {
+    screen: DashboardTabScreen
+  }
 }, {
   tabBarOptions: {
     style: {
@@ -63,6 +72,35 @@ const DashboardTabNavigator = TabNavigator({
     activeTintColor: 'white',
     inactiveTintColor: 'black',
     activeBackgroundColor: '#fff',
-    inactiveBackgroundColor : '#DADADA'
+    inactiveBackgroundColor : '#DADADA',
   }
 });
+
+const DashboardBottomTabNavigator = TabNavigator({
+  'TRANSACTIONS': {
+    screen: DashboardTabBottomScreen
+  },
+  'INCOMES': {
+    screen: DashboardTabBottomScreen
+  },
+  'EXPENSES': {
+    screen: DashboardTabBottomScreen
+  }
+}, {
+  tabBarOptions: {
+    style: {
+      backgroundColor: '#3B3B3B',
+    },
+    labelStyle: {
+      fontFamily: 'QuicksandBold-Regular',
+      fontSize: 10
+    },
+    tabStyle: {
+      padding: 15
+    },
+    activeTintColor: 'white',
+    activeBackgroundColor: '#fff',
+    inactiveBackgroundColor : '#DADADA',
+  }
+});
+

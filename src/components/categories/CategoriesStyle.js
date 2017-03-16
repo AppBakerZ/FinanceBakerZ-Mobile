@@ -8,21 +8,42 @@ export const CategoriesStyles = StyleSheet.create({
         height: null
     },
     main: {
-        backgroundColor: '#00562f',
         flex : 1,
         flexDirection : 'row',
-        marginLeft : 20,
-        marginRight : 20,
-
     },
     child1: {
-        backgroundColor: '#5b9972',
         flex : 1,
-        color : '#ffffff',
-        height : 200,
+        padding : 20,
     },
     child2: {
-        backgroundColor: '#174844',
         flex : 1,
+        padding : 20,
+    },
+    customIcon :{
+        color: '#ffffff',
+        textAlign: 'center',
+        marginTop: 35,
+    },
+    customIconText : {
+        color: '#ffffff',
+        textAlign: 'center',
+        fontSize: 20,
+    },
+    mainDiv : {
+        margin : 20,
+    },
+    Texture1 :{
+        flex :1,
+        height : 210,
+    },
+    Texture2 :{
+        flex :1,
+        height : 210,
+    },
+    AddCategoryIcon : {
+        position : 'absolute',
+        right : 30,
+        flex : 1,
+        top : 400,
     }
 });

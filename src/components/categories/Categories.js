@@ -6,8 +6,7 @@ import CategoryIcon from 'FinanceBakerZ/src/icons/CategoryIcon';
 
 export default class Categories extends Component {
     constructor(props) {
-        super(props);
-
+        super(props)
         this.state = {
 
         };
@@ -17,51 +16,86 @@ export default class Categories extends Component {
         return (
             <ViewContainer>
                 <Image source={require('FinanceBakerZ/src/images/app-background.png')} style={CategoriesStyles.backgroundImage}>
-                    <ScrollView>
-                        <View style={CategoriesStyles.main}>
-                            <View style={CategoriesStyles.child1}>
-                                <CategoryIcon name ='icons_automobile' style={{color: '#ffffff', textAlign: 'center'}} size={130} />
-                                <Text style={{color: '#ffffff', textAlign: 'center', fontSize: 30}}>AUTOMOBILE</Text>
-                            </View>
-                            <View style={CategoriesStyles.child2}>
-                                <CategoryIcon name ='icons_health-care' style={{color: '#ffffff', textAlign: 'center'}} size={130} />
-                                <Text style={{color: '#ffffff', textAlign: 'center', fontSize: 30}}>HEALTHCARE</Text></View>
-                        </View>
-                        <View style={CategoriesStyles.main}>
-                            <View style={CategoriesStyles.child2}>
-                                <CategoryIcon name ='icons_food' style={{color: '#ffffff', textAlign: 'center'}} size={130} />
-                                <Text style={{color: '#ffffff', textAlign: 'center', fontSize: 30}}>FOOD</Text></View>
-                            <View style={CategoriesStyles.child1}>
-                                <CategoryIcon name ='icons_automobile' style={{color: '#ffffff',  textAlign: 'center'}} size={130} />
-                                <Text style={{color: '#ffffff', textAlign: 'center', fontSize: 30}}>AUTOMOBILE</Text></View>
-                        </View>
-                        <View style={CategoriesStyles.main}>
-                            <View style={CategoriesStyles.child1}>
-                                <CategoryIcon name ='icons_child-care' style={{color: '#ffffff',  textAlign: 'center'}} size={130} />
-                                <Text style={{color: '#ffffff', textAlign: 'center', fontSize: 30}}>CHILD</Text></View>
-                            <View style={CategoriesStyles.child2}>
-                                <CategoryIcon name ='icons_coffee' style={{color: '#ffffff',  textAlign: 'center'}} size={130} />
-                                <Text style={{color: '#ffffff', textAlign: 'center', fontSize: 30}}>COFFEE</Text></View>
-                        </View>
-                        <View style={CategoriesStyles.main}>
-                            <View style={CategoriesStyles.child2}>
-                                <CategoryIcon name ='icons_dinner' style={{color: '#ffffff',  textAlign: 'center'}} size={130} />
-                                <Text style={{color: '#ffffff', textAlign: 'center', fontSize: 30}}>DINNER</Text></View>
-                            <View style={CategoriesStyles.child1}>
-                                <CategoryIcon name ='icons_automobile' style={{color: '#ffffff',  textAlign: 'center'}} size={130} />
-                                <Text style={{color: '#ffffff', textAlign: 'center', fontSize: 30}}>AUTOMOBILE</Text></View>
-                        </View>
-                        <View style={CategoriesStyles.main}>
-                            <View style={CategoriesStyles.child1}>
-                                <CategoryIcon name ='icons_coffee' style={{color: '#ffffff',  textAlign: 'center'}} size={130} />
-                                <Text style={{color: '#ffffff', textAlign: 'center', fontSize: 30}}>COFFEE</Text></View>
-                            <View style={CategoriesStyles.child2}>
-                                <CategoryIcon name ='icons_zakaat' style={{color: '#ffffff',  textAlign: 'center'}} size={130} />
-                                <Text style={{color: '#ffffff', textAlign: 'center', fontSize: 30}}>HEALTHCARE</Text></View>
+                    <ScrollView style={{flex:1}}>
+                        <View style={CategoriesStyles.mainDiv}>
+                            <View style={CategoriesStyles.main}>
+                                <Image source={require('FinanceBakerZ/src/images/category/Category-Img-Box1.png')} style={CategoriesStyles.Texture1}>
 
+                                    <View style={CategoriesStyles.child1}>
+                                        <CategoryIcon name ='icons_automobile' style={CategoriesStyles.customIcon} size={80} />
+                                        <Text style={CategoriesStyles.customIconText}>AUTOMOBILE</Text>
+                                    </View>
+                                </Image>
+                                <Image source={require('FinanceBakerZ/src/images/category/Category-Img-Box2.png')} style={CategoriesStyles.Texture1}>
+
+                                    <View style={CategoriesStyles.child2}>
+                                        <CategoryIcon name ='icons_health-care' style={CategoriesStyles.customIcon} size={80} />
+                                        <Text  style={CategoriesStyles.customIconText}>HEALTHCARE</Text></View>
+                                </Image>
+                            </View>
+
+
+                            <View style={CategoriesStyles.main}>
+                                <Image source={require('FinanceBakerZ/src/images/category/Category-Img-Box2.png')} style={CategoriesStyles.Texture2}>
+                                    <View style={CategoriesStyles.child2}>
+                                        <CategoryIcon name ='icons_food'style={CategoriesStyles.customIcon} size={80} />
+                                        <Text style={CategoriesStyles.customIconText}>FOOD</Text></View>
+                                </Image>
+                                <Image source={require('FinanceBakerZ/src/images/category/Category-Img-Box1.png')} style={CategoriesStyles.Texture1}>
+
+                                    <View style={CategoriesStyles.child1}>
+                                        <CategoryIcon name ='icons_automobile' style={CategoriesStyles.customIcon} size={80} />
+                                        <Text style={CategoriesStyles.customIconText}>AUTOMOBILE</Text></View>
+                                </Image>
+                            </View>
+                            <View style={CategoriesStyles.main}>
+                                <Image source={require('FinanceBakerZ/src/images/category/Category-Img-Box1.png')} style={CategoriesStyles.Texture1}>
+
+                                    <View style={CategoriesStyles.child1}>
+                                        <CategoryIcon name ='icons_child-care' style={CategoriesStyles.customIcon} size={80} />
+                                        <Text style={CategoriesStyles.customIconText}>CHILD</Text></View>
+                                </Image>
+                                <Image source={require('FinanceBakerZ/src/images/category/Category-Img-Box2.png')} style={CategoriesStyles.Texture2}>
+
+                                    <View style={CategoriesStyles.child2}>
+                                        <CategoryIcon name ='icons_coffee' style={CategoriesStyles.customIcon} size={80} />
+                                        <Text  style={CategoriesStyles.customIconText}>COFFEE</Text></View>
+                                </Image>
+                            </View>
+                            <View style={CategoriesStyles.main}>
+                                <Image source={require('FinanceBakerZ/src/images/category/Category-Img-Box2.png')} style={CategoriesStyles.Texture2}>
+
+                                    <View style={CategoriesStyles.child2}>
+                                        <CategoryIcon name ='icons_dinner' style={CategoriesStyles.customIcon} size={80} />
+                                        <Text  style={CategoriesStyles.customIconText}>DINNER</Text></View>
+                                </Image>
+                                <Image source={require('FinanceBakerZ/src/images/category/Category-Img-Box1.png')} style={CategoriesStyles.Texture1}>
+
+                                    <View style={CategoriesStyles.child1}>
+                                        <CategoryIcon name ='icons_automobile' style={CategoriesStyles.customIcon} size={80} />
+                                        <Text  style={CategoriesStyles.customIconText}>AUTOMOBILE</Text></View>
+                                </Image>
+                            </View>
+                            <View style={CategoriesStyles.main}>
+                                <Image source={require('FinanceBakerZ/src/images/category/Category-Img-Box1.png')} style={CategoriesStyles.Texture1}>
+
+                                    <View style={CategoriesStyles.child1}>
+                                        <CategoryIcon name ='icons_coffee'style={CategoriesStyles.customIcon} size={80} />
+                                        <Text  style={CategoriesStyles.customIconText}>COFFEE</Text></View>
+                                </Image>
+                                <Image source={require('FinanceBakerZ/src/images/category/Category-Img-Box2.png')} style={CategoriesStyles.Texture2}>
+
+                                    <View style={CategoriesStyles.child2}>
+                                        <CategoryIcon name ='icons_zakaat' style={CategoriesStyles.customIcon} size={80} />
+                                        <Text  style={CategoriesStyles.customIconText}>HEALTHCARE</Text></View>
+                                </Image>
+                            </View>
+                        </View>
+                        <View  style={CategoriesStyles.AddCategoryIcon}>
+                        <CategoryIcon name ='icons_clock' size={70} />
                         </View>
                     </ScrollView>
-                </ Image>
+                </Image>
 
             </ViewContainer>
 

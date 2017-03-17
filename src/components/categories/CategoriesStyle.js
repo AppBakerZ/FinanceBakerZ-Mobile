@@ -44,10 +44,4 @@ export const CategoriesStyles = StyleSheet.create({
         height : 200,
 
     },
-    AddCategoryIcon : {
-        position : 'absolute',
-        right : 30,
-        flex : 1,
-        top : 400,
-    }
 });

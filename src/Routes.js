@@ -11,6 +11,7 @@ import ProjectsScreen from 'FinanceBakerZ/src/screens/Projects';
 import TransactionsScreen from 'FinanceBakerZ/src/screens/Transactions';
 import AccountsScreen from 'FinanceBakerZ/src/screens/Accounts';
 import CategoriesScreen from 'FinanceBakerZ/src/screens/Categories';
+import SubCategoriesScreen from 'FinanceBakerZ/src/components/categories/subCategory/SubCategory';
 import SettingsScreen from 'FinanceBakerZ/src/screens/Settings';
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
 import DrawerItems, {DrawerItemIcon} from 'FinanceBakerZ/src/components/drawerItems/DrawerItems';
@@ -110,7 +111,14 @@ const CategoriesStack = StackNavigator({
     navigationOptions: {
       header: header
     }
+  },
+  SubCategories: {
+    screen: SubCategoriesScreen,
+    navigationOptions: {
+      header: header
+    }
   }
+
 });
 
 const SettingsStack = StackNavigator({

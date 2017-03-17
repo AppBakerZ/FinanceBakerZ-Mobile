@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button, Image, Text} from 'react-native';
+import {Button, Image, Text, View} from 'react-native';
 
 
 import LoginScreen from 'FinanceBakerZ/src/screens/auth/Login';
@@ -55,11 +55,16 @@ const header = ({ state, navigate }) => {
     width: 50}} source={{uri: 'http://placehold.it/100x100'}}/>
   );
 
+  let title = (
+    <Text style={{fontSize: 20, fontFamily: 'QuicksandBold-Regular', color: '#00562E'}}>{(state.routeName != 'Dashboard') ? state.routeName : ''}</Text>
+  );
+
+
   style = {
     height: 70
   };
 
-  return { left, right, style};
+  return { left, right, title, style};
 };
 
 

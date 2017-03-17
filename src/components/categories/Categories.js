@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, ScrollView, Icon} from 'react-native';
+import { View, Text, Image, ScrollView, Icon, TouchableOpacity} from 'react-native';
 import { CategoriesStyles } from 'FinanceBakerZ/src/components/categories/CategoriesStyle';
 import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
 import CategoryIcon from 'FinanceBakerZ/src/icons/CategoryIcon';
@@ -22,15 +22,22 @@ export default class Categories extends Component {
                                 <Image source={require('FinanceBakerZ/src/images/category/Category-Img-Box1.png')} style={CategoriesStyles.Texture1}>
 
                                     <View style={CategoriesStyles.child1}>
+                                        <TouchableOpacity activeOpacity={0.3}>
                                         <CategoryIcon name ='icons_automobile' style={CategoriesStyles.customIcon} size={80} />
                                         <Text style={CategoriesStyles.customIconText}>AUTOMOBILE</Text>
+                                        </TouchableOpacity>
+
                                     </View>
                                 </Image>
                                 <Image source={require('FinanceBakerZ/src/images/category/Category-Img-Box2.png')} style={CategoriesStyles.Texture1}>
 
                                     <View style={CategoriesStyles.child2}>
+                                        <TouchableOpacity activeOpacity={0.3}>
                                         <CategoryIcon name ='icons_health-care' style={CategoriesStyles.customIcon} size={80} />
-                                        <Text  style={CategoriesStyles.customIconText}>HEALTHCARE</Text></View>
+                                        <Text  style={CategoriesStyles.customIconText}>HEALTHCARE</Text>
+                                        </TouchableOpacity>
+
+                                    </View>
                                 </Image>
                             </View>
 
@@ -38,56 +45,81 @@ export default class Categories extends Component {
                             <View style={CategoriesStyles.main}>
                                 <Image source={require('FinanceBakerZ/src/images/category/Category-Img-Box2.png')} style={CategoriesStyles.Texture2}>
                                     <View style={CategoriesStyles.child2}>
+                                        <TouchableOpacity activeOpacity={0.3}>
                                         <CategoryIcon name ='icons_food'style={CategoriesStyles.customIcon} size={80} />
-                                        <Text style={CategoriesStyles.customIconText}>FOOD</Text></View>
+                                        <Text style={CategoriesStyles.customIconText}>FOOD</Text>
+                                            </TouchableOpacity>
+
+                                            </View>
                                 </Image>
                                 <Image source={require('FinanceBakerZ/src/images/category/Category-Img-Box1.png')} style={CategoriesStyles.Texture1}>
 
                                     <View style={CategoriesStyles.child1}>
+                                        <TouchableOpacity activeOpacity={0.3}>
                                         <CategoryIcon name ='icons_automobile' style={CategoriesStyles.customIcon} size={80} />
-                                        <Text style={CategoriesStyles.customIconText}>AUTOMOBILE</Text></View>
+                                        <Text style={CategoriesStyles.customIconText}>AUTOMOBILE</Text>
+                                            </TouchableOpacity>
+                                            </View>
                                 </Image>
                             </View>
                             <View style={CategoriesStyles.main}>
                                 <Image source={require('FinanceBakerZ/src/images/category/Category-Img-Box1.png')} style={CategoriesStyles.Texture1}>
 
                                     <View style={CategoriesStyles.child1}>
-                                        <CategoryIcon name ='icons_child-care' style={CategoriesStyles.customIcon} size={80} />
-                                        <Text style={CategoriesStyles.customIconText}>CHILD</Text></View>
+                                        <TouchableOpacity activeOpacity={0.3}>
+                                            <CategoryIcon name ='icons_child-care' style={CategoriesStyles.customIcon} size={80} />
+                                        <Text style={CategoriesStyles.customIconText}>CHILD</Text>
+                                            </TouchableOpacity>
+                                            </View>
                                 </Image>
                                 <Image source={require('FinanceBakerZ/src/images/category/Category-Img-Box2.png')} style={CategoriesStyles.Texture2}>
 
                                     <View style={CategoriesStyles.child2}>
+                                        <TouchableOpacity activeOpacity={0.3}>
                                         <CategoryIcon name ='icons_coffee' style={CategoriesStyles.customIcon} size={80} />
-                                        <Text  style={CategoriesStyles.customIconText}>COFFEE</Text></View>
+                                        <Text  style={CategoriesStyles.customIconText}>COFFEE</Text>
+                                            </TouchableOpacity>
+                                            </View>
                                 </Image>
                             </View>
                             <View style={CategoriesStyles.main}>
                                 <Image source={require('FinanceBakerZ/src/images/category/Category-Img-Box2.png')} style={CategoriesStyles.Texture2}>
 
                                     <View style={CategoriesStyles.child2}>
+                                        <TouchableOpacity activeOpacity={0.3}>
                                         <CategoryIcon name ='icons_dinner' style={CategoriesStyles.customIcon} size={80} />
-                                        <Text  style={CategoriesStyles.customIconText}>DINNER</Text></View>
+                                        <Text  style={CategoriesStyles.customIconText}>DINNER</Text>
+                                            </TouchableOpacity>
+                                            </View>
                                 </Image>
                                 <Image source={require('FinanceBakerZ/src/images/category/Category-Img-Box1.png')} style={CategoriesStyles.Texture1}>
 
                                     <View style={CategoriesStyles.child1}>
+                                        <TouchableOpacity activeOpacity={0.3}>
                                         <CategoryIcon name ='icons_automobile' style={CategoriesStyles.customIcon} size={80} />
-                                        <Text  style={CategoriesStyles.customIconText}>AUTOMOBILE</Text></View>
+                                        <Text  style={CategoriesStyles.customIconText}>AUTOMOBILE</Text>
+                                            </TouchableOpacity>
+                                            </View>
                                 </Image>
                             </View>
                             <View style={CategoriesStyles.main}>
                                 <Image source={require('FinanceBakerZ/src/images/category/Category-Img-Box1.png')} style={CategoriesStyles.Texture1}>
 
                                     <View style={CategoriesStyles.child1}>
+                                        <TouchableOpacity activeOpacity={0.3}>
                                         <CategoryIcon name ='icons_coffee'style={CategoriesStyles.customIcon} size={80} />
-                                        <Text  style={CategoriesStyles.customIconText}>COFFEE</Text></View>
+                                        <Text  style={CategoriesStyles.customIconText}>COFFEE</Text>
+                                            </TouchableOpacity>
+                                            </View>
                                 </Image>
                                 <Image source={require('FinanceBakerZ/src/images/category/Category-Img-Box2.png')} style={CategoriesStyles.Texture2}>
 
                                     <View style={CategoriesStyles.child2}>
+                                        <TouchableOpacity activeOpacity={0.3}>
                                         <CategoryIcon name ='icons_zakaat' style={CategoriesStyles.customIcon} size={80} />
-                                        <Text  style={CategoriesStyles.customIconText}>HEALTHCARE</Text></View>
+                                        <Text  style={CategoriesStyles.customIconText}>HEALTHCARE</Text>
+                                            </TouchableOpacity>
+                                            </View>
                                 </Image>
                             </View>
                         </View>

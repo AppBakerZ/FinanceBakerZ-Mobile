@@ -39,12 +39,11 @@ export default class Login extends Component {
                     showAlert('Error', err.reason);
                     this.setState({loading: false});
                 }else{
-                    showAlert('Welcome', 'Hello '+usernameOrEmail + '.');
                     this.setState({loading: false});
                     var useraccount = {account: {owner: Meteor.user()._id}};
                     Meteor.call('profileAssets', useraccount, function (err, result) {
-                        console.log('err:', err);
-                        console.log('result:', result);
+                        // console.log('err:', err);
+                        // console.log('result:', result);
                     });
                     setTimeout(() => {
                         // this.props.history.push('/app/dashboard');
@@ -81,6 +80,7 @@ export default class Login extends Component {
                                     autoCorrect={false}
                                     onChangeText={this.onChange.bind(this, 'usernameOrEmail')}
                                     ref={(ref) => this.username = ref}
+                                    underlineColorAndroid="transparent"
                                     />
                             </View>
                             <View style={LoginStyles.borderBottom}>
@@ -96,7 +96,8 @@ export default class Login extends Component {
                                     autoCorrect={false}
                                     onChangeText={this.onChange.bind(this, 'password')}
                                     onSubmitEditing={() => {(this.state.usernameOrEmail.length ? this.onSubmit.bind(this)() : this.username.focus() )}}
-                                    />
+                                    underlineColorAndroid="transparent"
+                                />
                             </View>
                         </KeyboardAvoidingView>
                     </View>

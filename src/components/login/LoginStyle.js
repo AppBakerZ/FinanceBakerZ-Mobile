@@ -28,14 +28,14 @@ export const LoginStyles = StyleSheet.create({
 
   textRightContainer: {
     flex: 1,
-    justifyContent: 'flex-start',
+    justifyContent: 'flex-end',
     alignItems: 'flex-end'
   },
 
   textRight: {
     fontFamily: 'QuicksandBold-Regular',
     paddingRight: 15,
-    paddingBottom: 15
+    paddingBottom: 10
 
   },
 
@@ -70,7 +70,7 @@ export const LoginStyles = StyleSheet.create({
 
   input: {
     fontFamily: 'QuicksandBook-Regular',
-    paddingLeft: 50,
+    paddingLeft: 70,
     fontSize: 15,
     height: 48
   },
@@ -78,12 +78,12 @@ export const LoginStyles = StyleSheet.create({
   inputIcon:{
     position: 'absolute',
     top: 13,
-    left: 20
+    left: 30
   },
 
   borderBottom: {
     borderBottomWidth: 1,
-    borderBottomColor: 'green'
+    borderBottomColor: '#F5F5F5'
   }
 
 

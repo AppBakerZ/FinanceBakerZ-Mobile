@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 export const DashboardStyles = StyleSheet.create({
 
   imgContainer: {
-    flex: 1.5
+    flex: 1.2
   },
 
   img: {
@@ -16,7 +16,7 @@ export const DashboardStyles = StyleSheet.create({
 
 
   dateTabContainer:{
-    flex: 2
+    flex: 1.5
   },
 
   text: {

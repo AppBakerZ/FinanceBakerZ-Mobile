@@ -4,7 +4,7 @@ import { DashboardStyles } from 'FinanceBakerZ/src/components/dashboard/Dashboar
 import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
 import DashboardTabScreen from 'FinanceBakerZ/src/components/dashboard/DashboardTabScreen';
 import DashboardTabBottomScreen from 'FinanceBakerZ/src/components/dashboard/DashboardTabBottomScreen';
-import { TabNavigator } from 'react-navigation';
+import { TabNavigator, TabView } from 'react-navigation';
 
 
 export default class Dashboard extends Component {
@@ -53,26 +53,22 @@ const DashboardTabNavigator = TabNavigator({
     screen: DashboardTabScreen
   }
 }, {
+  tabBarComponent: TabView.TabBarTop,
+  lazyLoad: true,
+  swipeEnabled: true,
+  tabBarPosition: 'top',
+  animationEnabled: true,
+  initialRouteName: 'THIS MONTH',
   tabBarOptions: {
     style: {
-      backgroundColor: '#DADADA',
+      backgroundColor: '#3b3b3b',
+      height: 55
     },
     labelStyle: {
-      fontFamily: 'QuicksandBook-Regular'
-    },
-    indicatorStyle: {
-      backgroundColor: 'transparent'
-    },
-    tabStyle: {
-      borderLeftColor: '#CFCFCF',
-      borderLeftWidth: 1,
-      borderRightWidth: 1,
-      borderRightColor: '#CFCFCF'
-    },
-    activeTintColor: 'white',
-    inactiveTintColor: 'black',
-    activeBackgroundColor: '#fff',
-    inactiveBackgroundColor : '#DADADA',
+      fontFamily: 'QuicksandBold-Regular',
+      fontSize: 12,
+      color: '#ffffff',
+    }
   }
 });
 
@@ -87,20 +83,23 @@ const DashboardBottomTabNavigator = TabNavigator({
     screen: DashboardTabBottomScreen
   }
 }, {
+  tabBarComponent: TabView.TabBarTop,
+  lazyLoad: true,
+  swipeEnabled: true,
+  tabBarPosition: 'top',
+  animationEnabled: true,
+  initialRouteName: 'TRANSACTIONS',
   tabBarOptions: {
     style: {
-      backgroundColor: '#3B3B3B',
+      backgroundColor: '#3b3b3b',
+      height: 55
     },
     labelStyle: {
       fontFamily: 'QuicksandBold-Regular',
-      fontSize: 10
-    },
-    tabStyle: {
-      padding: 15
-    },
-    activeTintColor: 'white',
-    activeBackgroundColor: '#fff',
-    inactiveBackgroundColor : '#DADADA',
+      fontSize: 11,
+      color: '#ffffff',
+      marginTop: 15
+    }
   }
 });
 

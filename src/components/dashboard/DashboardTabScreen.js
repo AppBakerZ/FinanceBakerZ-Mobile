@@ -14,11 +14,14 @@ export default class DashboardTabScreen extends Component {
 
   render() {
     console.log('props', this.props);
+    let {navigation} = this.props;
+    console.log('navigation', navigation.state.key);
+
     return (
       <View style={DashboardStyles.tabScreenContainer}>
         <View style={DashboardStyles.childContainer}>
           <Text style={DashboardStyles.textHeading}>Your Incomes</Text>
-          <Text style={DashboardStyles.greenText}>Rs. 4,30,000</Text>
+          <Text style={DashboardStyles.greenText}>{navigation.state.key}</Text>
         </View>
         <View style={DashboardStyles.childContainer}>
           <Text style={DashboardStyles.textHeading}>Your Expenses</Text>

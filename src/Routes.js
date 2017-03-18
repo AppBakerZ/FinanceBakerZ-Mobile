@@ -30,8 +30,18 @@ export const Auth = StackNavigator({
       }
     }
   },
-  Register: {screen: RegisterScreen},
-  ForgotPassword: {screen: ForgotPasswordScreen}
+  Register: {
+    screen: RegisterScreen,
+    navigationOptions: {
+      title: 'Sign Up'
+    }
+  },
+  ForgotPassword: {
+    screen: ForgotPasswordScreen,
+    navigationOptions: {
+      title: 'Forgot Password'
+    }
+  }
 }, {
   headerMode: 'screen'
 });

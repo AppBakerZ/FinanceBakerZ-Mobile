@@ -65,8 +65,8 @@ export default class Register extends Component {
                     <View style={RegisterStyles.formContainer}>
                         <KeyboardAvoidingView>
                             <ScrollView>
-                                <View>
-                                    <Icon size={15} name="Person" style={RegisterStyles.inputIcon} ></Icon>
+                                <View style={RegisterStyles.borderBottom}>
+                                    <Icon size={18} name="Person" style={RegisterStyles.inputIcon} ></Icon>
                                     <TextInput
                                         placeholder='Full Name'
                                         style={RegisterStyles.input}
@@ -74,10 +74,11 @@ export default class Register extends Component {
                                         onSubmitEditing={() => this.usernameOrEmail.focus()}
                                         maxLength={ 30 }
                                         onChangeText={this.onChange.bind(this, 'fullName')}
-                                        />
+                                        underlineColorAndroid="transparent"
+                                    />
                                 </View>
-                                <View>
-                                    <Icon size={15} name="Email" style={RegisterStyles.inputIcon} ></Icon>
+                                <View style={RegisterStyles.borderBottom}>
+                                    <Icon size={18} name="Email" style={RegisterStyles.inputIcon} ></Icon>
                                     <TextInput
                                         placeholder='Email'
                                         keyboardType="email-address"
@@ -88,11 +89,11 @@ export default class Register extends Component {
                                         maxLength={ 30 }
                                         onChangeText={this.onChange.bind(this, 'usernameOrEmail')}
                                         ref={(ref) => {this.usernameOrEmail = ref}}
-
-                                        />
+                                        underlineColorAndroid="transparent"
+                                    />
                                 </View>
-                                <View>
-                                    <Icon size={15} name="Password" style={RegisterStyles.inputIcon} ></Icon>
+                                <View style={RegisterStyles.borderBottom}>
+                                    <Icon size={18} name="Password" style={RegisterStyles.inputIcon} ></Icon>
                                     <TextInput
                                         placeholder='Password'
                                         secureTextEntry

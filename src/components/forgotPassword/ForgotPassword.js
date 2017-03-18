@@ -53,8 +53,8 @@ export default class ForgotPassword extends Component {
                         <Text style={ForgotPasswordStyle.textEmail}>Enter your email address to get the recovery email.</Text>
                     </View>
                     <View style={ForgotPasswordStyle.inputContainer}>
-                        <View>
-                            <Icon size={15} name="Email" style={ForgotPasswordStyle.inputIcon} ></Icon>
+                        <View style={ForgotPasswordStyle.borderBottom}>
+                            <Icon size={18} name="Email" style={ForgotPasswordStyle.inputIcon} ></Icon>
                             <TextInput
                                 placeholder='Email'
                                 style={[ForgotPasswordStyle.input]}
@@ -62,7 +62,8 @@ export default class ForgotPassword extends Component {
                                 maxLength = {30}
                                 autoCorrect={false}
                                 onChangeText={this.onChange.bind(this)}
-                                />
+                                underlineColorAndroid="transparent"
+                            />
                         </View>
                     </View>
                     <View style={ForgotPasswordStyle.btnContainer}>

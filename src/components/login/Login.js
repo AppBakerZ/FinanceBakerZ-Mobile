@@ -69,7 +69,7 @@ export default class Login extends Component {
                     </View>
                     <View style={LoginStyles.formContainer}>
                         <KeyboardAvoidingView>
-                            <View >
+                            <View style={LoginStyles.borderBottom}>
                                 <Icon size={15} name="Person" style={LoginStyles.inputIcon} ></Icon>
                                 <TextInput
                                     placeholder='Username'
@@ -83,7 +83,7 @@ export default class Login extends Component {
                                     ref={(ref) => this.username = ref}
                                     />
                             </View>
-                            <View>
+                            <View style={LoginStyles.borderBottom}>
                                 <Icon size={15} name="Password"  style={LoginStyles.inputIcon} ></Icon>
                                 <TextInput
                                     placeholder='Password'

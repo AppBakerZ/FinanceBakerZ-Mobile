@@ -72,14 +72,18 @@ export const LoginStyles = StyleSheet.create({
     fontFamily: 'QuicksandBook-Regular',
     paddingLeft: 50,
     fontSize: 15,
-    paddingBottom: 15,
-    marginBottom: 15
+    height: 48
   },
 
   inputIcon:{
     position: 'absolute',
     top: 13,
     left: 20
+  },
+
+  borderBottom: {
+    borderBottomWidth: 1,
+    borderBottomColor: 'green'
   }
 
 

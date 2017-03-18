@@ -34,13 +34,11 @@ export const ProjectsStyles = StyleSheet.create({
   iconText: {
     flex: 3,
     fontFamily: 'QuicksandBook-Regular'
-
   },
 
   contentRightText: {
-    paddingRight: 10,
+    paddingRight: 20,
     fontFamily: 'QuicksandBook-Regular'
-
   }
 
 });

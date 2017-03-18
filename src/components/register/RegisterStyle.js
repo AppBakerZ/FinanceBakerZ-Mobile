@@ -44,16 +44,15 @@ export const RegisterStyles = StyleSheet.create({
 
   input: {
     fontFamily: 'QuicksandBook-Regular',
-    paddingTop: 12,
-    paddingLeft: 65,
-    fontSize: 13,
-    height: 60
+    paddingLeft: 60,
+    fontSize: 15,
+    height: 48
   },
 
   inputIcon:{
     position: 'absolute',
-    top: 19,
-    left: 35
+    top: 13,
+    left: 25
   },
 
   borderBottom: {

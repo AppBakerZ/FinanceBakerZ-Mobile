@@ -37,9 +37,9 @@ export const ForgotPasswordStyle = StyleSheet.create({
 
   input: {
     fontFamily: 'QuicksandBook-Regular',
-    paddingLeft: 53,
-    fontSize: 14,
-    paddingBottom: 15
+    paddingLeft: 60,
+    fontSize: 15,
+    height: 48
   },
 
   inputIcon:{

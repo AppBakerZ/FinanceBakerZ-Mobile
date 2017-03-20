@@ -64,7 +64,7 @@ export default class Login extends Component {
             <ViewContainer>
                 <Image source={require('FinanceBakerZ/src/images/app-background.png')} style={LoginStyles.backgroundImage} >
                     <View style={LoginStyles.logoContainer} >
-                        <Image source={require('FinanceBakerZ/src/images/logo-final.png')} style={LoginStyles.logo} />
+                        <Image source={require('FinanceBakerZ/src/images/logo-final.png')} resizeMode='stretch' style={LoginStyles.logo} />
                     </View>
                     <View style={LoginStyles.formContainer}>
                         <KeyboardAvoidingView>

@@ -15,9 +15,8 @@ export const LoginStyles = StyleSheet.create({
   },
 
   logo: {
-    resizeMode: 'center',
     width: 220,
-    height: 220
+    height: 220 - 62
   },
 
   formContainer:{

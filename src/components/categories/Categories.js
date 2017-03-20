@@ -63,7 +63,7 @@ class Categories extends Component {
         );
     }
 }
-ategories c
+
 export default createContainer(() => {
     const categoriesHandle = Meteor.subscribe('categories');
     return {

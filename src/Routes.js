@@ -20,6 +20,32 @@ import DrawerItems, {DrawerItemIcon} from 'FinanceBakerZ/src/components/drawerIt
 import { StackNavigator, DrawerNavigator } from 'react-navigation';
 
 //Only for Auth Components
+const authHeader = ({ state, goBack }) => {
+  // The navigation prop has functions like setParams, goBack, and navigate.
+  let left = (
+      <Icon  name="ic_arrow_back_black_48px"
+             size={32}
+             color="#00562f"
+             style={{marginLeft: 5, padding: 10}}
+             onPress={() => {
+               goBack()
+                }}
+          />
+  );
+
+  let title = (
+      <Text style={{fontSize: 20, fontFamily: 'QuicksandBold-Regular', color: '#00562E'}}>{(state.routeName != 'Dashboard') ? state.routeName : ''}</Text>
+  );
+
+
+  style = {
+    height: 70,
+    backgroundColor: '#ffffff'
+  };
+
+  return { left, title, style};
+};
+
 export const Auth = StackNavigator({
   Login: {
     screen: LoginScreen,
@@ -33,13 +59,15 @@ export const Auth = StackNavigator({
   Register: {
     screen: RegisterScreen,
     navigationOptions: {
-      title: 'Sign Up'
+      title: 'Sign Up',
+      header: authHeader
     }
   },
   ForgotPassword: {
     screen: ForgotPasswordScreen,
     navigationOptions: {
-      title: 'Forgot Password'
+      title: 'Forgot Password',
+      header: authHeader
     }
   }
 }, {
@@ -60,22 +88,17 @@ const header = ({ state, navigate }) => {
     />
   );
 
-  let right = (
-    <Image style={{marginRight: 5, height: 50,
-    borderRadius: 50,
-    width: 50}} source={{uri: 'http://placehold.it/100x100'}}/>
-  );
-
   let title = (
     <Text style={{fontSize: 20, fontFamily: 'QuicksandBold-Regular', color: '#00562E'}}>{(state.routeName != 'Dashboard') ? state.routeName : ''}</Text>
   );
 
 
   style = {
-    height: 70
+    height: 70,
+    backgroundColor: '#ffffff'
   };
 
-  return { left, right, title, style};
+  return { left, title, style};
 };
 
 

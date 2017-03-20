@@ -9,39 +9,38 @@ export const CategoriesStyles = StyleSheet.create({
     },
     main: {
         flex : 1,
-        flexDirection : 'row',
+        flexDirection : 'row'
     },
     child1: {
-        flex : 1,
+        flex : 1
 
     },
     child2: {
-        flex : 1,
+        flex : 1
 
     },
     customIcon :{
         color: '#ffffff',
         textAlign: 'center',
-        marginTop: 25,
+        marginTop: 25
     },
     customIconText : {
         color: '#ffffff',
         textAlign: 'center',
         fontSize: 15,
         paddingTop : 20,
-        paddingBottom : 50,
+        paddingBottom : 50
     },
     mainDiv : {
-        margin : 20,
-        backgroundColor : '#008000',
+        margin : 20
     },
     Texture1 :{
         flex :1,
-        height : 200,
+        height : 200
     },
     Texture2 :{
         flex :1,
-        height : 200,
+        height : 200
 
-    },
+    }
 });

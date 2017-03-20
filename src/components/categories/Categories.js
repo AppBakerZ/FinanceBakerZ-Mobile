@@ -4,9 +4,11 @@ import { CategoriesStyles } from 'FinanceBakerZ/src/components/categories/Catego
 import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
 import CategoryIcon from 'FinanceBakerZ/src/icons/CategoryIcon';
 
-export default class Categories extends Component {
+import Meteor, { createContainer } from 'react-native-meteor';
+
+class Categories extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
 
         };
@@ -16,8 +18,15 @@ export default class Categories extends Component {
         this.props.navigation.navigate('SubCategories');
     }
 
+    renderItem(){
+        let categories = this.props.categories.map((category) => {
+            return
+        });
+    }
     render() {
+        const { categories } = this.props;
         const { navigate } = this.props.navigation;
+        console.log('categories :', categories);
         return (
             <ViewContainer>
                 <Image source={require('FinanceBakerZ/src/images/app-background.png')} style={CategoriesStyles.backgroundImage}>
@@ -45,88 +54,6 @@ export default class Categories extends Component {
                                     </View>
                                 </Image>
                             </View>
-
-
-                            <View style={CategoriesStyles.main}>
-                                <Image source={require('FinanceBakerZ/src/images/category/Category-Img-Box2.png')} style={CategoriesStyles.Texture2}>
-                                    <View style={CategoriesStyles.child2}>
-                                        <TouchableOpacity activeOpacity={0.3}>
-                                            <CategoryIcon name ='icons_food'style={CategoriesStyles.customIcon} size={80} />
-                                            <Text style={CategoriesStyles.customIconText}>FOOD</Text>
-                                        </TouchableOpacity>
-
-                                    </View>
-                                </Image>
-                                <Image source={require('FinanceBakerZ/src/images/category/Category-Img-Box1.png')} style={CategoriesStyles.Texture1}>
-
-                                    <View style={CategoriesStyles.child1}>
-                                        <TouchableOpacity activeOpacity={0.3}>
-                                            <CategoryIcon name ='icons_automobile' style={CategoriesStyles.customIcon} size={80} />
-                                            <Text style={CategoriesStyles.customIconText}>AUTOMOBILE</Text>
-                                        </TouchableOpacity>
-                                    </View>
-                                </Image>
-                            </View>
-                            <View style={CategoriesStyles.main}>
-                                <Image source={require('FinanceBakerZ/src/images/category/Category-Img-Box1.png')} style={CategoriesStyles.Texture1}>
-
-                                    <View style={CategoriesStyles.child1}>
-                                        <TouchableOpacity activeOpacity={0.3}>
-                                            <CategoryIcon name ='icons_child-care' style={CategoriesStyles.customIcon} size={80} />
-                                            <Text style={CategoriesStyles.customIconText}>CHILD</Text>
-                                        </TouchableOpacity>
-                                    </View>
-                                </Image>
-                                <Image source={require('FinanceBakerZ/src/images/category/Category-Img-Box2.png')} style={CategoriesStyles.Texture2}>
-
-                                    <View style={CategoriesStyles.child2}>
-                                        <TouchableOpacity activeOpacity={0.3}>
-                                            <CategoryIcon name ='icons_coffee' style={CategoriesStyles.customIcon} size={80} />
-                                            <Text  style={CategoriesStyles.customIconText}>COFFEE</Text>
-                                        </TouchableOpacity>
-                                    </View>
-                                </Image>
-                            </View>
-                            <View style={CategoriesStyles.main}>
-                                <Image source={require('FinanceBakerZ/src/images/category/Category-Img-Box2.png')} style={CategoriesStyles.Texture2}>
-
-                                    <View style={CategoriesStyles.child2}>
-                                        <TouchableOpacity activeOpacity={0.3}>
-                                            <CategoryIcon name ='icons_dinner' style={CategoriesStyles.customIcon} size={80} />
-                                            <Text  style={CategoriesStyles.customIconText}>DINNER</Text>
-                                        </TouchableOpacity>
-                                    </View>
-                                </Image>
-                                <Image source={require('FinanceBakerZ/src/images/category/Category-Img-Box1.png')} style={CategoriesStyles.Texture1}>
-
-                                    <View style={CategoriesStyles.child1}>
-                                        <TouchableOpacity activeOpacity={0.3}>
-                                            <CategoryIcon name ='icons_automobile' style={CategoriesStyles.customIcon} size={80} />
-                                            <Text  style={CategoriesStyles.customIconText}>AUTOMOBILE</Text>
-                                        </TouchableOpacity>
-                                    </View>
-                                </Image>
-                            </View>
-                            <View style={CategoriesStyles.main}>
-                                <Image source={require('FinanceBakerZ/src/images/category/Category-Img-Box1.png')} style={CategoriesStyles.Texture1}>
-
-                                    <View style={CategoriesStyles.child1}>
-                                        <TouchableOpacity activeOpacity={0.3}>
-                                            <CategoryIcon name ='icons_coffee'style={CategoriesStyles.customIcon} size={80} />
-                                            <Text  style={CategoriesStyles.customIconText}>COFFEE</Text>
-                                        </TouchableOpacity>
-                                    </View>
-                                </Image>
-                                <Image source={require('FinanceBakerZ/src/images/category/Category-Img-Box2.png')} style={CategoriesStyles.Texture2}>
-
-                                    <View style={CategoriesStyles.child2}>
-                                        <TouchableOpacity activeOpacity={0.3}>
-                                            <CategoryIcon name ='icons_zakaat' style={CategoriesStyles.customIcon} size={80} />
-                                            <Text  style={CategoriesStyles.customIconText}>HEALTHCARE</Text>
-                                        </TouchableOpacity>
-                                    </View>
-                                </Image>
-                            </View>
                         </View>
                     </ScrollView>
                 </Image>
@@ -136,5 +63,13 @@ export default class Categories extends Component {
         );
     }
 }
-
-
+ategories c
+export default createContainer(() => {
+    const categoriesHandle = Meteor.subscribe('categories');
+    return {
+        categoriesReady: categoriesHandle.ready(),
+        categories: Meteor.collection('categories').find({
+            parent: null
+        }, {sort: {createdAt: -1}})
+    };
+}, Categories);

@@ -102,7 +102,7 @@ export const DashboardStyles = StyleSheet.create({
   },
 
   contentRightText: {
-    paddingRight: 10,
+    paddingRight: 20,
     fontFamily: 'QuicksandBook-Regular'
 
   }

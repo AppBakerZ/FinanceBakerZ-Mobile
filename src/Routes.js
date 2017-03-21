@@ -25,7 +25,6 @@ const authHeader = ({ state, goBack }) => {
   let left = (
       <Icon  name="ic_arrow_back_black_48px"
              size={32}
-             color="#00562f"
              style={{marginLeft: 5, padding: 10}}
              onPress={() => {
                goBack()
@@ -80,7 +79,6 @@ const header = ({ state, navigate }) => {
   let left = (
     <Icon  name="menu-options"
            size={32}
-           color="#00562f"
            style={{marginLeft: 5, padding: 10}}
            onPress={() => {
                navigate('DrawerOpen')

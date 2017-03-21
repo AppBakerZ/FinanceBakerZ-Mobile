@@ -71,7 +71,7 @@ export default class Register extends Component {
             <KeyboardAvoidingView>
               <ScrollView>
                 <View style={RegisterStyles.borderBottom}>
-                  <Icon size={18} name="Person" style={RegisterStyles.inputIcon} ></Icon>
+                  <Icon size={18} name="person" style={RegisterStyles.inputIcon} ></Icon>
                   <TextInput
                     placeholder='Full Name'
                     style={RegisterStyles.input}
@@ -83,7 +83,7 @@ export default class Register extends Component {
                   />
                 </View>
                 <View style={RegisterStyles.borderBottom}>
-                  <Icon size={18} name="Email" style={RegisterStyles.inputIcon} ></Icon>
+                  <Icon size={18} name="email" style={RegisterStyles.inputIcon} ></Icon>
                   <TextInput
                     placeholder='Email'
                     keyboardType="email-address"
@@ -98,7 +98,7 @@ export default class Register extends Component {
                   />
                 </View>
                 <View style={RegisterStyles.borderBottom}>
-                  <Icon size={18} name="Password" style={RegisterStyles.inputIcon} ></Icon>
+                  <Icon size={18} name="password" style={RegisterStyles.inputIcon} ></Icon>
                   <TextInput
                     placeholder='Password'
                     secureTextEntry

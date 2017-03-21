@@ -23,7 +23,7 @@ import { StackNavigator, DrawerNavigator } from 'react-navigation';
 const authHeader = ({ state, goBack }) => {
   // The navigation prop has functions like setParams, goBack, and navigate.
   let left = (
-      <Icon  name="ic_arrow_back_black_48px"
+      <Icon  name="back"
              size={32}
              style={{marginLeft: 5, padding: 10}}
              onPress={() => {
@@ -77,7 +77,8 @@ export const Auth = StackNavigator({
 const header = ({ state, navigate }) => {
   // The navigation prop has functions like setParams, goBack, and navigate.
   let left = (
-    <Icon  name="menu-options"
+    <Icon  name="menu"
+           color="#45A27A"
            size={32}
            style={{marginLeft: 5, padding: 10}}
            onPress={() => {
@@ -165,31 +166,31 @@ const SettingsStack = StackNavigator({
 export const Drawer = DrawerNavigator({
   Dashboard: {
     screen: DashboardStack,
-    drawer: DrawerItemIcon('ic_dashboard_black_48px')
+    drawer: DrawerItemIcon('dashboard')
   },
   Projects: {
     screen: ProjectsStack,
-    drawer: DrawerItemIcon('ic_timeline_black_48px')
+    drawer: DrawerItemIcon('project')
   },
   Transactions: {
     screen: TransactionsStack,
-    drawer: DrawerItemIcon('ic_monetization_on_black_48px')
+    drawer: DrawerItemIcon('transaction')
   },
   Accounts: {
     screen: AccountsStack,
-    drawer: DrawerItemIcon('ic_account_balance_black_48px')
+    drawer: DrawerItemIcon('bank')
   },
   Categories: {
     screen: CategoriesStack,
-    drawer: DrawerItemIcon('ic_view_module_black_48px')
+    drawer: DrawerItemIcon('category')
   },
   Settings: {
     screen: SettingsStack,
-    drawer: DrawerItemIcon('ic_settings_black_48px')
+    drawer: DrawerItemIcon('setting')
   },
   Logout: {
     screen: SettingsStack,
-    drawer: DrawerItemIcon('ic_power_settings_new_black_48px')
+    drawer: DrawerItemIcon('sign-in')
   }
 }, {
   contentComponent: DrawerItems

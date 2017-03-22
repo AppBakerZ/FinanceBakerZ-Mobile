@@ -18,15 +18,15 @@ export const SubCategoryStyles = StyleSheet.create({
     customIcon :{
         color: '#ffffff',
         flex : 1,
-        paddingLeft : 30,
+        paddingLeft : 20,
 
     },
     customIconText : {
         color: '#ffffff',
-        fontSize: 25,
+        fontSize: 18,
         flex : 1,
         textAlign : 'right',
-        paddingTop : 40,
+        paddingTop : 30,
         paddingRight : 25,
     },
     mainDiv : {
@@ -36,10 +36,10 @@ export const SubCategoryStyles = StyleSheet.create({
     Texture1 :{
         flex :1,
         flexDirection : 'row',
-        height : 120,
+        height : null,
     },
     items :{
-        padding : 40,
+        padding : 25,
         borderBottomColor : '#cdcdcd' ,
         borderLeftColor : '#cdcdcd' ,
         borderRightColor : '#cdcdcd' ,
@@ -48,6 +48,6 @@ export const SubCategoryStyles = StyleSheet.create({
         borderRightWidth: 1,
     },
     itemsText:{
-        fontSize : 20
+        fontSize : 15,
     }
 });

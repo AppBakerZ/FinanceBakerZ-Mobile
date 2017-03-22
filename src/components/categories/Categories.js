@@ -6,13 +6,35 @@ import CategoryIcon from 'FinanceBakerZ/src/icons/CategoryIcon';
 
 import Meteor, { createContainer } from 'react-native-meteor';
 
+let newData = [];
+let firstImg = require("FinanceBakerZ/src/images/category/img1.png");
+let secondImg = require("FinanceBakerZ/src/images/category/Category-Img-Box2.png");
+
+
 class Categories extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
         };
+
+
+        Array.prototype.chunk = function(chunkSize) {
+            var array = this;
+
+            return [].concat.apply([],
+                array.map(function(elem, i) {
+                    return i % chunkSize ? [] : [array.slice(i, i + chunkSize)];
+                })
+            );
+        };
+
     }
+    componentWillReceiveProps(props){
+
+        newData = props.categories.chunk(2)
+
+    }
+
 
     _onPressButton(){
         this.props.navigation.navigate('SubCategories');
@@ -26,34 +48,31 @@ class Categories extends Component {
     render() {
         const { categories } = this.props;
         const { navigate } = this.props.navigation;
-        console.log('categories :', categories);
         return (
             <ViewContainer>
                 <Image source={require('FinanceBakerZ/src/images/app-background.png')} style={CategoriesStyles.backgroundImage}>
                     <ScrollView style={{flex:1}}>
                         <View style={CategoriesStyles.mainDiv}>
-                            <View style={CategoriesStyles.main}>
-                                <Image source={require('FinanceBakerZ/src/images/category/Category-Img-Box1.png')} style={CategoriesStyles.Texture1}>
-
-                                    <View style={CategoriesStyles.child1}>
-                                        <TouchableOpacity activeOpacity={0.3 }  onPress={this._onPressButton.bind(this)}>
-                                            <CategoryIcon name ='icons_automobile' style={CategoriesStyles.customIcon} size={80} />
-                                            <Text style={CategoriesStyles.customIconText}>AUTOMOBILE</Text>
-                                        </TouchableOpacity>
-
-                                    </View>
-                                </Image>
-                                <Image source={require('FinanceBakerZ/src/images/category/Category-Img-Box2.png')} style={CategoriesStyles.Texture1}>
-
-                                    <View style={CategoriesStyles.child2}>
-                                        <TouchableOpacity activeOpacity={0.3}>
-                                            <CategoryIcon name ='icons_health-care' style={CategoriesStyles.customIcon} size={80} />
-                                            <Text  style={CategoriesStyles.customIconText}>HEALTHCARE</Text>
-                                        </TouchableOpacity>
-
-                                    </View>
-                                </Image>
-                            </View>
+                            {newData.map((section, i) => {
+                                console.log(section);
+                                return(
+                                    <View style={CategoriesStyles.main}>
+                                        {section.map((item, index) => {
+                                            let icon = item.icon.replace('icon-' , "");
+                                            i++;
+                                            return(
+                                                <Image source={((i % 2 == (Math.ceil(i / 2) % 1 == 0) ? 0 : 1) ? firstImg : secondImg)} style={CategoriesStyles.Texture}>
+                                                    <View style={CategoriesStyles.child}>
+                                                        <TouchableOpacity activeOpacity={0.3 }  onPress={this._onPressButton.bind(this)}>
+                                                            <CategoryIcon name ={icon} style={CategoriesStyles.customIcon} size={60} />
+                                                            <Text style={CategoriesStyles.customIconText}>{item.name.toUpperCase()}</Text>
+                                                        </TouchableOpacity>
+                                                    </View>
+                                                </Image>
+                                            );
+                                        })}
+                                    </ View>);
+                            })}
                         </View>
                     </ScrollView>
                 </Image>

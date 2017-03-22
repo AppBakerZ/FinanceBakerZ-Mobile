@@ -11,36 +11,26 @@ export const CategoriesStyles = StyleSheet.create({
         flex : 1,
         flexDirection : 'row'
     },
-    child1: {
+    child: {
         flex : 1
-
     },
-    child2: {
-        flex : 1
 
-    },
     customIcon :{
         color: '#ffffff',
         textAlign: 'center',
-        marginTop: 25
+        marginTop: 15
     },
     customIconText : {
         color: '#ffffff',
         textAlign: 'center',
         fontSize: 15,
-        paddingTop : 20,
-        paddingBottom : 50
+        padding : 20,
     },
     mainDiv : {
         margin : 20
     },
-    Texture1 :{
-        flex :1,
-        height : 200
+    Texture :{
+        flex :2,
+        height : null
     },
-    Texture2 :{
-        flex :1,
-        height : 200
-
-    }
 });

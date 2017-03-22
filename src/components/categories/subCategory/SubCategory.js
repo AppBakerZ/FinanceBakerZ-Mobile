@@ -23,10 +23,10 @@ export default class SubCategory extends Component {
                     <ScrollView style={{flex:1}}>
                         <View style={SubCategoryStyles.mainDiv}>
                             <View style={SubCategoryStyles.main}>
-                                <Image source={require('FinanceBakerZ/src/images/category/Category-Img-Box2.png')} style={SubCategoryStyles.Texture1}>
+                                <Image source={require('FinanceBakerZ/src/images/category/img1.png')} style={SubCategoryStyles.Texture1}>
                                     <View style={SubCategoryStyles.child2}>
                                         <TouchableOpacity activeOpacity={0.3} style={{flex:1, flexDirection : 'row'}} >
-                                            <CategoryIcon name ='icons_automobile' style={SubCategoryStyles.customIcon} size={120} />
+                                            <CategoryIcon name ='icons_automobile' style={SubCategoryStyles.customIcon} size={80} />
                                             <Text  style={SubCategoryStyles.customIconText}>HEALTHCARE</Text>
                                         </TouchableOpacity>
 

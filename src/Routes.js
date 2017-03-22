@@ -100,14 +100,14 @@ const header = ({ state, navigate }) => {
   return { left, title, style};
 };
 
-const selectionHeader = ({ state, navigate }) => {
+const selectionHeader = ({ state, navigate, goBack }) => {
   // The navigation prop has functions like setParams, goBack, and navigate.
   let left = (
     <Icon  name="back"
            size={32}
            style={{marginLeft: 5, padding: 10}}
            onPress={() => {
-               navigate('Dashboard')
+               goBack()
                 }}
     />
   );
@@ -147,9 +147,10 @@ const DashboardStack = StackNavigator({
     screen: DashboardSelection,
     navigationOptions: {
       header: selectionHeader
-    },
-    mode: 'modal'
+    }
   }
+}, {
+  mode: 'modal'
 });
 
 const ProjectsStack = StackNavigator({

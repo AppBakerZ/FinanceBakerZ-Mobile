@@ -4,11 +4,7 @@ exports.validateEmail = (email)  => {
   let atpos, dotpos;
   atpos = email.indexOf("@");
   dotpos = email.lastIndexOf(".");
-  if (atpos < 1 || dotpos < atpos+2 || dotpos+2 >= email.length) {
-    return false;
-  }else {
-    return true;
-  }
+  return !(atpos < 1 || dotpos < atpos+2 || dotpos+2 >= email.length);
 };
 
 exports.showAlert = (title, message) =>{
@@ -16,10 +12,10 @@ exports.showAlert = (title, message) =>{
     title,
     message,
     [
-      {text: 'OK' },
+      {text: 'OK' }
     ],
     {
-      cancelable: false,
+      cancelable: false
     }
   )
 };

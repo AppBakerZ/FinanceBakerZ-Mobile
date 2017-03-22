@@ -16,12 +16,44 @@ export const DashboardStyles = StyleSheet.create({
 
 
   dateTabContainer:{
-    flex: 1.5
+    flex: 1.5,
+    backgroundColor: '#F2F2F2'
+  },
+
+  filterMainContainer: {
+    paddingTop: 5,
+    marginLeft: 15,
+    marginRight: 15,
+    flex: 1,
+    flexDirection: 'row'
+  },
+
+  filterContainer: {
+    flex: 5,
+    justifyContent: 'center'
+  },
+
+  filterIconContainer: {
+    flex: 1,
+    alignItems: 'flex-end',
+    justifyContent: 'center'
+  },
+
+  card: {
+    flex: 1.5,
+    margin: 10,
+    flexDirection: 'row',
+    paddingTop: 5,
+    paddingBottom: 5,
   },
 
   text: {
+    fontFamily: 'QuicksandBook-Regular'
+  },
+
+  textWhite: {
     fontFamily: 'QuicksandBook-Regular',
-    color: '#fff'
+    color: 'white'
   },
 
   textPrice: {
@@ -41,6 +73,10 @@ export const DashboardStyles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+
+  },
+
+  childContainerBorder: {
     borderRightWidth: 1,
     borderRightColor: '#DADADA'
   },
@@ -102,9 +138,45 @@ export const DashboardStyles = StyleSheet.create({
   },
 
   contentRightText: {
-    paddingRight: 10,
+    paddingRight: 20,
     fontFamily: 'QuicksandBook-Regular'
+  },
 
+  DbSelectionContainer: {
+    flex: 1,
+    paddingLeft: 20,
+    paddingRight: 20
+  },
+
+  DbSelectionTabContainer: {
+    flex: 2.5
+  },
+
+  DbSelectionAccAndWeek: {
+    flex: 1,
+    borderBottomColor: '#cbcbcb',
+    borderBottomWidth: 1,
+    justifyContent: 'center'
+  },
+
+  DbSelectionBankAcc: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+
+  DbSeclectionText: {
+    fontFamily: 'QuicksandBook-Regular',
+    fontSize: 16
+  },
+
+  DbSelectionPicker: {
+    borderBottomColor: '#cbcbcb',
+    borderBottomWidth: 1
+  },
+
+  DbSelectionPickerItem: {
+    fontFamily: 'QuicksandBook-Regular'
   }
+
 
 });

@@ -44,6 +44,7 @@
 		4EBD84C1AA304A5C9A5C179D /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 415F5ADB934045F78149EAC3 /* Foundation.ttf */; };
 		56CB8897A91144029727E136 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F1187255E724437BDCE492D /* libRNVectorIcons.a */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
+		6F23C349EF4E41FC9EF31025 /* libRCTMaterialKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A53043ECB7640D1AC7DE8AB /* libRCTMaterialKit.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		844429151E72CA2400FC00BD /* Quicksand_Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 844429131E72CA2400FC00BD /* Quicksand_Bold.otf */; };
 		844429161E72CA2400FC00BD /* Quicksand_Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = 844429141E72CA2400FC00BD /* Quicksand_Book.otf */; };
@@ -259,6 +260,13 @@
 			remoteGlobalIDString = 5DBEB1501B18CEA900B34395;
 			remoteInfo = RNVectorIcons;
 		};
+		C1D79FAA1E82895A00F2ADCC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 320CBCD178094EBD9F2A0708 /* RCTMaterialKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8A1B8E771B22E4E300DB45C2;
+			remoteInfo = RCTMaterialKit;
+		};
 		C1FC9F901E7D40A800E0B59C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B49344077C2849888128B38C /* RCTSplashScreen.xcodeproj */;
@@ -307,6 +315,7 @@
 		2D585EF3CA504C2BB6030C3C /* Application-icon.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Application-icon.ttf"; path = "../src/icons/Application-icon.ttf"; sourceTree = "<group>"; };
 		2E18B5D5F4D54F7BA078FB3B /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		3193E37AAEED4D418CEE340A /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
+		320CBCD178094EBD9F2A0708 /* RCTMaterialKit.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTMaterialKit.xcodeproj; path = "../node_modules/react-native-material-kit/iOS/RCTMaterialKit.xcodeproj"; sourceTree = "<group>"; };
 		369C3D97DC1F4C4EBB4253D9 /* Quicksand_Book_Oblique.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Quicksand_Book_Oblique.otf; path = ../src/fonts/Quicksand_Book_Oblique.otf; sourceTree = "<group>"; };
 		3F76999AB1B340A0945B6A85 /* category-icon.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "category-icon.ttf"; path = "../src/icons/category-icon.ttf"; sourceTree = "<group>"; };
 		415F5ADB934045F78149EAC3 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
@@ -329,6 +338,7 @@
 		6BB3BA97B1CD499E8232DBF6 /* application-icon.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "application-icon.ttf"; path = "../src/icons/application-icon.ttf"; sourceTree = "<group>"; };
 		74BFF0DF91544C979438B122 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/native-base/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
+		7A53043ECB7640D1AC7DE8AB /* libRCTMaterialKit.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTMaterialKit.a; sourceTree = "<group>"; };
 		7C2F9CBBD8794967B195CDBF /* Quicksand_Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Quicksand_Bold.otf; path = ../src/fonts/Quicksand_Bold.otf; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		844429131E72CA2400FC00BD /* Quicksand_Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Quicksand_Bold.otf; sourceTree = "<group>"; };
@@ -388,6 +398,7 @@
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				56CB8897A91144029727E136 /* libRNVectorIcons.a in Frameworks */,
 				D76A15E2F2384273A45DEF14 /* libRCTSplashScreen.a in Frameworks */,
+				6F23C349EF4E41FC9EF31025 /* libRCTMaterialKit.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -620,6 +631,7 @@
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				2BDD8992F1024736B2FE4127 /* RNVectorIcons.xcodeproj */,
 				B49344077C2849888128B38C /* RCTSplashScreen.xcodeproj */,
+				320CBCD178094EBD9F2A0708 /* RCTMaterialKit.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -667,6 +679,14 @@
 			isa = PBXGroup;
 			children = (
 				844428FB1E72A81F00FC00BD /* libRNVectorIcons.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C1D79F9F1E82895800F2ADCC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C1D79FAB1E82895A00F2ADCC /* libRCTMaterialKit.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -815,6 +835,10 @@
 				{
 					ProductGroup = 78C398B11ACF4ADC00677621 /* Products */;
 					ProjectRef = 78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */;
+				},
+				{
+					ProductGroup = C1D79F9F1E82895800F2ADCC /* Products */;
+					ProjectRef = 320CBCD178094EBD9F2A0708 /* RCTMaterialKit.xcodeproj */;
 				},
 				{
 					ProductGroup = 00C302D41ABCB9D200DB3ED1 /* Products */;
@@ -1042,6 +1066,13 @@
 			remoteRef = 844428FA1E72A81F00FC00BD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		C1D79FAB1E82895A00F2ADCC /* libRCTMaterialKit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTMaterialKit.a;
+			remoteRef = C1D79FAA1E82895A00F2ADCC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		C1FC9F911E7D40A800E0B59C /* libRCTSplashScreen.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1213,12 +1244,14 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)..\node_modules\neact-native-smart-splash-screeniosRCTSplashScreenRCTSplashScreen",
+					"$(SRCROOT)..\node_modules\neact-native-material-kitiOSRCTMaterialKit",
 				);
 				INFOPLIST_FILE = FinanceBakerZTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
@@ -1240,12 +1273,14 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)..\node_modules\neact-native-smart-splash-screeniosRCTSplashScreenRCTSplashScreen",
+					"$(SRCROOT)..\node_modules\neact-native-material-kitiOSRCTMaterialKit",
 				);
 				INFOPLIST_FILE = FinanceBakerZTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
@@ -1268,6 +1303,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)..\node_modules\neact-native-smart-splash-screeniosRCTSplashScreenRCTSplashScreen",
+					"$(SRCROOT)..\node_modules\neact-native-material-kitiOSRCTMaterialKit",
 				);
 				INFOPLIST_FILE = FinanceBakerZ/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1292,6 +1328,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)..\node_modules\neact-native-smart-splash-screeniosRCTSplashScreenRCTSplashScreen",
+					"$(SRCROOT)..\node_modules\neact-native-material-kitiOSRCTMaterialKit",
 				);
 				INFOPLIST_FILE = FinanceBakerZ/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1323,11 +1360,13 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)..\node_modules\neact-native-smart-splash-screeniosRCTSplashScreenRCTSplashScreen",
+					"$(SRCROOT)..\node_modules\neact-native-material-kitiOSRCTMaterialKit",
 				);
 				INFOPLIST_FILE = "FinanceBakerZ-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
@@ -1359,11 +1398,13 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)..\node_modules\neact-native-smart-splash-screeniosRCTSplashScreenRCTSplashScreen",
+					"$(SRCROOT)..\node_modules\neact-native-material-kitiOSRCTMaterialKit",
 				);
 				INFOPLIST_FILE = "FinanceBakerZ-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
@@ -1397,6 +1438,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.FinanceBakerZ-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1422,6 +1464,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);

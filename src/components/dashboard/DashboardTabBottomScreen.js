@@ -17,13 +17,14 @@ export default class DashboardTabBottomScreen extends Component {
     this.state = {
       dataSource: ds.cloneWithRows(arr),
     };
+
   }
 
   renderRow(rowData){
       return(
         <View style={DashboardStyles.listViewContainer}>
           <View style={DashboardStyles.listViewContentLeft}>
-            <Icon name='checked' color={'green'} style={DashboardStyles.icons}></Icon>
+            <Icon name='right-arrow' color={'green'} style={DashboardStyles.icons}></Icon>
             <Text style={DashboardStyles.iconText}>{rowData}</Text>
           </View>
           <View style={DashboardStyles.listViewContentRight}>

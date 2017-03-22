@@ -76,7 +76,7 @@ export const LoginStyles = StyleSheet.create({
 
   inputIcon:{
     position: 'absolute',
-    top: 10,
+    top: 12,
     left: 30
   },
 

@@ -7,6 +7,7 @@ import RegisterScreen from 'FinanceBakerZ/src/screens/auth/Register';
 import ForgotPasswordScreen from 'FinanceBakerZ/src/screens/auth/ForgotPassword';
 
 import DashboardScreen, {DashboardTabNavigator} from 'FinanceBakerZ/src/screens/Dashboard';
+import DashboardSelection  from 'FinanceBakerZ/src/components/dashboard/DashboardSelection';
 import ProjectsScreen from 'FinanceBakerZ/src/screens/Projects';
 import TransactionsScreen from 'FinanceBakerZ/src/screens/Transactions';
 import AccountsScreen from 'FinanceBakerZ/src/screens/Accounts';
@@ -23,9 +24,8 @@ import { StackNavigator, DrawerNavigator } from 'react-navigation';
 const authHeader = ({ state, goBack }) => {
   // The navigation prop has functions like setParams, goBack, and navigate.
   let left = (
-      <Icon  name="ic_arrow_back_black_48px"
+      <Icon  name="back"
              size={32}
-             color="#00562f"
              style={{marginLeft: 5, padding: 10}}
              onPress={() => {
                goBack()
@@ -78,9 +78,9 @@ export const Auth = StackNavigator({
 const header = ({ state, navigate }) => {
   // The navigation prop has functions like setParams, goBack, and navigate.
   let left = (
-    <Icon  name="menu-options"
+    <Icon  name="menu"
+           color="#45A27A"
            size={32}
-           color="#00562f"
            style={{marginLeft: 5, padding: 10}}
            onPress={() => {
                navigate('DrawerOpen')
@@ -92,7 +92,6 @@ const header = ({ state, navigate }) => {
     <Text style={{fontSize: 20, fontFamily: 'QuicksandBold-Regular', color: '#00562E'}}>{(state.routeName != 'Dashboard') ? state.routeName : ''}</Text>
   );
 
-
   style = {
     height: 70,
     backgroundColor: '#ffffff'
@@ -101,6 +100,41 @@ const header = ({ state, navigate }) => {
   return { left, title, style};
 };
 
+const selectionHeader = ({ state, navigate, goBack }) => {
+  // The navigation prop has functions like setParams, goBack, and navigate.
+  let left = (
+    <Icon  name="back"
+           size={32}
+           style={{marginLeft: 5, padding: 10}}
+           onPress={() => {
+               goBack()
+                }}
+    />
+  );
+
+  let title = (
+    <Text style={{fontSize: 20, fontFamily: 'QuicksandBold-Regular', color: '#00562E'}}>{state.routeName}</Text>
+  );
+
+  let right = (
+    <Icon  name="checked"
+           color="black"
+           size={32}
+           style={{padding: 10}}
+           onPress={() => {
+               navigate('Dashboard')
+                }}
+    />
+  );
+
+
+  style = {
+    height: 70,
+    backgroundColor: '#ffffff'
+  };
+
+  return { left, title, right, style};
+};
 
 const DashboardStack = StackNavigator({
   Dashboard: {
@@ -108,7 +142,15 @@ const DashboardStack = StackNavigator({
     navigationOptions: {
       header: header
     }
+  },
+  Selection: {
+    screen: DashboardSelection,
+    navigationOptions: {
+      header: selectionHeader
+    }
   }
+}, {
+  mode: 'modal'
 });
 
 const ProjectsStack = StackNavigator({
@@ -167,31 +209,31 @@ const SettingsStack = StackNavigator({
 export const Drawer = DrawerNavigator({
   Dashboard: {
     screen: DashboardStack,
-    drawer: DrawerItemIcon('ic_dashboard_black_48px')
+    drawer: DrawerItemIcon('dashboard')
   },
   Projects: {
     screen: ProjectsStack,
-    drawer: DrawerItemIcon('ic_timeline_black_48px')
+    drawer: DrawerItemIcon('project')
   },
   Transactions: {
     screen: TransactionsStack,
-    drawer: DrawerItemIcon('ic_monetization_on_black_48px')
+    drawer: DrawerItemIcon('transaction')
   },
   Accounts: {
     screen: AccountsStack,
-    drawer: DrawerItemIcon('ic_account_balance_black_48px')
+    drawer: DrawerItemIcon('bank')
   },
   Categories: {
     screen: CategoriesStack,
-    drawer: DrawerItemIcon('ic_view_module_black_48px')
+    drawer: DrawerItemIcon('category')
   },
   Settings: {
     screen: SettingsStack,
-    drawer: DrawerItemIcon('ic_settings_black_48px')
+    drawer: DrawerItemIcon('setting')
   },
   Logout: {
     screen: SettingsStack,
-    drawer: DrawerItemIcon('ic_power_settings_new_black_48px')
+    drawer: DrawerItemIcon('sign-in')
   }
 }, {
   contentComponent: DrawerItems

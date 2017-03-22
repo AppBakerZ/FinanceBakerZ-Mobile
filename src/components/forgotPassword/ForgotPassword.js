@@ -54,7 +54,7 @@ export default class ForgotPassword extends Component {
                     </View>
                     <View style={ForgotPasswordStyle.inputContainer}>
                         <View style={ForgotPasswordStyle.borderBottom}>
-                            <Icon size={18} name="Email" style={ForgotPasswordStyle.inputIcon} ></Icon>
+                            <Icon size={18} name="email" style={ForgotPasswordStyle.inputIcon} ></Icon>
                             <TextInput
                                 placeholder='Email'
                                 style={[ForgotPasswordStyle.input]}

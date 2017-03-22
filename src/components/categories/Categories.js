@@ -15,13 +15,12 @@ class Categories extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
         };
 
 
         Array.prototype.chunk = function(chunkSize) {
             var array = this;
-            console.log(this,"kashif");
+
             return [].concat.apply([],
                 array.map(function(elem, i) {
                     return i % chunkSize ? [] : [array.slice(i, i + chunkSize)];
@@ -33,7 +32,7 @@ class Categories extends Component {
     componentWillReceiveProps(props){
 
         newData = props.categories.chunk(2)
-        console.log('data', newData);
+
     }
 
 
@@ -49,7 +48,6 @@ class Categories extends Component {
     render() {
         const { categories } = this.props;
         const { navigate } = this.props.navigation;
-        console.log('categories :', categories);
         return (
             <ViewContainer>
                 <Image source={require('FinanceBakerZ/src/images/app-background.png')} style={CategoriesStyles.backgroundImage}>
@@ -61,7 +59,6 @@ class Categories extends Component {
                                     <View style={CategoriesStyles.main}>
                                         {section.map((item, index) => {
                                             let icon = item.icon.replace('icon-' , "");
-                                            console.log(icon);
                                             i++;
                                             return(
                                                 <Image source={((i % 2 == (Math.ceil(i / 2) % 1 == 0) ? 0 : 1) ? firstImg : secondImg)} style={CategoriesStyles.Texture}>

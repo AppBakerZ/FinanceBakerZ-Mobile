@@ -164,7 +164,7 @@ export const DashboardStyles = StyleSheet.create({
     justifyContent: 'center',
   },
 
-  DbSeclectionText: {
+  DbSelectionText: {
     fontFamily: 'QuicksandBook-Regular',
     fontSize: 16
   },
@@ -176,7 +176,38 @@ export const DashboardStyles = StyleSheet.create({
 
   DbSelectionPickerItem: {
     fontFamily: 'QuicksandBook-Regular'
+  },
+
+  DbSelectionBankAccBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderBottomColor: '#cbcbcb',
+    borderBottomWidth: 1,
+    paddingLeft: 25,
+    paddingBottom: 10
+  },
+
+  DbSelectionBankAccText: {
+    flex: 1
+  },
+
+  DbSelectionBankAccIcon: {
+    flex: 1,
+    textAlign: 'right'
+  },
+
+  modal: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 300
+  },
+
+  checkBoxContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
   }
+
 
 
 });

@@ -7,6 +7,7 @@ import RegisterScreen from 'FinanceBakerZ/src/screens/auth/Register';
 import ForgotPasswordScreen from 'FinanceBakerZ/src/screens/auth/ForgotPassword';
 
 import DashboardScreen, {DashboardTabNavigator} from 'FinanceBakerZ/src/screens/Dashboard';
+import DashboardSelection  from 'FinanceBakerZ/src/components/dashboard/DashboardSelection';
 import ProjectsScreen from 'FinanceBakerZ/src/screens/Projects';
 import TransactionsScreen from 'FinanceBakerZ/src/screens/Transactions';
 import AccountsScreen from 'FinanceBakerZ/src/screens/Accounts';
@@ -91,7 +92,6 @@ const header = ({ state, navigate }) => {
     <Text style={{fontSize: 20, fontFamily: 'QuicksandBold-Regular', color: '#00562E'}}>{(state.routeName != 'Dashboard') ? state.routeName : ''}</Text>
   );
 
-
   style = {
     height: 70,
     backgroundColor: '#ffffff'
@@ -100,6 +100,41 @@ const header = ({ state, navigate }) => {
   return { left, title, style};
 };
 
+const selectionHeader = ({ state, navigate }) => {
+  // The navigation prop has functions like setParams, goBack, and navigate.
+  let left = (
+    <Icon  name="back"
+           size={32}
+           style={{marginLeft: 5, padding: 10}}
+           onPress={() => {
+               navigate('Dashboard')
+                }}
+    />
+  );
+
+  let title = (
+    <Text style={{fontSize: 20, fontFamily: 'QuicksandBold-Regular', color: '#00562E'}}>{state.routeName}</Text>
+  );
+
+  let right = (
+    <Icon  name="checked"
+           color="black"
+           size={32}
+           style={{padding: 10}}
+           onPress={() => {
+               navigate('Dashboard')
+                }}
+    />
+  );
+
+
+  style = {
+    height: 70,
+    backgroundColor: '#ffffff'
+  };
+
+  return { left, title, right, style};
+};
 
 const DashboardStack = StackNavigator({
   Dashboard: {
@@ -107,6 +142,13 @@ const DashboardStack = StackNavigator({
     navigationOptions: {
       header: header
     }
+  },
+  Selection: {
+    screen: DashboardSelection,
+    navigationOptions: {
+      header: selectionHeader
+    },
+    mode: 'modal'
   }
 });
 

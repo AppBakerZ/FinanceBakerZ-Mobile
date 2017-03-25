@@ -44,7 +44,7 @@ export const DashboardStyles = StyleSheet.create({
     margin: 10,
     flexDirection: 'row',
     paddingTop: 5,
-    paddingBottom: 5,
+    paddingBottom: 5
   },
 
   text: {
@@ -72,7 +72,7 @@ export const DashboardStyles = StyleSheet.create({
   childContainer: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
 
   },
 
@@ -161,12 +161,33 @@ export const DashboardStyles = StyleSheet.create({
 
   DbSelectionBankAcc: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
 
   DbSelectionText: {
     fontFamily: 'QuicksandBook-Regular',
+    fontSize: 15
+  },
+
+  DbSelectionCardTag: {
+    flexDirection: 'row',
+    marginRight: 10,
+    padding: 2
+  },
+
+  DbSelectionCardTagCross: {
+    fontWeight: 'bold',
+    lineHeight: 13,
     fontSize: 16
+  },
+
+
+  DbSelectionTag: {
+      paddingLeft: 5
+  },
+
+  DbSelectionAccountsCon: {
+    flexDirection: 'row'
   },
 
   DbSelectionPicker: {
@@ -205,9 +226,26 @@ export const DashboardStyles = StyleSheet.create({
   checkBoxContainer: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
-  }
+    justifyContent: 'center',
+    flexDirection: 'row',
+    paddingTop: 5,
+    paddingBottom: 5,
+    borderBottomWidth: 1,
+    borderBottomColor: '#DADADA'
+  },
 
+  checkBoxItemCon: {
+    flex: 4,
+    paddingTop: 3
+  },
+
+  checkBoxCon: {
+    flex: 0.5
+  },
+
+  checkBoxItem: {
+    fontFamily: 'QuicksandBook-Regular'
+  }
 
 
 });

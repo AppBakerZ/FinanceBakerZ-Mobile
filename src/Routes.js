@@ -146,7 +146,6 @@ const DashboardStack = StackNavigator({
   Selection: {
     screen: DashboardSelection,
     navigationOptions: {
-      header: selectionHeader
     }
   }
 }, {

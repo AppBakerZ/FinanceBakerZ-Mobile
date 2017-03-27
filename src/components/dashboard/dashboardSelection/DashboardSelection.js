@@ -1,22 +1,14 @@
 import React, {Component} from 'react';
-import {View, Text, Picker, ScrollView, Dimensions, StyleSheet, TouchableOpacity, Button } from 'react-native';
+import {View, Text, Picker, ScrollView, StyleSheet, TouchableOpacity, Button } from 'react-native';
 import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
-import { DashboardStyles } from 'FinanceBakerZ/src/components/dashboard/DashboardStyle';
-import DashboardSelectionTab from 'FinanceBakerZ/src/components/dashboard/DashboardSelectionTab';
+import { DashboardSelStyles } from 'FinanceBakerZ/src/components/dashboard/dashboardSelection/DashboardSelStyles';
+import DashboardSelectionTab from 'FinanceBakerZ/src/components/dashboard/dashboardSelection/DashboardSelectionTab';
 import { TabNavigator, TabView } from 'react-navigation';
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
 import Modal from 'react-native-modalbox';
-import { MKCheckbox, setTheme, MKColor } from 'react-native-material-kit';
-import { getTheme } from 'react-native-material-kit';
+import { MKCheckbox, getTheme } from 'react-native-material-kit';
 const theme = getTheme();
-let screen = Dimensions.get('window');
 
-setTheme({checkboxStyle: {
-  fillColor: MKColor.Green,
-  borderOnColor: MKColor.Green,
-  borderOffColor: MKColor.Green,
-  rippleColor: `rgba(${MKColor.RGBTeal},.15)`,
-}});
 
 let STATE;
 
@@ -71,15 +63,15 @@ export default class DashboardSelection extends Component{
     let data = [];
 
     if(!this.props.navigation.state.params.params.bankList){
-    for(let x = 0; x < banks.length; x++){
-      data.push({
-        name : banks[x],
-        check: false,
-        id: x,
-      });
+      for(let x = 0; x < banks.length; x++){
+        data.push({
+          name : banks[x],
+          check: false,
+          id: x,
+        });
+      }
+      this.setState({bankList: data});
     }
-    this.setState({bankList: data});
-  }
   }
 
 
@@ -105,12 +97,12 @@ export default class DashboardSelection extends Component{
     let list = [];
     for(let i = 0; i < this.state.bankList.length; i++) {
       list.push(
-        <TouchableOpacity onPress={this.handleMultipleChange.bind(this, this.state.bankList[i], i)}    key={i} style={DashboardStyles.checkBoxContainer} activeOpacity={0.8}>
-          <View style={DashboardStyles.checkBoxCon}>
-            <MKCheckbox  checked={this.state.bankList[i].check} disabled  />
+        <TouchableOpacity onPress={this.handleMultipleChange.bind(this, this.state.bankList[i], i)} elevation={5}   key={i} style={DashboardSelStyles.checkBoxContainer} activeOpacity={0.8}>
+          <View style={DashboardSelStyles.checkBoxCon}>
+            <MKCheckbox style={DashboardSelStyles.checkBox} checked={this.state.bankList[i].check} disabled  />
           </View>
-          <View style={DashboardStyles.checkBoxItemCon}>
-            <Text style={DashboardStyles.checkBoxItem}>{this.state.bankList[i].name}</Text>
+          <View style={DashboardSelStyles.checkBoxItemCon}>
+            <Text style={DashboardSelStyles.checkBoxItem}>{this.state.bankList[i].name}</Text>
           </View>
         </TouchableOpacity>
       )
@@ -122,36 +114,38 @@ export default class DashboardSelection extends Component{
 
     return(
       <ViewContainer>
-        <View style={DashboardStyles.DbSelectionContainer}>
-          <View style={DashboardStyles.DbSelectionAccAndWeek}>
-            <View style={DashboardStyles.DbSelectionAccountsCon}>
-              <Text style={DashboardStyles.DbSelectionText}>Accounts: &nbsp;</Text>
-                {this.state.multiple.map((val, i) => {
-                  let index = this.state.bankList.indexOf(val);
-                  return(
-                    <TouchableOpacity onPress={this.handleMultipleChange.bind(this, val, index)} key={i} style={[theme.cardStyle, DashboardStyles.DbSelectionCardTag]} elevation={5} activeOpacity={0.8}>
-                      <Text style={DashboardStyles.DbSelectionCardTagCross}>x</Text>
-                      <Text style={[DashboardStyles.DbSelectionTag, DashboardStyles.DbSelectionText]}>{val.name}</Text>
-                    </TouchableOpacity>
-                  );
-                })
-                }
+        <View style={DashboardSelStyles.DbSelectionContainer}>
+          <View style={DashboardSelStyles.DbSelectionAccAndWeek}>
+            <View style={DashboardSelStyles.DbSelectionAccountsCon}>
+              <Text style={DashboardSelStyles.DbSelectionText}>Accounts: &nbsp;</Text>
+              {this.state.multiple.map((val, i) => {
+                let index = this.state.bankList.indexOf(val);
+                return(
+                  <TouchableOpacity onPress={this.handleMultipleChange.bind(this, val, index)} key={i} style={DashboardSelStyles.DbSelectionCardTagCon} activeOpacity={0.8}>
+                    <View style={[theme.cardStyle, DashboardSelStyles.DbSelectionCardTag]} elevation={5} >
+                      <Text style={DashboardSelStyles.DbSelectionCardTagCross}>x</Text>
+                      <Text style={[DashboardSelStyles.DbSelectionTag, DashboardSelStyles.DbSelectionText]}>{val.name}</Text>
+                    </View>
+                  </TouchableOpacity>
+                );
+              })
+              }
             </View>
-            <Text style={DashboardStyles.DbSelectionText}>Week: </Text>
+            <Text style={DashboardSelStyles.DbSelectionText}>Week: </Text>
           </View>
-          <View style={DashboardStyles.DbSelectionBankAcc}>
-            <TouchableOpacity style={DashboardStyles.DbSelectionBankAccBtn} onPress={() => this.refs.modal.open()} activeOpacity={0.7}>
-              <Text style={[DashboardStyles.DbSelectionText, DashboardStyles.DbSelectionBankAccText]}>Bank Account</Text>
-              <Icon size={20} style={DashboardStyles.DbSelectionBankAccIcon} name="down-arrow"></Icon>
+          <View style={DashboardSelStyles.DbSelectionBankAcc}>
+            <TouchableOpacity style={DashboardSelStyles.DbSelectionBankAccBtn} onPress={() => this.refs.modal.open()} activeOpacity={0.7}>
+              <Text style={[DashboardSelStyles.DbSelectionText, DashboardSelStyles.DbSelectionBankAccText]}>Bank Account</Text>
+              <Icon size={20} style={DashboardSelStyles.DbSelectionBankAccIcon} name="down-arrow"></Icon>
             </TouchableOpacity>
           </View>
         </View>
-        <View style={DashboardStyles.DbSelectionTabContainer}>
+        <View style={DashboardSelStyles.DbSelectionTabContainer}>
           <DashboardSelectionTabScreen />
         </View>
-        <Modal style={DashboardStyles.modal} position={"bottom"} ref={"modal"} swipeArea={20}>
+        <Modal style={DashboardSelStyles.modal} position={"bottom"} ref={"modal"} swipeArea={20}>
           <ScrollView>
-            <View style={{width: screen.width, paddingLeft: 10}}>
+            <View style={DashboardSelStyles.renderListCon}>
               {this.renderList.bind(this)()}
             </View>
           </ScrollView>

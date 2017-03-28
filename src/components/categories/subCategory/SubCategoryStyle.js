@@ -19,6 +19,7 @@ export const SubCategoryStyles = StyleSheet.create({
         color: '#ffffff',
         flex : 1,
         paddingLeft : 20,
+        paddingVertical : 15,
 
     },
     customIconText : {

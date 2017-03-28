@@ -16,6 +16,12 @@ export default class SubCategory extends Component {
     }
 
     render(){
+
+        console.log(children, 'this');
+        const children = this.props.navigation.state.params;
+        console.log(children);
+        let icon = children.icon.replace('icon-' , "");
+
         return(
 
             <ViewContainer>
@@ -26,49 +32,22 @@ export default class SubCategory extends Component {
                                 <Image source={require('FinanceBakerZ/src/images/category/img1.png')} style={SubCategoryStyles.Texture1}>
                                     <View style={SubCategoryStyles.child2}>
                                         <TouchableOpacity activeOpacity={0.3} style={{flex:1, flexDirection : 'row'}} >
-                                            <CategoryIcon name ='icons_automobile' style={SubCategoryStyles.customIcon} size={80} />
-                                            <Text  style={SubCategoryStyles.customIconText}>HEALTHCARE</Text>
+                                            <CategoryIcon name = {icon}  style={SubCategoryStyles.customIcon} size={50} />
+                                            <Text  style={SubCategoryStyles.customIconText}>{children.name}</Text>
                                         </TouchableOpacity>
 
                                     </View>
                                 </Image>
                             </View>
-                            <View  style={SubCategoryStyles.items}>
-                                <Text  style={SubCategoryStyles.itemsText}>GASOLINE</Text>
-                            </View>
-                            <View  style={SubCategoryStyles.items}>
-                                <Text  style={SubCategoryStyles.itemsText}>MAINTENACE</Text>
-                            </View>
-                            <View  style={SubCategoryStyles.items}>
-                                <Text  style={SubCategoryStyles.itemsText}>REPAIRING</Text>
-                            </View>
-                            <View  style={SubCategoryStyles.items}>
-                                <Text  style={SubCategoryStyles.itemsText}>LOAN PAYMENT</Text>
-                            </View>
-                            <View  style={SubCategoryStyles.items}>
-                                <Text  style={SubCategoryStyles.itemsText}>GASOLINE</Text>
-                            </View>
-                            <View  style={SubCategoryStyles.items}>
-                                <Text  style={SubCategoryStyles.itemsText}>MAINTENACE</Text>
-                            </View>
-                            <View  style={SubCategoryStyles.items}>
-                                <Text  style={SubCategoryStyles.itemsText}>REPAIRING</Text>
-                            </View>
-                            <View  style={SubCategoryStyles.items}>
-                                <Text  style={SubCategoryStyles.itemsText}>LOAN PAYMENT</Text>
-                            </View>
-                            <View  style={SubCategoryStyles.items}>
-                                <Text  style={SubCategoryStyles.itemsText}>GASOLINE</Text>
-                            </View>
-                            <View  style={SubCategoryStyles.items}>
-                                <Text  style={SubCategoryStyles.itemsText}>MAINTENACE</Text>
-                            </View>
-                            <View  style={SubCategoryStyles.items}>
-                                <Text  style={SubCategoryStyles.itemsText}>REPAIRING</Text>
-                            </View>
-                            <View  style={SubCategoryStyles.items}>
-                                <Text  style={SubCategoryStyles.itemsText}>LOAN PAYMENT</Text>
-                            </View>
+
+                            {children.children.map((val) => {
+                            return(
+                                <View  style={SubCategoryStyles.items}>
+                                    <Text  style={SubCategoryStyles.item}>{val}</Text>
+                                </View>
+                            )
+                                }
+                            )}
 
                             </View>
                     </ScrollView>

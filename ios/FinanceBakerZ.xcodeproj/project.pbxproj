@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -61,6 +60,7 @@
 		E4006DB220D94C2EB16A0064 /* category-icon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F76999AB1B340A0945B6A85 /* category-icon.ttf */; };
 		F2FF77E2390C467BA0E385D0 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3193E37AAEED4D418CEE340A /* MaterialCommunityIcons.ttf */; };
 		F4F793510F534F779B622164 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2E18B5D5F4D54F7BA078FB3B /* SimpleLineIcons.ttf */; };
+		5311625D5E4345789004B25B /* Bank-font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5E8F2CB2C254833A571C0EF /* Bank-font.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -370,6 +370,7 @@
 		E8FA2FA6FB834E3FBF1DB66A /* SanFrancisco.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SanFrancisco.ttf; path = "../node_modules/native-base/Fonts/SanFrancisco.ttf"; sourceTree = "<group>"; };
 		F1113805F161445B94716BC3 /* Georgia.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Georgia.ttf; path = "../node_modules/native-base/Fonts/Georgia.ttf"; sourceTree = "<group>"; };
 		F6ACED63CD3B471889C25E92 /* Courier New.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Courier New.ttf"; path = "../node_modules/native-base/Fonts/Courier New.ttf"; sourceTree = "<group>"; };
+		B5E8F2CB2C254833A571C0EF /* Bank-font.ttf */ = {isa = PBXFileReference; name = "Bank-font.ttf"; path = "../src/icons/Bank-font.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -602,6 +603,7 @@
 				26615D118A8146D48415815D /* QuicksandBold-Regular.otf */,
 				6BB3BA97B1CD499E8232DBF6 /* application-icon.ttf */,
 				3F76999AB1B340A0945B6A85 /* category-icon.ttf */,
+				B5E8F2CB2C254833A571C0EF /* Bank-font.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1118,6 +1120,7 @@
 				2EBA23A7E8D74E6F8DD47DEC /* QuicksandBold-Regular.otf in Resources */,
 				C1757B798DB6401FB8FF3FE2 /* application-icon.ttf in Resources */,
 				E4006DB220D94C2EB16A0064 /* category-icon.ttf in Resources */,
+				5311625D5E4345789004B25B /* Bank-font.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

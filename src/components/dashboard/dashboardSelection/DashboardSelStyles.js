@@ -157,7 +157,30 @@ export const DashboardSelStyles = StyleSheet.create({
   radioButton: {
     height: 22,
     width: 22
+  },
+
+  tabContainerCustom: {
+    flex: 1,
+    backgroundColor: '#fff',
+    flexDirection: 'row',
+    paddingTop: 20,
+    paddingBottom: 20
+  },
+
+  textCon: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRightWidth: 1,
+    borderRightColor: '#cbcbcb'
+  },
+
+  text: {
+    fontFamily: 'QuicksandBook-Regular',
+    fontSize: 20
   }
+
 
 
 });

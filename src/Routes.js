@@ -7,7 +7,7 @@ import RegisterScreen from 'FinanceBakerZ/src/screens/auth/Register';
 import ForgotPasswordScreen from 'FinanceBakerZ/src/screens/auth/ForgotPassword';
 
 import DashboardScreen, {DashboardTabNavigator} from 'FinanceBakerZ/src/screens/Dashboard';
-import DashboardSelection  from 'FinanceBakerZ/src/components/dashboard/DashboardSelection';
+import DashboardSelection  from 'FinanceBakerZ/src/components/dashboard/dashboardSelection/DashboardSelection';
 import ProjectsScreen from 'FinanceBakerZ/src/screens/Projects';
 import TransactionsScreen from 'FinanceBakerZ/src/screens/Transactions';
 import AccountsScreen from 'FinanceBakerZ/src/screens/Accounts';
@@ -146,7 +146,6 @@ const DashboardStack = StackNavigator({
   Selection: {
     screen: DashboardSelection,
     navigationOptions: {
-      header: selectionHeader
     }
   }
 }, {

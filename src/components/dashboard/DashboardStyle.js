@@ -44,7 +44,7 @@ export const DashboardStyles = StyleSheet.create({
     margin: 10,
     flexDirection: 'row',
     paddingTop: 5,
-    paddingBottom: 5,
+    paddingBottom: 5
   },
 
   text: {
@@ -72,7 +72,7 @@ export const DashboardStyles = StyleSheet.create({
   childContainer: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
 
   },
 
@@ -140,74 +140,7 @@ export const DashboardStyles = StyleSheet.create({
   contentRightText: {
     paddingRight: 20,
     fontFamily: 'QuicksandBook-Regular'
-  },
-
-  DbSelectionContainer: {
-    flex: 1,
-    paddingLeft: 20,
-    paddingRight: 20
-  },
-
-  DbSelectionTabContainer: {
-    flex: 2.5
-  },
-
-  DbSelectionAccAndWeek: {
-    flex: 1,
-    borderBottomColor: '#cbcbcb',
-    borderBottomWidth: 1,
-    justifyContent: 'center'
-  },
-
-  DbSelectionBankAcc: {
-    flex: 1,
-    justifyContent: 'center',
-  },
-
-  DbSelectionText: {
-    fontFamily: 'QuicksandBook-Regular',
-    fontSize: 16
-  },
-
-  DbSelectionPicker: {
-    borderBottomColor: '#cbcbcb',
-    borderBottomWidth: 1
-  },
-
-  DbSelectionPickerItem: {
-    fontFamily: 'QuicksandBook-Regular'
-  },
-
-  DbSelectionBankAccBtn: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderBottomColor: '#cbcbcb',
-    borderBottomWidth: 1,
-    paddingLeft: 25,
-    paddingBottom: 10
-  },
-
-  DbSelectionBankAccText: {
-    flex: 1
-  },
-
-  DbSelectionBankAccIcon: {
-    flex: 1,
-    textAlign: 'right'
-  },
-
-  modal: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 300
-  },
-
-  checkBoxContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
   }
-
 
 
 });

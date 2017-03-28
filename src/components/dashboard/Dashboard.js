@@ -33,8 +33,8 @@ export default class Dashboard extends Component {
   }
   render() {
     const { navigate } = this.props.navigation;
-    console.log(this.props);
-
+    let params  = this.props.navigation.state.params || [];
+    let multiple = params.multiple || [];
     return (
       <ViewContainer>
         <View style={DashboardStyles.imgContainer}>
@@ -44,16 +44,16 @@ export default class Dashboard extends Component {
           </Image>
         </View>
         <View style={DashboardStyles.dateTabContainer}>
-          <TouchableOpacity style={DashboardStyles.filterMainContainer} activeOpacity={0.7} onPress={() => navigate('Selection')}>
+          <TouchableOpacity style={DashboardStyles.filterMainContainer} activeOpacity={0.7} onPress={() => navigate('Selection', {params})}>
             <View style={DashboardStyles.filterContainer}>
-              <Text style={DashboardStyles.text}>Accounts: DIB | HBL | UBL</Text>
+              <Text style={DashboardStyles.text}>Accounts: {multiple.map((val, i, arr) => ' '+ val.name + (i != arr.length - 1 ? ' |' : ''))}</Text>
               <Text style={DashboardStyles.text}>This Week: Mar 14 - Mar 20</Text>
             </View>
             <View style={DashboardStyles.filterIconContainer}>
-                <Icon name="filter" size={25} />
+              <Icon name="filter" size={25} />
             </View>
           </TouchableOpacity>
-          <View style={[theme.cardStyle, DashboardStyles.card]} elevation={4}>
+          <View style={[theme.cardStyle, DashboardStyles.card]} elevation={5}>
             <View style={[DashboardStyles.childContainer, DashboardStyles.childContainerBorder]}>
               <Text style={DashboardStyles.textHeading}>Your Incomes</Text>
               <Text style={DashboardStyles.greenText}>Rs. 4,354,155</Text>

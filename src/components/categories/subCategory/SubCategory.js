@@ -19,6 +19,10 @@ export default class SubCategory extends Component {
 
         console.log(children, 'this');
         const children = this.props.navigation.state.params;
+        let categories = Meteor.collection('categories').find({
+            _id: children._id
+        })
+        console.log(categories, 'categories');
         console.log(children);
         let icon = children.icon.replace('icon-' , "");
 

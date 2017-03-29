@@ -32,9 +32,11 @@ export default class Dashboard extends Component {
     });
   }
   render() {
-    const { navigate } = this.props.navigation;
-    let params  = this.props.navigation.state.params || [];
+    const { navigate, state } = this.props.navigation;
+    let params  = state.params || [];
     let multiple = params.multiple || [];
+    let date = params.date || [];
+
     return (
       <ViewContainer>
         <View style={DashboardStyles.imgContainer}>
@@ -47,7 +49,18 @@ export default class Dashboard extends Component {
           <TouchableOpacity style={DashboardStyles.filterMainContainer} activeOpacity={0.7} onPress={() => navigate('Selection', {params})}>
             <View style={DashboardStyles.filterContainer}>
               <Text style={DashboardStyles.text}>Accounts: {multiple.map((val, i, arr) => ' '+ val.name + (i != arr.length - 1 ? ' |' : ''))}</Text>
-              <Text style={DashboardStyles.text}>This Week: Mar 14 - Mar 20</Text>
+              <Text style={DashboardStyles.text}>
+                {date.map((val, i, arr) => {
+                  if(val.checked){
+                    if(val.selected == 'Custom'){
+                      let index = (i == arr.length - 2 ? i : i - 1);
+                      return val.selected + ': '  + (arr[index].selectedDate ? arr[index].selectedDate : '')  + ' - ' + (arr[index + 1].selectedDate ? arr[index + 1].selectedDate : '');
+                    }else{
+                      return val.selected + ': ' + val.selectedDate;
+                    }
+                  }
+                })}
+              </Text>
             </View>
             <View style={DashboardStyles.filterIconContainer}>
               <Icon name="filter" size={25} />

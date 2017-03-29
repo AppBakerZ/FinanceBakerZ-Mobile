@@ -10,6 +10,7 @@ import { MKCheckbox, getTheme } from 'react-native-material-kit';
 const theme = getTheme();
 
 
+
 let STATE;
 
 export default class DashboardSelection extends Component{
@@ -50,13 +51,26 @@ export default class DashboardSelection extends Component{
 
   constructor(props){
     super(props);
-    let {multiple, bankList} = props.navigation.state.params.params;
+    let {multiple, bankList, date} = props.navigation.state.params.params;
     this.state = {
       multiple: multiple || [],
-      bankList: bankList
+      bankList: bankList,
+      date : date || [
+        {selected: 'Day', checked: false},
+        {selected: 'Day', checked: false},
+        {selected: 'Week', checked: false},
+        {selected: 'Week', checked: false},
+        {selected: 'Month', checked: false},
+        {selected: 'Month', checked: false},
+        {selected: 'Custom', checked: false},
+        {selected: 'Custom', checked: false}
+      ],
+      updateDates: (date) => {this.setState({date})}
     };
     STATE = this.state;
   }
+
+
 
   componentWillMount(){
     let banks = ['HBL', 'UBL', 'DIB', 'NIB'];
@@ -131,7 +145,16 @@ export default class DashboardSelection extends Component{
               })
               }
             </View>
-            <Text style={DashboardSelStyles.DbSelectionText}>Week: </Text>
+            <Text style={DashboardSelStyles.DbSelectionText}>{this.state.date.map((val, i, arr) => {
+              if(val.checked){
+                if(val.selected == 'Custom'){
+                  let index = (i == arr.length - 2 ? i : i - 1);
+                  return val.selected + ': '  + (arr[index].selectedDate ? arr[index].selectedDate : '')  + ' - ' + (arr[index + 1].selectedDate ? arr[index + 1].selectedDate : '');
+                }else{
+                  return val.selected + ': ' + val.selectedDate;
+                }
+              }
+            })}</Text>
           </View>
           <View style={DashboardSelStyles.DbSelectionBankAcc}>
             <TouchableOpacity style={DashboardSelStyles.DbSelectionBankAccBtn} onPress={() => this.refs.modal.open()} activeOpacity={0.7}>
@@ -141,7 +164,7 @@ export default class DashboardSelection extends Component{
           </View>
         </View>
         <View style={DashboardSelStyles.DbSelectionTabContainer}>
-          <DashboardSelectionTabScreen />
+          <DashboardSelectionTabScreen screenProps={[this.state.date, this.state.updateDates]} />
         </View>
         <Modal style={DashboardSelStyles.modal} position={"bottom"} ref={"modal"} swipeArea={20}>
           <ScrollView>

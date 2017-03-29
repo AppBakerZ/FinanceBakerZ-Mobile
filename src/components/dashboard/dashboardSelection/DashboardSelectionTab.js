@@ -11,59 +11,72 @@ export default class DashboardSelectionTab extends Component {
     super(props);
     this.radioGroup = new MKRadioButton.Group();
     this.state = {
-      date : [
-        {selected: 'DAY', checked: false},
-        {selected: 'DAY', checked: false},
-        {selected: 'WEEK', checked: false},
-        {selected: 'WEEK', checked: false},
-        {selected: 'MONTH', checked: false},
-        {selected: 'MONTH', checked: false}
-      ],
+      date : props.screenProps[0],
       customDateTo: new Date(),
-      customDateFrom: new Date()
+      customDateFrom: new Date(),
     };
   }
 
   // For Android
-  showPicker = async (stateKey, options) => {
+  showPicker = async (stateKey, options, index) => {
     try {
       let newState = {};
       const {action, year, month, day} = await DatePickerAndroid.open(options);
       if (action === DatePickerAndroid.dismissedAction) {
-        newState[stateKey + 'Text'] = 'dismissed';
+        newState[stateKey] = 'dismissed';
       } else {
         let date = new Date(year, month, day);
-        newState[stateKey + 'Text'] = date.toLocaleDateString();
-        newState[stateKey + 'Date'] = date;
+        newState[stateKey] = date;
+        this.selectCheckBox(index, '('+moment(date).format('MMM DD')+')');
+        this.setState(newState);
       }
-      this.setState(newState);
-
     } catch ({code, message}) {
       console.warn(`Error in example '${stateKey}': `, message);
     }
   };
 
 
-  selectCheckBox(state, index){
+  selectCheckBox(index, text){
     let date = this.state.date;
+    let m = /\((.*)\)/i;
     date.map((val, i, arr) => {
       index == i ? arr[i].checked = true : arr[i].checked = false;
-      arr[i].selected = state.routeName;
     });
-    this.setState({date});
+    date[index].selectedDate = text.match(m)[1];
+    this.props.screenProps[1](date);
+    this.setState(this.state);
   }
+
+
 
   render() {
 
     const {state} = this.props.navigation;
 
     getData = (text, index) => {
-      return(
-        <TouchableOpacity style={DashboardSelStyles.tabItemCon} onPress={this.selectCheckBox.bind(this, state, index)} activeOpacity={0.75}>
-          <MKRadioButton style={DashboardSelStyles.radioButton}   checked={this.state.date[index].checked} group={this.radioGroup}/>
-          <Text style={[DashboardSelStyles.DbSelectionText, DashboardSelStyles.tabItemTxt]}>{text}</Text>
-        </TouchableOpacity>
-      );
+      if(state.routeName != 'CUSTOM'){
+        return(
+          <TouchableOpacity style={DashboardSelStyles.tabItemCon} onPress={this.selectCheckBox.bind(this, index, text )} activeOpacity={0.75}>
+            <MKRadioButton style={DashboardSelStyles.radioButton}   checked={this.state.date[index].checked} group={this.radioGroup}/>
+            <Text style={[DashboardSelStyles.DbSelectionText, DashboardSelStyles.tabItemTxt]}>{text}</Text>
+          </TouchableOpacity>
+        );
+      }else{
+        return(
+          <ViewContainer style={DashboardSelStyles.tabContainerCustom}>
+            <TouchableWithoutFeedback>
+              <TouchableOpacity style={DashboardSelStyles.textCon} onPress={this.showPicker.bind(this, 'customDateTo', {date: this.state.customDateTo, mode: 'calendar'}, index)}>
+                <Text style={DashboardSelStyles.text}>TO</Text>
+              </TouchableOpacity>
+            </TouchableWithoutFeedback>
+            <TouchableWithoutFeedback>
+              <TouchableOpacity style={DashboardSelStyles.textCon} onPress={this.showPicker.bind(this, 'customDateFrom', {date: this.state.customDateFrom, mode: 'calendar'}, index+1)}>
+                <Text style={DashboardSelStyles.text} >FROM</Text>
+              </TouchableOpacity>
+            </TouchableWithoutFeedback>
+          </ViewContainer>
+        );
+      }
     };
 
     const Day = () => (
@@ -88,17 +101,8 @@ export default class DashboardSelectionTab extends Component {
     );
 
     const Custom = () => (
-      <ViewContainer style={DashboardSelStyles.tabContainerCustom}>
-        <TouchableWithoutFeedback>
-          <TouchableOpacity style={DashboardSelStyles.textCon} onPress={this.showPicker.bind(this, 'calendar', {date: this.state.customDateTo, mode: 'calendar'})}>
-            <Text style={DashboardSelStyles.text}>TO</Text>
-          </TouchableOpacity>
-        </TouchableWithoutFeedback>
-        <TouchableWithoutFeedback>
-          <TouchableOpacity style={DashboardSelStyles.textCon} onPress={this.showPicker.bind(this, 'calendar', {date: this.state.customDateFrom, mode: 'calendar'})}>
-            <Text style={DashboardSelStyles.text} >FROM</Text>
-          </TouchableOpacity>
-        </TouchableWithoutFeedback>
+      <ViewContainer>
+        {getData('CUSTOM', 6)}
       </ViewContainer>
     );
 

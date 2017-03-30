@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, Picker, ScrollView, StyleSheet, TouchableOpacity, Button } from 'react-native';
+import {View, Text, Picker, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
 import { DashboardSelStyles } from 'FinanceBakerZ/src/components/dashboard/dashboardSelection/DashboardSelStyles';
 import DashboardSelectionTab from 'FinanceBakerZ/src/components/dashboard/dashboardSelection/DashboardSelectionTab';
@@ -7,16 +7,15 @@ import { TabNavigator, TabView } from 'react-navigation';
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
 import Modal from 'react-native-modalbox';
 import { MKCheckbox, getTheme } from 'react-native-material-kit';
+import moment from 'moment';
 const theme = getTheme();
-
-
 
 let STATE;
 
 export default class DashboardSelection extends Component{
 
   static navigationOptions = {
-    header: ({ state, navigate, goBack }) => {
+    header: ({ state, goBack }) => {
       let left = (
         <Icon  name="back"
                size={32}
@@ -35,7 +34,8 @@ export default class DashboardSelection extends Component{
                size={32}
                style={{padding: 10}}
                onPress={() => {
-               navigate('Dashboard', STATE)
+                 state.params[1]({childState: STATE});
+                 goBack();
                 }}
         />
       );
@@ -47,11 +47,10 @@ export default class DashboardSelection extends Component{
     },
   };
 
-
-
   constructor(props){
     super(props);
-    let {multiple, bankList, date} = props.navigation.state.params.params;
+    let {multiple, bankList, date} = props.navigation.state.params[0].params;
+    let dateNow = new Date(), y = dateNow.getFullYear(), m = dateNow.getMonth();
     this.state = {
       multiple: multiple || [],
       bankList: bankList,
@@ -62,8 +61,8 @@ export default class DashboardSelection extends Component{
         {selected: 'Week', checked: false},
         {selected: 'Month', checked: false},
         {selected: 'Month', checked: false},
-        {selected: 'Custom', checked: false},
-        {selected: 'Custom', checked: false}
+        {selected: 'Custom', checked: true, customDateTo: new Date(y, m, 1), selectedDate: moment().startOf('month').format('MMM DD')},
+        {selected: 'Custom', checked: false, customDateFrom: new  Date(), selectedDate: moment().format('MMM DD')}
       ],
       updateDates: (date) => {this.setState({date})}
     };
@@ -71,12 +70,11 @@ export default class DashboardSelection extends Component{
   }
 
 
-
   componentWillMount(){
     let banks = ['HBL', 'UBL', 'DIB', 'NIB'];
     let data = [];
 
-    if(!this.props.navigation.state.params.params.bankList){
+    if(!this.props.navigation.state.params[0].params.bankList){
       for(let x = 0; x < banks.length; x++){
         data.push({
           name : banks[x],
@@ -126,26 +124,28 @@ export default class DashboardSelection extends Component{
 
   render(){
 
+    const {multiple, date, bankList} = this.state;
+
     return(
       <ViewContainer>
         <View style={DashboardSelStyles.DbSelectionContainer}>
           <View style={DashboardSelStyles.DbSelectionAccAndWeek}>
             <View style={DashboardSelStyles.DbSelectionAccountsCon}>
               <Text style={DashboardSelStyles.DbSelectionText}>Accounts: &nbsp;</Text>
-              {this.state.multiple.map((val, i) => {
-                let index = this.state.bankList.indexOf(val);
-                return(
-                  <TouchableOpacity onPress={this.handleMultipleChange.bind(this, val, index)} key={i} style={DashboardSelStyles.DbSelectionCardTagCon} activeOpacity={0.8}>
-                    <View style={[theme.cardStyle, DashboardSelStyles.DbSelectionCardTag]} elevation={5} >
-                      <Text style={DashboardSelStyles.DbSelectionCardTagCross}>x</Text>
-                      <Text style={[DashboardSelStyles.DbSelectionTag, DashboardSelStyles.DbSelectionText]}>{val.name}</Text>
-                    </View>
-                  </TouchableOpacity>
-                );
-              })
+              {(multiple.length ? multiple.map((val, i) => {
+                  let index = bankList.indexOf(val);
+                  return(
+                    <TouchableOpacity onPress={this.handleMultipleChange.bind(this, val, index)} key={i} style={DashboardSelStyles.DbSelectionCardTagCon} activeOpacity={0.8}>
+                      <View style={[theme.cardStyle, DashboardSelStyles.DbSelectionCardTag]} elevation={5} >
+                        <Text style={DashboardSelStyles.DbSelectionCardTagCross}>x</Text>
+                        <Text style={[DashboardSelStyles.DbSelectionTag, DashboardSelStyles.DbSelectionText]}>{val.name}</Text>
+                      </View>
+                    </TouchableOpacity>
+                  );
+                }) : <Text style={DashboardSelStyles.DbSelectionText}>All</Text>)
               }
             </View>
-            <Text style={DashboardSelStyles.DbSelectionText}>{this.state.date.map((val, i, arr) => {
+            <Text style={DashboardSelStyles.DbSelectionText}>{date.map((val, i, arr) => {
               if(val.checked){
                 if(val.selected == 'Custom'){
                   let index = (i == arr.length - 2 ? i : i - 1);
@@ -154,7 +154,8 @@ export default class DashboardSelection extends Component{
                   return val.selected + ': ' + val.selectedDate;
                 }
               }
-            })}</Text>
+            })}
+            </Text>
           </View>
           <View style={DashboardSelStyles.DbSelectionBankAcc}>
             <TouchableOpacity style={DashboardSelStyles.DbSelectionBankAccBtn} onPress={() => this.refs.modal.open()} activeOpacity={0.7}>

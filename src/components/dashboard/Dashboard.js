@@ -8,13 +8,15 @@ import Meteor from 'react-native-meteor';
 import { getTheme } from 'react-native-material-kit';
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
 const theme = getTheme();
+import moment from 'moment';
 
 export default class Dashboard extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      availableBalance: null
+      availableBalance: null,
+      updateParentState: (childState) => {this.setState(childState)}
     };
     this.getAvailableBalance();
   }
@@ -32,8 +34,9 @@ export default class Dashboard extends Component {
     });
   }
   render() {
-    const { navigate, state } = this.props.navigation;
-    let params  = state.params || [];
+    const { navigate } = this.props.navigation;
+
+    let params = this.state.childState || [];
     let multiple = params.multiple || [];
     let date = params.date || [];
 
@@ -46,20 +49,20 @@ export default class Dashboard extends Component {
           </Image>
         </View>
         <View style={DashboardStyles.dateTabContainer}>
-          <TouchableOpacity style={DashboardStyles.filterMainContainer} activeOpacity={0.7} onPress={() => navigate('Selection', {params})}>
+          <TouchableOpacity style={DashboardStyles.filterMainContainer} activeOpacity={0.7} onPress={() => navigate('Selection', [{params}, this.state.updateParentState])}>
             <View style={DashboardStyles.filterContainer}>
-              <Text style={DashboardStyles.text}>Accounts: {multiple.map((val, i, arr) => ' '+ val.name + (i != arr.length - 1 ? ' |' : ''))}</Text>
+              <Text style={DashboardStyles.text}>Accounts: {(multiple.length ? multiple.map((val, i, arr) => ' '+ val.name + (i != arr.length - 1 ? ' |' : '')) : 'All')}</Text>
               <Text style={DashboardStyles.text}>
-                {date.map((val, i, arr) => {
-                  if(val.checked){
-                    if(val.selected == 'Custom'){
-                      let index = (i == arr.length - 2 ? i : i - 1);
-                      return val.selected + ': '  + (arr[index].selectedDate ? arr[index].selectedDate : '')  + ' - ' + (arr[index + 1].selectedDate ? arr[index + 1].selectedDate : '');
-                    }else{
-                      return val.selected + ': ' + val.selectedDate;
+                {(date.length ? date.map((val, i, arr) => {
+                    if(val.checked){
+                      if(val.selected == 'Custom'){
+                        let index = (i == arr.length - 2 ? i : i - 1);
+                        return val.selected + ': '  + (arr[index].selectedDate ? arr[index].selectedDate : '')  + ' - ' + (arr[index + 1].selectedDate ? arr[index + 1].selectedDate : '');
+                      }else{
+                        return val.selected + ': ' + val.selectedDate;
+                      }
                     }
-                  }
-                })}
+                  }) : 'Custom: ' + moment().startOf('month').format('MMM DD') + ' - ' + moment().format('MMM DD'))}
               </Text>
             </View>
             <View style={DashboardStyles.filterIconContainer}>

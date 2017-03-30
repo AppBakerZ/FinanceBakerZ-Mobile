@@ -1,20 +1,18 @@
 import React, { Component } from 'react';
-import { View, Text, DatePickerAndroid, TouchableWithoutFeedback, TouchableOpacity} from 'react-native';
+import { Button, View, Text, DatePickerAndroid, TouchableWithoutFeedback, TouchableOpacity, DatePickerIOS, Platform } from 'react-native';
 import { DashboardSelStyles } from 'FinanceBakerZ/src/components/dashboard/dashboardSelection/DashboardSelStyles';
-import { MKRadioButton } from 'react-native-material-kit';
 import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
 import moment from 'moment';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 
 export default class DashboardSelectionTab extends Component {
   constructor(props) {
     super(props);
-    this.radioGroup = new MKRadioButton.Group();
     this.state = {
       date : props.screenProps[0],
-      customDateTo: new Date(),
-      customDateFrom: new Date(),
     };
+    this.findDate = this.findDate.bind(this);
   }
 
   // For Android
@@ -27,7 +25,8 @@ export default class DashboardSelectionTab extends Component {
       } else {
         let date = new Date(year, month, day);
         newState[stateKey] = date;
-        this.selectCheckBox(index, '('+moment(date).format('MMM DD')+')');
+        // this.selectCheckBox(index, '('+moment(date).format('MMM DD')+')');
+        this.selectCheckBox(index, date, stateKey);
         this.setState(newState);
       }
     } catch ({code, message}) {
@@ -35,18 +34,31 @@ export default class DashboardSelectionTab extends Component {
     }
   };
 
+  //For iOS
+  onDateChange(name, index, date){
+    this.setState({[name]: date});
+    this.selectCheckBox(index, date, name);
+  }
 
-  selectCheckBox(index, text){
+  findDate(objName){
+    return this.state.date.find(x => x.hasOwnProperty(objName))[objName];
+  }
+
+
+  selectCheckBox(index, text, stateKey){
     let date = this.state.date;
     let m = /\((.*)\)/i;
     date.map((val, i, arr) => {
       index == i ? arr[i].checked = true : arr[i].checked = false;
     });
+    date[index][stateKey] = text;
+    if(stateKey.length){
+      text = '(' + moment(text).format('MMM DD') + ')';
+    }
     date[index].selectedDate = text.match(m)[1];
     this.props.screenProps[1](date);
     this.setState(this.state);
   }
-
 
 
   render() {
@@ -57,25 +69,50 @@ export default class DashboardSelectionTab extends Component {
       if(state.routeName != 'CUSTOM'){
         return(
           <TouchableOpacity style={DashboardSelStyles.tabItemCon} onPress={this.selectCheckBox.bind(this, index, text )} activeOpacity={0.75}>
-            <MKRadioButton style={DashboardSelStyles.radioButton}   checked={this.state.date[index].checked} group={this.radioGroup}/>
+            <Icon style={DashboardSelStyles.radioIcon} name={this.state.date[index].checked ? 'md-radio-button-on' : 'ios-radio-button-off'} size={25} color={this.state.date[index].checked ? '#008142' : '#dadada'} />
             <Text style={[DashboardSelStyles.DbSelectionText, DashboardSelStyles.tabItemTxt]}>{text}</Text>
           </TouchableOpacity>
         );
       }else{
-        return(
-          <ViewContainer style={DashboardSelStyles.tabContainerCustom}>
-            <TouchableWithoutFeedback>
-              <TouchableOpacity style={DashboardSelStyles.textCon} onPress={this.showPicker.bind(this, 'customDateTo', {date: this.state.customDateTo, mode: 'calendar'}, index)}>
-                <Text style={DashboardSelStyles.text}>TO</Text>
-              </TouchableOpacity>
-            </TouchableWithoutFeedback>
-            <TouchableWithoutFeedback>
-              <TouchableOpacity style={DashboardSelStyles.textCon} onPress={this.showPicker.bind(this, 'customDateFrom', {date: this.state.customDateFrom, mode: 'calendar'}, index+1)}>
-                <Text style={DashboardSelStyles.text} >FROM</Text>
-              </TouchableOpacity>
-            </TouchableWithoutFeedback>
-          </ViewContainer>
-        );
+        if(Platform.OS === 'ios'){
+          return(
+            <ViewContainer style={DashboardSelStyles.tabContainerCustom}>
+              <TouchableWithoutFeedback>
+                <TouchableOpacity style={DashboardSelStyles.textCon} onPress={this.showPicker.bind(this, 'customDateTo', {date: this.findDate('customDateTo'), mode: 'calendar'}, index)}>
+                  <DatePickerIOS
+                    date={this.findDate('customDateTo')}
+                    mode="date"
+                    onDateChange={this.onDateChange.bind(this, 'customDateTo', index)}
+                  />
+                </TouchableOpacity>
+              </TouchableWithoutFeedback>
+              <TouchableWithoutFeedback>
+                <TouchableOpacity style={DashboardSelStyles.textCon} onPress={this.showPicker.bind(this, 'customDateFrom', {date: this.findDate('customDateFrom'), mode: 'calendar'}, index+1)}>
+                  <DatePickerIOS
+                    date={this.findDate('customDateFrom')}
+                    mode="date"
+                    onDateChange={this.onDateChange.bind(this, 'customDateFrom', index + 1)}
+                  />
+                </TouchableOpacity>
+              </TouchableWithoutFeedback>
+            </ViewContainer>
+          );
+        }else{
+          return(
+            <ViewContainer style={DashboardSelStyles.tabContainerCustom}>
+              <TouchableWithoutFeedback>
+                <TouchableOpacity style={DashboardSelStyles.textCon} onPress={this.showPicker.bind(this, 'customDateTo', {date: this.findDate('customDateTo'), mode: 'calendar', maxDate: (() => {let d = new Date(); return d.setDate(d.getDate() - 1)})()}, index)}>
+                  <Text style={DashboardSelStyles.text}>TO</Text>
+                </TouchableOpacity>
+              </TouchableWithoutFeedback>
+              <TouchableWithoutFeedback>
+                <TouchableOpacity style={DashboardSelStyles.textCon} onPress={this.showPicker.bind(this, 'customDateFrom', {date: this.findDate('customDateFrom'), mode: 'calendar', maxDate: new Date()}, index+1)}>
+                  <Text style={DashboardSelStyles.text} >FROM</Text>
+                </TouchableOpacity>
+              </TouchableWithoutFeedback>
+            </ViewContainer>
+          );
+        }
       }
     };
 

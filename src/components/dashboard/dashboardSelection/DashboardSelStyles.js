@@ -154,9 +154,8 @@ export const DashboardSelStyles = StyleSheet.create({
     marginLeft: 10
   },
 
-  radioButton: {
-    height: 22,
-    width: 22
+  radioIcon: {
+    padding: 10
   },
 
   tabContainerCustom: {

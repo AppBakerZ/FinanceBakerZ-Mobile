@@ -36,8 +36,8 @@ class Categories extends Component {
     }
 
 
-    _onPressButton(item){
-        this.props.navigation.navigate('SubCategories', item);
+    _onPressButton(parentId){
+        this.props.navigation.navigate('SubCategories', {parentId});
     }
 
     renderItem(){
@@ -63,7 +63,7 @@ class Categories extends Component {
                                             return(
                                                 <Image source={((i % 2 == (Math.ceil(i / 2) % 1 == 0) ? 0 : 1) ? firstImg : secondImg)} style={CategoriesStyles.Texture}>
                                                     <View style={CategoriesStyles.child}>
-                                                        <TouchableOpacity activeOpacity={0.3 }  onPress={this._onPressButton.bind(this, item)}>
+                                                        <TouchableOpacity activeOpacity={0.3 }  onPress={this._onPressButton.bind(this, item._id)}>
                                                             <CategoryIcon name ={icon} style={CategoriesStyles.customIcon} size={60} />
                                                             <Text style={CategoriesStyles.customIconText}>{item.name.toUpperCase()}</Text>
                                                         </TouchableOpacity>

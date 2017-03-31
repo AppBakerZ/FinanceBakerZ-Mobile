@@ -7,7 +7,7 @@ import { TabNavigator, TabView } from 'react-navigation';
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
 import Modal from 'react-native-modalbox';
 import { MKCheckbox, getTheme } from 'react-native-material-kit';
-import moment from 'moment';
+import {formatDate} from 'FinanceBakerZ/src/customLibrary';
 const theme = getTheme();
 
 let STATE;
@@ -61,8 +61,8 @@ export default class DashboardSelection extends Component{
         {selected: 'Week', checked: false},
         {selected: 'Month', checked: false},
         {selected: 'Month', checked: false},
-        {selected: 'Custom', checked: true, customDateTo: new Date(y, m, 1), selectedDate: moment().startOf('month').format('MMM DD')},
-        {selected: 'Custom', checked: false, customDateFrom: new  Date(), selectedDate: moment().format('MMM DD')}
+        {selected: 'Custom', checked: true, customDateTo: new Date(y, m, 1), selectedDate: formatDate('startOf', null, 'month')},
+        {selected: 'Custom', checked: false, customDateFrom: new  Date(), selectedDate: formatDate()}
       ],
       updateDates: (date) => {this.setState({date})}
     };

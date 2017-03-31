@@ -8,7 +8,8 @@ import Meteor from 'react-native-meteor';
 import { getTheme } from 'react-native-material-kit';
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
 const theme = getTheme();
-import moment from 'moment';
+import {formatDate} from 'FinanceBakerZ/src/customLibrary';
+
 
 export default class Dashboard extends Component {
   constructor(props) {
@@ -62,7 +63,7 @@ export default class Dashboard extends Component {
                         return val.selected + ': ' + val.selectedDate;
                       }
                     }
-                  }) : 'Custom: ' + moment().startOf('month').format('MMM DD') + ' - ' + moment().format('MMM DD'))}
+                  }) : 'Custom: ' + formatDate('startOf', null, 'month') + ' - ' + formatDate())}
               </Text>
             </View>
             <View style={DashboardStyles.filterIconContainer}>

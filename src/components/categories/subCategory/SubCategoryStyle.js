@@ -10,7 +10,6 @@ export const SubCategoryStyles = StyleSheet.create({
     main: {
         flex : 1,
         flexDirection : 'row',
-
     },
     child2: {
         flex : 1,
@@ -20,6 +19,8 @@ export const SubCategoryStyles = StyleSheet.create({
         flex : 1,
         paddingLeft : 20,
         paddingVertical : 15,
+        textAlign : 'right',
+        paddingRight : 15
 
     },
     customIconText : {
@@ -29,6 +30,15 @@ export const SubCategoryStyles = StyleSheet.create({
         textAlign : 'right',
         paddingTop : 30,
         paddingRight : 25,
+        textAlign : 'left',
+        paddingLeft : 10
+    },
+    scroll:{
+      flex : 1
+    },
+    touchableOpacity:{
+        flex:1,
+        flexDirection : 'row'
     },
     mainDiv : {
         margin : 20,
@@ -39,7 +49,7 @@ export const SubCategoryStyles = StyleSheet.create({
         flexDirection : 'row',
         height : null,
     },
-    items :{
+    categoryChildren :{
         padding : 25,
         borderBottomColor : '#cdcdcd' ,
         borderLeftColor : '#cdcdcd' ,

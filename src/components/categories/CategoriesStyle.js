@@ -33,4 +33,7 @@ export const CategoriesStyles = StyleSheet.create({
         flex :2,
         height : null
     },
+    scroll :{
+        flex : 1
+    }
 });

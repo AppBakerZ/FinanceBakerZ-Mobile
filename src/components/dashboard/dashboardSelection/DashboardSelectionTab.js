@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { Button, View, Text, DatePickerAndroid, TouchableWithoutFeedback, TouchableOpacity, DatePickerIOS, Platform } from 'react-native';
 import { DashboardSelStyles } from 'FinanceBakerZ/src/components/dashboard/dashboardSelection/DashboardSelStyles';
 import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
-import moment from 'moment';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {formatDate} from 'FinanceBakerZ/src/customLibrary';
+
 
 
 export default class DashboardSelectionTab extends Component {
@@ -25,7 +26,6 @@ export default class DashboardSelectionTab extends Component {
       } else {
         let date = new Date(year, month, day);
         newState[stateKey] = date;
-        // this.selectCheckBox(index, '('+moment(date).format('MMM DD')+')');
         this.selectCheckBox(index, date, stateKey);
         this.setState(newState);
       }
@@ -53,7 +53,7 @@ export default class DashboardSelectionTab extends Component {
     });
     date[index][stateKey] = text;
     if(stateKey.length){
-      text = '(' + moment(text).format('MMM DD') + ')';
+      text = '(' + formatDate('getCustomDate', null, null, text) + ')';
     }
     date[index].selectedDate = text.match(m)[1];
     this.props.screenProps[1](date);
@@ -118,22 +118,22 @@ export default class DashboardSelectionTab extends Component {
 
     const Day = () => (
       <ViewContainer style={DashboardSelStyles.tabContainer}>
-        {getData('Yesterday (' + moment().subtract(1, 'day').format('MMM DD') + ')', 0)}
-        {getData('Today (' + moment().format('MMM DD') + ')', 1)}
+        {getData('Yesterday (' + formatDate('subtract', 1, 'day') + ')', 0)}
+        {getData('Today (' + formatDate() + ')', 1)}
       </ViewContainer>
     );
 
     const Week = () => (
       <ViewContainer style={DashboardSelStyles.tabContainer}>
-        {getData('Last 7 Days (' + moment().subtract(7, 'day').format('MMM DD') + ' - ' + moment().subtract(1, 'day').format('MMM DD') + ')', 2)}
-        {getData('This Week (' + moment().format('MMM DD') + ' - ' + moment().add(6, 'day').format('MMM DD') + ')', 3)}
+        {getData('Last 7 Days (' + formatDate('subtract', 7, 'day') + ' - ' + formatDate('subtract', 1, 'day') + ')', 2)}
+        {getData('This Week (' + formatDate() + ' - ' + formatDate('add', 6, 'day') + ')', 3)}
       </ViewContainer>
     );
 
     const Month = () => (
       <ViewContainer style={DashboardSelStyles.tabContainer}>
-        {getData('Last Month ' + '(' + moment().subtract(1, 'month').format('MMMM') + ')', 4)}
-        {getData('This Month ' + '(' + moment().format('MMMM') + ')', 5)}
+        {getData('Last Month ' + '(' + formatDate('subtract', 1, 'month') + ')', 4)}
+        {getData('This Month ' + '(' + formatDate() + ')', 5)}
       </ViewContainer>
     );
 

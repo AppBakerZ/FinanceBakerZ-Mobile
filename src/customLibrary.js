@@ -18,16 +18,20 @@ exports.showAlert = (title, message) =>{
   )
 };
 
-exports.formatDate = (type, noOfDays, dayOrMonth, date, format = 'MMM DD') => {
+exports.formatDate = (dateData = {}) => {
+
+  let {type, no, duration, date, format} = dateData;
+  format = format || 'MMM DD';
+
   switch (type){
     case 'subtract':
-      return moment().subtract(noOfDays, dayOrMonth).format(format);
+      return moment().subtract(no, duration).format(format);
       break;
     case 'add':
-      return moment().add(noOfDays, dayOrMonth).format(format);
+      return moment().add(no, duration).format(format);
       break;
     case 'startOf':
-      return moment().startOf(dayOrMonth).format(format);
+      return moment().startOf(duration).format(format);
       break;
     case 'getCustomDate':
       return moment(date).format(format);

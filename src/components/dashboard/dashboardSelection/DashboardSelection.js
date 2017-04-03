@@ -35,6 +35,7 @@ export default class DashboardSelection extends Component{
                style={{padding: 10}}
                onPress={() => {
                  state.params[1]({childState: STATE});
+                 setTimeout(() => state.params[2](state.params[3]));
                  goBack();
                 }}
         />
@@ -49,11 +50,12 @@ export default class DashboardSelection extends Component{
 
   constructor(props){
     super(props);
-    let {multiple, bankList, date} = props.navigation.state.params[0].params;
+    let {date} = props.navigation.state.params[0].params;
+    let bankAcc = props.navigation.state.params[4];
     let dateNow = new Date(), y = dateNow.getFullYear(), m = dateNow.getMonth();
     this.state = {
-      multiple: multiple || [],
-      bankList: bankList,
+      multiple: [],
+      bankList: bankAcc,
       date : date || [
         {selected: 'Day', checked: false},
         {selected: 'Day', checked: false},
@@ -62,7 +64,7 @@ export default class DashboardSelection extends Component{
         {selected: 'Month', checked: false},
         {selected: 'Month', checked: false},
         {selected: 'Custom', checked: true, customDateTo: new Date(y, m, 1), selectedDate: formatDate({type: 'startOf', duration: 'month'})},
-        {selected: 'Custom', checked: false, customDateFrom: new  Date(), selectedDate: formatDate()}
+        {selected: 'Custom', checked: true, customDateFrom: new  Date(), selectedDate: formatDate()}
       ],
       updateDates: (date) => {this.setState({date})}
     };
@@ -71,15 +73,17 @@ export default class DashboardSelection extends Component{
 
 
   componentWillMount(){
-    let banks = ['HBL', 'UBL', 'DIB', 'NIB'];
+
+    let multiple = this.props.navigation.state.params[3];
+    let {bankList} = this.state;
     let data = [];
 
     if(!this.props.navigation.state.params[0].params.bankList){
-      for(let x = 0; x < banks.length; x++){
+      for(let x = 0; x < multiple.length; x++){
         data.push({
-          name : banks[x],
+          name : bankList[x],
           check: false,
-          id: x,
+          id: multiple[x],
         });
       }
       this.setState({bankList: data});
@@ -123,7 +127,6 @@ export default class DashboardSelection extends Component{
   }
 
   render(){
-
     const {multiple, date, bankList} = this.state;
 
     return(
@@ -148,8 +151,7 @@ export default class DashboardSelection extends Component{
             <Text style={DashboardSelStyles.DbSelectionText}>{date.map((val, i, arr) => {
               if(val.checked){
                 if(val.selected == 'Custom'){
-                  let index = (i == arr.length - 2 ? i : i - 1);
-                  return val.selected + ': '  + (arr[index].selectedDate ? arr[index].selectedDate : '')  + ' - ' + (arr[index + 1].selectedDate ? arr[index + 1].selectedDate : '');
+                  return (i == arr.length - 1 ?  val.selected + ': ' + arr[i - 1].selectedDate + ' - ' + val.selectedDate : false);
                 }else{
                   return val.selected + ': ' + val.selectedDate;
                 }

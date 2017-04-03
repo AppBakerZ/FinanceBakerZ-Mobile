@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { View, Text, Image, TouchableOpacity} from 'react-native';
+import { View, Text, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { DashboardStyles } from 'FinanceBakerZ/src/components/dashboard/DashboardStyle';
 import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
 import DashboardTabBottomScreen from 'FinanceBakerZ/src/components/dashboard/DashboardTabBottomScreen';
@@ -8,7 +8,7 @@ import Meteor, {createContainer} from 'react-native-meteor';
 import { getTheme } from 'react-native-material-kit';
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
 const theme = getTheme();
-import {formatDate} from 'FinanceBakerZ/src/customLibrary';
+import {formatDate, filterDate, alterName} from 'FinanceBakerZ/src/customLibrary';
 import moment from 'moment';
 
 
@@ -21,12 +21,15 @@ class Dashboard extends Component {
       availableBalance: null,
       totalIncomes: null,
       totalExpenses: null,
+      loading: true,
       updateParentState: (childState) => {this.setState(childState)},
       dateFrom: new Date(moment(datetime).startOf('month').format()),
-      dateTo: datetime
+      dateTo: datetime,
+      getTotalIncomesAndExpenses: this.getTotalIncomesAndExpenses
     };
     this.getAvailableBalance();
     this.filterByDate = this.filterByDate.bind(this);
+    this.getTotalIncomesAndExpenses = this.getTotalIncomesAndExpenses.bind(this);
   }
 
 
@@ -34,11 +37,7 @@ class Dashboard extends Component {
     accounts = accounts || [];
     Meteor.call('statistics.availableBalance', {accounts}, (err, ab) => {
       if(ab){
-        this.setState({
-          availableBalance: ab
-        })
-      }else{
-
+        this.setState({availableBalance: ab})
       }
     });
   }
@@ -49,11 +48,14 @@ class Dashboard extends Component {
 
   setDefaultAccounts (props){
     let multiple = [];
+    let bankAcc =  [];
     props.accounts.forEach((account) => {
       multiple.push(account._id);
+      bankAcc.push(alterName(account.bank));
     });
-    this.setState({multiple});
+    this.setState({multiple, bankAcc});
     this.updateByAccount(multiple)
+
   }
 
 
@@ -68,9 +70,7 @@ class Dashboard extends Component {
       const {date}  = this.state.childState;
       let newDate;
       newDate = date.filter(date => date.checked);
-      this.setState({dateFrom: moment(newDate.selectedDate).toDate()});
-      setDate.start = moment(this.state.dateFrom).startOf('day').format();
-      setDate.end = moment(this.state.dateTo).endOf('day').format();
+      setDate = filterDate(newDate);
     }else{
       setDate.start = moment(this.state.dateFrom).startOf('day').format();
       setDate.end = moment(this.state.dateTo).endOf('day').format();
@@ -78,15 +78,15 @@ class Dashboard extends Component {
     return setDate;
   }
 
-  getTotalIncomesAndExpenses (accounts = this.state.multiple , filterBy, range){
-    // let date = dateHelpers.filterByDate(filterBy || this.state.filterBy, range || {}, this);
+  getTotalIncomesAndExpenses (accounts = this.state.multiple){
     let date = this.filterByDate();
     Meteor.call('statistics.totalIncomesAndExpenses', {accounts, date}, (err, totals) => {
       if(totals){
         this.setState({
           totalIncomes: totals.incomes,
-          totalExpenses: totals.expenses
-        }, () => console.log(this.state))
+          totalExpenses: totals.expenses,
+          loading: false
+        })
       }else{
         console.log(err.reason);
       }
@@ -106,19 +106,18 @@ class Dashboard extends Component {
         <View style={DashboardStyles.imgContainer}>
           <Image style={DashboardStyles.img} source={require('FinanceBakerZ/src/images/dashboard/dollars.png')}>
             <Text style={DashboardStyles.textWhite}>Your Remaining Amount is</Text>
-            <Text style={DashboardStyles.textPrice}>{this.state.availableBalance}</Text>
+            {(!this.state.loading  ? <Text style={DashboardStyles.textPrice}>{this.state.availableBalance}</Text> : <ActivityIndicator size="large" color="#ff9c00" />)}
           </Image>
         </View>
         <View style={DashboardStyles.dateTabContainer}>
-          <TouchableOpacity style={DashboardStyles.filterMainContainer} activeOpacity={0.7} onPress={() => navigate('Selection', [{params}, this.state.updateParentState])}>
+          <TouchableOpacity style={DashboardStyles.filterMainContainer} activeOpacity={0.7} onPress={() => navigate('Selection', [{params}, this.state.updateParentState, this.getTotalIncomesAndExpenses, this.state.multiple, this.state.bankAcc])}>
             <View style={DashboardStyles.filterContainer}>
               <Text style={DashboardStyles.text}>Accounts: {(multiple.length ? multiple.map((val, i, arr) => ' '+ val.name + (i != arr.length - 1 ? ' |' : '')) : 'All')}</Text>
               <Text style={DashboardStyles.text}>
                 {(date.length ? date.map((val, i, arr) => {
                     if(val.checked){
                       if(val.selected == 'Custom'){
-                        let index = (i == arr.length - 2 ? i : i - 1);
-                        return val.selected + ': '  + (arr[index].selectedDate ? arr[index].selectedDate : '')  + ' - ' + (arr[index + 1].selectedDate ? arr[index + 1].selectedDate : '');
+                        return (i == arr.length - 1 ?  val.selected + ': ' + arr[i - 1].selectedDate + ' - ' + val.selectedDate : false);
                       }else{
                         return val.selected + ': ' + val.selectedDate;
                       }
@@ -133,11 +132,12 @@ class Dashboard extends Component {
           <View style={[theme.cardStyle, DashboardStyles.card]} elevation={5}>
             <View style={[DashboardStyles.childContainer, DashboardStyles.childContainerBorder]}>
               <Text style={DashboardStyles.textHeading}>Your Incomes</Text>
-              <Text style={DashboardStyles.greenText}>{this.state.totalIncomes}</Text>
+              {(!this.state.loading ? <Text style={DashboardStyles.greenText}>{this.state.totalIncomes}</Text> : <ActivityIndicator size="large" color="#008142" />)}
             </View>
             <View style={DashboardStyles.childContainer}>
               <Text style={DashboardStyles.textHeading}>Your Expenses</Text>
-              <Text style={DashboardStyles.redText}>{this.state.totalExpenses}</Text>
+              {(!this.state.loading ? <Text style={DashboardStyles.redText}>{this.state.totalExpenses}</Text> : <ActivityIndicator size="large" color="#008142" />)}
+
             </View>
           </View>
         </View>

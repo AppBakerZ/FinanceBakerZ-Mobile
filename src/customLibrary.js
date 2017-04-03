@@ -41,3 +41,40 @@ exports.formatDate = (dateData = {}) => {
   }
 };
 
+exports.filterDate = (date) => {
+
+  let newDate = {};
+  let d;
+
+  function getDate(date) {
+    d = moment(date.selectedDate, 'MMM DD').format();
+    newDate.start = moment(d).startOf(date.selected.toLowerCase()).format();
+    newDate.end = moment(d).endOf(date.selected.toLowerCase()).format();
+    return newDate;
+  }
+
+  switch (date[0].selected){
+    case 'Day' :
+      return getDate(date[0]);
+      break;
+    case 'Week' :
+      d  = date[0].selectedDate.split('-').map(date => moment(date.trim(), 'MMM DD').format());
+      newDate.start = moment(d[0]).startOf('week').format();
+      newDate.end = moment(d[1]).endOf('week').format();
+      return newDate;
+      break;
+    case 'Month' :
+      return getDate(date[0]);
+      break;
+    case 'Custom' :
+      d  = date.map(date => moment(date.selectedDate, 'MMM DD').format());
+      newDate.start = moment(d[0]).startOf('day').format();
+      newDate.end = moment(d[1]).endOf('day').format();
+      return newDate;
+      break;
+  }
+};
+
+exports.alterName = (bank) => {
+  return bank.substring(5).replace(/-/g, " ");
+};

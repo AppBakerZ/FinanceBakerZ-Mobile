@@ -49,8 +49,11 @@ export default class DashboardSelectionTab extends Component {
   selectCheckBox(index, text, stateKey){
     let date = this.state.date;
     let m = /\((.*)\)/i;
-    date.map((val, i, arr) => {
+    date.forEach((val, i, arr) => {
       index == i ? arr[i].checked = true : arr[i].checked = false;
+      if(stateKey == 'customDateFrom' || stateKey == 'customDateTo' && val.selected == 'Custom'){
+        (index == arr.length - 1 ? arr[index - 1].checked = true :  arr[index + 1].checked = true);
+      }
     });
 
     if(stateKey.length){
@@ -60,6 +63,7 @@ export default class DashboardSelectionTab extends Component {
     date[index].selectedDate = text.match(m)[1];
     this.props.screenProps[1](date);
     this.setState(this.state);
+
   }
 
 
@@ -100,7 +104,7 @@ export default class DashboardSelectionTab extends Component {
     getData = (text, index) => {
       if(state.routeName != 'CUSTOM') {
         return (
-          <TouchableOpacity style={DashboardSelStyles.tabItemCon} onPress={this.selectCheckBox.bind(this, index, text )}
+          <TouchableOpacity style={DashboardSelStyles.tabItemCon} onPress={this.selectCheckBox.bind(this, index, text)}
                             activeOpacity={0.75}>
             <Icon style={DashboardSelStyles.radioIcon}
                   name={this.state.date[index].checked ? 'md-radio-button-on' : 'ios-radio-button-off'} size={25}
@@ -140,7 +144,7 @@ export default class DashboardSelectionTab extends Component {
     const Week = () => (
       <ViewContainer style={DashboardSelStyles.tabContainer}>
         {getData('Last 7 Days (' + formatDate({type: 'subtract', no: 7, duration: 'day'}) + ' - ' + formatDate({type: 'subtract', no: 1, duration: 'day'}) + ')', 2)}
-        {getData('This Week (' + formatDate() + ' - ' + formatDate({type: 'add', no: 6, duration: 'day'}) + ')', 3)}
+        {getData('This Week (' + formatDate({type: 'startOf', duration: 'week'}) + ' - ' + formatDate() + ')', 3)}
       </ViewContainer>
     );
 

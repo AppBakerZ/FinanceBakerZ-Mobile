@@ -36,9 +36,8 @@ class SubCategory extends Component {
                                 <Image source={require('FinanceBakerZ/src/images/category/img1.png')} style={SubCategoryStyles.Texture1}>
                                     <View style={SubCategoryStyles.child2}>
                                         <TouchableOpacity activeOpacity={0.3} style={SubCategoryStyles.touchableOpacity} >
+                                            <CategoryIcon  style={SubCategoryStyles.customIcon} name={icon} size={55}/>
                                             <Text  style={SubCategoryStyles.customIconText}>{subCategories.name.toUpperCase()}</Text>
-                                            <CategoryIcon  style={SubCategoryStyles.customIcon} name={icon} size={60}/>
-
                                         </TouchableOpacity>
 
                                     </View>

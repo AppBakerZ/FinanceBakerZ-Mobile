@@ -1,40 +1,100 @@
-import React, { Component } from 'react';
-import { View, Text, Image, TouchableOpacity} from 'react-native';
+import React, { Component, PropTypes } from 'react';
+import { View, Text, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { DashboardStyles } from 'FinanceBakerZ/src/components/dashboard/DashboardStyle';
 import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
 import DashboardTabBottomScreen from 'FinanceBakerZ/src/components/dashboard/DashboardTabBottomScreen';
 import { TabNavigator, TabView } from 'react-navigation';
-import Meteor from 'react-native-meteor';
+import Meteor, {createContainer} from 'react-native-meteor';
 import { getTheme } from 'react-native-material-kit';
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
 const theme = getTheme();
-import {formatDate} from 'FinanceBakerZ/src/customLibrary';
+import {formatDate, filterDate, alterName} from 'FinanceBakerZ/src/customLibrary';
+import moment from 'moment';
 
 
-export default class Dashboard extends Component {
+class Dashboard extends Component {
   constructor(props) {
     super(props);
+    let datetime = new Date();
 
     this.state = {
       availableBalance: null,
-      updateParentState: (childState) => {this.setState(childState)}
+      totalIncomes: null,
+      totalExpenses: null,
+      loading: true,
+      updateParentState: (childState) => {this.setState(childState)},
+      dateFrom: new Date(moment(datetime).startOf('month').format()),
+      dateTo: datetime,
+      getTotalIncomesAndExpenses: this.getTotalIncomesAndExpenses
     };
     this.getAvailableBalance();
+    this.filterByDate = this.filterByDate.bind(this);
+    this.getTotalIncomesAndExpenses = this.getTotalIncomesAndExpenses.bind(this);
   }
+
+
   getAvailableBalance (accounts){
     accounts = accounts || [];
     Meteor.call('statistics.availableBalance', {accounts}, (err, ab) => {
-      console.log('err, ab', err, ab);
       if(ab){
-        this.setState({
-          availableBalance: ab
-        })
-      }else{
-
+        this.setState({availableBalance: ab})
       }
     });
   }
+
+  componentWillReceiveProps(props){
+    this.setDefaultAccounts(props);
+  }
+
+  setDefaultAccounts (props){
+    let multiple = [];
+    let bankAcc =  [];
+    props.accounts.forEach((account) => {
+      multiple.push(account._id);
+      bankAcc.push(alterName(account.bank));
+    });
+    this.setState({multiple, bankAcc});
+    this.updateByAccount(multiple)
+
+  }
+
+
+  updateByAccount(accounts){
+    this.getAvailableBalance(accounts);
+    this.getTotalIncomesAndExpenses(accounts);
+  }
+
+  filterByDate(){
+    let setDate = {};
+    if(this.state.childState){
+      const {date}  = this.state.childState;
+      let newDate;
+      newDate = date.filter(date => date.checked);
+      setDate = filterDate(newDate);
+    }else{
+      setDate.start = moment(this.state.dateFrom).startOf('day').format();
+      setDate.end = moment(this.state.dateTo).endOf('day').format();
+    }
+    return setDate;
+  }
+
+  getTotalIncomesAndExpenses (accounts = this.state.multiple){
+    let date = this.filterByDate();
+    Meteor.call('statistics.totalIncomesAndExpenses', {accounts, date}, (err, totals) => {
+      if(totals){
+        this.setState({
+          totalIncomes: totals.incomes,
+          totalExpenses: totals.expenses,
+          loading: false
+        })
+      }else{
+        console.log(err.reason);
+      }
+    });
+  }
+
   render() {
+
     const { navigate } = this.props.navigation;
 
     let params = this.state.childState || [];
@@ -46,24 +106,23 @@ export default class Dashboard extends Component {
         <View style={DashboardStyles.imgContainer}>
           <Image style={DashboardStyles.img} source={require('FinanceBakerZ/src/images/dashboard/dollars.png')}>
             <Text style={DashboardStyles.textWhite}>Your Remaining Amount is</Text>
-            <Text style={DashboardStyles.textPrice}>{this.state.availableBalance}</Text>
+            {(!this.state.loading  ? <Text style={DashboardStyles.textPrice}>{this.state.availableBalance}</Text> : <ActivityIndicator size="large" color="#ff9c00" />)}
           </Image>
         </View>
         <View style={DashboardStyles.dateTabContainer}>
-          <TouchableOpacity style={DashboardStyles.filterMainContainer} activeOpacity={0.7} onPress={() => navigate('Selection', [{params}, this.state.updateParentState])}>
+          <TouchableOpacity style={DashboardStyles.filterMainContainer} activeOpacity={0.7} onPress={() => navigate('Selection', [{params}, this.state.updateParentState, this.getTotalIncomesAndExpenses, this.state.multiple, this.state.bankAcc])}>
             <View style={DashboardStyles.filterContainer}>
               <Text style={DashboardStyles.text}>Accounts: {(multiple.length ? multiple.map((val, i, arr) => ' '+ val.name + (i != arr.length - 1 ? ' |' : '')) : 'All')}</Text>
               <Text style={DashboardStyles.text}>
                 {(date.length ? date.map((val, i, arr) => {
                     if(val.checked){
                       if(val.selected == 'Custom'){
-                        let index = (i == arr.length - 2 ? i : i - 1);
-                        return val.selected + ': '  + (arr[index].selectedDate ? arr[index].selectedDate : '')  + ' - ' + (arr[index + 1].selectedDate ? arr[index + 1].selectedDate : '');
+                        return (i == arr.length - 1 ?  val.selected + ': ' + arr[i - 1].selectedDate + ' - ' + val.selectedDate : false);
                       }else{
                         return val.selected + ': ' + val.selectedDate;
                       }
                     }
-                  }) : 'Custom: ' + formatDate('startOf', null, 'month') + ' - ' + formatDate())}
+                  }) : 'Custom: ' + formatDate({type: 'startOf', duration: 'month'}) + ' - ' + formatDate())}
               </Text>
             </View>
             <View style={DashboardStyles.filterIconContainer}>
@@ -73,11 +132,12 @@ export default class Dashboard extends Component {
           <View style={[theme.cardStyle, DashboardStyles.card]} elevation={5}>
             <View style={[DashboardStyles.childContainer, DashboardStyles.childContainerBorder]}>
               <Text style={DashboardStyles.textHeading}>Your Incomes</Text>
-              <Text style={DashboardStyles.greenText}>Rs. 4,354,155</Text>
+              {(!this.state.loading ? <Text style={DashboardStyles.greenText}>{this.state.totalIncomes}</Text> : <ActivityIndicator size="large" color="#008142" />)}
             </View>
             <View style={DashboardStyles.childContainer}>
               <Text style={DashboardStyles.textHeading}>Your Expenses</Text>
-              <Text style={DashboardStyles.redText}>Rs. 4,305,000</Text>
+              {(!this.state.loading ? <Text style={DashboardStyles.redText}>{this.state.totalExpenses}</Text> : <ActivityIndicator size="large" color="#008142" />)}
+
             </View>
           </View>
         </View>
@@ -121,3 +181,16 @@ const DashboardBottomTabNavigator = TabNavigator({
   }
 });
 
+Dashboard.propTypes = {
+  accounts: PropTypes.array.isRequired
+};
+
+export default createContainer(() => {
+
+  const accountHandler = Meteor.subscribe('accounts');
+
+  return {
+    accountsReady: accountHandler.ready(),
+    accounts: Meteor.collection('accounts').find({})
+  };
+}, Dashboard);

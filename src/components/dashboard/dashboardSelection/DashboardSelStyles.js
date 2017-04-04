@@ -178,6 +178,18 @@ export const DashboardSelStyles = StyleSheet.create({
   text: {
     fontFamily: 'QuicksandBook-Regular',
     fontSize: 20
+  },
+
+  modalHeader: {
+    backgroundColor: '#008142',
+    padding: 20
+  },
+
+  modalText: {
+    fontFamily: 'QuicksandBook-Regular',
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 25
   }
 
 

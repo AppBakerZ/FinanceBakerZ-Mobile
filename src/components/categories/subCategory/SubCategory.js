@@ -11,35 +11,41 @@ class SubCategory extends Component {
         super(props);
         this.state = {};
     }
+    renderSubCategory(children) {
+        return children.map((val) => {
+                return(
+                    <View key={val} style={SubCategoryStyles.categoryChild}>
+                        <Text style={SubCategoryStyles.categoryChildren}>{val}</Text>
+
+                    </View>
+                )
+            }
+        )
+    }
     render(){
         let { subCategories } = this.props;
         let { children } = subCategories;
-
+        let icon = subCategories.icon.replace('icon-' , "");
         return(
 
             <ViewContainer>
                 <Image source={require('FinanceBakerZ/src/images/app-background.png')} style={SubCategoryStyles.backgroundImage}>
-                    <ScrollView style={{flex:1}}>
+                    <ScrollView style={SubCategoryStyles.scroll}>
                         <View style={SubCategoryStyles.mainDiv}>
                             <View style={SubCategoryStyles.main}>
                                 <Image source={require('FinanceBakerZ/src/images/category/img1.png')} style={SubCategoryStyles.Texture1}>
                                     <View style={SubCategoryStyles.child2}>
-                                        <TouchableOpacity activeOpacity={0.3} style={{flex:1, flexDirection : 'row'}} >
-                                            <Text  style={SubCategoryStyles.customIconText}>{subCategories.name}</Text>
+                                        <TouchableOpacity activeOpacity={0.3} style={SubCategoryStyles.touchableOpacity} >
+                                            <Text  style={SubCategoryStyles.customIconText}>{subCategories.name.toUpperCase()}</Text>
+                                            <CategoryIcon  style={SubCategoryStyles.customIcon} name={icon} size={60}/>
+
                                         </TouchableOpacity>
 
                                     </View>
                                 </Image>
                             </View>
 
-                            {children.map((val) => {
-                                    return(
-                                        <View  key={val} style={SubCategoryStyles.items}>
-                                            <Text  style={SubCategoryStyles.item}>{val}</Text>
-                                        </View>
-                                    )
-                                }
-                            )}
+                            {this.renderSubCategory(children)}
 
                         </View>
                     </ScrollView>
@@ -48,11 +54,9 @@ class SubCategory extends Component {
         )
     }
 }
-
 SubCategory.propTypes = {
     subCategories: PropTypes.object.isRequired
 };
-
 export default createContainer((props) => {
     const {params} = props.navigation.state;
     return {

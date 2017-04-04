@@ -14,6 +14,7 @@ import AccountsScreen from 'FinanceBakerZ/src/screens/Accounts';
 import CategoriesScreen from 'FinanceBakerZ/src/screens/Categories';
 import SubCategoriesScreen from 'FinanceBakerZ/src/components/categories/subCategory/SubCategory';
 import SettingsScreen from 'FinanceBakerZ/src/screens/Settings';
+import ChangePasswordScreen from 'FinanceBakerZ/src/components/settings/changePassword/ChangePassword';
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
 import DrawerItems, {DrawerItemIcon} from 'FinanceBakerZ/src/components/drawerItems/DrawerItems';
 
@@ -198,6 +199,12 @@ const CategoriesStack = StackNavigator({
 const SettingsStack = StackNavigator({
   Settings: {
     screen: SettingsScreen,
+    navigationOptions: {
+      header: header
+    }
+  },
+  ChangePassword: {
+    screen: ChangePasswordScreen,
     navigationOptions: {
       header: header
     }

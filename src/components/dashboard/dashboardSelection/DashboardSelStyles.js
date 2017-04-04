@@ -70,7 +70,8 @@ export const DashboardSelStyles = StyleSheet.create({
   },
 
   DbSelectionAccountsCon: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    height: 25
   },
 
   DbSelectionPicker: {
@@ -180,15 +181,27 @@ export const DashboardSelStyles = StyleSheet.create({
     fontSize: 20
   },
 
-  modalHeader: {
+  modalFooter: {
+    flex: 1,
+    justifyContent: 'flex-end'
+  },
+
+  pickerIOS: {
+    flex: 1,
+    justifyContent: 'flex-end'
+  },
+
+  btn: {
     backgroundColor: '#008142',
-    padding: 20
+    padding: 20,
   },
 
   modalText: {
     fontFamily: 'QuicksandBook-Regular',
     color: '#fff',
     textAlign: 'center',
+    justifyContent: 'flex-end',
+
     fontSize: 25
   }
 

@@ -63,8 +63,6 @@ export default class DashboardSelectionTab extends Component {
     date[index].selectedDate = text.match(m)[1];
     this.props.screenProps[1](date);
     this.setState(this.state);
-    this.setState({modalVisible: false});
-
   }
 
 
@@ -81,18 +79,20 @@ export default class DashboardSelectionTab extends Component {
         visible={this.state.modalVisible}
         onRequestClose={() => {}}
       >
-        <View style={DashboardSelStyles.modalHeader}>
-          <TouchableOpacity onPress={() => {
+        <View style={DashboardSelStyles.pickerIOS}>
+          <DatePickerIOS
+            date={new Date(this.findDate.bind(this, this.state.iosRange))}
+            mode="date"
+            onDateChange={this.onDateChange.bind(this)}
+          />
+        </View>
+        <View style={DashboardSelStyles.modalFooter}>
+          <TouchableOpacity style={DashboardSelStyles.btn}  onPress={() => {
               this.setModalVisible(!this.state.modalVisible)
             }}>
             <Text style={DashboardSelStyles.modalText}>Close</Text>
           </TouchableOpacity>
         </View>
-        <DatePickerIOS
-          date={new Date(this.findDate.bind(this, this.state.iosRange))}
-          mode="date"
-          onDateChange={this.onDateChange.bind(this)}
-        />
       </Modal>
     );
   };

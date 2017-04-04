@@ -8,7 +8,7 @@ import Meteor, {createContainer} from 'react-native-meteor';
 import { getTheme } from 'react-native-material-kit';
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
 const theme = getTheme();
-import {formatDate, filterDate, alterName} from 'FinanceBakerZ/src/customLibrary';
+import {formatDate, filterDate, alterName, loggedUserCurrency, currencyStandardFormat} from 'FinanceBakerZ/src/customLibrary';
 import moment from 'moment';
 
 
@@ -30,19 +30,12 @@ class Dashboard extends Component {
     this.getAvailableBalance();
     this.filterByDate = this.filterByDate.bind(this);
     this.getTotalIncomesAndExpenses = this.getTotalIncomesAndExpenses.bind(this);
-  }
-
-
-  getAvailableBalance (accounts){
-    accounts = accounts || [];
-    Meteor.call('statistics.availableBalance', {accounts}, (err, ab) => {
-      if(ab){
-        this.setState({availableBalance: ab})
-      }
-    });
+    this.getAvailableBalance = this.getAvailableBalance.bind(this);
+    this.updateByAccount = this.updateByAccount.bind(this);
   }
 
   componentWillReceiveProps(props){
+    // console.log(loggedUserCurrency(props.user));
     this.setDefaultAccounts(props);
   }
 
@@ -55,13 +48,20 @@ class Dashboard extends Component {
     });
     this.setState({multiple, bankAcc});
     this.updateByAccount(multiple)
-
   }
-
 
   updateByAccount(accounts){
     this.getAvailableBalance(accounts);
     this.getTotalIncomesAndExpenses(accounts);
+  }
+
+  getAvailableBalance (accounts){
+    accounts = accounts || [];
+    Meteor.call('statistics.availableBalance', {accounts}, (err, ab) => {
+      if(ab){
+        this.setState({availableBalance: ab})
+      }
+    });
   }
 
   filterByDate(){
@@ -96,23 +96,24 @@ class Dashboard extends Component {
   render() {
 
     const { navigate } = this.props.navigation;
-
     let params = this.state.childState || [];
-    let multiple = params.multiple || [];
+    let bankList = params.bankList || [];
     let date = params.date || [];
+
+
 
     return (
       <ViewContainer>
         <View style={DashboardStyles.imgContainer}>
           <Image style={DashboardStyles.img} source={require('FinanceBakerZ/src/images/dashboard/dollars.png')}>
             <Text style={DashboardStyles.textWhite}>Your Remaining Amount is</Text>
-            {(!this.state.loading  ? <Text style={DashboardStyles.textPrice}>{this.state.availableBalance}</Text> : <ActivityIndicator size="large" color="#ff9c00" />)}
+            {(!this.state.loading  ? <Text style={DashboardStyles.textPrice}>{currencyStandardFormat(this.state.availableBalance)}</Text> : <ActivityIndicator size="large" color="#ff9c00" />)}
           </Image>
         </View>
-        <View style={DashboardStyles.dateTabContainer}>
-          <TouchableOpacity style={DashboardStyles.filterMainContainer} activeOpacity={0.7} onPress={() => navigate('Selection', [{params}, this.state.updateParentState, this.getTotalIncomesAndExpenses, this.state.multiple, this.state.bankAcc])}>
+        <View style={DashboardStyles.dateTabContainer} >
+          <TouchableOpacity style={DashboardStyles.filterMainContainer} disabled={this.state.loading} activeOpacity={0.7} onPress={() => navigate('Selection', [{params}, this.state.updateParentState, this.updateByAccount, this.state.multiple, this.state.bankAcc])}>
             <View style={DashboardStyles.filterContainer}>
-              <Text style={DashboardStyles.text}>Accounts: {(multiple.length ? multiple.map((val, i, arr) => ' '+ val.name + (i != arr.length - 1 ? ' |' : '')) : 'All')}</Text>
+              <Text style={DashboardStyles.text}>Accounts: {(bankList.length ? bankList.map((val, i, arr) => (val.check ? ' ' + val.name + ' |' : '')) : 'All')}</Text>
               <Text style={DashboardStyles.text}>
                 {(date.length ? date.map((val, i, arr) => {
                     if(val.checked){
@@ -132,11 +133,11 @@ class Dashboard extends Component {
           <View style={[theme.cardStyle, DashboardStyles.card]} elevation={5}>
             <View style={[DashboardStyles.childContainer, DashboardStyles.childContainerBorder]}>
               <Text style={DashboardStyles.textHeading}>Your Incomes</Text>
-              {(!this.state.loading ? <Text style={DashboardStyles.greenText}>{this.state.totalIncomes}</Text> : <ActivityIndicator size="large" color="#008142" />)}
+              {(!this.state.loading ? <Text style={DashboardStyles.greenText}>{currencyStandardFormat(this.state.totalIncomes)}</Text> : <ActivityIndicator size="large" color="#008142" />)}
             </View>
             <View style={DashboardStyles.childContainer}>
               <Text style={DashboardStyles.textHeading}>Your Expenses</Text>
-              {(!this.state.loading ? <Text style={DashboardStyles.redText}>{this.state.totalExpenses}</Text> : <ActivityIndicator size="large" color="#008142" />)}
+              {(!this.state.loading ? <Text style={DashboardStyles.redText}>{currencyStandardFormat(this.state.totalExpenses)}</Text> : <ActivityIndicator size="large" color="#008142" />)}
 
             </View>
           </View>
@@ -191,6 +192,7 @@ export default createContainer(() => {
 
   return {
     accountsReady: accountHandler.ready(),
-    accounts: Meteor.collection('accounts').find({})
+    accounts: Meteor.collection('accounts').find({}),
+    user: Meteor.user()
   };
 }, Dashboard);

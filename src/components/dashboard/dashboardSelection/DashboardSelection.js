@@ -34,8 +34,9 @@ export default class DashboardSelection extends Component{
                size={32}
                style={{padding: 10}}
                onPress={() => {
-                 state.params[1]({childState: STATE});
-                 setTimeout(() => state.params[2](state.params[3]));
+                 let accounts = STATE.multiple.length ? STATE.multiple : state.params[3];
+                 state.params[1]({childState: STATE}); // updating Dashboard state
+                 setTimeout(() => state.params[2](accounts)); // calling updateByAccount from Dashboard
                  goBack();
                 }}
         />
@@ -50,12 +51,17 @@ export default class DashboardSelection extends Component{
 
   constructor(props){
     super(props);
-    let {date} = props.navigation.state.params[0].params;
-    let bankAcc = props.navigation.state.params[4];
+    let {state} = this.props.navigation;
+
+    let {date} = state.params[0].params; // selected dates if available
+    let bankAcc = state.params[4]; // bank account names from server
+    let multiple =  state.params[0].params.multiple; // user selected account id's
+
     let dateNow = new Date(), y = dateNow.getFullYear(), m = dateNow.getMonth();
     this.state = {
-      multiple: [],
-      bankList: bankAcc,
+      multiple: multiple || [],
+      bankAccName: bankAcc,
+      bankList: state.params[0].params.bankList || [],
       date : date || [
         {selected: 'Day', checked: false},
         {selected: 'Day', checked: false},
@@ -74,14 +80,15 @@ export default class DashboardSelection extends Component{
 
   componentWillMount(){
 
-    let multiple = this.props.navigation.state.params[3];
-    let {bankList} = this.state;
+    let {state} = this.props.navigation;
+    let multiple = state.params[3]; // accounts id's from server
+    let {bankList, bankAccName} = this.state;
     let data = [];
 
-    if(!this.props.navigation.state.params[0].params.bankList){
-      for(let x = 0; x < multiple.length; x++){
+    if(!state.params[0].params.bankList || !bankList.length) {
+      for (let x = 0; x < multiple.length; x++) {
         data.push({
-          name : bankList[x],
+          name: bankAccName[x],
           check: false,
           id: multiple[x],
         });
@@ -94,17 +101,17 @@ export default class DashboardSelection extends Component{
   handleMultipleChange(selected, indexBank){
     let multiple = this.state.multiple;
     let bankList = this.state.bankList;
-    let check = multiple.find(check => check.id == selected.id);
+    let check = multiple.find(bankId => bankId == selected);
     let index = multiple.indexOf(check);
     if(!check){
-      this.setState({multiple: [...multiple, selected]}, ()=> STATE = this.state);
+      this.setState({multiple: [...multiple, selected]});
       bankList[indexBank].check = true;
-      this.setState({bankList});
+      this.setState({bankList}, ()=> STATE = this.state);
     }else{
       multiple.splice(index, 1);
-      this.setState({multiple}, ()=> STATE = this.state);
+      this.setState({multiple});
       bankList[indexBank].check = false;
-      this.setState({bankList});
+      this.setState({bankList}, ()=> STATE = this.state);
     }
   }
 
@@ -113,7 +120,7 @@ export default class DashboardSelection extends Component{
     let list = [];
     for(let i = 0; i < this.state.bankList.length; i++) {
       list.push(
-        <TouchableOpacity onPress={this.handleMultipleChange.bind(this, this.state.bankList[i], i)} elevation={5}   key={i} style={DashboardSelStyles.checkBoxContainer} activeOpacity={0.8}>
+        <TouchableOpacity onPress={this.handleMultipleChange.bind(this, this.state.bankList[i].id, i)} elevation={5}   key={i} style={DashboardSelStyles.checkBoxContainer} activeOpacity={0.8}>
           <View style={DashboardSelStyles.checkBoxCon}>
             <MKCheckbox style={DashboardSelStyles.checkBox} checked={this.state.bankList[i].check} disabled  />
           </View>
@@ -126,6 +133,14 @@ export default class DashboardSelection extends Component{
     return list;
   }
 
+
+  findIndex(bankId){
+    const {bankList} = this.state;
+    let findBankId;
+    findBankId = bankList.find(bank => bank.id == bankId);
+    return bankList.indexOf(findBankId);
+  }
+
   render(){
     const {multiple, date, bankList} = this.state;
 
@@ -136,12 +151,12 @@ export default class DashboardSelection extends Component{
             <View style={DashboardSelStyles.DbSelectionAccountsCon}>
               <Text style={DashboardSelStyles.DbSelectionText}>Accounts: &nbsp;</Text>
               {(multiple.length ? multiple.map((val, i) => {
-                  let index = bankList.indexOf(val);
+                  let index = this.findIndex(val);
                   return(
                     <TouchableOpacity onPress={this.handleMultipleChange.bind(this, val, index)} key={i} style={DashboardSelStyles.DbSelectionCardTagCon} activeOpacity={0.8}>
                       <View style={[theme.cardStyle, DashboardSelStyles.DbSelectionCardTag]} elevation={5} >
                         <Text style={DashboardSelStyles.DbSelectionCardTagCross}>x</Text>
-                        <Text style={[DashboardSelStyles.DbSelectionTag, DashboardSelStyles.DbSelectionText]}>{val.name}</Text>
+                        <Text style={[DashboardSelStyles.DbSelectionTag, DashboardSelStyles.DbSelectionText]}>{bankList[index].name}</Text>
                       </View>
                     </TouchableOpacity>
                   );

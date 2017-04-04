@@ -1,5 +1,6 @@
 import {Alert} from 'react-native';
 import moment from 'moment';
+import numeral from 'numeral';
 
 
 exports.validateEmail = (email)  => {
@@ -76,6 +77,17 @@ exports.filterDate = (date) => {
 };
 
 exports.alterName = (bank) => {
-  console.log('bank ', bank)
   return bank ? bank.substring(5).replace(/-/g, " ") : '';
+};
+
+exports.loggedUserCurrency = (user) =>{
+  return user ? user.profile.currency && user.profile.currency.value : '';
+};
+
+exports.currencyWithUnits = (currency) => {
+  return numeral(currency).format('0.[0000]a');
+};
+
+exports.currencyStandardFormat = (currency) =>{
+  return numeral(currency).format('0,0');
 };

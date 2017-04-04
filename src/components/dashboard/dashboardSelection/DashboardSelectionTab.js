@@ -42,13 +42,11 @@ export default class DashboardSelectionTab extends Component {
   }
 
   findDate(objName){
-    console.log('this.state.date.find(x => x.hasOwnProperty(objName))[objName]', this.state.date.find(x => x.hasOwnProperty(objName))[objName]);
     return this.state.date.find(x => x.hasOwnProperty(objName))[objName];
   }
 
 
   selectCheckBox(index, text, stateKey){
-    console.log('selectCheckBox', index, text, stateKey)
     let date = this.state.date;
     let m = /\((.*)\)/i;
     date.forEach((val, i, arr) => {
@@ -64,6 +62,7 @@ export default class DashboardSelectionTab extends Component {
     }
     date[index].selectedDate = text.match(m)[1];
     this.props.screenProps[1](date);
+    this.setState(this.state);
     this.setState({modalVisible: false});
 
   }
@@ -71,17 +70,16 @@ export default class DashboardSelectionTab extends Component {
 
   setModalVisible (visible, index, name){
     this.setState({modalVisible: visible, iosRange: name, iosIndex: index});
-    console.log('setModalVisible', visible, index, name)
-    //this.customDateModal(index, name)
+    this.customDateModal();
   };
 
-  customDateModal (index, name){
-    console.log('customDateModal ', name, index)
+  customDateModal (){
     return (
       <Modal
         animationType={"slide"}
         transparent={false}
         visible={this.state.modalVisible}
+        onRequestClose={() => {}}
       >
         <View style={DashboardSelStyles.modalHeader}>
           <TouchableOpacity onPress={() => {
@@ -91,7 +89,7 @@ export default class DashboardSelectionTab extends Component {
           </TouchableOpacity>
         </View>
         <DatePickerIOS
-          date={new Date(this.findDate.bind(this, name))}
+          date={new Date(this.findDate.bind(this, this.state.iosRange))}
           mode="date"
           onDateChange={this.onDateChange.bind(this)}
         />

@@ -3,35 +3,31 @@ import {StyleSheet} from 'react-native';
 export const SubCategoryStyles = StyleSheet.create({
     backgroundImage: {
         flex: 1,
-        resizeMode: 'cover', // or 'stretch'
+        resizeMode: 'cover',
         width: null,
         height: null
     },
     main: {
         flex : 1,
-        flexDirection : 'row',
+        flexDirection : 'row'
     },
     child2: {
-        flex : 1,
+        flex : 1
     },
     customIcon :{
         color: '#ffffff',
         flex : 1,
-        paddingLeft : 20,
-        paddingVertical : 15,
-        textAlign : 'right',
-        paddingRight : 15
-
+        textAlign : 'left',
+        padding : 13,
+        marginLeft : 10
     },
     customIconText : {
         color: '#ffffff',
         fontSize: 18,
         flex : 1,
         textAlign : 'right',
-        paddingTop : 30,
-        paddingRight : 25,
-        textAlign : 'left',
-        paddingLeft : 10
+        marginTop : 22,
+        marginRight : 12
     },
     scroll:{
       flex : 1
@@ -42,23 +38,19 @@ export const SubCategoryStyles = StyleSheet.create({
     },
     mainDiv : {
         margin : 20,
-        flex : 1,
+        flex : 1
     },
     Texture1 :{
         flex :1,
         flexDirection : 'row',
-        height : null,
+        height : null
     },
     categoryChildren :{
         padding : 25,
-        borderBottomColor : '#cdcdcd' ,
-        borderLeftColor : '#cdcdcd' ,
-        borderRightColor : '#cdcdcd' ,
-        borderBottomWidth: 1,
-        borderLeftWidth: 1,
-        borderRightWidth: 1,
+        borderColor : '#cdcdcd' ,
+        borderWidth: 1
     },
     itemsText:{
-        fontSize : 15,
+        fontSize : 15
     }
 });

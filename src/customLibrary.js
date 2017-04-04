@@ -76,5 +76,6 @@ exports.filterDate = (date) => {
 };
 
 exports.alterName = (bank) => {
-  return bank.substring(5).replace(/-/g, " ");
+  console.log('bank ', bank)
+  return bank ? bank.substring(5).replace(/-/g, " ") : '';
 };

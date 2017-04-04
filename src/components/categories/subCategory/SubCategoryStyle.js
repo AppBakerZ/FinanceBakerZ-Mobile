@@ -18,7 +18,7 @@ export const SubCategoryStyles = StyleSheet.create({
         color: '#ffffff',
         flex : 1,
         textAlign : 'left',
-        padding : 13,
+        padding : 10,
         marginLeft : 10
     },
     customIconText : {
@@ -26,8 +26,9 @@ export const SubCategoryStyles = StyleSheet.create({
         fontSize: 18,
         flex : 1,
         textAlign : 'right',
-        marginTop : 22,
-        marginRight : 12
+        marginTop : 28,
+        marginRight : 12,
+        fontFamily: 'QuicksandBold-Regular'
     },
     scroll:{
       flex : 1
@@ -46,8 +47,8 @@ export const SubCategoryStyles = StyleSheet.create({
         height : null
     },
     categoryChildren :{
-        padding : 25,
-        borderColor : '#cdcdcd' ,
+        padding : 20,
+        borderColor : '#cdcdcd',
         borderWidth: 1
     },
     itemsText:{

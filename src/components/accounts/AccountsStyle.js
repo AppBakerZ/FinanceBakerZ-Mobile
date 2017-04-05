@@ -11,55 +11,35 @@ export const AccountsStyles = StyleSheet.create({
         flexDirection: 'row',
     },
     imgBox: {
-        //backgroundColor: '#DCDCDC',
         flex: 1,
-        marginTop: 5,
-        marginBottom: 5,
-        marginLeft: 10,
-        height: 150,
-        paddingTop: 30,
-        paddingLeft: 15,
 
     },
     detailBox: {
-        flex: 1.5
+        flex: 1
     },
-    bankName: {
-        paddingTop: 15,
-        paddingLeft: 10,
-        fontSize: 20,
-        fontFamily: 'QuicksandBook-Regular',
-        paddingBottom: 10,
-    },
+
     accNo: {
-        paddingLeft: 10,
-        fontSize: 15,
         fontFamily: 'QuicksandBold-Regular',
-        paddingBottom: 10,
     },
     amount: {
 
         fontSize: 15,
-        paddingLeft: 10,
         fontFamily: 'QuicksandBold-Regular',
     },
     card: {
+        padding : 15,
         marginTop: 15,
         marginLeft: 25,
         marginRight: 25,
         flexDirection: 'row',
-        paddingTop: 5,
-        paddingBottom: 5,
-    },
 
+    },
     text: {
         fontFamily: 'QuicksandBook-Regular'
     },
-
-    customIcon: {
-
-    }
-
+    scroll:{
+        flex :1
+    },
 
 
 });

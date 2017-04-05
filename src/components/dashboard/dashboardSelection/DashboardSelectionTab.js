@@ -58,7 +58,7 @@ export default class DashboardSelectionTab extends Component {
 
     if(stateKey.length){
       date[index][stateKey] = text;
-      text = '(' + formatDate({type: 'getCustomDate', date: text}) + ')';
+      text = '(' + formatDate({type: 'getCustomDate', date: text, format: 'MMMM DD, YYYY'}) + ')';
     }
     date[index].selectedDate = text.match(m)[1];
     this.props.screenProps[1](date);

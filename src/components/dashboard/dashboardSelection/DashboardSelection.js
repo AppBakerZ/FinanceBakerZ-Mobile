@@ -69,8 +69,8 @@ export default class DashboardSelection extends Component{
         {selected: 'Week', checked: false},
         {selected: 'Month', checked: false},
         {selected: 'Month', checked: false},
-        {selected: 'Custom', checked: true, customDateTo: new Date(y, m, 1), selectedDate: formatDate({type: 'startOf', duration: 'month'})},
-        {selected: 'Custom', checked: true, customDateFrom: new  Date(), selectedDate: formatDate()}
+        {selected: 'Custom', checked: true, customDateTo: new Date(y, m, 1), selectedDate: formatDate({type: 'startOf', duration: 'month', format: 'MMM DD, YYYY'})},
+        {selected: 'Custom', checked: true, customDateFrom: new  Date(), selectedDate: formatDate({format: 'MMM DD, YYYY'})}
       ],
       updateDates: (date) => {this.setState({date})}
     };

@@ -91,6 +91,15 @@ export const DashboardStyles = StyleSheet.create({
     fontFamily: 'QuicksandBook-Regular'
   },
 
+  currencyCon: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+
+  currencyIcon: {
+    paddingRight: 5
+  },
+
   greenText: {
     color: '#1F9058',
     fontSize: 22,
@@ -120,8 +129,9 @@ export const DashboardStyles = StyleSheet.create({
 
   listViewContentRight:{
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'flex-end',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
     borderBottomColor: '#DDDDDD',
     borderBottomWidth: 1
   },
@@ -140,6 +150,10 @@ export const DashboardStyles = StyleSheet.create({
   contentRightText: {
     paddingRight: 20,
     fontFamily: 'QuicksandBook-Regular'
+  },
+
+  contentCurrIcon: {
+    paddingRight: 5
   }
 
 

@@ -7,8 +7,9 @@ import { TabNavigator, TabView } from 'react-navigation';
 import Meteor, {createContainer} from 'react-native-meteor';
 import { getTheme } from 'react-native-material-kit';
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
+import CurrencyIcon from 'FinanceBakerZ/src/icons/CurrencyIcon';
 const theme = getTheme();
-import {formatDate, filterDate, alterName, loggedUserCurrency, currencyStandardFormat} from 'FinanceBakerZ/src/customLibrary';
+import {formatDate, filterDate, alterName, loggedUserCurrency, currencyStandardFormat, alterIconName} from 'FinanceBakerZ/src/customLibrary';
 import moment from 'moment';
 
 
@@ -35,7 +36,7 @@ class Dashboard extends Component {
   }
 
   componentWillReceiveProps(props){
-    // console.log(loggedUserCurrency(props.user));
+    this.setState({incomes: props.incomes, expenses: props.expenses});
     this.setDefaultAccounts(props);
   }
 
@@ -107,7 +108,13 @@ class Dashboard extends Component {
         <View style={DashboardStyles.imgContainer}>
           <Image style={DashboardStyles.img} source={require('FinanceBakerZ/src/images/dashboard/dollars.png')}>
             <Text style={DashboardStyles.textWhite}>Your Remaining Amount is</Text>
-            {(!this.state.loading  ? <Text style={DashboardStyles.textPrice}>{currencyStandardFormat(this.state.availableBalance)}</Text> : <ActivityIndicator size="large" color="#ff9c00" />)}
+            {(!this.state.loading  ?
+              <View style={DashboardStyles.currencyCon}>
+                <CurrencyIcon style={DashboardStyles.currencyIcon} size={30} color="#fff" name={alterIconName(loggedUserCurrency())} />
+
+                <Text style={DashboardStyles.textPrice}>{currencyStandardFormat(this.state.availableBalance)}
+              </Text>
+              </View>: <ActivityIndicator size="large" color="#ff9c00" />)}
           </Image>
         </View>
         <View style={DashboardStyles.dateTabContainer} >
@@ -123,7 +130,7 @@ class Dashboard extends Component {
                         return val.selected + ': ' + val.selectedDate;
                       }
                     }
-                  }) : 'Custom: ' + formatDate({type: 'startOf', duration: 'month'}) + ' - ' + formatDate())}
+                  }) : 'Custom: ' + formatDate({type: 'startOf', duration: 'month', format: 'MMM DD, YYYY'}) + ' - ' + formatDate({format: 'MMM DD, YYYY'}))}
               </Text>
             </View>
             <View style={DashboardStyles.filterIconContainer}>
@@ -133,12 +140,20 @@ class Dashboard extends Component {
           <View style={[theme.cardStyle, DashboardStyles.card]} elevation={5}>
             <View style={[DashboardStyles.childContainer, DashboardStyles.childContainerBorder]}>
               <Text style={DashboardStyles.textHeading}>Your Incomes</Text>
-              {(!this.state.loading ? <Text style={DashboardStyles.greenText}>{currencyStandardFormat(this.state.totalIncomes)}</Text> : <ActivityIndicator size="large" color="#008142" />)}
+              {(!this.state.loading ?
+                <View style={DashboardStyles.currencyCon}>
+                  <CurrencyIcon style={DashboardStyles.currencyIcon} size={20} color="#1F9058" name={alterIconName(loggedUserCurrency())} />
+                  <Text style={DashboardStyles.greenText}>{currencyStandardFormat(this.state.totalIncomes)}</Text>
+                </View> : <ActivityIndicator size="large" color="#008142" />)}
             </View>
             <View style={DashboardStyles.childContainer}>
               <Text style={DashboardStyles.textHeading}>Your Expenses</Text>
-              {(!this.state.loading ? <Text style={DashboardStyles.redText}>{currencyStandardFormat(this.state.totalExpenses)}</Text> : <ActivityIndicator size="large" color="#008142" />)}
-
+              {(!this.state.loading ?
+                <View style={DashboardStyles.currencyCon}>
+                  <CurrencyIcon style={DashboardStyles.currencyIcon} size={20} color="#C71818" name={alterIconName(loggedUserCurrency())} />
+                  <Text style={DashboardStyles.redText}>{currencyStandardFormat(this.state.totalExpenses)}</Text>
+                </View>
+                : <ActivityIndicator size="large" color="#008142" />)}
             </View>
           </View>
         </View>
@@ -167,7 +182,7 @@ const DashboardBottomTabNavigator = TabNavigator({
   swipeEnabled: true,
   tabBarPosition: 'top',
   animationEnabled: true,
-  initialRouteName: 'TRANSACTIONS',
+  initialRouteName: 'INCOMES',
   tabBarOptions: {
     style: {
       backgroundColor: '#3b3b3b',
@@ -193,6 +208,7 @@ export default createContainer(() => {
   return {
     accountsReady: accountHandler.ready(),
     accounts: Meteor.collection('accounts').find({}),
-    user: Meteor.user()
+    user: Meteor.user(),
+
   };
 }, Dashboard);

@@ -50,6 +50,9 @@ export const DashboardSelStyles = StyleSheet.create({
   },
 
   DbSelectionCardTagCon: {
+    flex: 1,
+    flexWrap: 'wrap'
+
   },
 
   DbSelectionCardTag: {
@@ -71,7 +74,7 @@ export const DashboardSelStyles = StyleSheet.create({
 
   DbSelectionAccountsCon: {
     flexDirection: 'row',
-    height: 25
+    height: 35
   },
 
   DbSelectionPicker: {
@@ -201,8 +204,14 @@ export const DashboardSelStyles = StyleSheet.create({
     color: '#fff',
     textAlign: 'center',
     justifyContent: 'flex-end',
-
     fontSize: 25
+  },
+
+  loadingCon: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'green'
   }
 
 

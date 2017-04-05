@@ -1,6 +1,7 @@
 import {Alert} from 'react-native';
 import moment from 'moment';
 import numeral from 'numeral';
+import Meteor from 'react-native-meteor';
 
 
 exports.validateEmail = (email)  => {
@@ -80,8 +81,12 @@ exports.alterName = (bank) => {
   return bank ? bank.substring(5).replace(/-/g, " ") : '';
 };
 
-exports.loggedUserCurrency = (user) =>{
-  return user ? user.profile.currency && user.profile.currency.value : '';
+exports.loggedUserCurrency = () =>{
+  return Meteor.user() ? Meteor.user().profile.currency.value : '';
+};
+
+exports.alterIconName = (iconName) => {
+  return iconName ? iconName.substring(9) : '';
 };
 
 exports.currencyWithUnits = (currency) => {
@@ -90,4 +95,8 @@ exports.currencyWithUnits = (currency) => {
 
 exports.currencyStandardFormat = (currency) =>{
   return numeral(currency).format('0,0');
+};
+
+exports.capitalizeFirstLetter  = (string) => {
+  return string ? string.charAt(0).toUpperCase() + string.slice(1) : '';
 };

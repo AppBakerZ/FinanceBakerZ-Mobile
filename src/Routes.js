@@ -90,7 +90,7 @@ const header = ({ state, navigate }) => {
   );
 
   let title = (
-    <Text style={{fontSize: 20, fontFamily: 'QuicksandBold-Regular', color: '#00562E'}}>{(state.routeName != 'Dashboard') ? state.routeName : ''}</Text>
+    <Text style={{fontSize: 20, fontFamily: 'QuicksandBold-Regular', color: '#00562E', paddingLeft: 10}}>{(state.routeName != 'Dashboard') ? state.routeName : ''}</Text>
   );
 
   style = {
@@ -101,7 +101,7 @@ const header = ({ state, navigate }) => {
   return { left, title, style};
 };
 
-const selectionHeader = ({ state, navigate, goBack }) => {
+const goBackHeader  = ({ goBack }) => {
   // The navigation prop has functions like setParams, goBack, and navigate.
   let left = (
     <Icon  name="back"
@@ -114,28 +114,17 @@ const selectionHeader = ({ state, navigate, goBack }) => {
   );
 
   let title = (
-    <Text style={{fontSize: 20, fontFamily: 'QuicksandBold-Regular', color: '#00562E'}}>{state.routeName}</Text>
+    <Text style={{fontSize: 20, fontFamily: 'QuicksandBold-Regular', color: '#00562E'}}>Categories</Text>
   );
-
-  let right = (
-    <Icon  name="checked"
-           color="black"
-           size={32}
-           style={{padding: 10}}
-           onPress={() => {
-               navigate('Dashboard')
-                }}
-    />
-  );
-
 
   style = {
     height: 70,
     backgroundColor: '#ffffff'
   };
 
-  return { left, title, right, style};
+  return { left, title, style};
 };
+
 
 const DashboardStack = StackNavigator({
   Dashboard: {
@@ -190,7 +179,7 @@ const CategoriesStack = StackNavigator({
   SubCategories: {
     screen: SubCategoriesScreen,
     navigationOptions: {
-      header: header
+      header: goBackHeader,
     }
   }
 

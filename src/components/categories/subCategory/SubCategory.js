@@ -7,60 +7,61 @@ import CategoryIcon from 'FinanceBakerZ/src/icons/CategoryIcon';
 import Meteor, { createContainer } from 'react-native-meteor';
 
 class SubCategory extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
+
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  renderSubCategory(children) {
+
+    if(children.length){
+      return children.map((val) => {
+          return(
+            <View key={val} >
+              <Text style={SubCategoryStyles.categoryChildren}>{val.toUpperCase()}</Text>
+            </View>
+          )})
+    }else{
+      return <Text style={SubCategoryStyles.categoryChildren}>No categories</Text>
     }
-    renderSubCategory(children) {
-        return children.map((val) => {
-                return(
-                    <View key={val} style={SubCategoryStyles.categoryChild}>
-                        <Text style={SubCategoryStyles.categoryChildren}>{val}</Text>
+  }
+  render(){
+    let { subCategories } = this.props;
+    let { children } = subCategories;
+    let icon = subCategories.icon.replace('icon-' , "");
+    return(
 
-                    </View>
-                )
-            }
-        )
-    }
-    render(){
-        let { subCategories } = this.props;
-        let { children } = subCategories;
-        let icon = subCategories.icon.replace('icon-' , "");
-        return(
-
-            <ViewContainer>
-                <Image source={require('FinanceBakerZ/src/images/app-background.png')} style={SubCategoryStyles.backgroundImage}>
-                    <ScrollView style={SubCategoryStyles.scroll}>
-                        <View style={SubCategoryStyles.mainDiv}>
-                            <View style={SubCategoryStyles.main}>
-                                <Image source={require('FinanceBakerZ/src/images/category/img1.png')} style={SubCategoryStyles.Texture1}>
-                                    <View style={SubCategoryStyles.child2}>
-                                        <TouchableOpacity activeOpacity={0.3} style={SubCategoryStyles.touchableOpacity} >
-                                            <CategoryIcon  style={SubCategoryStyles.customIcon} name={icon} size={55}/>
-                                            <Text  style={SubCategoryStyles.customIconText}>{subCategories.name.toUpperCase()}</Text>
-                                        </TouchableOpacity>
-
-                                    </View>
-                                </Image>
-                            </View>
-
-                            {this.renderSubCategory(children)}
-
-                        </View>
-                    </ScrollView>
+      <ViewContainer>
+        <Image source={require('FinanceBakerZ/src/images/app-background.png')} style={SubCategoryStyles.backgroundImage}>
+          <ScrollView style={SubCategoryStyles.scroll}>
+            <View style={SubCategoryStyles.mainDiv}>
+              <View style={SubCategoryStyles.main}>
+                <Image source={require('FinanceBakerZ/src/images/category/img1.png')} style={SubCategoryStyles.Texture1}>
+                  <View style={SubCategoryStyles.child2}>
+                    <TouchableOpacity activeOpacity={0.3} style={SubCategoryStyles.touchableOpacity} >
+                      <CategoryIcon  style={SubCategoryStyles.customIcon} name={icon} size={50}/>
+                      <Text  style={SubCategoryStyles.customIconText}>{subCategories.name.toUpperCase()}</Text>
+                    </TouchableOpacity>
+                  </View>
                 </Image>
-            </ViewContainer>
-        )
-    }
+              </View >
+              {this.renderSubCategory(children)}
+            </View>
+          </ScrollView>
+        </Image>
+      </ViewContainer>
+    )
+  }
 }
 SubCategory.propTypes = {
-    subCategories: PropTypes.object.isRequired
+  subCategories: PropTypes.object.isRequired
 };
 export default createContainer((props) => {
-    const {params} = props.navigation.state;
-    return {
-        subCategories: Meteor.collection('categories').findOne({
-            _id: params.parentId
-        })
-    };
+  const {params} = props.navigation.state;
+  return {
+    subCategories: Meteor.collection('categories').findOne({
+      _id: params.parentId
+    })
+  };
 }, SubCategory);

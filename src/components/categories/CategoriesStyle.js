@@ -12,7 +12,8 @@ export const CategoriesStyles = StyleSheet.create({
         flexDirection : 'row'
     },
     child: {
-        flex : 1
+        flex : 1,
+        padding: 25
     },
 
     customIcon :{
@@ -21,13 +22,15 @@ export const CategoriesStyles = StyleSheet.create({
         marginTop: 15
     },
     customIconText : {
+        fontFamily: 'QuicksandBook-Regular',
         color: '#ffffff',
         textAlign: 'center',
         fontSize: 15,
-        padding : 20,
+        padding : 20
     },
     mainDiv : {
-        margin : 20
+        margin : 20,
+        backgroundColor: '#008142'
     },
     Texture :{
         flex :2,

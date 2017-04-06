@@ -14,25 +14,30 @@ class Settings extends Component {
         this.state = {};
     }
 
-    editSetting() {
-        console.warn('Button Pressed');
-    }
-
     render() {
         const { navigate } = this.props.navigation;
         let { user } = this.props;
+        console.log('User', user);
         return (
             <ViewContainer>
                 <Image source = {require('FinanceBakerZ/src/images/app-background.png')} style={SettingsStyles.backgroundImage}>
-                    <View style = {[SettingsStyles.contentContainer, SettingsStyles.borderBottom]}>
+                    <TouchableOpacity
+                        style = {[SettingsStyles.contentContainer, SettingsStyles.borderBottom]}
+                        onPress = {() => navigate('PersonalInformation')}>
                         <Text style = {SettingsStyles.headingText}>Personal Information</Text>
                         <Text style = {SettingsStyles.contentText}>User Name: {user.profile.fullName}</Text>
                         <Text style = {SettingsStyles.contentText}>Contact Number: {user.profile.contactNumber ? user.profile.contactNumber : 'Not Available'}</Text>
-                        <Text style = {SettingsStyles.contentText}>Email: {(user.emails ? user.emails.map(email => email.address + ' ') : 'Not Available')}</Text>
+                        {!Meteor.user().emails ?
+                            <Text style = {SettingsStyles.contentText}>User Name: {user.username}</Text>
+                            :
+                            <Text style = {SettingsStyles.contentText}>Email: {(user.emails ? user.emails.map(email => email.address + ' ') : 'Not Available')}</Text>
+                        }
                         <Text style = {SettingsStyles.contentText}>Address: {user.profile.address ? user.profile.address : 'Not Available'}</Text>
-                    </View>
+                    </TouchableOpacity>
 
-                    <View style = {[SettingsStyles.contentContainer, SettingsStyles.borderBottom]}>
+                    <TouchableOpacity
+                        style = {[SettingsStyles.contentContainer, SettingsStyles.borderBottom]}
+                        onPress = {() => navigate('AccountSettings')}>
                         <Text style = {SettingsStyles.headingText}>Accout Settings</Text>
                         <Text style = {SettingsStyles.contentText}>Currency: {user.profile.currency.label ? user.profile.currency.label : 'Not Available'}</Text>
                         <Text style = {SettingsStyles.contentText}>Language: {user.profile.language ? user.profile.language : 'Not Available'}</Text>
@@ -54,22 +59,15 @@ class Settings extends Component {
                                 <Text>Off</Text>
                             </View>
                         </View>
-                    </View>
+                    </TouchableOpacity>
 
-                    <View style = {SettingsStyles.contentContainer}>
-                        <Text style = {SettingsStyles.headingText}>Security Settings</Text>
-                        <TouchableOpacity
-                            onPress = {() => navigate('ChangePassword')}>
-                            <Text style = {SettingsStyles.contentText}>Password: **********</Text>
-                        </TouchableOpacity>
-                    </View>
+                    <TouchableOpacity
+                        style = {SettingsStyles.contentContainer}
+                        onPress = {() => navigate('ChangePassword')}>
+                        <Text style = {SettingsStyles.headingText}>Change Password</Text>
+                        <Text style = {SettingsStyles.contentText}>Password: **********</Text>
+                    </TouchableOpacity>
                 </Image>
-
-                <FabButton
-                    onPress = {this.editSetting.bind(this)}
-                    iconName="pencil-square-o"
-                    iconColor="white"
-                />
             </ViewContainer>
         );
     }

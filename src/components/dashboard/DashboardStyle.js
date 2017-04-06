@@ -154,7 +154,14 @@ export const DashboardStyles = StyleSheet.create({
 
   contentCurrIcon: {
     paddingRight: 5
+  },
+
+  loadingCon: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
+
 
 
 });

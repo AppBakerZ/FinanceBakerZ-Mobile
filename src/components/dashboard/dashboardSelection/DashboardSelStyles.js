@@ -205,15 +205,7 @@ export const DashboardSelStyles = StyleSheet.create({
     textAlign: 'center',
     justifyContent: 'flex-end',
     fontSize: 25
-  },
-
-  loadingCon: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'green'
   }
-
 
 
 });

@@ -110,7 +110,7 @@ class Dashboard extends Component {
             <Text style={DashboardStyles.textWhite}>Your Remaining Amount is</Text>
             {(!this.state.loading  ?
               <View style={DashboardStyles.currencyCon}>
-                <CurrencyIcon style={DashboardStyles.currencyIcon} size={30} color="#fff" name={alterIconName(loggedUserCurrency())} />
+                {(loggedUserCurrency() ? <CurrencyIcon style={DashboardStyles.currencyIcon} size={30} color="#fff" name={alterIconName(loggedUserCurrency())} /> : <Text></Text>)}
 
                 <Text style={DashboardStyles.textPrice}>{currencyStandardFormat(this.state.availableBalance)}
               </Text>
@@ -142,7 +142,7 @@ class Dashboard extends Component {
               <Text style={DashboardStyles.textHeading}>Your Incomes</Text>
               {(!this.state.loading ?
                 <View style={DashboardStyles.currencyCon}>
-                  <CurrencyIcon style={DashboardStyles.currencyIcon} size={20} color="#1F9058" name={alterIconName(loggedUserCurrency())} />
+                  {loggedUserCurrency() ? <CurrencyIcon style={DashboardStyles.currencyIcon} size={20} color="#1F9058" name={alterIconName(loggedUserCurrency())} /> : <Text></Text>}
                   <Text style={DashboardStyles.greenText}>{currencyStandardFormat(this.state.totalIncomes)}</Text>
                 </View> : <ActivityIndicator size="large" color="#008142" />)}
             </View>
@@ -150,7 +150,7 @@ class Dashboard extends Component {
               <Text style={DashboardStyles.textHeading}>Your Expenses</Text>
               {(!this.state.loading ?
                 <View style={DashboardStyles.currencyCon}>
-                  <CurrencyIcon style={DashboardStyles.currencyIcon} size={20} color="#C71818" name={alterIconName(loggedUserCurrency())} />
+                  {loggedUserCurrency() ? <CurrencyIcon style={DashboardStyles.currencyIcon} size={20} color="#C71818" name={alterIconName(loggedUserCurrency())} /> : <Text></Text>}
                   <Text style={DashboardStyles.redText}>{currencyStandardFormat(this.state.totalExpenses)}</Text>
                 </View>
                 : <ActivityIndicator size="large" color="#008142" />)}
@@ -182,7 +182,7 @@ const DashboardBottomTabNavigator = TabNavigator({
   swipeEnabled: true,
   tabBarPosition: 'top',
   animationEnabled: true,
-  initialRouteName: 'INCOMES',
+  initialRouteName: 'TRANSACTIONS',
   tabBarOptions: {
     style: {
       backgroundColor: '#3b3b3b',

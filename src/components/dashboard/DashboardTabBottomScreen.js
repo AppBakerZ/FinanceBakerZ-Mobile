@@ -1,10 +1,11 @@
 import React, { Component, PropTypes } from 'react';
-import { View, Text, ListView, ActivityIndicator, ViewContainer} from 'react-native';
+import { View, Text, ListView, ActivityIndicator } from 'react-native';
 import { DashboardStyles } from 'FinanceBakerZ/src/components/dashboard/DashboardStyle';
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
 import Meteor, {createContainer} from 'react-native-meteor';
 import {loggedUserCurrency, currencyStandardFormat, alterIconName, capitalizeFirstLetter} from 'FinanceBakerZ/src/customLibrary';
 import CurrencyIcon from 'FinanceBakerZ/src/icons/CurrencyIcon';
+import _ from 'underscore';
 
 
 class DashboardTabBottomScreen extends Component {
@@ -13,7 +14,8 @@ class DashboardTabBottomScreen extends Component {
     this.state = {
       ds: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
       incomes: props.incomes || [],
-      expenses: props.expenses || []
+      expenses: props.expenses || [],
+      transactions: props.transactions || []
     };
   }
 
@@ -21,19 +23,19 @@ class DashboardTabBottomScreen extends Component {
     this.setState({
       incomes: props.incomes,
       expenses: props.expenses,
-      loading: false
+      transactions: props.transactions
     });
   }
 
-  renderRow(routeName, rowData){
+  renderRow(rowData){
     return(
       <View style={DashboardStyles.listViewContainer}>
         <View style={DashboardStyles.listViewContentLeft}>
-          <Icon name={routeName == 'INCOMES' ? 'right-arrow' : 'left-arrow'} color={routeName == 'INCOMES' ? 'green' : 'red'} style={DashboardStyles.icons}></Icon>
-          <Text style={DashboardStyles.iconText}>{capitalizeFirstLetter(rowData.type)}</Text>
+          <Icon name={rowData.category ? 'left-arrow' : 'right-arrow'} color={rowData.category ?  'red' : 'green'} style={DashboardStyles.icons}></Icon>
+          <Text style={DashboardStyles.iconText}>{rowData.category ?  capitalizeFirstLetter(rowData.category.name) : capitalizeFirstLetter(rowData.type)}</Text>
         </View>
         <View style={DashboardStyles.listViewContentRight}>
-          <CurrencyIcon style={DashboardStyles.contentCurrIcon} size={20} name={alterIconName(loggedUserCurrency())} />
+          <CurrencyIcon style={DashboardStyles.contentCurrIcon} size={14} name={alterIconName(loggedUserCurrency())} />
           <Text style={DashboardStyles.contentRightText}>{currencyStandardFormat(rowData.amount)}</Text>
         </View>
       </View>
@@ -43,16 +45,15 @@ class DashboardTabBottomScreen extends Component {
 
   render() {
     const {state} = this.props.navigation;
-    let {ds, incomes, expenses} = this.state;
-    let transactions = [];
+    let {ds, incomes, expenses, transactions} = this.state;
 
-    if(incomes.length && expenses.length){
-        return (
-          <ListView
-            dataSource={ds.cloneWithRows(eval(state.routeName.toLowerCase()))}
-            renderRow={this.renderRow.bind(this, state.routeName)}
-          />
-        );
+    if(incomes.length || expenses.length || transactions.length){
+      return (
+        <ListView
+          dataSource={ds.cloneWithRows(eval(state.routeName.toLowerCase()))}
+          renderRow={this.renderRow.bind(this)}
+        />
+      );
     }else{
       return <View style={DashboardStyles.loadingCon}><ActivityIndicator size="large" color="#008142" /></View>
     }
@@ -68,8 +69,13 @@ export default createContainer(() => {
   Meteor.subscribe('incomes', 10);
   Meteor.subscribe('expenses', 10);
 
+  let incomes, expenses;
+  incomes =  Meteor.collection('incomes').find({});
+  expenses = Meteor.collection('expenses').find({});
+
   return {
-    incomes: Meteor.collection('incomes').find({}),
-    expenses: Meteor.collection('expenses').find({})
+    incomes: incomes,
+    expenses: expenses,
+    transactions: _.sortBy(incomes.concat(expenses), function(transaction){return transaction.receivedAt || transaction.spentAt }).reverse()
   };
 }, DashboardTabBottomScreen);

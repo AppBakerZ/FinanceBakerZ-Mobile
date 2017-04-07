@@ -29,8 +29,7 @@ export const CategoriesStyles = StyleSheet.create({
         padding : 20
     },
     mainDiv : {
-        margin : 20,
-        backgroundColor: '#008142'
+        margin : 20
     },
     Texture :{
         flex :2,

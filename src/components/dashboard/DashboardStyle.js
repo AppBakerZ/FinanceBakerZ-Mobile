@@ -59,7 +59,8 @@ export const DashboardStyles = StyleSheet.create({
   textPrice: {
     fontFamily: 'QuicksandBold-Regular',
     color: '#fff',
-    fontSize: 35
+    fontSize: 35,
+    textAlign: 'center'
   },
 
   tabScreenContainer: {

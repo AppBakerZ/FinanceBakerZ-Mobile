@@ -6,6 +6,8 @@ import Meteor, {createContainer} from 'react-native-meteor';
 import {loggedUserCurrency, currencyStandardFormat, alterIconName, capitalizeFirstLetter} from 'FinanceBakerZ/src/customLibrary';
 import CurrencyIcon from 'FinanceBakerZ/src/icons/CurrencyIcon';
 import _ from 'underscore';
+import Loader from 'FinanceBakerZ/src/components/loader/Loader';
+
 
 
 class DashboardTabBottomScreen extends Component {
@@ -55,7 +57,7 @@ class DashboardTabBottomScreen extends Component {
         />
       );
     }else{
-      return <View style={DashboardStyles.loadingCon}><ActivityIndicator size="large" color="#008142" /></View>
+      return <View style={DashboardStyles.loadingCon}><Loader size={35} color="#008142" /></View>
     }
   }
 }

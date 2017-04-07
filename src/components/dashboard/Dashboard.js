@@ -11,6 +11,8 @@ import CurrencyIcon from 'FinanceBakerZ/src/icons/CurrencyIcon';
 const theme = getTheme();
 import {formatDate, filterDate, alterName, loggedUserCurrency, currencyStandardFormat, alterIconName} from 'FinanceBakerZ/src/customLibrary';
 import moment from 'moment';
+import Loader from 'FinanceBakerZ/src/components/loader/Loader';
+
 
 
 class Dashboard extends Component {
@@ -96,6 +98,7 @@ class Dashboard extends Component {
 
   render() {
 
+    let {loading} = this.state;
     const { navigate } = this.props.navigation;
     let params = this.state.childState || [];
     let bankList = params.bankList || [];
@@ -106,16 +109,16 @@ class Dashboard extends Component {
     return (
       <ViewContainer>
         <View style={DashboardStyles.imgContainer}>
+          {(!loading  ?
           <Image style={DashboardStyles.img} source={require('FinanceBakerZ/src/images/dashboard/dollars.png')}>
-            <Text style={DashboardStyles.textWhite}>Your Remaining Amount is</Text>
-            {(!this.state.loading  ?
-              <View style={DashboardStyles.currencyCon}>
-                {(loggedUserCurrency() ? <CurrencyIcon style={DashboardStyles.currencyIcon} size={30} color="#fff" name={alterIconName(loggedUserCurrency())} /> : <Text></Text>)}
-
-                <Text style={DashboardStyles.textPrice}>{currencyStandardFormat(this.state.availableBalance)}
-              </Text>
-              </View>: <ActivityIndicator size="large" color="#ff9c00" />)}
+              <Text style={DashboardStyles.textWhite}>Your Remaining Amount is</Text>
+                <View style={DashboardStyles.currencyCon}>
+                  {(loggedUserCurrency() ? <CurrencyIcon style={DashboardStyles.currencyIcon} size={30} color="#fff" name={alterIconName(loggedUserCurrency())} /> : <Text></Text>)}
+                  <Text style={DashboardStyles.textPrice}>{currencyStandardFormat(this.state.availableBalance)}
+                  </Text>
+                </View>
           </Image>
+            : <Image style={DashboardStyles.img} source={require('FinanceBakerZ/src/images/dashboard/dollars.png')}><Loader size={30} color="#fff" /></Image>)}
         </View>
         <View style={DashboardStyles.dateTabContainer} >
           <TouchableOpacity style={DashboardStyles.filterMainContainer} disabled={this.state.loading} activeOpacity={0.7} onPress={() => navigate('Selection', [{params}, this.state.updateParentState, this.updateByAccount, this.state.multiple, this.state.bankAcc])}>
@@ -138,23 +141,23 @@ class Dashboard extends Component {
             </View>
           </TouchableOpacity>
           <View style={[theme.cardStyle, DashboardStyles.card]} elevation={5}>
-            <View style={[DashboardStyles.childContainer, DashboardStyles.childContainerBorder]}>
+            {(!loading ?
+              <View style={[DashboardStyles.childContainer, DashboardStyles.childContainerBorder]}>
               <Text style={DashboardStyles.textHeading}>Your Incomes</Text>
-              {(!this.state.loading ?
                 <View style={DashboardStyles.currencyCon}>
                   {loggedUserCurrency() ? <CurrencyIcon style={DashboardStyles.currencyIcon} size={20} color="#1F9058" name={alterIconName(loggedUserCurrency())} /> : <Text></Text>}
                   <Text style={DashboardStyles.greenText}>{currencyStandardFormat(this.state.totalIncomes)}</Text>
-                </View> : <ActivityIndicator size="large" color="#008142" />)}
-            </View>
-            <View style={DashboardStyles.childContainer}>
-              <Text style={DashboardStyles.textHeading}>Your Expenses</Text>
-              {(!this.state.loading ?
-                <View style={DashboardStyles.currencyCon}>
-                  {loggedUserCurrency() ? <CurrencyIcon style={DashboardStyles.currencyIcon} size={20} color="#C71818" name={alterIconName(loggedUserCurrency())} /> : <Text></Text>}
-                  <Text style={DashboardStyles.redText}>{currencyStandardFormat(this.state.totalExpenses)}</Text>
                 </View>
-                : <ActivityIndicator size="large" color="#008142" />)}
             </View>
+              : <View style={[DashboardStyles.childContainer, DashboardStyles.childContainerBorder]}><Loader size={20} color="#008142" /></View>)}
+            {(!loading ?
+                <View style={DashboardStyles.childContainer}>
+                  <Text style={DashboardStyles.textHeading}>Your Expenses</Text>
+                  <View style={DashboardStyles.currencyCon}>
+                    {loggedUserCurrency() ? <CurrencyIcon style={DashboardStyles.currencyIcon} size={20} color="#C71818" name={alterIconName(loggedUserCurrency())} /> : <Text></Text>}
+                    <Text style={DashboardStyles.redText}>{currencyStandardFormat(this.state.totalExpenses)}</Text>
+                  </View>
+                </View> : <View style={DashboardStyles.childContainer}><Loader size={20} color="#008142" /></View>)}
           </View>
         </View>
         <View style={DashboardStyles.bottomTabContainer}>

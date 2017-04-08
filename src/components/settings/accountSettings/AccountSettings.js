@@ -37,7 +37,8 @@ class AccountSettings extends Component {
         return(
             <Picker
                 selectedValue= {this.state.userCurrency}
-                onValueChange={this.onChange.bind(this)}>
+                onValueChange={this.onChange.bind(this)}
+                mode='dropdown'>
                 {currencyItems}
             </Picker>
         )

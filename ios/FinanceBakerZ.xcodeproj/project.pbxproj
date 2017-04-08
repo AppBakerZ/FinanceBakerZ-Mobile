@@ -324,6 +324,7 @@
 		2E18B5D5F4D54F7BA078FB3B /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		3193E37AAEED4D418CEE340A /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		320CBCD178094EBD9F2A0708 /* RCTMaterialKit.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTMaterialKit.xcodeproj; path = "../node_modules/react-native-material-kit/iOS/RCTMaterialKit.xcodeproj"; sourceTree = "<group>"; };
+		3483E8BDBA29403CA406BEEE /* Bank_font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Bank_font.ttf; path = ../src/icons/Bank_font.ttf; sourceTree = "<group>"; };
 		369C3D97DC1F4C4EBB4253D9 /* Quicksand_Book_Oblique.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Quicksand_Book_Oblique.otf; path = ../src/fonts/Quicksand_Book_Oblique.otf; sourceTree = "<group>"; };
 		3F76999AB1B340A0945B6A85 /* category-icon.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "category-icon.ttf"; path = "../src/icons/category-icon.ttf"; sourceTree = "<group>"; };
 		415F5ADB934045F78149EAC3 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
@@ -615,6 +616,7 @@
 				3F76999AB1B340A0945B6A85 /* category-icon.ttf */,
 				B5E8F2CB2C254833A571C0EF /* Bank-font.ttf */,
 				C974B05FDC164F6AB07742C8 /* Currency.ttf */,
+				3483E8BDBA29403CA406BEEE /* Bank_font.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1325,8 +1327,12 @@
 				DEVELOPMENT_TEAM = D7ZLLL2YZT;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)..\node_modules\neact-native-smart-splash-screeniosRCTSplashScreenRCTSplashScreen",
-					"$(SRCROOT)..\node_modules\neact-native-material-kitiOSRCTMaterialKit",
+					"$(SRCROOT)..",
+					ode_modules,
+					"eact-native-smart-splash-screeniosRCTSplashScreenRCTSplashScreen",
+					"$(SRCROOT)..",
+					ode_modules,
+					"eact-native-material-kitiOSRCTMaterialKit",
 				);
 				INFOPLIST_FILE = FinanceBakerZ/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1351,8 +1357,12 @@
 				DEVELOPMENT_TEAM = D7ZLLL2YZT;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)..\node_modules\neact-native-smart-splash-screeniosRCTSplashScreenRCTSplashScreen",
-					"$(SRCROOT)..\node_modules\neact-native-material-kitiOSRCTMaterialKit",
+					"$(SRCROOT)..",
+					ode_modules,
+					"eact-native-smart-splash-screeniosRCTSplashScreenRCTSplashScreen",
+					"$(SRCROOT)..",
+					ode_modules,
+					"eact-native-material-kitiOSRCTMaterialKit",
 				);
 				INFOPLIST_FILE = FinanceBakerZ/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

@@ -26,7 +26,8 @@ export const CategoriesStyles = StyleSheet.create({
         color: '#ffffff',
         textAlign: 'center',
         fontSize: 15,
-        padding : 20
+        padding : 10,
+        lineHeight : 25
     },
     mainDiv : {
         margin : 20

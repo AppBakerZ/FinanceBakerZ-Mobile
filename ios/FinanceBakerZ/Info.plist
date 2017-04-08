@@ -94,6 +94,7 @@
       <string>application-icon.ttf</string>
       <string>category-icon.ttf</string>
       <string>Currency.ttf</string>
+      <string>Bank_font.ttf</string>
     </array>
     <key>UIRequiredDeviceCapabilities</key>
     <array>

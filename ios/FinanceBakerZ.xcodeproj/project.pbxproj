@@ -61,6 +61,7 @@
 		F2FF77E2390C467BA0E385D0 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3193E37AAEED4D418CEE340A /* MaterialCommunityIcons.ttf */; };
 		F4F793510F534F779B622164 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2E18B5D5F4D54F7BA078FB3B /* SimpleLineIcons.ttf */; };
 		82DD175355A34DC3BA03E32B /* Currency.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C974B05FDC164F6AB07742C8 /* Currency.ttf */; };
+		9EF8D44ED77E487B96FDCBC4 /* Bank_font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3483E8BDBA29403CA406BEEE /* Bank_font.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -371,6 +372,7 @@
 		F1113805F161445B94716BC3 /* Georgia.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Georgia.ttf; path = "../node_modules/native-base/Fonts/Georgia.ttf"; sourceTree = "<group>"; };
 		F6ACED63CD3B471889C25E92 /* Courier New.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Courier New.ttf"; path = "../node_modules/native-base/Fonts/Courier New.ttf"; sourceTree = "<group>"; };
 		C974B05FDC164F6AB07742C8 /* Currency.ttf */ = {isa = PBXFileReference; name = "Currency.ttf"; path = "../src/icons/Currency.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		3483E8BDBA29403CA406BEEE /* Bank_font.ttf */ = {isa = PBXFileReference; name = "Bank_font.ttf"; path = "../src/icons/Bank_font.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -604,6 +606,7 @@
 				3F76999AB1B340A0945B6A85 /* category-icon.ttf */,
 				B5E8F2CB2C254833A571C0EF /* Bank-font.ttf */,
 				C974B05FDC164F6AB07742C8 /* Currency.ttf */,
+				3483E8BDBA29403CA406BEEE /* Bank_font.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1121,6 +1124,7 @@
 				E4006DB220D94C2EB16A0064 /* category-icon.ttf in Resources */,
 				5311625D5E4345789004B25B /* Bank-font.ttf in Resources */,
 				82DD175355A34DC3BA03E32B /* Currency.ttf in Resources */,
+				9EF8D44ED77E487B96FDCBC4 /* Bank_font.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

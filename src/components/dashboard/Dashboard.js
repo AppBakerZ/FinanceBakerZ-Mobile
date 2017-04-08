@@ -211,7 +211,6 @@ export default createContainer(() => {
   return {
     accountsReady: accountHandler.ready(),
     accounts: Meteor.collection('accounts').find({}),
-    user: Meteor.user(),
-
+    user: Meteor.user()
   };
 }, Dashboard);

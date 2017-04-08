@@ -15,6 +15,7 @@ export default class DashboardSelectionTab extends Component {
       modalVisible: false
     };
     this.findDate = this.findDate.bind(this);
+    this.customDateModal = this.customDateModal.bind(this);
   }
 
   // For Android
@@ -88,7 +89,7 @@ export default class DashboardSelectionTab extends Component {
         </View>
         <View style={DashboardSelStyles.modalFooter}>
           <TouchableOpacity style={DashboardSelStyles.btn}  onPress={() => {
-              this.setModalVisible(!this.state.modalVisible)
+              this.setState({modalVisible: false});
             }}>
             <Text style={DashboardSelStyles.modalText}>Close</Text>
           </TouchableOpacity>

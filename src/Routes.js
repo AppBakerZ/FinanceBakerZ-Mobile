@@ -197,19 +197,19 @@ const SettingsStack = StackNavigator({
   ChangePassword: {
     screen: ChangePasswordScreen,
     navigationOptions: {
-      header: header
+      title: 'Change Password'
     }
   },
   AccountSettings: {
     screen: AccountSettingsScreen,
     navigationOptions: {
-      header: header
+      title: 'Account Settings'
     }
   },
   PersonalInformation: {
     screen: PersonalInformationScreen,
     navigationOptions: {
-      header: header
+      title: 'Personal Information'
     }
   }
 });

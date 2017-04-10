@@ -18,12 +18,12 @@ class SubCategory extends Component {
     if(children.length){
       return children.map((val) => {
           return(
-            <View key={val} >
+            <View style={SubCategoryStyles.subCategoryChildren} key={val} >
               <Text style={SubCategoryStyles.categoryChildren}>{val.toUpperCase()}</Text>
             </View>
           )})
     }else{
-      return <Text style={SubCategoryStyles.categoryChildren}>No categories</Text>
+      return <View style={[SubCategoryStyles.subCategoryChildren, SubCategoryStyles.noCategoryChildren]}><Text style={SubCategoryStyles.categoryChildren}>No categories</Text></View>
     }
   }
   render(){

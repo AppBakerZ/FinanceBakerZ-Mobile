@@ -63,13 +63,15 @@ export default class DashboardSelectionTab extends Component {
     }
     date[index].selectedDate = text.match(m)[1];
     this.props.screenProps[1](date);
-    this.setState(this.state);
+    this.setState({
+      modalVisible: false
+    });
   }
 
 
   setModalVisible (visible, index, name){
-    this.setState({modalVisible: visible, iosRange: name, iosIndex: index});
-    this.customDateModal();
+    this.setState({modalVisible: true, iosRange: name, iosIndex: index});
+    //this.customDateModal();
   };
 
   customDateModal (){

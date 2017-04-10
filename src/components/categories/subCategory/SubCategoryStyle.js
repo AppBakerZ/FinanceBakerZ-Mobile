@@ -26,10 +26,9 @@ export const SubCategoryStyles = StyleSheet.create({
   customIconText : {
     color: '#ffffff',
     fontSize: 20,
-    flex : 1,
-    paddingRight: 10,
     textAlign : 'right',
-    fontFamily: 'QuicksandBold-Regular'
+    fontFamily: 'QuicksandBold-Regular',
+      flex : 5
   },
 
   categoryChild: {
@@ -55,11 +54,20 @@ export const SubCategoryStyles = StyleSheet.create({
     height : null
   },
   categoryChildren :{
-      padding : 25,
-      borderColor : '#cdcdcd' ,
-      borderWidth: 1,
-      fontFamily: 'QuicksandBook-Regular'
+      fontFamily: 'QuicksandBook-Regular',
   },
+    noCategoryChildren:{
+    alignItems:'center',
+    },
+    subCategoryChildren :{
+        flex : 1,
+        paddingHorizontal:20,
+        height : 80,
+        justifyContent : 'center',
+        borderColor : '#cdcdcd',
+        borderTopColor : '#ffffff',
+        borderWidth: 1
+    },
   itemsText:{
     fontSize : 15
   }

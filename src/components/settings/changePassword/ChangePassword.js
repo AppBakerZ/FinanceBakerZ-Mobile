@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, KeyboardAvoidingView, TextInput, TouchableOpacity} from 'react-native';
+import { View, Text, Image, KeyboardAvoidingView, TextInput} from 'react-native';
 import { ChangePasswordStyle } from 'FinanceBakerZ/src/components/settings/changePassword/ChangePasswordStyle';
 import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
 import Button from 'FinanceBakerZ/src/components/button/Button';

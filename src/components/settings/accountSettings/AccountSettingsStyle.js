@@ -33,7 +33,7 @@ export const AccountSettingsStyle = StyleSheet.create({
     notificationIcon: {
         marginTop: 12,
         marginLeft: 25,
-        marginRight: 15
+        marginRight: 10
     },
     notificationText: {
         marginVertical: 14,
@@ -54,6 +54,12 @@ export const AccountSettingsStyle = StyleSheet.create({
     },
     pickerContainer: {
         paddingLeft: 20,
-        paddingRight: 20
+        paddingRight: 20,
+        marginBottom: 10
+    },
+    modal: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: 200
     }
 });

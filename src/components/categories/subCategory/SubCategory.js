@@ -18,7 +18,7 @@ class SubCategory extends Component {
     if(children.length){
       return children.map((val) => {
           return(
-            <View key={val} >
+            <View style={SubCategoryStyles.subCategoryChildren} key={val} >
               <Text style={SubCategoryStyles.categoryChildren}>{val.toUpperCase()}</Text>
             </View>
           )})

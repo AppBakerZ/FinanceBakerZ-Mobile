@@ -23,30 +23,22 @@ import DrawerItems, {DrawerItemIcon} from 'FinanceBakerZ/src/components/drawerIt
 
 import { StackNavigator, DrawerNavigator } from 'react-navigation';
 
-//Only for Auth Components
-const authHeader = ({ state, goBack }) => {
-  // The navigation prop has functions like setParams, goBack, and navigate.
-  let left = (
-      <Icon  name="back"
-             size={32}
-             style={{marginLeft: 5, padding: 10}}
-             onPress={() => {
-               goBack()
-                }}
-          />
-  );
 
-  let title = (
-      <Text style={{fontSize: 20, fontFamily: 'QuicksandBold-Regular', color: '#00562E'}}>{(state.routeName != 'Dashboard') ? state.routeName : ''}</Text>
-  );
-
-
-  style = {
-    height: 70,
-    backgroundColor: '#ffffff'
-  };
-
-  return { left, title, style};
+let nestingHeaders  = (routeName) => {
+  return {
+    title: routeName,
+    header: {
+      titleStyle: {
+        fontWeight: '200',
+        fontFamily: 'QuicksandBold-Regular',
+        fontSize: 20
+      },
+      style: {
+        height: 70
+      },
+      tintColor: '#00562E'
+    }
+  }
 };
 
 export const Auth = StackNavigator({
@@ -61,17 +53,12 @@ export const Auth = StackNavigator({
   },
   Register: {
     screen: RegisterScreen,
-    navigationOptions: {
-      title: 'Sign Up',
-      header: authHeader
-    }
+    navigationOptions: nestingHeaders('Sign Up')
   },
   ForgotPassword: {
     screen: ForgotPasswordScreen,
-    navigationOptions: {
-      title: 'Forgot Password',
-      header: authHeader
-    }
+    navigationOptions: nestingHeaders('Forgot Password')
+
   }
 }, {
   headerMode: 'screen'
@@ -92,7 +79,7 @@ const header = ({ state, navigate }) => {
   );
 
   let title = (
-    <Text style={{fontSize: 20, fontFamily: 'QuicksandBold-Regular', color: '#00562E', paddingLeft: 10}}>{(state.routeName != 'Dashboard') ? state.routeName : ''}</Text>
+    <Text style={{fontSize: 20, fontFamily: 'QuicksandBold-Regular', color: '#00562E', paddingLeft: 20}}>{(state.routeName != 'Dashboard') ? state.routeName : ''}</Text>
   );
 
   style = {
@@ -102,31 +89,6 @@ const header = ({ state, navigate }) => {
 
   return { left, title, style};
 };
-
-const goBackHeader  = ({ goBack }) => {
-  // The navigation prop has functions like setParams, goBack, and navigate.
-  let left = (
-    <Icon  name="back"
-           size={32}
-           style={{marginLeft: 5, padding: 10}}
-           onPress={() => {
-               goBack()
-                }}
-    />
-  );
-
-  let title = (
-    <Text style={{fontSize: 20, fontFamily: 'QuicksandBold-Regular', color: '#00562E'}}>Categories</Text>
-  );
-
-  style = {
-    height: 70,
-    backgroundColor: '#ffffff'
-  };
-
-  return { left, title, style};
-};
-
 
 const DashboardStack = StackNavigator({
   Dashboard: {
@@ -180,9 +142,7 @@ const CategoriesStack = StackNavigator({
   },
   SubCategories: {
     screen: SubCategoriesScreen,
-    navigationOptions: {
-      header: goBackHeader,
-    }
+    navigationOptions: nestingHeaders('Categories')
   }
 
 });
@@ -196,21 +156,15 @@ const SettingsStack = StackNavigator({
   },
   ChangePassword: {
     screen: ChangePasswordScreen,
-    navigationOptions: {
-      header: header
-    }
+    navigationOptions: nestingHeaders('Change Password')
   },
   AccountSettings: {
     screen: AccountSettingsScreen,
-    navigationOptions: {
-      header: header
-    }
+    navigationOptions: nestingHeaders('Account Settings')
   },
   PersonalInformation: {
     screen: PersonalInformationScreen,
-    navigationOptions: {
-      header: header
-    }
+    navigationOptions: nestingHeaders('Personal Information')
   }
 });
 

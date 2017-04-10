@@ -26,10 +26,9 @@ export const SubCategoryStyles = StyleSheet.create({
   customIconText : {
     color: '#ffffff',
     fontSize: 20,
-    flex : 1,
-    paddingRight: 10,
     textAlign : 'right',
-    fontFamily: 'QuicksandBold-Regular'
+    fontFamily: 'QuicksandBold-Regular',
+      flex : 5
   },
 
   categoryChild: {

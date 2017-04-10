@@ -57,6 +57,9 @@ export const SubCategoryStyles = StyleSheet.create({
   categoryChildren :{
       fontFamily: 'QuicksandBook-Regular',
   },
+    noCategoryChildren:{
+    alignItems:'center',
+    },
     subCategoryChildren :{
         flex : 1,
         paddingHorizontal:20,

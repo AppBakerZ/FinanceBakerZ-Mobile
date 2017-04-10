@@ -23,7 +23,7 @@ class SubCategory extends Component {
             </View>
           )})
     }else{
-      return <Text style={SubCategoryStyles.categoryChildren}>No categories</Text>
+      return <View style={[SubCategoryStyles.subCategoryChildren, SubCategoryStyles.noCategoryChildren]}><Text style={SubCategoryStyles.categoryChildren}>No categories</Text></View>
     }
   }
   render(){

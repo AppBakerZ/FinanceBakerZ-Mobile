@@ -9,7 +9,6 @@ import {currencyStandardFormat, loggedUserCurrency, alterIconName} from 'Finance
 import CurrencyIcon from 'FinanceBakerZ/src/icons/CurrencyIcon';
 import Loader from 'FinanceBakerZ/src/components/loader/Loader';
 
-
 const theme = getTheme();
 
 class Accounts extends Component {
@@ -20,6 +19,9 @@ class Accounts extends Component {
       loading: true
     };
     this.getAvailableBalance = this.getAvailableBalance.bind(this);
+  }
+
+  componentWillReceiveProps(props){
     props.accounts.forEach(account => this.getAvailableBalance([account._id]))
   }
 
@@ -27,7 +29,7 @@ class Accounts extends Component {
     accounts = accounts || [];
     Meteor.call('statistics.availableBalance', {accounts}, (err, ab) => {
       this.setState({availableBalance: [...this.state.availableBalance, ab ? ab : 0]});
-      this.state.availableBalance.length == this.props.accounts.length ? this.setState({loading: false}) : ''
+      this.state.availableBalance.length == this.props.accounts.length ? this.setState({loading: false}) : false
     });
   }
 
@@ -37,7 +39,7 @@ class Accounts extends Component {
       return(
         <View style={[theme.cardStyle, AccountsStyles.card]} key={i} elevation={3}>
           <View style={AccountsStyles.imgBox}>
-            <BankIcon name ={icon_name} size={50} />
+            <BankIcon name ={icon_name} size={45} />
           </View>
           <View style={AccountsStyles.detailBox}>
             <Text style={AccountsStyles.text}>{icon_name.split('-').map(bankName => bankName  + ' ')}</Text>

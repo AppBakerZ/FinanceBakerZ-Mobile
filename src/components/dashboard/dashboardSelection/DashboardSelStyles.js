@@ -50,9 +50,7 @@ export const DashboardSelStyles = StyleSheet.create({
   },
 
   DbSelectionCardTagCon: {
-    flex: 1,
     flexWrap: 'wrap'
-
   },
 
   DbSelectionCardTag: {
@@ -73,6 +71,7 @@ export const DashboardSelStyles = StyleSheet.create({
   },
 
   DbSelectionAccountsCon: {
+    flexWrap: 'wrap',
     flexDirection: 'row',
     height: 35
   },

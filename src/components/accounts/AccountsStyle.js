@@ -1,20 +1,13 @@
 import {StyleSheet} from 'react-native';
 
 export const AccountsStyles = StyleSheet.create({
-  box: {
-    height: 150,
-    marginTop: 20,
-    marginLeft: 20,
-    marginRight:20,
-    borderColor: '#cdcdcd',
-    borderWidth: 1,
-    flexDirection: 'row',
-  },
+
   imgBox: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'flex-start'
   },
+
   detailBox: {
     flex: 1.5,
     paddingLeft: 15
@@ -24,6 +17,7 @@ export const AccountsStyles = StyleSheet.create({
     fontFamily: 'QuicksandBold-Regular',
     color: 'black'
   },
+
   amount: {
 
     fontSize: 15,
@@ -35,17 +29,18 @@ export const AccountsStyles = StyleSheet.create({
   card: {
     flex: 1,
     padding : 18,
-    marginTop: 20,
-    marginLeft: 25,
-    marginRight: 25,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    marginVertical: 10
   },
+
   text: {
     fontFamily: 'QuicksandBook-Regular',
     color: '#696969'
   },
+
   scroll:{
-    flex :1
+    flex :1,
+    margin: 20
   },
 
   currencyAndAmount: {
@@ -59,6 +54,5 @@ export const AccountsStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   }
-
 
 });

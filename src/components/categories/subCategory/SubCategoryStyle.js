@@ -55,13 +55,10 @@ export const SubCategoryStyles = StyleSheet.create({
     height : null
   },
   categoryChildren :{
-    padding : 25,
-    borderWidth: 1,
-    borderTopColor: 'transparent',
-    borderLeftColor: '#cdcdcd',
-    borderBottomColor: '#cdcdcd',
-    borderRightColor: '#cdcdcd',
-    fontFamily: 'QuicksandBook-Regular'
+      padding : 25,
+      borderColor : '#cdcdcd' ,
+      borderWidth: 1,
+      fontFamily: 'QuicksandBook-Regular'
   },
   itemsText:{
     fontSize : 15

@@ -92,7 +92,7 @@ const header = ({ state, navigate }) => {
   );
 
   let title = (
-    <Text style={{fontSize: 20, fontFamily: 'QuicksandBold-Regular', color: '#00562E', paddingLeft: 10}}>{(state.routeName != 'Dashboard') ? state.routeName : ''}</Text>
+    <Text style={{fontSize: 20, fontFamily: 'QuicksandBold-Regular', color: '#00562E', paddingLeft: 15}}>{(state.routeName != 'Dashboard') ? state.routeName : ''}</Text>
   );
 
   style = {
@@ -108,6 +108,7 @@ const goBackHeader  = ({ goBack }) => {
   let left = (
     <Icon  name="back"
            size={32}
+           color={'#00562E'}
            style={{marginLeft: 5, padding: 10}}
            onPress={() => {
                goBack()
@@ -116,7 +117,7 @@ const goBackHeader  = ({ goBack }) => {
   );
 
   let title = (
-    <Text style={{fontSize: 20, fontFamily: 'QuicksandBold-Regular', color: '#00562E'}}>Categories</Text>
+    <Text style={{fontSize: 20, fontFamily: 'QuicksandBold-Regular', color: '#00562E', paddingLeft: 15}}>Categories</Text>
   );
 
   style = {

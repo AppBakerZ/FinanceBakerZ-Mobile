@@ -37,16 +37,12 @@ class AccountSettings extends Component {
         ];
     }
 
-    languageOrCurrency(seletedItem, name){
+    languageOrCurrency(seletedItem, name, iosModal){
         lanOrCurr = seletedItem.map((lanOrCurr, i) => {
             return <Picker.Item label = {lanOrCurr.label} value = {lanOrCurr.value} key = {i}/>;
         });
-        if(Platform.OS === 'ios'){
-            return(
-                <TouchableOpacity onPress={()=> this.refs.modal.open()}><Text>Dropdown</Text></TouchableOpacity>
-            )
-        } else {
-            return(
+        if(iosModal){
+            return (
                 <Picker
                     selectedValue={name == 'userCurrency'? this.state.userCurrency : this.state.languageSelected}
                     onValueChange={this.onChange.bind(this, name)}
@@ -54,6 +50,21 @@ class AccountSettings extends Component {
                     {lanOrCurr}
                 </Picker>
             )
+        } else {
+            if (Platform.OS === 'ios') {
+                return (
+                    <TouchableOpacity onPress={()=> this.refs.modal.open()}><Text>Dropdown</Text></TouchableOpacity>
+                )
+            } else {
+                return (
+                    <Picker
+                        selectedValue={name == 'userCurrency'? this.state.userCurrency : this.state.languageSelected}
+                        onValueChange={this.onChange.bind(this, name)}
+                        mode='dropdown'>
+                        {lanOrCurr}
+                    </Picker>
+                )
+            }
         }
     }
 
@@ -152,8 +163,8 @@ class AccountSettings extends Component {
                 </Image>
 
                 <Modal style={AccountSettingsStyle.modal} position={"bottom"} ref={"modal"} swipeArea={20}>
-                    <View>
-                        <Text>Hello World...!</Text>
+                    <View style = {[AccountSettingsStyle.pickerContainer]}>
+                        {this.languageOrCurrency(currencyIcon, 'userCurrency', true)}
                     </View>
                 </Modal>
             </ViewContainer>

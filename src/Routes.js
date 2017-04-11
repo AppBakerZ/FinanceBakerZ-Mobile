@@ -9,6 +9,7 @@ import ForgotPasswordScreen from 'FinanceBakerZ/src/screens/auth/ForgotPassword'
 import DashboardScreen, {DashboardTabNavigator} from 'FinanceBakerZ/src/screens/Dashboard';
 import DashboardSelection  from 'FinanceBakerZ/src/components/dashboard/dashboardSelection/DashboardSelection';
 import ProjectsScreen from 'FinanceBakerZ/src/screens/Projects';
+import ProjectSelectionScreen from 'FinanceBakerZ/src/components/projects/projectSelection/ProjectSelection';
 import TransactionsScreen from 'FinanceBakerZ/src/screens/Transactions';
 import AccountsScreen from 'FinanceBakerZ/src/screens/Accounts';
 import CategoriesScreen from 'FinanceBakerZ/src/screens/Categories';
@@ -101,18 +102,22 @@ const DashboardStack = StackNavigator({
     screen: DashboardSelection,
     navigationOptions: {
     }
-  }
+  },
 }, {
   mode: 'modal'
 });
 
 const ProjectsStack = StackNavigator({
-  Projects: {
-    screen: ProjectsScreen,
-    navigationOptions: {
-      header: header
+    Projects: {
+        screen: ProjectsScreen,
+        navigationOptions: {
+            header: header
+        }
+    },
+    ProjectSelection: {
+        screen: ProjectSelectionScreen,
+        navigationOptions: nestingHeaders('Selection'),
     }
-  }
 });
 
 const TransactionsStack = StackNavigator({
@@ -144,6 +149,7 @@ const CategoriesStack = StackNavigator({
     screen: SubCategoriesScreen,
     navigationOptions: nestingHeaders('Categories')
   }
+
 
 });
 

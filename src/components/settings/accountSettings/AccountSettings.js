@@ -163,7 +163,7 @@ class AccountSettings extends Component {
                 </Image>
 
                 <Modal style={AccountSettingsStyle.modal} position={"bottom"} ref={"modal"} swipeArea={20}>
-                    <View style = {[AccountSettingsStyle.pickerContainer]}>
+                    <View style = {[AccountSettingsStyle.modalViewContainer]}>
                         {this.languageOrCurrency(currencyIcon, 'userCurrency', true)}
                     </View>
                 </Modal>

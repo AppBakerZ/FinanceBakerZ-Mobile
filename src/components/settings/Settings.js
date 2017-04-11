@@ -17,7 +17,6 @@ class Settings extends Component {
     render() {
         const { navigate } = this.props.navigation;
         let { user } = this.props;
-        console.log('User', user);
         return (
             <ViewContainer>
                 <Image source = {require('FinanceBakerZ/src/images/app-background.png')} style={SettingsStyles.backgroundImage}>
@@ -27,11 +26,8 @@ class Settings extends Component {
                         <Text style = {SettingsStyles.headingText}>Personal Information</Text>
                         <Text style = {SettingsStyles.contentText}>User Name: {user.profile.fullName}</Text>
                         <Text style = {SettingsStyles.contentText}>Contact Number: {user.profile.contactNumber ? user.profile.contactNumber : 'Not Available'}</Text>
-                        {!Meteor.user().emails ?
-                            <Text style = {SettingsStyles.contentText}>User Name: {user.username}</Text>
-                            :
-                            <Text style = {SettingsStyles.contentText}>Email: {(user.emails ? user.emails.map(email => email.address + ' ') : 'Not Available')}</Text>
-                        }
+                        <Text style = {SettingsStyles.contentText}>Email: {user.emails ? user.emails[0].address : 'Not Available'}</Text>
+                        <Text style = {SettingsStyles.contentText}>User Name: {user.username ? user.username : 'Not Available'}</Text>
                         <Text style = {SettingsStyles.contentText}>Address: {user.profile.address ? user.profile.address : 'Not Available'}</Text>
                     </TouchableOpacity>
 

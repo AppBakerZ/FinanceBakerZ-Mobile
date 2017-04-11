@@ -1,4 +1,5 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native';
+let screen = Dimensions.get('window');
 
 export const AccountSettingsStyle = StyleSheet.create({
     backgroundImage: {
@@ -60,6 +61,10 @@ export const AccountSettingsStyle = StyleSheet.create({
     modal: {
         justifyContent: 'center',
         alignItems: 'center',
-        height: 200
+        height: 150
+    },
+    modalViewContainer: {
+        width: screen.width,
+        paddingHorizontal: 20
     }
 });

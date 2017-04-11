@@ -11,7 +11,6 @@ class PersonalInformation extends Component {
     constructor(props) {
         super(props);
         let { user } = this.props;
-        console.log('User', user);
         this.state = {
             username: user.username,
             name : user.profile.fullName,
@@ -21,7 +20,6 @@ class PersonalInformation extends Component {
             loading: false
         };
     }
-
     update() {
         const {name, number, email, address, username} = this.state;
         let info = {users: {name, number, email, address, username}};
@@ -52,7 +50,6 @@ class PersonalInformation extends Component {
 
     render() {
         const { navigate } = this.props.navigation;
-        //let { user } = this.props;
         return (
             <ViewContainer>
                 <Image source = {require('FinanceBakerZ/src/images/app-background.png')} style = {PersonalInformationStyle.backgroundImage}>
@@ -84,33 +81,32 @@ class PersonalInformation extends Component {
                             />
                         </View>
 
-                        {!Meteor.user().emails ?
-                            <View style={PersonalInformationStyle.borderBottom}>
-                                <Icon size={18} name="person" style={PersonalInformationStyle.inputIcon}></Icon>
-                                <TextInput
-                                    placeholder='User Name'
-                                    style={[PersonalInformationStyle.input]}
-                                    returnKeyType="next"
-                                    autoCorrect={false}
-                                    onChangeText={this.onChange.bind(this, 'username')}
-                                    underlineColorAndroid="transparent"
-                                    value={this.state.username}
-                                />
-                            </View>
-                            :
-                            <View style={PersonalInformationStyle.borderBottom}>
-                                <Icon size={18} name="email" style={PersonalInformationStyle.inputIcon}></Icon>
-                                <TextInput
-                                    placeholder='Email'
-                                    style={[PersonalInformationStyle.input]}
-                                    returnKeyType="next"
-                                    autoCorrect={false}
-                                    onChangeText={this.onChange.bind(this, 'email')}
-                                    underlineColorAndroid="transparent"
-                                    value={this.state.email}
-                                />
-                            </View>
-                        }
+                        <View style={PersonalInformationStyle.borderBottom}>
+                            <Icon size={18} name="email" style={PersonalInformationStyle.inputIcon}></Icon>
+                            <TextInput
+                                placeholder='Email'
+                                style={[PersonalInformationStyle.input]}
+                                returnKeyType="next"
+                                autoCorrect={false}
+                                onChangeText={this.onChange.bind(this, 'email')}
+                                underlineColorAndroid="transparent"
+                                value={this.state.email}
+                            />
+                        </View>
+
+                        <View style={PersonalInformationStyle.borderBottom}>
+                            <Icon size={18} name="person" style={PersonalInformationStyle.inputIcon}></Icon>
+                            <TextInput
+                                placeholder='User Name'
+                                style={[PersonalInformationStyle.input]}
+                                returnKeyType="next"
+                                autoCorrect={false}
+                                onChangeText={this.onChange.bind(this, 'username')}
+                                underlineColorAndroid="transparent"
+                                value={this.state.username}
+                            />
+                        </View>
+
                         <View style = {PersonalInformationStyle.borderBottom}>
                             <Icon size = {18} name = "location-on" style = {PersonalInformationStyle.inputIcon}></Icon>
                             <TextInput

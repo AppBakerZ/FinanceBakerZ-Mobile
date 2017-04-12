@@ -8,6 +8,7 @@ import { TabNavigator, TabView } from 'react-navigation';
 import Meteor, {createContainer} from 'react-native-meteor';
 import _ from 'underscore';
 import Loader from 'FinanceBakerZ/src/components/loader/Loader';
+import {alterName} from 'FinanceBakerZ/src/customLibrary';
 
 
 
@@ -15,22 +16,36 @@ class Transactions extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: props.transactions ? false : true
-    }
+    };
+    this.setDefaultAccounts = this.setDefaultAccounts.bind(this);
+  }
+
+  componentWillReceiveProps(props){
+    this.setDefaultAccounts(props.accounts)
+  }
+
+  setDefaultAccounts (accounts){
+    let multiple = [];
+    let bankAcc =  [];
+    accounts.forEach((account) => {
+      multiple.push(account._id);
+      bankAcc.push(alterName(account.bank));
+    });
+    this.setState({multiple, bankAcc}, () => console.log(this.state));
   }
 
 
   render() {
 
     const { navigate } = this.props.navigation;
-    let {incomes, expenses, transactions} = this.props;
-    let {loading} = this.state;
+    let {incomes, expenses, transactions, transactionsLoading} = this.props;
+    let {multiple, bankAcc} = this.state;
 
-    if(!loading){
+    if(!transactionsLoading){
       return(
         <ViewContainer>
           <View style={TransactionsStyles.filterContainer}>
-            <TouchableOpacity style={TransactionsStyles.filterMainContainer}  activeOpacity={0.7} onPress={() => navigate('Selection')} >
+            <TouchableOpacity style={TransactionsStyles.filterMainContainer}  activeOpacity={0.7} onPress={() => navigate('Selection', {multiple, bankAcc})} >
               <View style={TransactionsStyles.filterContainerTxt}>
                 <Text style={TransactionsStyles.text}>Accounts: All </Text>
                 <Text style={TransactionsStyles.text}>This Week: Mar 10 to 20</Text>
@@ -88,14 +103,20 @@ Transactions.propTypes = {
 };
 
 export default createContainer(() => {
-  Meteor.subscribe('incomes', 100);
+
+
+  transactionsHandle = Meteor.subscribe('incomes', 100);
   Meteor.subscribe('expenses', 100);
+  Meteor.subscribe('accounts');
 
   let incomes, expenses;
   incomes =  Meteor.collection('incomes').find({}).reverse();
   expenses = Meteor.collection('expenses').find({}).reverse();
+  const transactionsLoading = !transactionsHandle.ready();
 
   return {
+    transactionsLoading,
+    accounts: Meteor.collection('accounts').find({}),
     incomes: incomes.reverse(),
     expenses: expenses.reverse(),
     transactions: _.sortBy(incomes.concat(expenses), function(transaction){return transaction.receivedAt || transaction.spentAt }).reverse()

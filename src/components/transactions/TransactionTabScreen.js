@@ -22,18 +22,19 @@ export default class TransactionTabScreen extends  Component {
 
   renderRow(rowData){
     return(
-      <View style={TransactionsStyles.listViewContainer}>
+      <TouchableOpacity style={TransactionsStyles.listViewContainer} activeOpacity={0.7}>
         <View style={TransactionsStyles.listViewContentLeft}>
-          <Icon name={rowData.category ? 'left-arrow' : 'right-arrow'} color={rowData.category ?  'red' : 'green'} style={TransactionsStyles.icons}></Icon>
+          <Icon name={rowData.category ? 'left-arrow' : 'right-arrow'} color={rowData.category ?  '#C81113' : '#008041'} style={TransactionsStyles.icons}></Icon>
           <Text style={TransactionsStyles.iconText}>{rowData.category ?  capitalizeFirstLetter(rowData.category.name) : capitalizeFirstLetter(rowData.type)}</Text>
         </View>
         <View style={TransactionsStyles.listViewContentRight}>
           <CurrencyIcon style={TransactionsStyles.contentCurrIcon} size={14} name={alterIconName(loggedUserCurrency())} />
           <Text style={TransactionsStyles.contentRightText}>{currencyStandardFormat(rowData.amount)}</Text>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   }
+
 
 
   render(){
@@ -46,8 +47,6 @@ export default class TransactionTabScreen extends  Component {
           renderRow={this.renderRow.bind(this)}
         />
       );
-    }else{
-      return <View style={TransactionsStyles.loadingCon}><Loader size={35} color="#008142" /></View>
     }
   }
 

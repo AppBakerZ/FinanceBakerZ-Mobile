@@ -2,28 +2,40 @@ import {StyleSheet} from 'react-native';
 
 export const ProjectsStyles = StyleSheet.create({
 
+    filterContainer : {
+        flex : 1,
+        backgroundColor : '#dadadada',
+        justifyContent : 'center',
+    },
 
   listViewContainer: {
-    flex: 1,
-    flexDirection: 'row'
+      flex : 8,
   },
+    filterDiv:{
+      flexDirection : 'row',
+    },
+    filterText:{
+     flex : 7,
+        marginLeft : 25
+    },
+    filterIcon:{
+        flex : 1,
+        alignItems : 'center',
+        justifyContent : 'center'
+    },
 
   listViewContentLeft: {
     flex: 1,
     flexDirection: 'row',
-    paddingTop: 20,
-    paddingBottom: 20,
+    paddingTop: 30,
+    paddingBottom: 30,
     alignItems: 'center',
-    borderBottomColor: '#DDDDDD',
-    borderBottomWidth: 1
   },
 
   listViewContentRight:{
     flex: 1,
     justifyContent: 'center',
     alignItems: 'flex-end',
-    borderBottomColor: '#DDDDDD',
-    borderBottomWidth: 1
   },
 
   icons: {
@@ -33,12 +45,23 @@ export const ProjectsStyles = StyleSheet.create({
 
   iconText: {
     flex: 3,
-    fontFamily: 'QuicksandBook-Regular'
+    fontFamily: 'QuicksandBook-Regular',
+      fontSize : 15
   },
 
   contentRightText: {
     paddingRight: 20,
-    fontFamily: 'QuicksandBook-Regular'
-  }
+    fontFamily: 'QuicksandBook-Regular',
+      fontSize : 15
+
+  },
+    listViewContaineritem:{
+        borderColor : '#cdcdcd',
+        borderWidth: 1,
+        borderTopColor : '#ffffff',
+    },
+    BankText:{
+        fontFamily: 'QuicksandBook-Regular',
+    }
 
 });

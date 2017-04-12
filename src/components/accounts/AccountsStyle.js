@@ -19,7 +19,6 @@ export const AccountsStyles = StyleSheet.create({
   },
 
   amount: {
-
     fontSize: 15,
     fontFamily: 'QuicksandBold-Regular',
     color: 'black',
@@ -40,7 +39,7 @@ export const AccountsStyles = StyleSheet.create({
 
   scroll:{
     flex :1,
-    margin: 20
+    padding: 20
   },
 
   currencyAndAmount: {
@@ -53,6 +52,14 @@ export const AccountsStyles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover',
+    width: null,
+    height: null
+  },
+  fabButtonBg: {
+    backgroundColor: '#008142'
   }
-
 });

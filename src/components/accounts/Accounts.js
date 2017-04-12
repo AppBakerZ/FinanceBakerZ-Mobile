@@ -8,6 +8,7 @@ import { getTheme } from 'react-native-material-kit';
 import {currencyStandardFormat, loggedUserCurrency, alterIconName} from 'FinanceBakerZ/src/customLibrary';
 import CurrencyIcon from 'FinanceBakerZ/src/icons/CurrencyIcon';
 import Loader from 'FinanceBakerZ/src/components/loader/Loader';
+import FabButton from 'FinanceBakerZ/src/components/button/FabButton';
 
 const theme = getTheme();
 
@@ -57,11 +58,14 @@ class Accounts extends Component {
 
     return (
       <ViewContainer>
-        {!this.state.loading ? <ScrollView style={AccountsStyles.scroll}>
+        <Image source = {require('FinanceBakerZ/src/images/app-background.png')} style={AccountsStyles.backgroundImage}>
+          {!this.state.loading ? <ScrollView style={AccountsStyles.scroll}>
             {
               this.accounts()
             }
           </ScrollView>: <View style={AccountsStyles.loaderView}><Loader size={35} color="#008142" /></View>}
+        </Image>
+        <FabButton iconName="add" iconColor="#fff" style={AccountsStyles.fabButtonBg}/>
       </ViewContainer>
     );
   }

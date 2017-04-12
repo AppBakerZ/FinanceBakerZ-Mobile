@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Button, View, Text, Modal, DatePickerAndroid, TouchableWithoutFeedback, TouchableOpacity, DatePickerIOS, Platform } from 'react-native';
+import { Button, View, Text, DatePickerAndroid, TouchableWithoutFeedback, TouchableOpacity, DatePickerIOS, Platform } from 'react-native';
 import { DashboardSelStyles } from 'FinanceBakerZ/src/components/dashboard/dashboardSelection/DashboardSelStyles';
 import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {formatDate} from 'FinanceBakerZ/src/customLibrary';
+import Modal from 'react-native-modalbox';
 
 
 
@@ -69,35 +70,9 @@ export default class DashboardSelectionTab extends Component {
   }
 
 
-  setModalVisible (visible, index, name){
-    this.setState({modalVisible: true, iosRange: name, iosIndex: index});
-    //this.customDateModal();
-  };
-
-  customDateModal (){
-    return (
-      <Modal
-        animationType={"slide"}
-        transparent={false}
-        visible={this.state.modalVisible}
-        onRequestClose={() => {}}
-      >
-        <View style={DashboardSelStyles.pickerIOS}>
-          <DatePickerIOS
-            date={new Date(this.findDate.bind(this, this.state.iosRange))}
-            mode="date"
-            onDateChange={this.onDateChange.bind(this)}
-          />
-        </View>
-        <View style={DashboardSelStyles.modalFooter}>
-          <TouchableOpacity style={DashboardSelStyles.btn}  onPress={() => {
-              this.setState({modalVisible: false});
-            }}>
-            <Text style={DashboardSelStyles.modalText}>Close</Text>
-          </TouchableOpacity>
-        </View>
-      </Modal>
-    );
+  setModalVisible (index, name){
+    this.refs.modal.open();
+   this.setState({modalVisible: true, iosRange: name, iosIndex: index});
   };
 
 
@@ -122,17 +97,25 @@ export default class DashboardSelectionTab extends Component {
           <ViewContainer style={DashboardSelStyles.tabContainerCustom}>
             <TouchableWithoutFeedback>
               <TouchableOpacity style={DashboardSelStyles.textCon}
-                                onPress={(Platform.OS === 'ios' ? this.setModalVisible.bind(this, true, index, 'customDateTo') : this.showPicker.bind(this, 'customDateTo', {date: this.findDate('customDateTo'), mode: 'calendar', maxDate: (() => {let d = new Date(); return d.setDate(d.getDate() - 1)})()}, index))}>
+                                onPress={(Platform.OS === 'ios' ? this.setModalVisible.bind(this, index, 'customDateTo') : this.showPicker.bind(this, 'customDateTo', {date: this.findDate('customDateTo'), mode: 'calendar', maxDate: (() => {let d = new Date(); return d.setDate(d.getDate() - 1)})()}, index))}>
                 <Text style={DashboardSelStyles.text}>TO</Text>
               </TouchableOpacity>
             </TouchableWithoutFeedback>
             <TouchableWithoutFeedback>
               <TouchableOpacity style={DashboardSelStyles.textCon}
-                                onPress={(Platform.OS === 'ios' ? this.setModalVisible.bind(this, true, index + 1, 'customDateFrom') : this.showPicker.bind(this, 'customDateFrom', {date: this.findDate('customDateFrom'), mode: 'calendar', maxDate: new Date()}, index+1))}>
+                                onPress={(Platform.OS === 'ios' ? this.setModalVisible.bind(this, index + 1, 'customDateFrom') : this.showPicker.bind(this, 'customDateFrom', {date: this.findDate('customDateFrom'), mode: 'calendar', maxDate: new Date()}, index+1))}>
                 <Text style={DashboardSelStyles.text}>FROM</Text>
               </TouchableOpacity>
             </TouchableWithoutFeedback>
-            {this.customDateModal()}
+            <Modal style={DashboardSelStyles.modal} position={"bottom"} ref={"modal"} swipeArea={20}>
+              <View style={DashboardSelStyles.renderListCon}>
+                <DatePickerIOS
+                  date={new Date(this.findDate.bind(this, this.state.iosRange))}
+                  mode="date"
+                  onDateChange={this.onDateChange.bind(this)}
+                />
+              </View>
+            </Modal>
           </ViewContainer>
         );
       }
@@ -160,17 +143,13 @@ export default class DashboardSelectionTab extends Component {
       </ViewContainer>
     );
 
-    const Custom = () => (
-      <ViewContainer>
-        {getData('CUSTOM', 6)}
-      </ViewContainer>
-    );
+
 
     switch (state.routeName){
       case 'DAY': return <Day />;
       case 'WEEK': return <Week />;
       case 'MONTH': return <Month />;
-      case 'CUSTOM': return <Custom />;
+      case 'CUSTOM': return <ViewContainer>{getData('CUSTOM', 6)}</ViewContainer>;
     }
   }
 }

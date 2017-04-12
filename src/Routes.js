@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button, Image, Text, View} from 'react-native';
+import {Button, Image, Text, View, Platform} from 'react-native';
 
 
 import LoginScreen from 'FinanceBakerZ/src/screens/auth/Login';
@@ -31,12 +31,13 @@ let nestingHeaders  = (routeName) => {
     title: routeName,
     header: {
       titleStyle: {
-        fontWeight: '200',
+        fontWeight: Platform.OS === 'ios' ? '500' : '200',
         fontFamily: 'QuicksandBold-Regular',
         fontSize: 20
       },
       style: {
-        height: 70
+        height: 70,
+        backgroundColor: '#fff'
       },
       tintColor: '#00562E'
     }
@@ -175,7 +176,7 @@ const SettingsStack = StackNavigator({
   },
   PersonalInformation: {
     screen: PersonalInformationScreen,
-    navigationOptions: nestingHeaders('Personal Information')
+    navigationOptions: nestingHeaders('Personal Info')
   }
 });
 

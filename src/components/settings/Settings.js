@@ -4,6 +4,7 @@ import { SettingsStyles } from 'FinanceBakerZ/src/components/settings/SettingsSt
 import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
 import FabButton from 'FinanceBakerZ/src/components/button/FabButton';
 import { MKRadioButton } from 'react-native-material-kit';
+import { capitalizeFirstLetter } from 'FinanceBakerZ/src/customLibrary';
 
 import Meteor, { createContainer } from 'react-native-meteor';
 
@@ -36,7 +37,7 @@ class Settings extends Component {
                         onPress = {() => navigate('AccountSettings')}>
                         <Text style = {SettingsStyles.headingText}>Accout Settings</Text>
                         <Text style = {SettingsStyles.contentText}>Currency: {user.profile.currency.label ? user.profile.currency.label : 'Not Available'}</Text>
-                        <Text style = {SettingsStyles.contentText}>Language: {user.profile.language ? user.profile.language : 'Not Available'}</Text>
+                        <Text style = {SettingsStyles.contentText}>Language: {user.profile.language ? capitalizeFirstLetter(user.profile.language) : 'Not Available'}</Text>
                         <View style = {SettingsStyles.row}>
                             <Text style = {SettingsStyles.contentText}>Email Notification:</Text>
 

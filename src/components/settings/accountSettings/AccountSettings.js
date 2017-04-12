@@ -23,6 +23,7 @@ class AccountSettings extends Component {
             userCurrency: userInfo.profile.currency ? userInfo.profile.currency.value : '',
             currencyObj: userInfo.profile.currency.label,
             languageSelected: userInfo.profile.language || '',
+            languageName : '',
             check2: userInfo.profile.emailNotification,
             loading: false
         };
@@ -35,6 +36,12 @@ class AccountSettings extends Component {
             { value: 'hi', label: 'Hindi'},
             { value: 'sp', label: 'Spanish'}
         ];
+    }
+
+    componentWillMount(){
+        this.setState({
+            languageName : this.setCurrency(this.state.languageSelected).label
+        })
     }
 
     languageOrCurrency(seletedItem, name, iosModal){
@@ -53,7 +60,14 @@ class AccountSettings extends Component {
         } else {
             if (Platform.OS === 'ios') {
                 return (
-                    <TouchableOpacity onPress={()=> this.refs.modal.open()}><Text>Dropdown</Text></TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={()=> name == 'userCurrency' ? this.refs.modalForCurrency.open() : this.refs.modalForLanguage.open()}
+                        style={AccountSettingsStyle.dropdownButton}>
+                        <Text style = {[AccountSettingsStyle.notificationText, AccountSettingsStyle.dropdownText]}>
+                            {name == 'userCurrency'? this.state.currencyObj : this.state.languageName}
+                        </Text>
+                        <Icon size = {22} name = "arrow-drop-down"></Icon>
+                    </TouchableOpacity>
                 )
             } else {
                 return (
@@ -68,8 +82,8 @@ class AccountSettings extends Component {
         }
     }
 
-    setCurrency(currency){
-        return currencyItem = _.findWhere(currencyIcon, {value: currency});
+    setCurrency(currency, name){
+        return currencyItem = _.findWhere(name === 'userCurrency' ? currencyIcon : this.languages, {value: currency});
     }
 
     emailNotify(){
@@ -83,7 +97,7 @@ class AccountSettings extends Component {
     }
 
     update() {
-        currencyObj = this.setCurrency(this.state.userCurrency);
+        currencyObj = this.setCurrency(this.state.userCurrency, 'userCurrency');
         const {languageSelected} = this.state;
         let accountinfo = {settings: {currencyObj, languageSelected}};
         this.setState({loading: true});
@@ -102,9 +116,18 @@ class AccountSettings extends Component {
     }
 
     onChange (state, name) {
-        this.setState({
-            [state] : name
-        });
+        if(state === 'userCurrency'){
+            this.setState({
+                [state] : name,
+                currencyObj : this.setCurrency(name, 'userCurrency').label
+
+            });
+        } else{
+            this.setState({
+                [state] : name,
+                languageName : this.setCurrency(name).label
+            });
+        }
     }
 
     render() {
@@ -122,7 +145,7 @@ class AccountSettings extends Component {
 
                             <View style = {[AccountSettingsStyle.borderBottom, AccountSettingsStyle.pickerContainer]}>
                                 <Text>Select language</Text>
-                                {this.languageOrCurrency.bind(this, this.languages, 'languageSelected')()}
+                                {this.languageOrCurrency(this.languages, 'languageSelected')}
                             </View>
 
                             <View style = {AccountSettingsStyle.row}>
@@ -162,9 +185,15 @@ class AccountSettings extends Component {
                     </View>
                 </Image>
 
-                <Modal style={AccountSettingsStyle.modal} position={"bottom"} ref={"modal"} swipeArea={20}>
+                <Modal style={AccountSettingsStyle.modal} position={"bottom"} ref={"modalForCurrency"} swipeArea={20}>
                     <View style = {[AccountSettingsStyle.modalViewContainer]}>
                         {this.languageOrCurrency(currencyIcon, 'userCurrency', true)}
+                    </View>
+                </Modal>
+
+                <Modal style={AccountSettingsStyle.modal} position={"bottom"} ref={"modalForLanguage"} swipeArea={20}>
+                    <View style = {[AccountSettingsStyle.modalViewContainer]}>
+                        {this.languageOrCurrency(this.languages, 'languageSelected', true)}
                     </View>
                 </Modal>
             </ViewContainer>

@@ -20,17 +20,6 @@ export const AccountSettingsStyle = StyleSheet.create({
         backgroundColor: '#00562f',
         padding: 30
     },
-    input: {
-        fontFamily: 'QuicksandBook-Regular',
-        paddingLeft: 60,
-        fontSize: 15,
-        height: 48
-    },
-    inputIcon:{
-        position: 'absolute',
-        top: 14,
-        left: 25
-    },
     notificationIcon: {
         marginTop: 12,
         marginLeft: 25,
@@ -61,10 +50,19 @@ export const AccountSettingsStyle = StyleSheet.create({
     modal: {
         justifyContent: 'center',
         alignItems: 'center',
-        height: 150
+        height: 200
     },
     modalViewContainer: {
         width: screen.width,
         paddingHorizontal: 20
+    },
+    dropdownButton: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between'
+    },
+    dropdownText: {
+        fontWeight: '500',
+        color: '#000'
     }
 });

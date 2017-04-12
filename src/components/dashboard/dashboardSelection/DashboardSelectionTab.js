@@ -16,7 +16,6 @@ export default class DashboardSelectionTab extends Component {
       modalVisible: false
     };
     this.findDate = this.findDate.bind(this);
-    this.customDateModal = this.customDateModal.bind(this);
   }
 
   // For Android

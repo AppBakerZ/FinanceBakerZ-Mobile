@@ -21,28 +21,8 @@ import AccountSettingsScreen from 'FinanceBakerZ/src/components/settings/account
 import PersonalInformationScreen from 'FinanceBakerZ/src/components/settings/personalInformation/PersonalInformation';
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
 import DrawerItems, {DrawerItemIcon} from 'FinanceBakerZ/src/components/drawerItems/DrawerItems';
-
-
 import { StackNavigator, DrawerNavigator } from 'react-navigation';
 
-
-let nestingHeaders  = (routeName) => {
-  return {
-    title: routeName,
-    header: {
-      titleStyle: {
-        fontWeight: Platform.OS === 'ios' ? '500' : '200',
-        fontFamily: 'QuicksandBold-Regular',
-        fontSize: 20
-      },
-      style: {
-        height: 70,
-        backgroundColor: '#fff'
-      },
-      tintColor: '#00562E'
-    }
-  }
-};
 
 export const Auth = StackNavigator({
   Login: {
@@ -61,7 +41,6 @@ export const Auth = StackNavigator({
   ForgotPassword: {
     screen: ForgotPasswordScreen,
     navigationOptions: nestingHeaders('Forgot Password')
-
   }
 }, {
   headerMode: 'screen'
@@ -93,6 +72,36 @@ const header = ({ state, navigate }) => {
   return { left, title, style};
 };
 
+function nestingHeaders(routeName, rightIconVisible) {
+
+  let header = ({state}) => {
+    let right = rightIconVisible ? (<Icon
+        name="checked"
+        size={28}
+        style={{paddingRight: 15}}
+        onPress={() => {state.params.submit()}}
+      />) : <Text></Text>;
+    return {
+      right,
+      titleStyle: {
+        fontWeight: Platform.OS === 'ios' ? '500' : '200',
+        fontFamily: 'QuicksandBold-Regular',
+        fontSize: 20
+      },
+      style: {
+        height: 70,
+        backgroundColor: '#fff'
+      },
+      tintColor: '#00562E'
+    }
+  };
+  return {
+    title: routeName,
+    header
+  }
+}
+
+
 const DashboardStack = StackNavigator({
   Dashboard: {
     screen: DashboardScreen,
@@ -102,24 +111,23 @@ const DashboardStack = StackNavigator({
   },
   Selection: {
     screen: DashboardSelection,
-    navigationOptions: {
-    }
+    navigationOptions: nestingHeaders('Selection', true)
   },
 }, {
   mode: 'modal'
 });
 
 const ProjectsStack = StackNavigator({
-    Projects: {
-        screen: ProjectsScreen,
-        navigationOptions: {
-            header: header
-        }
-    },
-    ProjectSelection: {
-        screen: ProjectSelectionScreen,
-        navigationOptions: nestingHeaders('Selection'),
+  Projects: {
+    screen: ProjectsScreen,
+    navigationOptions: {
+      header: header
     }
+  },
+  ProjectSelection: {
+    screen: ProjectSelectionScreen,
+    navigationOptions: nestingHeaders('Selection', true)
+  }
 });
 
 const TransactionsStack = StackNavigator({
@@ -131,7 +139,7 @@ const TransactionsStack = StackNavigator({
   },
   Selection: {
     screen: TransactionSelection,
-    navigationOptions: nestingHeaders('Selection')
+    navigationOptions: nestingHeaders('Selection', true)
   }
 });
 
@@ -155,8 +163,6 @@ const CategoriesStack = StackNavigator({
     screen: SubCategoriesScreen,
     navigationOptions: nestingHeaders('Categories')
   }
-
-
 });
 
 const SettingsStack = StackNavigator({

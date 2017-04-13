@@ -5,15 +5,25 @@ import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
 
 export default class ProjectSelectionScreen extends Component{
 
-    constructor(){
-    super()
-    }
+  constructor(props){
+    super(props);
+    this.submit = this.submit.bind(this);
+  }
 
-    render(){
+  componentDidMount() {
+    this.props.navigation.setParams({ submit: this.submit }); // setting submit function from Routes to this.submit function
+  }
 
-        return(
+  submit(){
+    alert('Im clicked!')
+  }
 
-           <Text>asdfadsf</Text>
-        );
-    }
+
+
+  render(){
+
+    return(
+      <Text>asdfadsf</Text>
+    );
+  }
 }

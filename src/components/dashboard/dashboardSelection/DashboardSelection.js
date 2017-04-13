@@ -14,40 +14,6 @@ let STATE;
 
 export default class DashboardSelection extends Component{
 
-  static navigationOptions = {
-    header: ({ state, goBack }) => {
-      let left = (
-        <Icon  name="back"
-               size={32}
-               style={{marginLeft: 5, padding: 10}}
-               onPress={() => {
-               goBack()
-                }}
-        />
-      );
-      let title = (
-        <Text style={{fontSize: 20, fontFamily: 'QuicksandBold-Regular', color: '#00562E'}}>{state.routeName}</Text>
-      );
-      let right = (
-        <Icon  name="checked"
-               color="black"
-               size={32}
-               style={{padding: 10}}
-               onPress={() => {
-                 let accounts = STATE.multiple.length ? STATE.multiple : state.params[3];
-                 state.params[1]({childState: STATE}); // updating Dashboard state
-                 setTimeout(() => state.params[2](accounts)); // calling updateByAccount from Dashboard
-                 goBack();
-                }}
-        />
-      );
-      style = {
-        height: 70,
-        backgroundColor: '#ffffff'
-      };
-      return { left, title, right, style};
-    },
-  };
 
   constructor(props){
     super(props);
@@ -75,6 +41,7 @@ export default class DashboardSelection extends Component{
       updateDates: (date) => {this.setState({date})}
     };
     STATE = this.state;
+    this.submit = this.submit.bind(this);
   }
 
 
@@ -95,6 +62,19 @@ export default class DashboardSelection extends Component{
       }
       this.setState({bankList: data});
     }
+  }
+
+  componentDidMount() {
+    this.props.navigation.setParams({ submit: this.submit }); // setting submit function from Routes to this.submit function
+  }
+
+  // invokes when tapping checked-icon on header
+  submit(){
+    let {state, goBack} = this.props.navigation;
+    let accounts = STATE.multiple.length ? STATE.multiple : state.params[3]; // setting all accounts ids if user didn't select any account
+    state.params[1]({childState: STATE}); // updating Dashboard state
+    setTimeout(() => state.params[2](accounts)); // calling updateByAccount from Dashboard
+    goBack();
   }
 
 

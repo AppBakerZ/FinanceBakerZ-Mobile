@@ -12,8 +12,8 @@ export default class DashboardSelectionTab extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      date : props.screenProps[0],
-      modalVisible: false
+      date : props.screenProps[0], // dates from DashboardSelection
+      iosRange: 'customDateTo'
     };
     this.findDate = this.findDate.bind(this);
   }
@@ -27,9 +27,7 @@ export default class DashboardSelectionTab extends Component {
         newState[stateKey] = 'dismissed';
       } else {
         let date = new Date(year, month, day);
-        newState[stateKey] = date;
         this.selectCheckBox(index, date, stateKey);
-        this.setState(newState);
       }
     } catch ({code, message}) {
       console.warn(`Error in example '${stateKey}': `, message);
@@ -38,14 +36,17 @@ export default class DashboardSelectionTab extends Component {
 
   //For iOS
   onDateChange(date){
-    this.setState({[this.state.iosRange]: date});
     this.selectCheckBox(this.state.iosIndex, date, this.state.iosRange);
   }
+
+  setModalVisible (index, name){
+    this.refs.modal.open();
+    this.setState({iosRange: name, iosIndex: index});
+  };
 
   findDate(objName){
     return this.state.date.find(x => x.hasOwnProperty(objName))[objName];
   }
-
 
   selectCheckBox(index, text, stateKey){
     let date = this.state.date;
@@ -56,24 +57,14 @@ export default class DashboardSelectionTab extends Component {
         (index == arr.length - 1 ? arr[index - 1].checked = true :  arr[index + 1].checked = true);
       }
     });
-
     if(stateKey.length){
       date[index][stateKey] = text;
       text = '(' + formatDate({type: 'getCustomDate', date: text, format: 'MMM DD, YYYY'}) + ')';
     }
     date[index].selectedDate = text.match(m)[1];
-    this.props.screenProps[1](date);
-    this.setState({
-      modalVisible: false
-    });
+    this.setState({date: date});
+    this.props.screenProps[1](date); // calling updateDates from DashboardSelection
   }
-
-
-  setModalVisible (index, name){
-    this.refs.modal.open();
-   this.setState({modalVisible: true, iosRange: name, iosIndex: index});
-  };
-
 
 
   render() {
@@ -109,7 +100,7 @@ export default class DashboardSelectionTab extends Component {
             <Modal style={DashboardSelStyles.modal} position={"bottom"} ref={"modal"} swipeArea={20}>
               <View style={DashboardSelStyles.renderListCon}>
                 <DatePickerIOS
-                  date={new Date(this.findDate.bind(this, this.state.iosRange))}
+                  date={new Date(this.findDate(this.state.iosRange))}
                   mode="date"
                   onDateChange={this.onDateChange.bind(this)}
                 />
@@ -141,7 +132,6 @@ export default class DashboardSelectionTab extends Component {
         {getData('This Month ' + '(' + formatDate({type: 'startOf', duration: 'month', format: 'MMMM'}) + ')', 5)}
       </ViewContainer>
     );
-
 
 
     switch (state.routeName){

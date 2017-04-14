@@ -47,6 +47,8 @@ export default class TransactionTabScreen extends  Component {
           renderRow={this.renderRow.bind(this)}
         />
       );
+    }else{
+      return <View></View>
     }
   }
 

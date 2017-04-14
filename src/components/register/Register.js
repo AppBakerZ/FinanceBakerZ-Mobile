@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Image, Text, TextInput, ScrollView, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
+import {Gravatar, GravatarApi} from 'react-native-gravatar';
 
 import { RegisterStyles } from 'FinanceBakerZ/src/components/register/RegisterStyle'
 import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
@@ -28,6 +29,15 @@ export default class Register extends Component {
     this.setState({[stateName]: val});
   }
 
+  getImgFromGravatar(email){
+    let options = {
+      email: email,
+      parameters: { "size": "100", "d" : "mm"},
+      secure: true
+    };
+    return GravatarApi.imageUrl(options);
+  }
+
   onSubmit(){
     this.setState({loading: true});
     const {fullName, usernameOrEmail, password} = this.state;
@@ -36,12 +46,13 @@ export default class Register extends Component {
         let selector;
         selector = {email: usernameOrEmail};
         const key = Object.keys(selector)[0];
+        let avatar = this.getImgFromGravatar(usernameOrEmail);
         let currency = {symbol: "$", name: "Dollar", symbol_native: "$", decimal_digits: 2, rounding: 0},
           emailNotification = true;
         Accounts.createUser({
           [key]: selector[key],
           password,
-          profile: {fullName, currency, emailNotification }
+          profile: {fullName, currency, emailNotification, avatar }
         }, (err) => {
           if(err){
             this.setState({loading: false});

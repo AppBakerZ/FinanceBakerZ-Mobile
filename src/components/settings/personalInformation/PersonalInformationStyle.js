@@ -33,5 +33,15 @@ export const PersonalInformationStyle = StyleSheet.create({
     borderBottom: {
         borderBottomWidth: 1,
         borderBottomColor: '#dadada'
+    },
+    avatarContainer: {
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    userAvatar: {
+        width: 100,
+        height: 100,
+        borderRadius: 50
     }
+
 });

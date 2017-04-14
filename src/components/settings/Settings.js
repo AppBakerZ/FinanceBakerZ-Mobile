@@ -18,6 +18,7 @@ class Settings extends Component {
     render() {
         const { navigate } = this.props.navigation;
         let { user } = this.props;
+        let userAvatar = user.profile.avatar ? {uri: user.profile.avatar} : require('FinanceBakerZ/src/images/default-avatar.gif');
         return (
             <ViewContainer>
                 <Image source = {require('FinanceBakerZ/src/images/app-background.png')} style={SettingsStyles.backgroundImage}>
@@ -25,6 +26,10 @@ class Settings extends Component {
                         style = {[SettingsStyles.contentContainer, SettingsStyles.borderBottom]}
                         onPress = {() => navigate('PersonalInformation')}>
                         <Text style = {SettingsStyles.headingText}>Personal Information</Text>
+                        <View style = {[SettingsStyles.row, SettingsStyles.notificationRadio]}>
+                            <Image source={userAvatar} style = {SettingsStyles.userAvatar}></Image>
+                            <Text style = {SettingsStyles.contentText}>Change Image | Remove</Text>
+                        </View>
                         <Text style = {SettingsStyles.contentText}>User Name: {user.profile.fullName}</Text>
                         <Text style = {SettingsStyles.contentText}>Contact Number: {user.profile.contactNumber ? user.profile.contactNumber : 'Not Available'}</Text>
                         <Text style = {SettingsStyles.contentText}>Email: {user.emails ? user.emails[0].address : 'Not Available'}</Text>

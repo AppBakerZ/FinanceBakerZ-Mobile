@@ -32,5 +32,11 @@ export const SettingsStyles = StyleSheet.create({
     notificationRadio: {
         flexDirection: 'row',
         alignItems: 'center'
+    },
+    userAvatar: {
+        width: 50,
+        height: 50,
+        borderRadius: 50,
+        marginRight: 10
     }
 });

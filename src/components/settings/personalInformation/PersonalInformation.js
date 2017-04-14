@@ -17,6 +17,7 @@ class PersonalInformation extends Component {
             number: user.profile.contactNumber,
             email: user.emails ? user.emails[0].address : '',
             address: user.profile.address,
+            avatar: user.profile.avatar,
             loading: false
         };
     }
@@ -54,6 +55,10 @@ class PersonalInformation extends Component {
             <ViewContainer>
                 <Image source = {require('FinanceBakerZ/src/images/app-background.png')} style = {PersonalInformationStyle.backgroundImage}>
                     <View style = {PersonalInformationStyle.inputContainer}>
+                        <View style = {PersonalInformationStyle.avatarContainer}>
+                            <Image source = {require('FinanceBakerZ/src/images/default-avatar.gif')} style = {PersonalInformationStyle.userAvatar}></Image>
+                        </View>
+
                         <View style = {PersonalInformationStyle.borderBottom}>
                             <Icon size = {18} name = "person" style = {PersonalInformationStyle.inputIcon}></Icon>
                             <TextInput

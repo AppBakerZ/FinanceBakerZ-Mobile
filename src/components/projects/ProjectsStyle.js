@@ -4,8 +4,13 @@ export const ProjectsStyles = StyleSheet.create({
 
     filterContainer : {
         flex : 1,
-        backgroundColor : '#dadadada',
         justifyContent : 'center',
+    },
+    backgroundImage: {
+        flex: 1,
+        resizeMode: 'cover',
+        width: null,
+        height: null,
     },
 
   listViewContainer: {
@@ -49,12 +54,21 @@ export const ProjectsStyles = StyleSheet.create({
       fontSize : 15,
   },
     currencydata:{
-        flex : 1
+
+    },
+    AmountContainer:{
+        flexDirection : 'row',
+        marginRight : 15,
+        flex : 1.5,
+    },
+    CurrencySymbol:{
+        paddingTop : 3,
+        margin : 2,
     },
   contentRightText: {
         flex : 4,
     fontFamily: 'QuicksandBook-Regular',
-      fontSize : 15,
+      fontSize : 18,
 
 
   },

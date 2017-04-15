@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { View, Text,TouchableOpacity,ListView} from 'react-native';
+import { View, Text,TouchableOpacity,ListView,Image} from 'react-native';
 import { ProjectsStyles } from 'FinanceBakerZ/src/components/projects/ProjectsStyle';
 import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
 import { TabNavigator } from 'react-navigation';
@@ -25,11 +25,13 @@ class Projects extends Component {
                 <View style={ProjectsStyles.listViewContentLeft}>
                     <Icon name='checked'style={ProjectsStyles.icons} color={this.getIconColor(rowData.status)}/>
                     <Text style={ProjectsStyles.contentRightText}>{rowData.name}</Text>
-                    <View style={ProjectsStyles.currencydata}>
-                        {loggedUserCurrency() ? <CurrencyIcon name={alterIconName(loggedUserCurrency())} size={30} color="#1F9058" /> : <Text></Text>}
+                    <View style={ProjectsStyles.AmountContainer}>
+                        <View style={ProjectsStyles.currencydata}>
+                            {loggedUserCurrency() ? <CurrencyIcon name={alterIconName(loggedUserCurrency())} size={25}/> : <Text></Text>}
+                        </View>
+                        <View style={ProjectsStyles.CurrencySymbol}>
                             <Text style={ProjectsStyles.iconText}>{rowData.amount}</Text>
-
-
+                        </View>
                     </View>
                 </View>
             </View>
@@ -37,11 +39,11 @@ class Projects extends Component {
     }
 
     getIconColor(status){
-      switch (status){
-          case 'progress' : return '#deb342';
-          case 'waiting' : return '##ff7200 ';
-          case 'completed' : return '#008000';
-      }
+        switch (status){
+            case 'progress' : return '#deb342';
+            case 'waiting' : return '#ff7200';
+            case 'completed' : return '#008000';
+        }
     }
 
     render() {
@@ -51,9 +53,9 @@ class Projects extends Component {
         if (projectsReady) {
             return (
 
-                <ViewContainer >
-                    <TouchableOpacity style={ProjectsStyles.filterContainer}
-                                      onPress={()=> {navigate('ProjectSelection')}}>
+                <ViewContainer>
+                    <Image source = {require('FinanceBakerZ/src/images/app-background.png')} style={ProjectsStyles.backgroundImage}>
+                    <TouchableOpacity style={ProjectsStyles.filterContainer} onPress={()=> {navigate('ProjectSelection')}}>
                         <View style={ProjectsStyles.filterDiv}>
                             <View style={ProjectsStyles.filterText}>
                                 <Text style={ProjectsStyles.BankText}>Accounts: DIB | HBL | UBL </Text>
@@ -64,6 +66,7 @@ class Projects extends Component {
                             </View>
                         </View>
                     </TouchableOpacity>
+                    </Image>
                     <View style={ProjectsStyles.listViewContainer}>
                         <ListView
                             dataSource={ds.cloneWithRows(this.props.projects)}
@@ -77,7 +80,7 @@ class Projects extends Component {
             );
         }
         else{
-            return <View style={ProjectsStyles.loader }><Loader size={'35'} color={'#008142'}/></View>
+            return <View style={ProjectsStyles.loader }><Loader size={35} color={'#008142'}/></View>
         }
     }
 }

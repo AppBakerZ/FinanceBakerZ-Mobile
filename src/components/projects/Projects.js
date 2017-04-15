@@ -6,7 +6,7 @@ import { TabNavigator } from 'react-navigation';
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
 import Loader from 'FinanceBakerZ/src/components/loader/Loader';
 import CurrencyIcon from 'FinanceBakerZ/src/icons/CurrencyIcon';
-import {loggedUserCurrency, alterIconName} from 'FinanceBakerZ/src/customLibrary';
+import {loggedUserCurrency, alterIconName,currencyStandardFormat} from 'FinanceBakerZ/src/customLibrary';
 
 import Meteor, { createContainer } from 'react-native-meteor';
 
@@ -28,7 +28,7 @@ class Projects extends Component {
                             {loggedUserCurrency() ? <CurrencyIcon name={alterIconName(loggedUserCurrency())} size={20}/> : <Text></Text>}
                         </View>
                         <View style={ProjectsStyles.CurrencySymbol}>
-                            <Text style={ProjectsStyles.iconText}>{rowData.amount}</Text>
+                            <Text style={ProjectsStyles.iconText}>{currencyStandardFormat(rowData.amount)}</Text>
                         </View>
                     </View>
                 </View>

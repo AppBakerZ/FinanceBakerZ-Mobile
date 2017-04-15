@@ -24,8 +24,6 @@ export const ProjectsStyles = StyleSheet.create({
     listViewContentLeft: {
         flex: 1,
         flexDirection: 'row',
-        paddingTop: 30,
-        paddingBottom: 30,
         alignItems: 'center',
     },
 
@@ -47,15 +45,17 @@ export const ProjectsStyles = StyleSheet.create({
     },
     AmountContainer:{
         flexDirection : 'row',
-        marginRight : 10,
+        paddingRight : 20,
         flex : 2,
         justifyContent : 'flex-end',
     },
     CurrencySymbol:{
-        marginLeft : 5
+        marginLeft : 5,
+        marginTop : 3
     },
     iconText:{
-        alignItems : 'center'
+        alignItems : 'center',
+        fontFamily: 'QuicksandBold-Regular'
     },
     contentRightText: {
         flex : 4,
@@ -65,7 +65,9 @@ export const ProjectsStyles = StyleSheet.create({
     listViewContaineritem:{
         borderColor : '#cdcdcd',
         borderWidth: 1,
-        borderTopColor : '#ffffff',
+        borderTopColor : 'transparent',
+        flexDirection:'row',
+        paddingVertical:22
     },
     BankText:{
         fontFamily: 'QuicksandBook-Regular',

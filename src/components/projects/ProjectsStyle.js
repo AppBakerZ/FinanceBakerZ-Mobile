@@ -50,7 +50,6 @@ export const ProjectsStyles = StyleSheet.create({
         marginRight : 10,
         flex : 2,
         justifyContent : 'flex-end',
-        backgroundColor: 'red',
     },
     CurrencySymbol:{
         marginLeft : 5

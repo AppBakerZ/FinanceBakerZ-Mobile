@@ -13,6 +13,7 @@ import ProjectSelectionScreen from 'FinanceBakerZ/src/components/projects/projec
 import TransactionsScreen from 'FinanceBakerZ/src/screens/Transactions';
 import TransactionSelection from 'FinanceBakerZ/src/components/transactions/transactionSelection/TransactionSelection';
 import AccountsScreen from 'FinanceBakerZ/src/screens/Accounts';
+import AddAccount from 'FinanceBakerZ/src/components/accounts/AddAccount';
 import CategoriesScreen from 'FinanceBakerZ/src/screens/Categories';
 import SubCategoriesScreen from 'FinanceBakerZ/src/components/categories/subCategory/SubCategory';
 import SettingsScreen from 'FinanceBakerZ/src/screens/Settings';
@@ -149,6 +150,10 @@ const AccountsStack = StackNavigator({
     navigationOptions: {
       header: header
     }
+  },
+  AddAccount: {
+    screen: AddAccount,
+    navigationOptions: nestingHeaders('Add Account')
   }
 });
 

@@ -100,3 +100,11 @@ exports.currencyStandardFormat = (currency) =>{
 exports.capitalizeFirstLetter  = (string) => {
   return string ? string.charAt(0).toUpperCase() + string.slice(1) : '';
 };
+
+exports.chunk = (array, chunkSize) => {
+  return [].concat.apply([],
+    array.map(function(elem, i) {
+      return i % chunkSize ? [] : [array.slice(i, i + chunkSize)];
+    })
+  );
+};

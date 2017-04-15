@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, Icon,ScrollView } from 'react-native';
+import { View, Text, Image, Icon, ScrollView } from 'react-native';
 import { AccountsStyles } from 'FinanceBakerZ/src/components/accounts/AccountsStyle';
 import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
 import Meteor, { createContainer } from 'react-native-meteor';
@@ -35,19 +35,21 @@ class Accounts extends Component {
   }
 
   accounts(){
-    return this.props.accounts.map((accountData, i) => {
+    return this.props.accounts.map((accountData, i, arr) => {
       let icon_name = accountData.bank ? accountData.bank.replace('bank-' , "") : '';
       return(
-        <View style={[theme.cardStyle, AccountsStyles.card]} key={i} elevation={3}>
-          <View style={AccountsStyles.imgBox}>
-            <BankIcon name ={icon_name} size={45} />
-          </View>
-          <View style={AccountsStyles.detailBox}>
-            <Text style={AccountsStyles.text}>{icon_name.split('-').map(bankName => bankName  + ' ')}</Text>
-            <Text style={AccountsStyles.accNo}>{accountData.number}</Text>
-            <View style={AccountsStyles.currencyAndAmount}>
-              <CurrencyIcon name={alterIconName(loggedUserCurrency())} size={15} />
-              <Text style={AccountsStyles.amount}>{currencyStandardFormat(this.state.availableBalance[i])}</Text>
+        <View style={arr.length - 1 == i ? AccountsStyles.lastElementPadding : ''} key={i} >
+          <View style={[theme.cardStyle, AccountsStyles.card]} elevation={3}>
+            <View style={AccountsStyles.imgBox}>
+              <BankIcon name ={icon_name} size={45} />
+            </View>
+            <View style={AccountsStyles.detailBox}>
+              <Text style={AccountsStyles.text}>{icon_name.split('-').map(bankName => bankName  + ' ')}</Text>
+              <Text style={AccountsStyles.accNo}>{accountData.number}</Text>
+              <View style={AccountsStyles.currencyAndAmount}>
+                <CurrencyIcon name={alterIconName(loggedUserCurrency())} size={15} />
+                <Text style={AccountsStyles.amount}>{currencyStandardFormat(this.state.availableBalance[i])}</Text>
+              </View>
             </View>
           </View>
         </View>
@@ -56,16 +58,20 @@ class Accounts extends Component {
   }
   render() {
 
+    let {navigate} = this.props.navigation;
+
     return (
       <ViewContainer>
         <Image source = {require('FinanceBakerZ/src/images/app-background.png')} style={AccountsStyles.backgroundImage}>
           {!this.state.loading ? <ScrollView style={AccountsStyles.scroll}>
-            {
-              this.accounts()
-            }
-          </ScrollView>: <View style={AccountsStyles.loaderView}><Loader size={35} color="#008142" /></View>}
+              {
+                this.accounts()
+              }
+            </ScrollView>: <View style={AccountsStyles.loaderView}><Loader size={35} color="#008142" /></View>
+
+          }
         </Image>
-        <FabButton iconName="add" iconColor="#fff" style={AccountsStyles.fabButtonBg}/>
+        {!this.state.loading ? <FabButton iconName="add" iconColor="#fff" style={AccountsStyles.fabButtonBg} onPress={() => navigate('AddAccount')} /> : <Text></Text>}
       </ViewContainer>
     );
   }

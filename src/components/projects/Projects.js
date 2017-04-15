@@ -8,7 +8,6 @@ import Loader from 'FinanceBakerZ/src/components/loader/Loader';
 import CurrencyIcon from 'FinanceBakerZ/src/icons/CurrencyIcon';
 import {loggedUserCurrency, alterIconName} from 'FinanceBakerZ/src/customLibrary';
 
-
 import Meteor, { createContainer } from 'react-native-meteor';
 
 class Projects extends Component {
@@ -18,7 +17,6 @@ class Projects extends Component {
             ds: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
         };
     }
-
     renderRow(rowData){
         return(
             <View style={ProjectsStyles.listViewContaineritem}>
@@ -27,7 +25,7 @@ class Projects extends Component {
                     <Text style={ProjectsStyles.contentRightText}>{rowData.name}</Text>
                     <View style={ProjectsStyles.AmountContainer}>
                         <View style={ProjectsStyles.currencydata}>
-                            {loggedUserCurrency() ? <CurrencyIcon name={alterIconName(loggedUserCurrency())} size={25}/> : <Text></Text>}
+                            {loggedUserCurrency() ? <CurrencyIcon name={alterIconName(loggedUserCurrency())} size={20}/> : <Text></Text>}
                         </View>
                         <View style={ProjectsStyles.CurrencySymbol}>
                             <Text style={ProjectsStyles.iconText}>{rowData.amount}</Text>
@@ -37,7 +35,6 @@ class Projects extends Component {
             </View>
         );
     }
-
     getIconColor(status){
         switch (status){
             case 'progress' : return '#deb342';
@@ -45,16 +42,13 @@ class Projects extends Component {
             case 'completed' : return '#008000';
         }
     }
-
     render() {
         const {navigate} = this.props.navigation;
         let {ds} =this.state;
         let {projectsReady} = this.props;
         if (projectsReady) {
             return (
-
                 <ViewContainer>
-                    <Image source = {require('FinanceBakerZ/src/images/app-background.png')} style={ProjectsStyles.backgroundImage}>
                     <TouchableOpacity style={ProjectsStyles.filterContainer} onPress={()=> {navigate('ProjectSelection')}}>
                         <View style={ProjectsStyles.filterDiv}>
                             <View style={ProjectsStyles.filterText}>
@@ -66,17 +60,14 @@ class Projects extends Component {
                             </View>
                         </View>
                     </TouchableOpacity>
-                    </Image>
                     <View style={ProjectsStyles.listViewContainer}>
                         <ListView
                             dataSource={ds.cloneWithRows(this.props.projects)}
                             renderRow={this.renderRow.bind(this)}
-
                         />
 
                     </View>
                 </ViewContainer>
-
             );
         }
         else{
@@ -84,12 +75,10 @@ class Projects extends Component {
         }
     }
 }
-
 export default createContainer((props) => {
     const projectsHandle = Meteor.subscribe('projects', {
         limit: 20
     });
-
     return {
         projectsReady: projectsHandle.ready(),
         projects: Meteor.collection('projects').find({})

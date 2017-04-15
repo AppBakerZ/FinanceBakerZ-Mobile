@@ -8,14 +8,16 @@ import { TabNavigator, TabView } from 'react-navigation';
 import Meteor, {createContainer} from 'react-native-meteor';
 import _ from 'underscore';
 import Loader from 'FinanceBakerZ/src/components/loader/Loader';
-import {alterName} from 'FinanceBakerZ/src/customLibrary';
+import {alterName, formatDate} from 'FinanceBakerZ/src/customLibrary';
 
 
 
 class Transactions extends Component {
   constructor(props) {
+
     super(props);
     this.state = {
+      updateParentState: (childState) => {this.setState(childState)}
     };
     this.setDefaultAccounts = this.setDefaultAccounts.bind(this);
   }
@@ -31,7 +33,7 @@ class Transactions extends Component {
       multiple.push(account._id);
       bankAcc.push(alterName(account.bank));
     });
-    this.setState({multiple, bankAcc}, () => console.log(this.state));
+    this.setState({multiple, bankAcc});
   }
 
 
@@ -40,15 +42,29 @@ class Transactions extends Component {
     const { navigate } = this.props.navigation;
     let {incomes, expenses, transactions, transactionsLoading} = this.props;
     let {multiple, bankAcc} = this.state;
+    let updateParentState = this.state.updateParentState;
+    let params = this.state.childState || []; // date and bankList from TransactionSelection's state
+    let bankList = params.bankList || [];
+    let date = params.date || [];
 
     if(!transactionsLoading){
       return(
         <ViewContainer>
           <View style={TransactionsStyles.filterContainer}>
-            <TouchableOpacity style={TransactionsStyles.filterMainContainer}  activeOpacity={0.7} onPress={() => navigate('Selection', {multiple, bankAcc})} >
+            <TouchableOpacity style={TransactionsStyles.filterMainContainer}  activeOpacity={0.7} onPress={() => navigate('Selection', {params, multiple, bankAcc, updateParentState})} >
               <View style={TransactionsStyles.filterContainerTxt}>
-                <Text style={TransactionsStyles.text}>Accounts: All </Text>
-                <Text style={TransactionsStyles.text}>This Week: Mar 10 to 20</Text>
+                <Text style={TransactionsStyles.text}>Accounts: {(bankList.length ? bankList.map((val, i, arr) => (val.check ? ' ' + val.name + ' |' : '')) : 'All')}</Text>
+                <Text style={TransactionsStyles.text}>
+                  {(date.length ? date.map((val, i, arr) => {
+                      if(val.checked){
+                        if(val.selected == 'Custom'){
+                          return (i == arr.length - 1 ?  val.selected + ': ' + arr[i - 1].selectedDate + ' - ' + val.selectedDate : false);
+                        }else{
+                          return val.selected + ': ' + val.selectedDate;
+                        }
+                      }
+                    }) : 'Custom: ' + formatDate({type: 'startOf', duration: 'month', format: 'MMM DD, YYYY'}) + ' - ' + formatDate({format: 'MMM DD, YYYY'}))}
+                </Text>
               </View>
               <View style={TransactionsStyles.filterIconContainer}>
                 <Icon name="filter" size={25} />
@@ -56,7 +72,7 @@ class Transactions extends Component {
             </TouchableOpacity>
           </View>
           <View style={TransactionsStyles.tabContainer}>
-            <TransactionTabNavigator screenProps={{incomes, expenses, transactions}} />
+            <TransactionTabNavigator screenProps={{incomes, expenses, transactions, transactionsLoading}} />
           </View>
         </ViewContainer>
       )
@@ -105,7 +121,7 @@ Transactions.propTypes = {
 export default createContainer(() => {
 
 
-  transactionsHandle = Meteor.subscribe('incomes', 100);
+  let transactionsHandle = Meteor.subscribe('incomes', 100);
   Meteor.subscribe('expenses', 100);
   Meteor.subscribe('accounts');
 

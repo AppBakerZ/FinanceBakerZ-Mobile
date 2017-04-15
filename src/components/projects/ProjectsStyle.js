@@ -35,7 +35,7 @@ export const ProjectsStyles = StyleSheet.create({
   listViewContentRight:{
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'flex-end',
+    alignItems: 'flex-end'
   },
 
   icons: {
@@ -44,15 +44,18 @@ export const ProjectsStyles = StyleSheet.create({
   },
 
   iconText: {
-    flex: 3,
+    flex: 2,
     fontFamily: 'QuicksandBook-Regular',
-      fontSize : 15
+      fontSize : 15,
   },
-
+    currencydata:{
+        flex : 1
+    },
   contentRightText: {
-    paddingRight: 20,
+        flex : 4,
     fontFamily: 'QuicksandBook-Regular',
-      fontSize : 15
+      fontSize : 15,
+
 
   },
     listViewContaineritem:{
@@ -62,6 +65,12 @@ export const ProjectsStyles = StyleSheet.create({
     },
     BankText:{
         fontFamily: 'QuicksandBook-Regular',
+    },
+    loader:{
+        flex :1,
+        justifyContent : 'center',
+        alignItems : 'center'
+
     }
 
 });

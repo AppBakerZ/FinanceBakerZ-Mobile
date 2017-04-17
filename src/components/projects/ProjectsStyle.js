@@ -55,12 +55,13 @@ export const ProjectsStyles = StyleSheet.create({
     },
     iconText:{
         alignItems : 'center',
-        fontFamily: 'QuicksandBold-Regular'
+        fontFamily: 'QuicksandBook-Regular',
+        fontSize : 15
     },
     contentRightText: {
         flex : 4,
         fontFamily: 'QuicksandBook-Regular',
-        fontSize : 18,
+        fontSize : 15,
     },
     listViewContaineritem:{
         borderColor : '#cdcdcd',

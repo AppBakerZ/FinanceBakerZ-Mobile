@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, ScrollView, Picker, Platform, TouchableOpacity, TextInput, KeyboardAvoidingView } from 'react-native';
+import { View, Text, Image, ScrollView, Picker, Platform, TouchableOpacity, TextInput, KeyboardAvoidingView, ActivityIndicator } from 'react-native';
 import { AccountsStyles } from 'FinanceBakerZ/src/components/accounts/AccountsStyle';
 import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
@@ -25,25 +25,48 @@ export default class AddAccount extends Component{
       country: 'PK',
       number: '',
       bank: '',
-      loading: false
+      loading: false,
+      bankIcons: this.renderBankIcons(),
+      checked: false
     };
+
+    this.renderBankIcons = this.renderBankIcons.bind(this);
 
     //get all countries that have banks.
     let availableBankCountries = Object.keys(bankFonts);
 
     //filter country according to availableBankCountries.
-    let bankCountries = countries.filter((obj) => {
-      return availableBankCountries.includes(obj.value)
-    });
+    let bankCountries = countries.filter(obj => availableBankCountries.includes(obj.value));
 
     //sort countries in alphabetically order.
     this.countries = _.sortBy(bankCountries, 'label');
     this.countries = [{value: 'All', label: 'All Countries'}, ...this.countries];
-    this.bankFonts = bankFonts;
   }
 
   setBanks(country){
-    return (country == 'All' ? Object.values(bankFonts).reduce((prev, curr) => [...prev, ...curr]) : bankFonts[country]);
+    let bankIcons = country == 'All' ? Object.values(bankFonts).reduce((prev, curr) => [...prev, ...curr]) : bankFonts[country];
+    return bankIcons.map((font, index) => {
+
+      index++;
+      //delete pre keys if attach.
+      delete font.removeRightBorder;
+      delete font.removeBottomBorder;
+      if(index % 3 == 0){
+        font.removeRightBorder = true
+      }
+      let lastItems = bankIcons.length % 3 == 0 ? 3 : bankIcons.length % 3;
+      if(index > bankIcons.length - lastItems){
+        font.removeBottomBorder = true
+      }
+      return font
+    });
+  }
+
+  handleChange(country){
+    this.setState({checked: true});
+    setTimeout(() => {
+      this.setState({checked: false, country, bankIcons: this.renderBankIcons(country)})
+    });
   }
 
   getCountries(){
@@ -53,7 +76,7 @@ export default class AddAccount extends Component{
     return(
       <Picker
         selectedValue={this.state.country}
-        onValueChange={(lang) => this.setState({country: lang})}>
+        onValueChange={country => this.handleChange(country)}>
         {countryItems}
       </Picker>
     );
@@ -88,26 +111,33 @@ export default class AddAccount extends Component{
     }
   }
 
-  renderBankIcons(){
-    let {country} = this.state;
-    let bankFonts = country == 'All' ? this.setBanks(country) : this.bankFonts[country];
+  removeBorder(bankName){
+    if(bankName.removeRightBorder) {
+      return {borderRightColor: 'transparent', borderRightWidth: 0}
+    }else if(bankName.removeBottomBorder){
+      return {borderBottomColor: 'transparent', borderBottomWidth: 0}
+    }
+  }
+
+  renderBankIcons(country = 'PK'){
+
+    let bankFonts = this.setBanks(country);
     let bankIcons = chunk(bankFonts, 3);
 
-      return bankIcons.map((bank, i) => {
-        return(
-          <View style={AccountsStyles.bankIconCon} key={i}>
-            {bank.map((bankName, index) => {
-              let icon_name = bankName.value.replace('bank-' , '');
-              return(
-                <TouchableOpacity style={AccountsStyles.bankIcon} onPress={() => this.setState({bank: bankName})} activeOpacity={0.75} key={index}>
-                  <BankIcon name={icon_name } size={30}/>
-                </TouchableOpacity>
-              );
-            })}
-          </View>
-        );
-      });
-
+    return bankIcons.map((bank, i) => {
+      return(
+        <View style={AccountsStyles.bankIconCon} key={i}>
+          {bank.map((bankName, index) => {
+            let icon_name = bankName.value.replace('bank-' , '');
+            return(
+              <TouchableOpacity style={[AccountsStyles.bankIcon, this.removeBorder(bankName)]} onPress={() => this.setState({bank: bankName})} activeOpacity={0.75} key={index}>
+                <BankIcon name={icon_name } size={30}/>
+              </TouchableOpacity>
+            );
+          })}
+        </View>
+      );
+    });
   }
 
   render(){
@@ -130,9 +160,7 @@ export default class AddAccount extends Component{
               </View>
             </View>
             <View style={AccountsStyles.bankIconsCon}>
-              <ScrollView>
-                {this.renderBankIcons.bind(this)()}
-              </ScrollView>
+              {!this.state.checked ? <ScrollView>{this.state.bankIcons}</ScrollView> : <View style={AccountsStyles.loaderBank}><ActivityIndicator size="large" color="#008142" /></View>}
             </View >
             <View style={AccountsStyles.accountNoCon}>
               <KeyboardAvoidingView>
@@ -141,8 +169,9 @@ export default class AddAccount extends Component{
                   style={AccountsStyles.input}
                   maxLength = {30}
                   autoCorrect={false}
-                  onChangeText={(number) => this.setState({number})}
+                  onChangeText={number => this.setState({number})}
                   underlineColorAndroid="transparent"
+                  keyboardType="numeric"
                 />
               </KeyboardAvoidingView>
             </View>

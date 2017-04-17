@@ -110,6 +110,7 @@ export const AccountsStyles = StyleSheet.create({
 
   bankIconsCon: {
     flex: 5,
+    padding: 8,
     borderBottomColor: '#dadada',
     borderLeftColor: '#dadada',
     borderRightColor: '#dadada',
@@ -125,14 +126,14 @@ export const AccountsStyles = StyleSheet.create({
 
   bankIcon: {
     flex: 1,
-    height: 100,
+    height: screen.height * .13,
     alignItems: 'center',
     justifyContent: 'center',
     borderRightColor: '#dadada',
     borderRightWidth: 1,
     borderBottomColor: '#dadada',
     borderBottomWidth: 1,
-
+    maxWidth: screen.width * .26
   },
 
   accountNoCon: {
@@ -140,7 +141,6 @@ export const AccountsStyles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#dadada',
     justifyContent: 'flex-end'
-
   },
 
   checkMarkCon: {
@@ -152,6 +152,12 @@ export const AccountsStyles = StyleSheet.create({
   loaderCon: {
     alignItems: 'center',
     flex: 5
+  },
+
+  loaderBank: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
 
   BtnCon: {
@@ -180,11 +186,5 @@ export const AccountsStyles = StyleSheet.create({
     height: 48,
     paddingLeft: 12
   }
-
-
-
-
-
-
 
 });

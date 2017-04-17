@@ -5,7 +5,7 @@ export const TransactionsStyles = StyleSheet.create({
   filterContainer: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: '#dadada'
+      backgroundColor: '#f0f0f0'
   },
 
   filterMainContainer: {

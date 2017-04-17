@@ -1,9 +1,12 @@
 import {StyleSheet} from 'react-native';
 export const ProjectsStyles = StyleSheet.create({
+    projectMainContainer:{
+        backgroundColor : '#ffffff'
+    },
     filterContainer : {
         flex : 1,
         justifyContent : 'center',
-        backgroundColor : '#cdcdcd'
+        backgroundColor : '#f7f7f7'
     },
     listViewContainer: {
         flex : 8,
@@ -51,7 +54,6 @@ export const ProjectsStyles = StyleSheet.create({
     },
     CurrencySymbol:{
         marginLeft : 5,
-        marginTop : 3
     },
     iconText:{
         alignItems : 'center',

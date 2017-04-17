@@ -25,7 +25,7 @@ class Projects extends Component {
                     <Text style={ProjectsStyles.contentRightText}>{rowData.name}</Text>
                     <View style={ProjectsStyles.AmountContainer}>
                         <View style={ProjectsStyles.currencydata}>
-                            {loggedUserCurrency() ? <CurrencyIcon name={alterIconName(loggedUserCurrency())} size={20}/> : <Text></Text>}
+                            {loggedUserCurrency() ? <CurrencyIcon name={alterIconName(loggedUserCurrency())} size={18}/> : <Text></Text>}
                         </View>
                         <View style={ProjectsStyles.CurrencySymbol}>
                             <Text style={ProjectsStyles.iconText}>{currencyStandardFormat(rowData.amount)}</Text>
@@ -48,7 +48,7 @@ class Projects extends Component {
         let {projectsReady} = this.props;
         if (projectsReady) {
             return (
-                <ViewContainer>
+                <ViewContainer style={ProjectsStyles.projectMainContainer}>
                     <TouchableOpacity style={ProjectsStyles.filterContainer} onPress={()=> {navigate('ProjectSelection')}}>
                         <View style={ProjectsStyles.filterDiv}>
                             <View style={ProjectsStyles.filterText}>

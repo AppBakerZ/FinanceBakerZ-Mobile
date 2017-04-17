@@ -16,6 +16,7 @@ import AccountsScreen from 'FinanceBakerZ/src/screens/Accounts';
 import AddAccount from 'FinanceBakerZ/src/components/accounts/AddAccount';
 import CategoriesScreen from 'FinanceBakerZ/src/screens/Categories';
 import SubCategoriesScreen from 'FinanceBakerZ/src/components/categories/subCategory/SubCategory';
+import AddCategory from 'FinanceBakerZ/src/components/categories/subCategory/AddCategory';
 import SettingsScreen from 'FinanceBakerZ/src/screens/Settings';
 import ChangePasswordScreen from 'FinanceBakerZ/src/components/settings/changePassword/ChangePassword';
 import AccountSettingsScreen from 'FinanceBakerZ/src/components/settings/accountSettings/AccountSettings';
@@ -167,7 +168,11 @@ const CategoriesStack = StackNavigator({
   SubCategories: {
     screen: SubCategoriesScreen,
     navigationOptions: nestingHeaders('Categories')
-  }
+  },
+    AddCategory : {
+        screen : AddCategory,
+        navigationOptions : nestingHeaders('AddCategory')
+    }
 });
 
 const SettingsStack = StackNavigator({

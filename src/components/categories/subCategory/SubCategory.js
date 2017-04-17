@@ -3,6 +3,7 @@ import { View, Text, Image, ScrollView, Icon, TouchableOpacity} from 'react-nati
 import { SubCategoryStyles } from 'FinanceBakerZ/src/components/categories/subCategory/SubCategoryStyle';
 import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
 import CategoryIcon from 'FinanceBakerZ/src/icons/CategoryIcon';
+import FabButton from 'FinanceBakerZ/src/components/button/FabButton';
 
 import Meteor, { createContainer } from 'react-native-meteor';
 
@@ -28,6 +29,8 @@ class SubCategory extends Component {
   }
   render(){
     let { subCategories } = this.props;
+    let {navigate} = this.props.navigation;
+
     let { children } = subCategories;
     let icon = subCategories.icon.replace('icon-' , "");
     return(
@@ -50,6 +53,7 @@ class SubCategory extends Component {
             </View>
           </ScrollView>
         </Image>
+          {!this.state.loading ? <FabButton iconName="add" iconColor="#fff" style={SubCategoryStyles.fabButtonBg} onPress={() => navigate('AddCategory')} /> : <Text></Text>}
       </ViewContainer>
     )
   }

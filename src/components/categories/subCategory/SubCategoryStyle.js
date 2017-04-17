@@ -70,5 +70,8 @@ export const SubCategoryStyles = StyleSheet.create({
     },
   itemsText:{
     fontSize : 15
-  }
+  },
+    fabButtonBg:{
+        backgroundColor: '#008142'
+    }
 });

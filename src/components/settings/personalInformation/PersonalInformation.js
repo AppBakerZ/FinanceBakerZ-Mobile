@@ -1,11 +1,12 @@
 import React, { Component, PropTypes } from 'react';
-import { View, Text, Image, KeyboardAvoidingView, TextInput} from 'react-native';
+import { View, Text, Image, KeyboardAvoidingView, TextInput, TouchableOpacity} from 'react-native';
 import { PersonalInformationStyle } from 'FinanceBakerZ/src/components/settings/personalInformation/PersonalInformationStyle';
 import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
 import Button from 'FinanceBakerZ/src/components/button/Button';
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import {showAlert, validateEmail} from 'FinanceBakerZ/src/customLibrary';
 import  Meteor, { createContainer } from 'react-native-meteor';
+import ImagePicker from 'react-native-image-picker'
 
 class PersonalInformation extends Component {
     constructor(props) {
@@ -49,14 +50,56 @@ class PersonalInformation extends Component {
         });
     }
 
+    testing(){
+        console.log('===> Pressed');
+        let options = {
+            title: 'Select Avatar',
+            customButtons: [
+                {name: 'fb', title: 'Choose Photo from Facebook'}
+            ],
+            storageOptions: {
+                skipBackup: true,
+                path: 'images'
+            }
+        };
+
+        ImagePicker.showImagePicker(options, (response) => {
+            console.log('Response = ', response);
+
+            if (response.didCancel) {
+                console.log('User cancelled image picker');
+            }
+            else if (response.error) {
+                console.log('ImagePicker Error: ', response.error);
+            }
+            else if (response.customButton) {
+                console.log('User tapped custom button: ', response.customButton);
+            }
+            else {
+                let source = { uri: response.uri };
+
+                // You can also display the image using data:
+                // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+
+                this.setState({
+                    avatarSource: source
+                });
+            }
+        });
+    }
+
     render() {
         const { navigate } = this.props.navigation;
+        let userAvatar = this.state.avatar ? {uri: this.state.avatar} : require('FinanceBakerZ/src/images/default-avatar.gif');
         return (
             <ViewContainer>
                 <Image source = {require('FinanceBakerZ/src/images/app-background.png')} style = {PersonalInformationStyle.backgroundImage}>
                     <View style = {PersonalInformationStyle.inputContainer}>
                         <View style = {PersonalInformationStyle.avatarContainer}>
-                            <Image source = {require('FinanceBakerZ/src/images/default-avatar.gif')} style = {PersonalInformationStyle.userAvatar}></Image>
+                            <TouchableOpacity
+                                onPress = {this.testing.bind(this)}>
+                                <Image source = {userAvatar} style = {PersonalInformationStyle.userAvatar}></Image>
+                            </TouchableOpacity>
                         </View>
 
                         <View style = {PersonalInformationStyle.borderBottom}>

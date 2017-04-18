@@ -38,12 +38,6 @@ class AccountSettings extends Component {
         ];
     }
 
-    componentWillMount(){
-        this.setState({
-            languageName : this.setCurrency(this.state.languageSelected).label
-        })
-    }
-
     languageOrCurrency(seletedItem, name, iosModal){
         lanOrCurr = seletedItem.map((lanOrCurr, i) => {
             return <Picker.Item label = {lanOrCurr.label} value = {lanOrCurr.value} key = {i}/>;
@@ -160,12 +154,14 @@ class AccountSettings extends Component {
                                         checked={userInfo.profile.emailNotification}
                                         group={this.radioGroup}
                                         onPress = {() => this.setState({check2: true})}
+                                        style={AccountSettingsStyle.radioButton}
                                     />
                                     <Text>On</Text>
                                     <MKRadioButton
                                         checked={!userInfo.profile.emailNotification}
                                         group={this.radioGroup}
                                         onPress = {() => this.setState({check2: false})}
+                                        style={AccountSettingsStyle.radioButton}
                                     />
                                     <Text>Off</Text>
                                 </View>

@@ -51,12 +51,14 @@ class Settings extends Component {
                                     checked={user.profile.emailNotification}
                                     group={this.radioGroup}
                                     disabled
+                                    style={SettingsStyles.radioButton}
                                 />
                                 <Text>On</Text>
                                 <MKRadioButton
                                     checked={!user.profile.emailNotification}
                                     group={this.radioGroup}
                                     disabled
+                                    style={SettingsStyles.radioButton}
                                 />
                                 <Text>Off</Text>
                             </View>

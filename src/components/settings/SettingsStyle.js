@@ -33,6 +33,10 @@ export const SettingsStyles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center'
     },
+    radioButton: {
+        width: 18,
+        height: 18
+    },
     userAvatar: {
         width: 50,
         height: 50,

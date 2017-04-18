@@ -39,8 +39,13 @@ export const AccountSettingsStyle = StyleSheet.create({
         flexDirection: 'row'
     },
     notificationRadio: {
+        flex: 1.5,
         flexDirection: 'row',
         alignItems: 'center'
+    },
+    radioButton: {
+        width: 18,
+        height: 18
     },
     pickerContainer: {
         paddingLeft: 20,

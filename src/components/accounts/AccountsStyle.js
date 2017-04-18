@@ -109,8 +109,8 @@ export const AccountsStyles = StyleSheet.create({
   },
 
   bankIconsCon: {
-    flex: 5,
-    padding: 8,
+    minHeight: screen.height * 0.1,
+    maxHeight: screen.height * 0.5,
     borderBottomColor: '#dadada',
     borderLeftColor: '#dadada',
     borderRightColor: '#dadada',
@@ -126,14 +126,19 @@ export const AccountsStyles = StyleSheet.create({
 
   bankIcon: {
     flex: 1,
-    height: screen.height * .13,
+    height: screen.height * .14,
     alignItems: 'center',
     justifyContent: 'center',
     borderRightColor: '#dadada',
     borderRightWidth: 1,
     borderBottomColor: '#dadada',
     borderBottomWidth: 1,
-    maxWidth: screen.width * .26
+    maxWidth: screen.width * .265
+  },
+
+  scrollViewCon: {
+    padding: 10,
+    marginBottom: 5
   },
 
   accountNoCon: {
@@ -155,19 +160,23 @@ export const AccountsStyles = StyleSheet.create({
   },
 
   loaderBank: {
-    flex: 1,
+    flex: 4,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    borderBottomColor: '#dadada',
+    borderLeftColor: '#dadada',
+    borderRightColor: '#dadada',
+    borderBottomWidth: 1,
+    borderLeftWidth: 1,
+    borderRightWidth: 1,
+    marginHorizontal: 10,
+    padding: 10
+
   },
 
   BtnCon: {
-    flex: 1,
-    backgroundColor: '#008142',
-    borderRadius: 50,
-    height: 60,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
+    flex: 1
+   },
 
   modal: {
     justifyContent: 'center',

@@ -10,18 +10,16 @@ import {loggedUserCurrency, alterIconName,currencyStandardFormat} from 'FinanceB
 
 import Meteor, { createContainer, ReactiveDict } from 'react-native-meteor';
 
-
-  let query = new ReactiveDict();
-  query.set('query', {
+let query = new ReactiveDict('projectsDict');
+query.set('query', {
     limit: 20
-  });
-
+});
 
 class Projects extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ds: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
+      ds: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
     };
   }
   renderRow(rowData){
@@ -86,9 +84,7 @@ class Projects extends Component {
 
 
 export default createContainer((props) => {
-
-
-  const projectsHandle = Meteor.subscribe('projects', query.get());
+  const projectsHandle = Meteor.subscribe('projects', query.get('query'));
   return {
     projectsReady: projectsHandle.ready(),
     projects: Meteor.collection('projects').find({})

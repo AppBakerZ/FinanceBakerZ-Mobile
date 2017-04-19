@@ -9,9 +9,10 @@ import Modal from 'react-native-modalbox';
 import {alterName, chunk, showAlert} from 'FinanceBakerZ/src/customLibrary';
 import BankIcon from 'FinanceBakerZ/src/icons/BankIcon';
 import _ from 'underscore';
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import Loader from 'FinanceBakerZ/src/components/loader/Loader';
 import Meteor  from 'react-native-meteor';
+import FabButton from 'FinanceBakerZ/src/components/button/FabButton';
+
 
 
 
@@ -159,9 +160,11 @@ export default class AddAccount extends Component{
                 <Icon size={10} name="down-arrow" style={AccountsStyles.iconRight} />
               </View>
             </View>
-            <View style={AccountsStyles.bankIconsCon}>
-              {!this.state.checked ? <ScrollView>{this.state.bankIcons}</ScrollView> : <View style={AccountsStyles.loaderBank}><ActivityIndicator size="large" color="#008142" /></View>}
-            </View >
+            {!this.state.checked ? <View style={AccountsStyles.bankIconsCon}>
+                <ScrollView style={AccountsStyles.scrollViewCon}>{this.state.bankIcons}
+                </ScrollView></View > :
+              <View style={AccountsStyles.loaderBank}><ActivityIndicator size="large" color="#008142" /></View>
+            }
             <View style={AccountsStyles.accountNoCon}>
               <KeyboardAvoidingView>
                 <TextInput
@@ -180,11 +183,11 @@ export default class AddAccount extends Component{
                 {this.state.loading ? <Loader size={35} color="#008142" /> : <Text></Text>}
               </View>
               <View style={AccountsStyles.BtnCon}>
-                <MaterialIcon name="done" size={40} color="#fff" onPress={this.submit.bind(this)} disabled={this.state.loading}/>
               </View>
             </View>
           </View>
         </Image>
+        <FabButton iconName="check" iconColor="#fff" onPress={this.submit.bind(this)} disabled={this.state.loading}/>
         <Modal style={AccountsStyles.modal} position={"bottom"} ref={"modal"} swipeArea={20}>
           <View style={AccountsStyles.renderListCon}>
             {this.getCountries()}

@@ -20,7 +20,7 @@ export default class FabButton extends Component{
                 backgroundColor = {MKColor.Teal}
                 onPress = {this.props.onPress}
             >
-                <Icon name = {this.props.iconName} size = {28} color = {this.props.iconColor}/>
+                <Icon name = {this.props.iconName} size = {this.props.size || 28} color = {this.props.iconColor}/>
             </ColoredFab>
         )
     }
@@ -28,7 +28,7 @@ export default class FabButton extends Component{
 
 const styles = StyleSheet.create({
     fab: {
-        backgroundColor: '#ff9c00',
+        backgroundColor: '#008142',
         position: 'absolute',
         right: 30,
         bottom: 30

@@ -546,11 +546,11 @@ export default {
     },
     {
       label: 'Industrial Bank China',
-      value: 'bank-Industrial-Bank-China'
+      value: 'bank-Industrial-and-Commercial-Bank-of-China'
     },
     {
       label: 'Peoples Bank of China',
-      value: 'bank-Peoples-Bank-of-China'
+      value: 'bank-Industrial-Bank-(China)'
     },
     {
       label: 'Shanghai Pudong Development Bank',

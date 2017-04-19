@@ -3,10 +3,12 @@ import { View, Text, Image, KeyboardAvoidingView, TextInput, TouchableOpacity} f
 import { PersonalInformationStyle } from 'FinanceBakerZ/src/components/settings/personalInformation/PersonalInformationStyle';
 import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
 import Button from 'FinanceBakerZ/src/components/button/Button';
-import Icon from 'react-native-vector-icons/MaterialIcons'
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import {showAlert, validateEmail} from 'FinanceBakerZ/src/customLibrary';
 import  Meteor, { createContainer } from 'react-native-meteor';
-import ImagePicker from 'react-native-image-picker'
+import ImagePicker from 'react-native-image-picker';
+import { RNS3 } from 'react-native-aws3';
+import Settings from 'FinanceBakerZ/settings.json';
 
 class PersonalInformation extends Component {
     constructor(props) {
@@ -29,10 +31,7 @@ class PersonalInformation extends Component {
         if(validateEmail(email)){
             Meteor.call('updateProfile', info, (err) => {
                 if(!err){
-                    showAlert('Success', 'Profile updated successfully');
-                    this.setState({name: '', number: '', email: '', address: '', username: ''});
-                    this.setState({loading: false});
-                    this.props.navigation.goBack();
+                    setTimeout(()=> this.uploadImage());
                 } else{
                     showAlert('Error', err.reason);
                     this.setState({loading: false});
@@ -50,13 +49,9 @@ class PersonalInformation extends Component {
         });
     }
 
-    testing(){
-        console.log('===> Pressed');
+    getImagePicker(){
         let options = {
             title: 'Select Avatar',
-            customButtons: [
-                {name: 'fb', title: 'Choose Photo from Facebook'}
-            ],
             storageOptions: {
                 skipBackup: true,
                 path: 'images'
@@ -64,26 +59,50 @@ class PersonalInformation extends Component {
         };
 
         ImagePicker.showImagePicker(options, (response) => {
-            console.log('Response = ', response);
-
             if (response.didCancel) {
                 console.log('User cancelled image picker');
             }
             else if (response.error) {
                 console.log('ImagePicker Error: ', response.error);
             }
-            else if (response.customButton) {
-                console.log('User tapped custom button: ', response.customButton);
-            }
             else {
-                let source = { uri: response.uri };
-
-                // You can also display the image using data:
-                // let source = { uri: 'data:image/jpeg;base64,' + response.data };
-
+                let source = response.uri;
                 this.setState({
-                    avatarSource: source
+                    avatar: source,
+                    getImage: response
                 });
+            }
+        });
+    }
+
+    uploadImage(){
+        let obj = this.state.getImage;
+        const file = {
+            uri: obj.uri,
+            name: obj.fileName,
+            type: obj.type
+        };
+
+        const options = {
+            keyPrefix: "uploads/",
+            bucket: "financebakerz",
+            region: Settings.AWSRegion,
+            accessKey: Settings.AWSAccessKeyId,
+            secretKey: Settings.AWSSecretAccessKey,
+            successActionStatus: 201
+        };
+
+        RNS3.put(file, options).then(response => {
+            if (response.status !== 201){
+                //throw new Error("Failed to upload image to S3");
+                showAlert('Error', 'Failed to upload image to S3');
+                this.setState({loading: false});
+            } else {
+                Meteor.collection('users').update(Meteor.userId(), {$set: {"profile.avatar": response.body.postResponse.location}});
+                showAlert('Success', 'Profile updated successfully');
+                this.setState({name: '', number: '', email: '', address: '', username: ''});
+                this.setState({loading: false});
+                this.props.navigation.goBack();
             }
         });
     }
@@ -97,7 +116,7 @@ class PersonalInformation extends Component {
                     <View style = {PersonalInformationStyle.inputContainer}>
                         <View style = {PersonalInformationStyle.avatarContainer}>
                             <TouchableOpacity
-                                onPress = {this.testing.bind(this)}>
+                                onPress = {this.getImagePicker.bind(this)}>
                                 <Image source = {userAvatar} style = {PersonalInformationStyle.userAvatar}></Image>
                             </TouchableOpacity>
                         </View>

@@ -5,9 +5,13 @@ export const ProjectsStyles = StyleSheet.create({
   },
   filterContainer : {
     flex : 1,
-    justifyContent : 'center',
-    backgroundColor : '#f7f7f7'
+    justifyContent : 'center'
   },
+    projectFilterBg:{
+      flex : 1,
+        width : null,
+        resizeMode : 'cover'
+    },
   listViewContainer: {
     flex : 8,
   },
@@ -60,14 +64,14 @@ export const ProjectsStyles = StyleSheet.create({
     fontSize : 15
   },
   listViewContainerItem:{
-    borderColor : '#cdcdcd',
-    borderWidth: 1,
-    borderTopColor : 'transparent',
+    borderBottomColor : '#ddd',
+    borderBottomWidth: 1,
     flexDirection:'row',
-    paddingVertical:22
+    paddingVertical:15
   },
   BankText:{
     fontFamily: 'QuicksandBook-Regular',
+      fontSize : 11
   },
   loader:{
     flex :1,

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { View, Text,TouchableOpacity,ListView} from 'react-native';
+import { View, Text,TouchableOpacity,ListView, Image} from 'react-native';
 import { ProjectsStyles } from 'FinanceBakerZ/src/components/projects/ProjectsStyle';
 import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
@@ -78,6 +78,7 @@ class Projects extends Component {
     if (projectsReady) {
       return (
         <ViewContainer style={ProjectsStyles.projectMainContainer}>
+          <Image source={require('FinanceBakerZ/src/images/filterBg.png')} style={ProjectsStyles.projectFilterBg}>
           <TouchableOpacity style={ProjectsStyles.filterContainer}
                             activeOpacity={0.75}
                             onPress={()=> {navigate('ProjectSelection', {updateQuery: this.updateQuery, updateProjectState, filter, getUpdatedQuery, updatedQuerySet, statuses: this.statuses, findStatusLabel: this.findStatusLabel})}}>
@@ -88,10 +89,11 @@ class Projects extends Component {
                 <Text style={ProjectsStyles.BankText}>Status: {this.findStatusLabel(status)}</Text>
               </View>
               <View style={ProjectsStyles.filterIcon}>
-                <Icon name="filter" size={35}/>
+                <Icon name="filter" size={25}/>
               </View>
             </View>
           </TouchableOpacity>
+          </Image>
           <View style={ProjectsStyles.listViewContainer}>
             {projects.length ? <ListView
                 dataSource={ds.cloneWithRows(projects)}

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { View, Text, TouchableOpacity} from 'react-native';
+import { View, Text, TouchableOpacity,Image} from 'react-native';
 import { TransactionsStyles } from 'FinanceBakerZ/src/components/transactions/TransactionsStyle';
 import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
@@ -51,6 +51,7 @@ class Transactions extends Component {
       return(
         <ViewContainer>
           <View style={TransactionsStyles.filterContainer}>
+            <Image source={require('FinanceBakerZ/src/images/filterBg.png')} style={TransactionsStyles.transitionFilterBg}>
             <TouchableOpacity style={TransactionsStyles.filterMainContainer}  activeOpacity={0.7} onPress={() => navigate('Selection', {params, multiple, bankAcc, updateParentState})} >
               <View style={TransactionsStyles.filterContainerTxt}>
                 <Text style={TransactionsStyles.text}>Accounts: {(bankList.length ? bankList.map((val, i, arr) => (val.check ? ' ' + val.name + ' |' : '')) : 'All')}</Text>
@@ -70,6 +71,7 @@ class Transactions extends Component {
                 <Icon name="filter" size={25} />
               </View>
             </TouchableOpacity>
+            </Image>
           </View>
           <View style={TransactionsStyles.tabContainer}>
             <TransactionTabNavigator screenProps={{incomes, expenses, transactions, transactionsLoading}} />

@@ -27,6 +27,11 @@ export const TransactionsStyles = StyleSheet.create({
     alignItems: 'flex-end',
     justifyContent: 'center'
   },
+    transitionFilterBg:{
+        flex : 1,
+        width : null,
+        resizeMode : 'cover'
+    },
 
   text: {
     fontFamily: 'QuicksandBook-Regular',

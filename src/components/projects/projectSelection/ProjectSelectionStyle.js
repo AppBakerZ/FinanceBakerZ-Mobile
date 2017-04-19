@@ -18,7 +18,7 @@ export const ProjectSelectionStyles = StyleSheet.create({
   },
 
   filterShowContainer: {
-    flex: 1.3,
+    flex: 1.2,
     justifyContent: 'space-around',
     paddingLeft: 10,
     borderBottomColor: '#cbcbcb',
@@ -26,12 +26,11 @@ export const ProjectSelectionStyles = StyleSheet.create({
   },
 
   filterCon: {
-    flex: 2,
-    paddingVertical: 10
+    flex: 3,
+    paddingVertical: 12,
   },
 
   projectNameCon: {
-    flex: 1,
     justifyContent: 'center'
   },
 

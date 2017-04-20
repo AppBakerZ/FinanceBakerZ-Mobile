@@ -31,8 +31,6 @@ export default class ProjectSelectionScreen extends Component{
 
     let updatedQueryObj = updatedQuerySet ? updatedQuerySet : {limit: 20}; // setting previously selected filters if available
     updatedQuery.set('query', updatedQueryObj);
-
-
   }
 
   componentDidMount() {
@@ -42,6 +40,7 @@ export default class ProjectSelectionScreen extends Component{
   submit(){
     let {filter, query} = this.state;
     let {goBack, state} = this.props.navigation;
+
     state.params.getUpdatedQuery({updatedQuerySet: updatedQuery.get('query')}); // setting updatedQuery in Project's state
     state.params.updateProjectState(filter);  // calling updateProjectState from Projects
     state.params.updateQuery(updatedQuery.get('query')); // calling updateQuery function from Projects
@@ -77,7 +76,6 @@ export default class ProjectSelectionScreen extends Component{
       </Picker>
     );
   }
-
 
   render(){
 

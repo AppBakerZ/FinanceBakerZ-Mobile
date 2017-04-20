@@ -10,6 +10,7 @@ import DashboardScreen, {DashboardTabNavigator} from 'FinanceBakerZ/src/screens/
 import DashboardSelection  from 'FinanceBakerZ/src/components/dashboard/dashboardSelection/DashboardSelection';
 import ProjectsScreen from 'FinanceBakerZ/src/screens/Projects';
 import ProjectSelectionScreen from 'FinanceBakerZ/src/components/projects/projectSelection/ProjectSelection';
+import CreateProject from 'FinanceBakerZ/src/components/projects/CreateProject';
 import TransactionsScreen from 'FinanceBakerZ/src/screens/Transactions';
 import TransactionSelection from 'FinanceBakerZ/src/components/transactions/transactionSelection/TransactionSelection';
 import AccountsScreen from 'FinanceBakerZ/src/screens/Accounts';
@@ -125,6 +126,10 @@ const ProjectsStack = StackNavigator({
     navigationOptions: {
       header: header
     }
+  },
+  CreateProject: {
+    screen: CreateProject,
+    navigationOptions: nestingHeaders('Create Project')
   },
   ProjectSelection: {
     screen: ProjectSelectionScreen,

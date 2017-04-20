@@ -176,7 +176,7 @@ const CategoriesStack = StackNavigator({
   },
     AddCategory : {
         screen : AddCategory,
-        navigationOptions : nestingHeaders('AddCategory')
+        navigationOptions : nestingHeaders('Add Category')
     }
 });
 

@@ -8,7 +8,7 @@ import {showAlert, validateEmail} from 'FinanceBakerZ/src/customLibrary';
 import  Meteor, { createContainer } from 'react-native-meteor';
 import ImagePicker from 'react-native-image-picker';
 import { RNS3 } from 'react-native-aws3';
-import Settings from 'FinanceBakerZ/settings.json';
+//import Settings from 'FinanceBakerZ/settings.json';
 
 class PersonalInformation extends Component {
     constructor(props) {

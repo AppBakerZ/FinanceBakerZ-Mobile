@@ -68,10 +68,67 @@ export const SubCategoryStyles = StyleSheet.create({
         borderTopColor : '#ffffff',
         borderWidth: 1
     },
+    categoryIconsDiv:{
+        flex : 1,
+        alignItems : 'center',
+        borderColor : '#cdcdcd',
+        borderWidth : 1,
+        paddingVertical : 20
+    },
   itemsText:{
     fontSize : 15
   },
     fabButtonBg:{
         backgroundColor: '#008142'
+    },
+    addCategoryMain:{
+        flex : 1,
+    },
+    addCategoryContainer:{
+        flex : 1,
+    },
+    categoryNameField: {
+        borderBottomWidth: 1,
+        borderBottomColor: '#dadada',
+        justifyContent: 'flex-end',
+        paddingTop : 30
+    },
+    input:{
+        fontFamily: 'QuicksandBook-Regular',
+        fontSize: 15,
+        height: 48,
+        paddingLeft: 12
+    },
+    iconParent: {
+        flex: 1,
+        paddingBottom : 10
+    },
+    CategoryIconList:{
+    flex : 4,
+        margin : 10,
+        borderColor : '#cdcdcd',
+        borderWidth: 1
+    },
+    SelectCategoryIcon:{
+        flex : 1,
+    },
+    categorySelectionIcon: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        borderBottomWidth: 1,
+        borderBottomColor: '#dadada'
+    },
+    categoryIcons:{
+        flexDirection : 'row'
+    },
+    textLeft: {
+        paddingLeft: 12
+    },
+    iconRight: {
+        flex: 1,
+        textAlign: 'right',
+        paddingRight: 19
     }
+
 });

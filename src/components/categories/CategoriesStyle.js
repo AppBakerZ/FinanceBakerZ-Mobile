@@ -38,5 +38,8 @@ export const CategoriesStyles = StyleSheet.create({
     },
     scroll :{
         flex : 1
-    }
+    },
+    fabButtonBg:{
+        backgroundColor: '#008142'
+    },
 });

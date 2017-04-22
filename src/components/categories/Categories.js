@@ -4,6 +4,8 @@ import { CategoriesStyles } from 'FinanceBakerZ/src/components/categories/Catego
 import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
 import CategoryIcon from 'FinanceBakerZ/src/icons/CategoryIcon';
 import Meteor, { createContainer } from 'react-native-meteor';
+import FabButton from 'FinanceBakerZ/src/components/button/FabButton';
+
 
 let firstImg = require("FinanceBakerZ/src/images/category/img1.png");
 let secondImg = require("FinanceBakerZ/src/images/category/Category-Img-Box2.png");
@@ -67,6 +69,7 @@ class Categories extends Component {
   }
   render() {
     const { loading } = this.state;
+      let {navigate} = this.props.navigation;
     return (
       <ViewContainer>
         <Image source={require('FinanceBakerZ/src/images/app-background.png')} style={CategoriesStyles.backgroundImage}>
@@ -75,6 +78,7 @@ class Categories extends Component {
             </ScrollView>
             : <View style={{flex: 1, justifyContent: 'center'}}><ActivityIndicator size={Platform.OS === 'ios' ? 'large' : 150} color="#008142"/></View>}
         </Image>
+          {!this.state.loading ? <FabButton iconName="add" iconColor="#fff" style={CategoriesStyles.fabButtonBg} onPress={() => navigate('AddCategory')} /> : <Text></Text>}
       </ViewContainer>
     );
   }

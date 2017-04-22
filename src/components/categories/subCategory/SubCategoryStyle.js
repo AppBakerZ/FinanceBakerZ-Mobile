@@ -1,4 +1,5 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native';
+let screen = Dimensions.get('window');
 
 export const SubCategoryStyles = StyleSheet.create({
   backgroundImage: {
@@ -73,7 +74,7 @@ export const SubCategoryStyles = StyleSheet.create({
         alignItems : 'center',
         borderColor : '#cdcdcd',
         borderWidth : 1,
-        paddingVertical : 20
+        paddingVertical : 20,
     },
   itemsText:{
     fontSize : 15
@@ -83,29 +84,44 @@ export const SubCategoryStyles = StyleSheet.create({
     },
     addCategoryMain:{
         flex : 1,
+        flexDirection : 'row',
+    },
+    addCategorySub:{
+        flex : 1,
     },
     addCategoryContainer:{
         flex : 1,
     },
     categoryNameField: {
+        flex : 2,
         borderBottomWidth: 1,
         borderBottomColor: '#dadada',
-        justifyContent: 'flex-end',
-        paddingTop : 30
+        justifyContent: 'flex-end'
+    },
+    categoryStyle:{
+       flex : 1,
+    },
+    categoryName:{
+        flex : 1,
     },
     input:{
         fontFamily: 'QuicksandBook-Regular',
         fontSize: 15,
-        height: 48,
-        paddingLeft: 12
+        height: 50,
+        paddingLeft: 12,
     },
     iconParent: {
-        flex: 1,
+        flex:1.2,
         paddingBottom : 10
     },
+    febButton:{
+      flex : 2,
+    },
     CategoryIconList:{
-    flex : 4,
-        margin : 10,
+        flex : 7,
+        marginLeft : 10,
+        marginRight : 10,
+        marginBottom : 5,
         borderColor : '#cdcdcd',
         borderWidth: 1
     },
@@ -116,8 +132,11 @@ export const SubCategoryStyles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
-        borderBottomWidth: 1,
-        borderBottomColor: '#dadada'
+    },
+    categorySelectionParentIcon:{
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     categoryIcons:{
         flexDirection : 'row'
@@ -128,7 +147,16 @@ export const SubCategoryStyles = StyleSheet.create({
     iconRight: {
         flex: 1,
         textAlign: 'right',
-        paddingRight: 19
+        paddingRight: 19,
+    },
+    modal:{
+        alignItems: 'center',
+        height: 600,
+        width: 500
+    },
+    renderListCon:{
+        paddingLeft: 15,
+        margin : 100
     }
 
 });

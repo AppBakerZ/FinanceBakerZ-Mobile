@@ -216,10 +216,6 @@ export default [
         value: 'icon-icons_painting'
     },
     {
-        label: 'net-cable',
-        value: 'icon-icons_net-cable'
-    },
-    {
         label: 'lawyer',
         value: 'icon-icons_lawyer'
     },
@@ -420,8 +416,8 @@ export default [
         value: 'icon-icons_extension-wire'
     },
     {
-        label: 'flight-ticket2',
-        value: 'icon-icons_flight-ticket2'
+        label: 'flight-ticket',
+        value: 'icon-icons_flight-ticket'
     },
     {
         label: 'hand-wash-liquid',
@@ -445,7 +441,7 @@ export default [
     },
     {
         label: 'net-cable2',
-        value: 'icon-icons_net-cable2'
+        value: 'icon-icons_net-cable'
     },
     {
         label: 'news-paper',

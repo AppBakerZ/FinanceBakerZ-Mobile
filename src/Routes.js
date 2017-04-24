@@ -169,10 +169,6 @@ const CategoriesStack = StackNavigator({
     navigationOptions: {
       header: header
     },
-      AddCategory : {
-          screen : AddCategory,
-          navigationOptions : nestingHeaders('AddCategory')
-      }
   },
   SubCategories: {
     screen: SubCategoriesScreen,

@@ -9,24 +9,26 @@ import FabButton from 'FinanceBakerZ/src/components/button/FabButton';
 import Meteor from 'react-native-meteor';
 import {showAlert} from 'FinanceBakerZ/src/customLibrary';
 
-
-export default class CreateProject extends Component {
-
+export default class UpdateProject extends  Component {
   constructor(props){
     super(props);
+    let {statuses, projectDetails} = props.navigation.state.params;
+
+
     this.state = {
-      date: new Date(),
-      name: '',
-      clientName: '',
-      type: '',
-      amount: '',
-      status: 'progress',
-      startAt: '',
+      _id: projectDetails._id,
+      date: projectDetails.startAt,
+      name: projectDetails.name,
+      clientName: projectDetails.client.name,
+      type: projectDetails.type,
+      amount: projectDetails.amount.toString(),
+      status: projectDetails.status,
+      startAt: projectDetails.startAt,
       active: false,
       loading: false,
       modalVisible: false
     };
-    let {statuses} = props.navigation.state.params;
+
     this.statuses  = statuses.slice(1);
     this.renderPicker = this.renderPicker.bind(this);
   }
@@ -40,16 +42,23 @@ export default class CreateProject extends Component {
 
   submit(){
     this.setState({loading: true});
-    const {name, clientName, type, amount, status, startAt} = this.state;
+    const {_id, name, clientName, type, amount, status, startAt} = this.state;
     if(name && clientName && type && amount && status && startAt){
-      Meteor.call('projects.insert', {
+      Meteor.call('projects.update', {
         project: {
-          name, client: {name: clientName}, type,
-          amount: Number(amount), status, startAt
+          _id,
+          name,
+          client: {
+            name: clientName
+          },
+          type,
+          amount: Number(amount),
+          status,
+          startAt
         }
       }, (err, response) => {
         if(response){
-          showAlert('Success', name + ' has been added.');
+          showAlert('Success', name + ' has been updated.');
           this.props.navigation.goBack();
         }else{
           showAlert('Error', err.reason);

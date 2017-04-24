@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { View, Text,TouchableOpacity,ListView, Image} from 'react-native';
+import { View, Text, TouchableOpacity, ListView, Image, Alert} from 'react-native';
 import { ProjectsStyles } from 'FinanceBakerZ/src/components/projects/ProjectsStyle';
 import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
@@ -9,7 +9,8 @@ import {loggedUserCurrency, alterIconName, currencyStandardFormat, formatDate} f
 import Meteor, { createContainer, ReactiveDict } from 'react-native-meteor';
 import Modal from 'react-native-modalbox';
 import FabButton from 'FinanceBakerZ/src/components/button/FabButton';
-
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome'
+import {showAlert} from 'FinanceBakerZ/src/customLibrary';
 
 
 let query = new ReactiveDict('projectsDict');
@@ -29,9 +30,7 @@ class Projects extends Component {
       { label: 'Waiting for Feedback', value: 'waiting' },
       { label: 'Completed',  value: 'completed' }
     ];
-    query.set('query', {
-      limit: 20
-    });
+    setTimeout(() => query.set('query', {limit: 20 }));
     this.findStatusLabel = this.findStatusLabel.bind(this);
   }
 
@@ -63,8 +62,7 @@ class Projects extends Component {
   }
 
   updateQuery(updatedQuery){
-    updatedQuery = updatedQuery ? updatedQuery : {limit: 20};
-    query.set('query', updatedQuery);
+    setTimeout(() => query.set('query', updatedQuery));
   }
 
   findStatusLabel(status){
@@ -76,20 +74,69 @@ class Projects extends Component {
     this.refs.modal.open();
   }
 
+  getPaidAmountOfProject(_id){
+    Meteor.call('statistics.incomesGroupByProject', {
+      project: {
+        _id: _id
+      }
+    }, (err, project) => {
+      if (!err) {
+        this.setState({
+          amountPaid: project.total
+        });
+      }
+    });
+  }
+
+  deleteProject(_id, name){
+    Meteor.call('projects.remove', {
+      project: {
+        _id
+      }
+    }, (err, response) => {
+      if(response){
+        showAlert('Success', name + ' project has been deleted.');
+        this.refs.modal.close();
+      }
+    });
+  }
+
+  removeProject(_id, name) {
+    showAlert('BANK PROJECT',
+      'This will remove your all data \nAre you sure to remove your ' + name + ' project?',
+      [
+        {text: 'Go Back'},
+        {text: 'Yes, Remove', onPress: () => this.deleteProject(_id, name), style: 'cancel'},
+      ],
+    );
+  }
+
+
   renderProjectDetail(){
     let {projectDetails} = this.state;
     projectDetails  = projectDetails ? projectDetails  : '';
     if(projectDetails){
-      let { name, status, client, startAt, amount } = projectDetails;
+      let { _id, name, status, client, startAt, amount } = projectDetails;
+      this.getPaidAmountOfProject(_id);
       return(
         <View style={ProjectsStyles.projectDetailCon}>
-          <Text style={[ProjectsStyles.textBold, ProjectsStyles.headingModal]}>{name.toUpperCase()}</Text>
+          <View style={ProjectsStyles.projectTitleAndBtn}>
+            <View style={ProjectsStyles.projectDetailButtons}>
+              <Text style={[ProjectsStyles.textBold, ProjectsStyles.headingModal]}>{name.toUpperCase()}</Text>
+            </View>
+            <View style={ProjectsStyles.projectDetailTitle}>
+              <Icon name="edit" style={ProjectsStyles.editBtn} size={28} onPress={() => {this.refs.modal.close(); this.props.navigation.navigate('UpdateProject', {statuses: this.statuses, projectDetails})}} />
+              <FontAwesomeIcon name="trash" style={ProjectsStyles.deleteBtn} size={28} onPress={() => this.removeProject(_id, name)} />
+            </View>
+          </View>
           <Text style={ProjectsStyles.projectDetailText}>Client Name: {client.name}</Text>
           <View style={ProjectsStyles.projectDetailAmount}>
-            <Text style={ProjectsStyles.projectDetailText}>Amount: </Text>
+            <Text style={ProjectsStyles.projectDetailText}>Amount Agreed: </Text>
             {loggedUserCurrency() ? <CurrencyIcon name={alterIconName(loggedUserCurrency())} size={18}/> : <Text></Text>}
             <Text style={ProjectsStyles.projectDetailText}> {currencyStandardFormat(amount)}</Text>
           </View>
+          <Text style={ProjectsStyles.projectDetailText}>Amount Paid: {this.state.amountPaid || 0}</Text>
+          <Text style={ProjectsStyles.projectDetailText}>Amount Remaining: {amount - this.state.amountPaid || amount}</Text>
           <Text style={ProjectsStyles.projectDetailText}>Project Status: {this.findStatusLabel(status)}</Text>
           <Text style={ProjectsStyles.projectDetailText}>Started At: {formatDate({type: 'getCustomDate', date: startAt, format: 'MMMM DD, YYYY'})}</Text>
         </View>
@@ -131,12 +178,12 @@ class Projects extends Component {
                 renderRow={this.renderRow.bind(this)}
               /> : <View style={ProjectsStyles.errorMsg}><Text style={ProjectsStyles.BankText}>YOU DO NOT HAVE ANY PROJECTS</Text></View>}
           </View>
-          {!modalVisible ? <FabButton iconName="add" iconColor="#fff" onPress={() => navigate('CreateProject', {statuses: this.statuses, findStatusLabel: this.findStatusLabel})} /> : <View></View>}
           <Modal style={ProjectsStyles.modal} onClosed={() => this.setState({modalVisible: false})} position={"bottom"} ref={"modal"} swipeArea={20}>
             <View style={ProjectsStyles.renderDetailCon}>
               {this.renderProjectDetail()}
             </View>
           </Modal>
+          {!modalVisible ? <FabButton iconName="add" iconColor="#fff" onPress={() => navigate('CreateProject', {statuses: this.statuses, findStatusLabel: this.findStatusLabel})} /> : <View></View>}
         </ViewContainer>
       );
     }

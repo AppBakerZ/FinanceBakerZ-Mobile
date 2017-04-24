@@ -98,12 +98,13 @@ export const ProjectsStyles = StyleSheet.create({
 
   projectDetailCon: {
     flex: 1,
+    justifyContent: 'space-around',
+    marginBottom: 8
   },
 
   projectDetailText: {
     fontFamily: 'QuicksandBook-Regular',
-    fontSize: 14,
-    paddingVertical: 5
+    fontSize: 14
   },
 
   projectDetailAmount: {
@@ -112,16 +113,15 @@ export const ProjectsStyles = StyleSheet.create({
   },
 
   headingModal: {
-    fontSize: 18,
+    fontSize: 20,
     color: '#008142',
-    paddingVertical: 20,
-    textAlign: 'center'
+    paddingVertical: 20
   },
 
   modal: {
     justifyContent: 'center',
     alignItems: 'center',
-    height: 200
+    height: 250
   },
 
   renderDetailCon: {
@@ -130,7 +130,7 @@ export const ProjectsStyles = StyleSheet.create({
     paddingLeft: 15
   },
 
-  /* CREATE PROJECT STYLING */
+  /* CreateProject Styling */
 
   inputBorderBottom: {
     justifyContent: 'flex-end',
@@ -139,7 +139,8 @@ export const ProjectsStyles = StyleSheet.create({
   },
 
   inputProjectNameCon:{
-    flex: 1
+    flex: 1,
+    justifyContent: 'center'
   },
 
   inputClientName:{
@@ -213,6 +214,31 @@ export const ProjectsStyles = StyleSheet.create({
 
   bottomCon: {
     flex: 4
+  },
+
+  projectTitleAndBtn: {
+    flexDirection: 'row'
+  },
+
+  projectDetailTitle: {
+    flex: 0.5,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    paddingHorizontal: 20
+  },
+
+  projectDetailButtons: {
+    flex: 1
+  },
+
+  editBtn: {
+    color: '#ff9c00',
+    paddingRight: 18
+  },
+
+  deleteBtn: {
+    color: '#c71212'
   }
 
 });

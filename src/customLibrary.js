@@ -11,11 +11,11 @@ exports.validateEmail = (email)  => {
   return !(atPos < 1 || dotPos < atPos+2 || dotPos+2 >= email.length);
 };
 
-exports.showAlert = (title, message) =>{
+exports.showAlert = (title, message, buttonsArray) =>{
   Alert.alert(
     title,
     message,
-    [{text: 'OK' }],
+    buttonsArray ? buttonsArray : [{text: 'OK' }],
     {cancelable: false}
   )
 };

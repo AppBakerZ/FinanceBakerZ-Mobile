@@ -11,6 +11,7 @@ import DashboardSelection  from 'FinanceBakerZ/src/components/dashboard/dashboar
 import ProjectsScreen from 'FinanceBakerZ/src/screens/Projects';
 import ProjectSelectionScreen from 'FinanceBakerZ/src/components/projects/projectSelection/ProjectSelection';
 import CreateProject from 'FinanceBakerZ/src/components/projects/CreateProject';
+import UpdateProject from 'FinanceBakerZ/src/components/projects/UpdateProject';
 import TransactionsScreen from 'FinanceBakerZ/src/screens/Transactions';
 import TransactionSelection from 'FinanceBakerZ/src/components/transactions/transactionSelection/TransactionSelection';
 import AccountsScreen from 'FinanceBakerZ/src/screens/Accounts';
@@ -131,6 +132,10 @@ const ProjectsStack = StackNavigator({
     screen: CreateProject,
     navigationOptions: nestingHeaders('Create Project')
   },
+  UpdateProject: {
+    screen: UpdateProject,
+    navigationOptions: nestingHeaders('Update Project')
+  },
   ProjectSelection: {
     screen: ProjectSelectionScreen,
     navigationOptions: nestingHeaders('Selection', true)
@@ -168,20 +173,16 @@ const CategoriesStack = StackNavigator({
     screen: CategoriesScreen,
     navigationOptions: {
       header: header
-    },
-      AddCategory : {
-          screen : AddCategory,
-          navigationOptions : nestingHeaders('AddCategory')
-      }
+    }
   },
   SubCategories: {
     screen: SubCategoriesScreen,
     navigationOptions: nestingHeaders('Categories')
   },
-    AddCategory : {
-        screen : AddCategory,
-        navigationOptions : nestingHeaders('Add Category')
-    }
+  AddCategory : {
+    screen : AddCategory,
+    navigationOptions : nestingHeaders('Add Category')
+  }
 });
 
 const SettingsStack = StackNavigator({

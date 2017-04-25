@@ -29,12 +29,12 @@ class Categories extends Component {
   }
   getCategory(section, i){
     return(
-      <View style={CategoriesStyles.main}>
+      <View style={CategoriesStyles.main} key={i}>
         {section.map((categoryObject, index) => {
           let icon = categoryObject.icon.replace('icon-' , "");
           i++;
           return(
-            <Image source={((i % 2 == (Math.ceil(i / 2) % 1 == 0) ? 0 : 1) ? firstImg : secondImg)} style={CategoriesStyles.Texture}>
+            <Image source={((i % 2 == (Math.ceil(i / 2) % 1 == 0) ? 0 : 1) ? firstImg : secondImg)} key={index} style={CategoriesStyles.Texture}>
               <View key={index} style={CategoriesStyles.child}>
                 <TouchableOpacity activeOpacity={0.3 }  onPress={this._onPressButton.bind(this, categoryObject._id)}>
                   <CategoryIcon name ={icon} style={CategoriesStyles.customIcon} size={55} />

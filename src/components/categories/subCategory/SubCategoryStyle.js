@@ -2,63 +2,63 @@ import {StyleSheet, Dimensions} from 'react-native';
 let screen = Dimensions.get('window');
 
 export const SubCategoryStyles = StyleSheet.create({
-  backgroundImage: {
-    flex: 1,
-    resizeMode: 'cover',
-    width: null,
-    height: null
-  },
-  main: {
-    flex : 1,
-    flexDirection : 'row'
-  },
-  child2: {
-    flex : 1,
-    justifyContent: 'center'
-  },
+    backgroundImage: {
+        flex: 1,
+        resizeMode: 'cover',
+        width: null,
+        height: null
+    },
+    main: {
+        flex : 1,
+        flexDirection : 'row'
+    },
+    child2: {
+        flex : 1,
+        justifyContent: 'center'
+    },
 
-  customIcon :{
-    color: '#ffffff',
-    flex : 1,
-    textAlign : 'left',
-    padding : 7,
-  },
+    customIcon :{
+        color: '#ffffff',
+        flex : 1,
+        textAlign : 'left',
+        padding : 7,
+    },
 
-  customIconText : {
-    color: '#ffffff',
-    fontSize: 20,
-    textAlign : 'right',
-    fontFamily: 'QuicksandBold-Regular',
-      flex : 5
-  },
+    customIconText : {
+        color: '#ffffff',
+        fontSize: 20,
+        textAlign : 'right',
+        fontFamily: 'QuicksandBold-Regular',
+        flex : 5
+    },
 
-  categoryChild: {
-    justifyContent: 'center',
-  },
+    categoryChild: {
+        justifyContent: 'center',
+    },
 
-  scroll:{
-    flex : 1
-  },
-  touchableOpacity:{
-    flex:1,
-    flexDirection : 'row',
-    padding: 10,
-    alignItems: 'center'
-  },
-  mainDiv : {
-    margin : 20,
-    flex : 1
-  },
-  Texture1 :{
-    flex :1,
-    flexDirection : 'row',
-    height : null
-  },
-  categoryChildren :{
-      fontFamily: 'QuicksandBook-Regular',
-  },
+    scroll:{
+        flex : 1
+    },
+    touchableOpacity:{
+        flex:1,
+        flexDirection : 'row',
+        padding: 10,
+        alignItems: 'center'
+    },
+    mainDiv : {
+        margin : 20,
+        flex : 1
+    },
+    Texture1 :{
+        flex :1,
+        flexDirection : 'row',
+        height : null
+    },
+    categoryChildren :{
+        fontFamily: 'QuicksandBook-Regular',
+    },
     noCategoryChildren:{
-    alignItems:'center',
+        alignItems:'center',
     },
     subCategoryChildren :{
         flex : 1,
@@ -76,9 +76,9 @@ export const SubCategoryStyles = StyleSheet.create({
         borderWidth : 1,
         paddingVertical : 20,
     },
-  itemsText:{
-    fontSize : 15
-  },
+    itemsText:{
+        fontSize : 15
+    },
     fabButtonBg:{
         backgroundColor: '#008142'
     },
@@ -99,7 +99,7 @@ export const SubCategoryStyles = StyleSheet.create({
         justifyContent: 'flex-end'
     },
     categoryStyle:{
-       flex : 1,
+        flex : 1,
     },
     categoryName:{
         flex : 1,
@@ -115,7 +115,7 @@ export const SubCategoryStyles = StyleSheet.create({
         paddingBottom : 10
     },
     febButton:{
-      flex : 2,
+        flex : 2,
     },
     CategoryIconList:{
         flex : 7,
@@ -149,14 +149,25 @@ export const SubCategoryStyles = StyleSheet.create({
         textAlign: 'right',
         paddingRight: 19,
     },
-    modal:{
+    ParentCategoryText: {
+        justifyContent: 'center',
         alignItems: 'center',
-        height: 600,
-        width: 500
+        height: 200
     },
-    renderListCon:{
-        paddingLeft: 15,
-        margin : 100
+    BankText:{
+        fontFamily: 'QuicksandBook-Regular'
+    },
+
+    renderListCon: {
+        width: screen.width,
+        paddingLeft: 15
+    },
+    ParentCategory:{
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        borderBottomWidth: 1,
+        borderBottomColor: '#dadada'
     }
 
 });

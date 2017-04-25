@@ -12,27 +12,46 @@ import FabButton from 'FinanceBakerZ/src/components/button/FabButton';
 
 class AddCategory extends Component{
 
-
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
-
+            parent: '',
+            renderCategoryIcon: this.renderCategoryIcon()
         };
+    }
+    submit(){
+        let {name, icon, parent} = this.state;
+        icon = icon.value;
+        Meteor.call('categories.insert', {
+            category: {
+                name,
+                icon,
+                parent
+            }
+        }, (err, response) => {
+            if(response){
+                alert('success')
+            }else{
+                console.warn(err.reason)
+            }
+
+        });
 
     }
+
     getParentCategory(){
         let categories = this.props.categories;
+        let category = categories.map((categoryParent, i) =>  <Picker.Item key={i} label={categoryParent.name} value={categoryParent.name}/>);
+        return(
+            <Picker
+                selectedValue={this.state.parent}
+                onValueChange={(parent) => this.setState({parent})}>
+                {category}
+            </Picker>
+        );
 
-        return (<View>{categories.map((categoryParent, i) => {
-            return (
-                <View style={SubCategoryStyles.categoryStyle} key={i}>
-                    <Text style={SubCategoryStyles.categoryName}>{categoryParent.name}</Text>
-                </View>
-            );
-        })
-        }</View>);
     }
-    renderCategoryIcons(){
+    renderCategoryIcon(){
 
         let categoryIcons = chunk(CategoryIconsName, 3);
         return categoryIcons.map((iconArray, i) => {
@@ -41,7 +60,7 @@ class AddCategory extends Component{
                     {iconArray.map((icon, index) => {
                         let icon_name = icon.value.replace('icon-' , "");
                         return(
-                            <TouchableOpacity style={SubCategoryStyles.categoryIconsDiv} onPress={() => this.setState({icons: icon.label})} activeOpacity={0.75} key={index}>
+                            <TouchableOpacity style={SubCategoryStyles.categoryIconsDiv} onPress={() => this.setState({icon})} activeOpacity={0.75} key={index}>
                                 <CategoryIconShow name={icon_name } size={60}/>
                             </TouchableOpacity>
                         );
@@ -65,6 +84,7 @@ class AddCategory extends Component{
                                         maxLength = {30}
                                         autoCorrect={false}
                                         underlineColorAndroid="transparent"
+                                        onChangeText={name => this.setState({name})}
                                     />
                                 </KeyboardAvoidingView>
                             </View>
@@ -72,7 +92,7 @@ class AddCategory extends Component{
                         </ViewContainer>
                         <View style={SubCategoryStyles.SelectCategoryIcon}>
                             <View style={SubCategoryStyles.categorySelectionIcon}>
-                                <Text style={[SubCategoryStyles.textBold, SubCategoryStyles.textLeft]}>{this.state.icons ? this.state.icons : 'Select Category Icon'}</Text>
+                                <Text style={[SubCategoryStyles.textBold, SubCategoryStyles.textLeft]}>{this.state.icon ? this.state.icon.label : 'Select Category Icon'}</Text>
                                 <Icon size={10} name="down-arrow" style={SubCategoryStyles.iconRight} />
                             </View>
                         </View>
@@ -80,31 +100,33 @@ class AddCategory extends Component{
                             <ScrollView>
                                 <TouchableOpacity>
                                     <View>
-                                        {this.renderCategoryIcons()}
+                                        {this.state.renderCategoryIcon}
                                     </View>
                                 </TouchableOpacity>
                             </ScrollView>
                         </View>
                         <View style={SubCategoryStyles.iconParent}>
-                            <TouchableOpacity style={{flex : 1}} activeOpacity={0.75} onPress={() => this.refs.modal.open()}>
-                                <Text style={[SubCategoryStyles.textBold, SubCategoryStyles.textLeft]}></Text>
-                                <View style={SubCategoryStyles.categorySelectionParentIcon}>
-                                <Text style={[SubCategoryStyles.textBold, SubCategoryStyles.textLeft]}>{this.state.categoryIcons ? this.state.categoryIcons : 'Select Parent Category'}</Text>
-                                <Icon size={10} name="down-arrow" style={SubCategoryStyles.iconRight} />
-                            </View>
-                            </TouchableOpacity>
+                            {(Platform.OS !== 'ios') ? <View><Text>Select Parent Category</Text>{this.getParentCategory()}</View> :
+                                <TouchableOpacity style={SubCategoryStyles.ParentCategory} activeOpacity={0.75}
+                                                  onPress={() => this.refs.modal.open()}>
+                                    <Text style={[SubCategoryStyles.textBold, SubCategoryStyles.textLeft]}>a</Text>
+                                    <View style={SubCategoryStyles.categorySelectionParentIcon}>
+                                        <Text style={[SubCategoryStyles.textBold, SubCategoryStyles.textLeft]}>{this.state.categoryIcons ? this.state.categoryIcons : 'Select Parent Category'}</Text>
+                                        <Icon size={10} name="down-arrow" style={SubCategoryStyles.iconRight}/>
+                                    </View>
+                                </TouchableOpacity>
+                            }
                         </View>
                         <View style={SubCategoryStyles.febButton}>
-                            <FabButton iconName="check" iconColor="#fff"/>
+                            <FabButton iconName="check" iconColor="#fff" onPress={this.submit.bind(this)}/>
                         </View>
                     </View>
-                    <Modal style={SubCategoryStyles.modal} ref={"modal"}>
+                    <Modal style={SubCategoryStyles.modal} position={"bottom"} ref={"modal"} swipeArea={20}>
                         <View style={SubCategoryStyles.renderListCon}>
                             {this.getParentCategory()}
                         </View>
                     </Modal>
                 </Image>
-
             </ViewContainer>
         );
     }

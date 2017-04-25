@@ -36,7 +36,10 @@ export const TransactionsStyles = StyleSheet.create({
   text: {
     fontFamily: 'QuicksandBook-Regular',
     fontSize: 14
+  },
 
+  textBold:{
+    fontFamily: 'QuicksandBold-Regular',
   },
 
   tabContainer:{
@@ -92,8 +95,72 @@ export const TransactionsStyles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+
+  /*ViewTransaction Styling*/
+
+  viewTransactionMainCon: {
+    flex: 1
+  },
+
+  viewTransactionIdAndDateCon:{
+    flex: 0.6,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+
+  viewTransactionBankDepositCon: {
+    flex: 0.3,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+
+  viewTransactionDepositedInCon: {
+    flex: 0.6,
+    paddingVertical: 10,
+    justifyContent: 'space-around',
+    alignItems: 'center'
+  },
+
+  viewTransactionUserInfoCon: {
+    flex: 2,
+    alignItems: 'center',
+    paddingTop: 20
+
+  },
+
+  borderBottom: {
+    borderBottomColor: '#EEEEEE',
+    borderBottomWidth: 1
+  },
+
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover', // or 'stretch'
+    width: null,
+    height: null
+  },
+
+  greenText: {
+    color: '#008142'
+  },
+
+  redText: {
+    color: '#C81113'
+  },
+
+  paddingBottom: {
+    paddingBottom: 15
+  },
+
+  fabButton: {
+    backgroundColor: '#ff9c00'
+  },
+
+
+  currencyIconCon: {
+    flexDirection: 'row',
+    alignItems: 'center'
   }
-
-
 
 });

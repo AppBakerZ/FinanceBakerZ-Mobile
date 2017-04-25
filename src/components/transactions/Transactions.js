@@ -5,11 +5,12 @@ import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContai
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
 import TransactionTabScreen from 'FinanceBakerZ/src/components/transactions/TransactionTabScreen';
 import { TabNavigator, TabView } from 'react-navigation';
-import Meteor, {createContainer} from 'react-native-meteor';
+import Meteor, {createContainer, ReactiveDict} from 'react-native-meteor';
 import _ from 'underscore';
 import Loader from 'FinanceBakerZ/src/components/loader/Loader';
 import {alterName, formatDate} from 'FinanceBakerZ/src/customLibrary';
 
+let query = new ReactiveDict('transactionsDict');
 
 
 class Transactions extends Component {
@@ -20,10 +21,14 @@ class Transactions extends Component {
       updateParentState: (childState) => {this.setState(childState)}
     };
     this.setDefaultAccounts = this.setDefaultAccounts.bind(this);
+    setTimeout(() => query.set('query', {
+      limit: 25,
+      accounts: []
+    }));
   }
 
-  componentWillReceiveProps(props){
-    this.setDefaultAccounts(props.accounts)
+ componentWillReceiveProps(){
+    this.setDefaultAccounts(this.props.accounts);
   }
 
   setDefaultAccounts (accounts){
@@ -36,6 +41,9 @@ class Transactions extends Component {
     this.setState({multiple, bankAcc});
   }
 
+  updateQuery(updatedQuery){
+    setTimeout(() => query.set('query', updatedQuery));
+  }
 
   render() {
 
@@ -46,13 +54,15 @@ class Transactions extends Component {
     let params = this.state.childState || []; // date and bankList from TransactionSelection's state
     let bankList = params.bankList || [];
     let date = params.date || [];
+    let transactionQuery = query.get('query');
+    let updateQuery = this.updateQuery;
 
     if(!transactionsLoading){
       return(
         <ViewContainer>
           <View style={TransactionsStyles.filterContainer}>
             <Image source={require('FinanceBakerZ/src/images/filterBg.png')} style={TransactionsStyles.transitionFilterBg}>
-            <TouchableOpacity style={TransactionsStyles.filterMainContainer}  activeOpacity={0.7} onPress={() => navigate('Selection', {params, multiple, bankAcc, updateParentState})} >
+            <TouchableOpacity style={TransactionsStyles.filterMainContainer}  activeOpacity={0.7} onPress={() => navigate('Selection', {params, multiple, bankAcc, updateParentState, transactionQuery, updateQuery})} >
               <View style={TransactionsStyles.filterContainerTxt}>
                 <Text style={TransactionsStyles.text}>Accounts: {(bankList.length ? bankList.map((val, i, arr) => (val.check ? ' ' + val.name + ' |' : '')) : 'All')}</Text>
                 <Text style={TransactionsStyles.text}>
@@ -74,7 +84,7 @@ class Transactions extends Component {
             </Image>
           </View>
           <View style={TransactionsStyles.tabContainer}>
-            <TransactionTabNavigator screenProps={{incomes, expenses, transactions, transactionsLoading}} />
+            <TransactionTabNavigator screenProps={{incomes, expenses, transactions, transactionsLoading, navigate}} />
           </View>
         </ViewContainer>
       )
@@ -122,14 +132,13 @@ Transactions.propTypes = {
 
 export default createContainer(() => {
 
-
-  let transactionsHandle = Meteor.subscribe('incomes', 100);
-  Meteor.subscribe('expenses', 100);
+  let transactionsHandle = Meteor.subscribe('transactions', query.get('query'));
   Meteor.subscribe('accounts');
 
-  let incomes, expenses;
+  let incomes, expenses, transactions;
   incomes =  Meteor.collection('incomes').find({}).reverse();
   expenses = Meteor.collection('expenses').find({}).reverse();
+  transactions = _.sortBy(incomes.concat(expenses), function(transaction){return transaction.receivedAt || transaction.spentAt }).reverse();
   const transactionsLoading = !transactionsHandle.ready();
 
   return {
@@ -137,6 +146,6 @@ export default createContainer(() => {
     accounts: Meteor.collection('accounts').find({}),
     incomes: incomes.reverse(),
     expenses: expenses.reverse(),
-    transactions: _.sortBy(incomes.concat(expenses), function(transaction){return transaction.receivedAt || transaction.spentAt }).reverse()
+    transactions
   };
 }, Transactions);

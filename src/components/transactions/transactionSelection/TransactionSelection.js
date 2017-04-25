@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import { View, Text, Picker, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text , ScrollView, TouchableOpacity } from 'react-native';
 import { TransactionSelStyles } from 'FinanceBakerZ/src/components/transactions/transactionSelection/TransactionSelStyles';
 import TransactionSelectionTab from 'FinanceBakerZ/src/components/transactions/transactionSelection/TransactionSelectionTab';
 import { TabNavigator, TabView } from 'react-navigation';
 import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
-
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
 import Modal from 'react-native-modalbox';
 import { MKCheckbox, getTheme } from 'react-native-material-kit';
-import {formatDate} from 'FinanceBakerZ/src/customLibrary';
+import {formatDate, filterDate} from 'FinanceBakerZ/src/customLibrary';
 const theme = getTheme();
 
 let STATE;
@@ -50,7 +49,7 @@ export  default  class TransactionSelection extends  Component {
 
     let {state} = this.props.navigation;
     let multiple = state.params.multiple; // accounts id's from server
-    let {bankList, bankAccName, date} = this.state;
+    let {bankList, bankAccName} = this.state;
     let data = [];
 
     if(!state.params.params.bankList || !bankList.length) {
@@ -73,7 +72,15 @@ export  default  class TransactionSelection extends  Component {
   // invokes when tapping checked-icon on header
   submit(){
     let {state, goBack} = this.props.navigation;
+    let {transactionQuery, updateQuery} = state.params;
+    let {multiple, date} = this.state;
     state.params.updateParentState({childState: STATE}); // updating Transactions state
+    let copyQuery = transactionQuery;
+    let selectedDate = date.filter(date => date.checked);
+    copyQuery['accounts'] = multiple;
+    copyQuery['dateFilter'] = filterDate(selectedDate);
+    console.log(copyQuery);
+    updateQuery(copyQuery); // calling UpdateQuery from Transactions
     goBack();
   }
 

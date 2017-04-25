@@ -98,7 +98,7 @@ exports.currencyStandardFormat = (currency) =>{
 };
 
 exports.capitalizeFirstLetter  = (string) => {
-  return string ? string.charAt(0).toUpperCase() + string.slice(1) : '';
+  return typeof string != 'object'? string.charAt(0).toUpperCase() + string.slice(1) : '';
 };
 
 exports.chunk = (array, chunkSize) => {

@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import {Button, Image, Text, View, Platform} from 'react-native';
+import React from 'react';
+import {Text, Platform} from 'react-native';
 
 
 import LoginScreen from 'FinanceBakerZ/src/screens/auth/Login';
@@ -14,6 +14,7 @@ import CreateProject from 'FinanceBakerZ/src/components/projects/CreateProject';
 import UpdateProject from 'FinanceBakerZ/src/components/projects/UpdateProject';
 import TransactionsScreen from 'FinanceBakerZ/src/screens/Transactions';
 import TransactionSelection from 'FinanceBakerZ/src/components/transactions/transactionSelection/TransactionSelection';
+import ViewTransaction from 'FinanceBakerZ/src/components/transactions/ViewTransaction';
 import AccountsScreen from 'FinanceBakerZ/src/screens/Accounts';
 import AddAccount from 'FinanceBakerZ/src/components/accounts/AddAccount';
 import CategoriesScreen from 'FinanceBakerZ/src/screens/Categories';
@@ -59,8 +60,8 @@ const header = ({ state, navigate }) => {
            size={32}
            style={{marginLeft: 5, padding: 10}}
            onPress={() => {
-               navigate('DrawerOpen')
-                }}
+             navigate('DrawerOpen')
+           }}
     />
   );
 
@@ -80,11 +81,11 @@ function nestingHeaders(routeName, rightIconVisible) {
 
   let header = ({state}) => {
     let right = rightIconVisible ? (<Icon
-        name="checked"
-        size={28}
-        style={{paddingRight: 15}}
-        onPress={() => {state.params.submit()}}
-      />) : <Text></Text>;
+      name="checked"
+      size={28}
+      style={{paddingRight: 15}}
+      onPress={() => {state.params.submit()}}
+    />) : <Text></Text>;
     return {
       right,
       titleStyle: {
@@ -152,6 +153,10 @@ const TransactionsStack = StackNavigator({
   Selection: {
     screen: TransactionSelection,
     navigationOptions: nestingHeaders('Selection', true)
+  },
+  ViewTransaction: {
+    screen: ViewTransaction,
+    navigationOptions: nestingHeaders('Transactions')
   }
 });
 

@@ -70,11 +70,15 @@ export const SubCategoryStyles = StyleSheet.create({
         borderWidth: 1
     },
     categoryIconsDiv:{
-        flex : 1,
-        alignItems : 'center',
-        borderColor : '#cdcdcd',
-        borderWidth : 1,
-        paddingVertical : 20,
+        flex: 1,
+        height: screen.height * .14,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRightColor: '#dadada',
+        borderRightWidth: 1,
+        borderBottomColor: '#dadada',
+        borderBottomWidth: 1,
+        maxWidth: screen.width * .265
     },
     itemsText:{
         fontSize : 15
@@ -119,14 +123,19 @@ export const SubCategoryStyles = StyleSheet.create({
     },
     CategoryIconList:{
         flex : 7,
-        marginLeft : 10,
-        marginRight : 10,
-        marginBottom : 5,
         borderColor : '#cdcdcd',
-        borderWidth: 1
+        borderWidth : 1,
+        margin : 15,
+        paddingLeft : 25
     },
     SelectCategoryIcon:{
         flex : 1,
+    },
+    selectParentText:{
+        paddingLeft : 10,
+        paddingTop : 10,
+        fontFamily: 'QuicksandBook-Regular'
+
     },
     categorySelectionIcon: {
         flex: 1,
@@ -142,7 +151,8 @@ export const SubCategoryStyles = StyleSheet.create({
         flexDirection : 'row'
     },
     textLeft: {
-        paddingLeft: 12
+        paddingLeft: 12,
+        fontFamily: 'QuicksandBook-Regular'
     },
     iconRight: {
         flex: 1,

@@ -34,9 +34,31 @@ class AddCategory extends Component{
             }else{
                 console.warn(err.reason)
             }
-
         });
+    }
+    removeBorder(icon){
+        if(icon.removeRightBorder) {
+            return {borderRightColor: 'transparent', borderRightWidth: 0}
+        }else if(icon.removeBottomBorder){
+            return {borderBottomColor: 'transparent', borderBottomWidth: 0}
+        }
+    }
+    setBorder(icon){
+        return icon.map((font, index) => {
 
+            index++;
+            //delete pre keys if attach.
+            delete font.removeRightBorder;
+            delete font.removeBottomBorder;
+            if(index % 3 == 0){
+                font.removeRightBorder = true
+            }
+            let lastItems = icon.length % 3 == 0 ? 3 : icon.length % 3;
+            if(index > icon.length - lastItems){
+                font.removeBottomBorder = true
+            }
+            return font
+        });
     }
 
     getParentCategory(){
@@ -53,14 +75,15 @@ class AddCategory extends Component{
     }
     renderCategoryIcon(){
 
-        let categoryIcons = chunk(CategoryIconsName, 3);
+        let CategoryFonts = this.setBorder(CategoryIconsName);
+        let categoryIcons = chunk(CategoryFonts, 3);
         return categoryIcons.map((iconArray, i) => {
             return(
                 <View style={SubCategoryStyles.categoryIcons} key={i}>
                     {iconArray.map((icon, index) => {
                         let icon_name = icon.value.replace('icon-' , "");
                         return(
-                            <TouchableOpacity style={SubCategoryStyles.categoryIconsDiv} onPress={() => this.setState({icon})} activeOpacity={0.75} key={index}>
+                            <TouchableOpacity style={[SubCategoryStyles.categoryIconsDiv, this.removeBorder(icon)]} onPress={() => this.setState({icon})} activeOpacity={0.75} key={index}>
                                 <CategoryIconShow name={icon_name } size={60}/>
                             </TouchableOpacity>
                         );
@@ -98,15 +121,15 @@ class AddCategory extends Component{
                         </View>
                         <View style={SubCategoryStyles.CategoryIconList}>
                             <ScrollView>
-                                <TouchableOpacity>
-                                    <View>
+                                <View>
+                                    <TouchableOpacity>
                                         {this.state.renderCategoryIcon}
-                                    </View>
-                                </TouchableOpacity>
+                                    </TouchableOpacity>
+                                </View>
                             </ScrollView>
                         </View>
                         <View style={SubCategoryStyles.iconParent}>
-                            {(Platform.OS !== 'ios') ? <View><Text>Select Parent Category</Text>{this.getParentCategory()}</View> :
+                            {(Platform.OS !== 'ios') ? <View><Text style={SubCategoryStyles.selectParentText}>Select Parent Category</Text>{this.getParentCategory()}</View> :
                                 <TouchableOpacity style={SubCategoryStyles.ParentCategory} activeOpacity={0.75}
                                                   onPress={() => this.refs.modal.open()}>
                                     <Text style={[SubCategoryStyles.textBold, SubCategoryStyles.textLeft]}>a</Text>

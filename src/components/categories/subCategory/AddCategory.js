@@ -132,7 +132,7 @@ class AddCategory extends Component{
                             {(Platform.OS !== 'ios') ? <View><Text style={SubCategoryStyles.selectParentText}>Select Parent Category</Text>{this.getParentCategory()}</View> :
                                 <TouchableOpacity style={SubCategoryStyles.ParentCategory} activeOpacity={0.75}
                                                   onPress={() => this.refs.modal.open()}>
-                                    <Text style={[SubCategoryStyles.textBold, SubCategoryStyles.textLeft]}>a</Text>
+                                    <Text style={[SubCategoryStyles.textBold, SubCategoryStyles.textLeft]}></Text>
                                     <View style={SubCategoryStyles.categorySelectionParentIcon}>
                                         <Text style={[SubCategoryStyles.textBold, SubCategoryStyles.textLeft]}>{this.state.categoryIcons ? this.state.categoryIcons : 'Select Parent Category'}</Text>
                                         <Icon size={10} name="down-arrow" style={SubCategoryStyles.iconRight}/>

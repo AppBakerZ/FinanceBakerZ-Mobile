@@ -21,7 +21,7 @@ export const SubCategoryStyles = StyleSheet.create({
         color: '#ffffff',
         flex : 1,
         textAlign : 'left',
-        padding : 7,
+        padding : 7
     },
 
     customIconText : {
@@ -78,7 +78,6 @@ export const SubCategoryStyles = StyleSheet.create({
         borderRightWidth: 1,
         borderBottomColor: '#dadada',
         borderBottomWidth: 1,
-        maxWidth: screen.width * .265
     },
     itemsText:{
         fontSize : 15
@@ -91,10 +90,10 @@ export const SubCategoryStyles = StyleSheet.create({
         flexDirection : 'row',
     },
     addCategorySub:{
-        flex : 1,
+        flex : 1
     },
     addCategoryContainer:{
-        flex : 1,
+        flex : 1
     },
     categoryNameField: {
         flex : 2,
@@ -103,30 +102,35 @@ export const SubCategoryStyles = StyleSheet.create({
         justifyContent: 'flex-end'
     },
     categoryStyle:{
-        flex : 1,
+        flex : 1
     },
     categoryName:{
-        flex : 1,
+        flex : 1
     },
     input:{
         fontFamily: 'QuicksandBook-Regular',
         fontSize: 15,
         height: 50,
-        paddingLeft: 12,
+        paddingLeft: 12
     },
     iconParent: {
         flex:1.2,
-        paddingBottom : 10
+        paddingLeft : 5,
+        paddingRight : 15
     },
     febButton:{
-        flex : 2,
+        flex : 2
     },
-    CategoryIconList:{
-        flex : 7,
-        borderColor : '#cdcdcd',
-        borderWidth : 1,
-        margin : 15,
-        paddingLeft : 25
+    CategoryIconList: {
+        flex: 6,
+        borderColor: '#cdcdcd',
+        borderWidth: 1,
+        margin : 15
+    },
+    modal: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: 200
     },
     SelectCategoryIcon:{
         flex : 1,
@@ -135,7 +139,6 @@ export const SubCategoryStyles = StyleSheet.create({
         paddingLeft : 10,
         paddingTop : 10,
         fontFamily: 'QuicksandBook-Regular'
-
     },
     categorySelectionIcon: {
         flex: 1,
@@ -148,7 +151,8 @@ export const SubCategoryStyles = StyleSheet.create({
         alignItems: 'center',
     },
     categoryIcons:{
-        flexDirection : 'row'
+        flexDirection : 'row',
+        flex : 1,
     },
     textLeft: {
         paddingLeft: 12,

@@ -9,6 +9,8 @@ import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
 import Modal from 'react-native-modalbox';
 import Meteor, { createContainer } from 'react-native-meteor';
 import FabButton from 'FinanceBakerZ/src/components/button/FabButton';
+import {showAlert} from 'FinanceBakerZ/src/customLibrary';
+
 
 class AddCategory extends Component{
 
@@ -21,8 +23,10 @@ class AddCategory extends Component{
     }
     submit(){
         let {name, icon, parent} = this.state;
-        icon = icon.value;
-        Meteor.call('categories.insert', {
+        if(name && icon){
+          icon = icon.value;
+
+          Meteor.call('categories.insert', {
             category: {
                 name,
                 icon,
@@ -30,11 +34,16 @@ class AddCategory extends Component{
             }
         }, (err, response) => {
             if(response){
-                alert('success')
+                showAlert('Success', 'Your category has been added.');
+                this.props.navigation.goBack();
             }else{
                 console.warn(err.reason)
             }
         });
+        }else{
+          showAlert('Warning', 'Category name and icon fields are required.');
+        }
+
     }
     removeBorder(icon){
         if(icon.removeRightBorder) {
@@ -63,7 +72,7 @@ class AddCategory extends Component{
 
     getParentCategory(){
         let categories = this.props.categories;
-        let category = categories.map((categoryParent, i) =>  <Picker.Item key={i} label={categoryParent.name} value={categoryParent.name}/>);
+        let category = categories.map((categoryParent, i) =>  <Picker.Item key={i} label={categoryParent.name} value={i === 0 ? '' : categoryParent.name}/>);
         return(
             <Picker
                 selectedValue={this.state.parent}
@@ -134,7 +143,7 @@ class AddCategory extends Component{
                                                   onPress={() => this.refs.modal.open()}>
                                     <Text style={[SubCategoryStyles.textBold, SubCategoryStyles.textLeft]}></Text>
                                     <View style={SubCategoryStyles.categorySelectionParentIcon}>
-                                        <Text style={[SubCategoryStyles.textBold, SubCategoryStyles.textLeft]}>{this.state.categoryIcons ? this.state.categoryIcons : 'Select Parent Category'}</Text>
+                                        <Text style={[SubCategoryStyles.textBold, SubCategoryStyles.textLeft]}>{this.state.parent || 'Select Parent Category'}</Text>
                                         <Icon size={10} name="down-arrow" style={SubCategoryStyles.iconRight}/>
                                     </View>
                                 </TouchableOpacity>
@@ -156,10 +165,12 @@ class AddCategory extends Component{
 }
 export default createContainer(() => {
     const categoriesHandle = Meteor.subscribe('categories');
+    let categories =  Meteor.collection('categories').find({
+      parent: null
+    }, {sort: {createdAt: -1}});
+    categories.unshift({name: 'No Parent Category'});
     return {
         categoriesReady: categoriesHandle.ready(),
-        categories: Meteor.collection('categories').find({
-            parent: null
-        }, {sort: {createdAt: -1}})
+        categories
     };
 }, AddCategory);

@@ -130,10 +130,11 @@ export const SubCategoryStyles = StyleSheet.create({
     modal: {
         justifyContent: 'center',
         alignItems: 'center',
-        height: 200
+        height: 120
     },
     SelectCategoryIcon:{
         flex : 1,
+        justifyContent: 'center'
     },
     selectParentText:{
         paddingLeft : 10,
@@ -142,8 +143,9 @@ export const SubCategoryStyles = StyleSheet.create({
     },
     categorySelectionIcon: {
         flex: 1,
+        paddingTop: 10,
         flexDirection: 'row',
-        alignItems: 'center',
+        alignItems: 'center'
     },
     categorySelectionParentIcon:{
         flex: 1,

@@ -61,8 +61,8 @@ exports.filterDate = (date) => {
       break;
     case 'Week' :
       d  = date[0].selectedDate.split('-').map(date => moment(date.trim(), 'MMM DD').format());
-      newDate.start = moment(d[0]).startOf('week').format();
-      newDate.end = moment(d[1]).endOf('week').format();
+      newDate.start = d[0] ;
+      newDate.end = d[1];
       return newDate;
       break;
     case 'Month' :

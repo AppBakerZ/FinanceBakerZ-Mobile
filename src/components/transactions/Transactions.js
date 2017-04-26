@@ -18,16 +18,27 @@ class Transactions extends Component {
 
     super(props);
     this.state = {
-      updateParentState: (childState) => {this.setState(childState)}
+      updateParentState: (childState) => {this.setState(childState)},
+      incomes: props.incomes || [],
+      expenses: props.expenses || [],
+      transactions: props.transactions || [],
+      transactionsLoading: props.transactionsLoading
     };
     this.setDefaultAccounts = this.setDefaultAccounts.bind(this);
     setTimeout(() => query.set('query', {
       limit: 25,
       accounts: []
     }));
+    this.updateQuery = this.updateQuery.bind(this);
   }
 
- componentWillReceiveProps(){
+  componentWillReceiveProps(props){
+    this.setState({
+      incomes: props.incomes,
+      expenses: props.expenses,
+      transactions: props.transactions,
+      transactionsLoading: props.transactionsLoading
+    });
     this.setDefaultAccounts(this.props.accounts);
   }
 
@@ -43,12 +54,14 @@ class Transactions extends Component {
 
   updateQuery(updatedQuery){
     setTimeout(() => query.set('query', updatedQuery));
+    this.forceUpdate();
   }
+
 
   render() {
 
     const { navigate } = this.props.navigation;
-    let {incomes, expenses, transactions, transactionsLoading} = this.props;
+    let {incomes, expenses, transactions, transactionsLoading} = this.state;
     let {multiple, bankAcc} = this.state;
     let updateParentState = this.state.updateParentState;
     let params = this.state.childState || []; // date and bankList from TransactionSelection's state
@@ -56,17 +69,16 @@ class Transactions extends Component {
     let date = params.date || [];
     let transactionQuery = query.get('query');
     let updateQuery = this.updateQuery;
-
     if(!transactionsLoading){
       return(
         <ViewContainer>
           <View style={TransactionsStyles.filterContainer}>
             <Image source={require('FinanceBakerZ/src/images/filterBg.png')} style={TransactionsStyles.transitionFilterBg}>
-            <TouchableOpacity style={TransactionsStyles.filterMainContainer}  activeOpacity={0.7} onPress={() => navigate('Selection', {params, multiple, bankAcc, updateParentState, transactionQuery, updateQuery})} >
-              <View style={TransactionsStyles.filterContainerTxt}>
-                <Text style={TransactionsStyles.text}>Accounts: {(bankList.length ? bankList.map((val, i, arr) => (val.check ? ' ' + val.name + ' |' : '')) : 'All')}</Text>
-                <Text style={TransactionsStyles.text}>
-                  {(date.length ? date.map((val, i, arr) => {
+              <TouchableOpacity style={TransactionsStyles.filterMainContainer}  activeOpacity={0.7} onPress={() => navigate('Selection', {params, multiple, bankAcc, updateParentState, transactionQuery, updateQuery})} >
+                <View style={TransactionsStyles.filterContainerTxt}>
+                  <Text style={TransactionsStyles.text}>Accounts: {(bankList.length ? bankList.map((val, i, arr) => (val.check ? ' ' + val.name + ' |' : '')) : 'All')}</Text>
+                  <Text style={TransactionsStyles.text}>
+                    {(date.length ? date.map((val, i, arr) => {
                       if(val.checked){
                         if(val.selected == 'Custom'){
                           return (i == arr.length - 1 ?  val.selected + ': ' + arr[i - 1].selectedDate + ' - ' + val.selectedDate : false);
@@ -75,12 +87,12 @@ class Transactions extends Component {
                         }
                       }
                     }) : 'Custom: ' + formatDate({type: 'startOf', duration: 'month', format: 'MMM DD, YYYY'}) + ' - ' + formatDate({format: 'MMM DD, YYYY'}))}
-                </Text>
-              </View>
-              <View style={TransactionsStyles.filterIconContainer}>
-                <Icon name="filter" size={25} />
-              </View>
-            </TouchableOpacity>
+                  </Text>
+                </View>
+                <View style={TransactionsStyles.filterIconContainer}>
+                  <Icon name="filter" size={25} />
+                </View>
+              </TouchableOpacity>
             </Image>
           </View>
           <View style={TransactionsStyles.tabContainer}>

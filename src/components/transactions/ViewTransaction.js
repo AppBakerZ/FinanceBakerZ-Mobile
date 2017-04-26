@@ -28,10 +28,10 @@ export default class ViewTransaction extends Component {
             </View>
             <View style={[TransactionsStyles.viewTransactionBankDepositCon, TransactionsStyles.borderBottom]}>
               <Text style={[TransactionsStyles.textBold, selectedProject.category ? TransactionsStyles.redText : TransactionsStyles.greenText]}>
-                {selectedProject.receivedAt ?
+                {(selectedProject.receivedAt ?
                   (selectedProject.type == "project" ?
-                    (selectedProject.project && selectedProject.project.name.toUpperCase() || selectedProject.project.toUpperCase()) : selectedProject.type) :
-                  (selectedProject.category.name.toUpperCase() || selectedProject.category.toUpperCase())}
+                    (selectedProject.project && selectedProject.project.name || selectedProject.project) : selectedProject.type) :
+                  (selectedProject.category.name || selectedProject.category)).toUpperCase()}
               </Text>
             </View>
             <View style={[TransactionsStyles.viewTransactionDepositedInCon, TransactionsStyles.borderBottom]}>

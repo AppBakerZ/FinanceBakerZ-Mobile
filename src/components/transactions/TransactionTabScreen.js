@@ -11,10 +11,7 @@ export default class TransactionTabScreen extends  Component {
   constructor(props){
     super(props);
     this.state = {
-      ds: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
-      incomes: props.screenProps.incomes || [],
-      expenses: props.screenProps.expenses || [],
-      transactions: props.screenProps.transactions || []
+      ds: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
     };
     this.renderRow = this.renderRow.bind(this);
   }
@@ -40,11 +37,12 @@ export default class TransactionTabScreen extends  Component {
     );
   }
 
-
-
   render(){
+
     const {state} = this.props.navigation;
-    let {ds, incomes, expenses, transactions} = this.state;
+    let {ds} = this.state;
+    let {incomes, expenses, transactions} = this.props.screenProps;
+
     if(incomes.length || expenses.length || transactions.length){
       return (
         <ListView
@@ -56,5 +54,4 @@ export default class TransactionTabScreen extends  Component {
       return <View></View>
     }
   }
-
 }

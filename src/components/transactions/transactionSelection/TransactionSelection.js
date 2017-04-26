@@ -79,15 +79,14 @@ export  default  class TransactionSelection extends  Component {
     let selectedDate = date.filter(date => date.checked);
     copyQuery['accounts'] = multiple;
     copyQuery['dateFilter'] = filterDate(selectedDate);
-    console.log(copyQuery);
-    updateQuery(copyQuery); // calling UpdateQuery from Transactions
+    setTimeout(() => updateQuery(copyQuery)); // calling UpdateQuery from Transactions
     goBack();
   }
 
 
   handleMultipleChange(selected, indexBank){
     let { multiple , bankList } = this.state;
-    let check = multiple.find(bankId => bankId == selected);
+    let check = multiple.find(bankId => bankId === selected);
     let index = multiple.indexOf(check);
     if(!check){
       this.setState({multiple: [...multiple, selected]});
@@ -127,7 +126,7 @@ export  default  class TransactionSelection extends  Component {
   findIndex(bankId){
     const {bankList} = this.state;
     let findBankId;
-    findBankId = bankList.find(bank => bank.id == bankId);
+    findBankId = bankList.find(bank => bank.id === bankId);
     return bankList.indexOf(findBankId);
   }
 

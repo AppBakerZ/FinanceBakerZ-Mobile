@@ -130,7 +130,7 @@ export const SubCategoryStyles = StyleSheet.create({
     modal: {
         justifyContent: 'center',
         alignItems: 'center',
-        height: 120
+        height: 200
     },
     SelectCategoryIcon:{
         flex : 1,

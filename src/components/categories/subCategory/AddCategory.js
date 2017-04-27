@@ -86,13 +86,13 @@ class AddCategory extends Component{
 
         let CategoryFonts = this.setBorder(CategoryIconsName);
         let categoryIcons = chunk(CategoryFonts, 3);
-        return categoryIcons.map((iconArray, i) => {
+        return categoryIcons.map((iconArray, i, arr) => {
             return(
                 <View style={SubCategoryStyles.categoryIcons} key={i}>
-                    {iconArray.map((icon, index) => {
+                    {iconArray.map((icon, index ) => {
                         let icon_name = icon.value.replace('icon-' , "");
                         return(
-                            <TouchableOpacity style={[SubCategoryStyles.categoryIconsDiv, this.removeBorder(icon)]} onPress={() => this.setState({icon})} activeOpacity={0.75} key={index}>
+                            <TouchableOpacity style={[SubCategoryStyles.categoryIconsDiv, this.removeBorder(icon) , arr.length-1 == i ? { borderBottomColor: 'transparent', borderBottomWidth: 0 } : '']} onPress={() => this.setState({icon})} activeOpacity={0.75} key={index}>
                                 <CategoryIconShow name={icon_name } size={60}/>
                             </TouchableOpacity>
                         );
@@ -101,7 +101,6 @@ class AddCategory extends Component{
             );
         });
     }
-
     render(){
         return(
             <ViewContainer style = {SubCategoryStyles.addCategoryMain}>

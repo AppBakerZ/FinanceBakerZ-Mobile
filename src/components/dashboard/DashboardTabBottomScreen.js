@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { View, Text, ListView, ActivityIndicator } from 'react-native';
+import { View, Text, ListView } from 'react-native';
 import { DashboardStyles } from 'FinanceBakerZ/src/components/dashboard/DashboardStyle';
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
 import Meteor, {createContainer} from 'react-native-meteor';
@@ -33,8 +33,13 @@ class DashboardTabBottomScreen extends Component {
     return(
       <View style={DashboardStyles.listViewContainer}>
         <View style={DashboardStyles.listViewContentLeft}>
-          <Icon name={rowData.category ? 'left-arrow' : 'right-arrow'} color={rowData.category ?  'red' : 'green'} style={DashboardStyles.icons}></Icon>
-          <Text style={DashboardStyles.iconText}>{rowData.category ?  capitalizeFirstLetter(rowData.category.name) : capitalizeFirstLetter(rowData.type)}</Text>
+          <Icon name={rowData.category ? 'left-arrow' : 'right-arrow'} color={rowData.category ?  '#C81113' : '#008041'} style={DashboardStyles.icons}></Icon>
+          <Text style={DashboardStyles.iconText}>
+            {capitalizeFirstLetter(rowData.receivedAt ?
+              (rowData.type == "project" ?
+                (rowData.project && rowData.project.name || rowData.project) : rowData.type) :
+              (rowData.category.name || rowData.category))}
+          </Text>
         </View>
         <View style={DashboardStyles.listViewContentRight}>
           <CurrencyIcon style={DashboardStyles.contentCurrIcon} size={14} name={alterIconName(loggedUserCurrency())} />

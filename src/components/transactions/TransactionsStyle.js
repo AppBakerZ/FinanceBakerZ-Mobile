@@ -1,4 +1,5 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native';
+let screen = Dimensions.get('window');
 
 export const TransactionsStyles = StyleSheet.create({
 
@@ -161,6 +162,118 @@ export const TransactionsStyles = StyleSheet.create({
   currencyIconCon: {
     flexDirection: 'row',
     alignItems: 'center'
-  }
+  },
+
+  /*UpdateTransaction Styling*/
+
+  renderIncomeForm: {
+    padding: 15
+  },
+
+  modal: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 250
+  },
+
+  renderDetailCon: {
+    flex: 1,
+    width: screen.width,
+    paddingLeft: 15
+  },
+
+  updateTranAccountCon: {
+    flex: 1,
+    justifyContent: 'center'
+  },
+
+  updateTranAmountCon: {
+    flex: 1,
+    justifyContent: 'center',
+    position: 'relative'
+  },
+
+  updateTranDateCon: {
+    flex: 1,
+    justifyContent: 'center'
+  },
+
+  updateTranTypeCon: {
+    flex: 1,
+    justifyContent: 'center',
+    position: 'relative'
+  },
+
+  updateTranTimeCon:{
+    flex: 1,
+    justifyContent: 'center'
+  },
+
+  updateTranProjectCon: {
+    flex: 1,
+    justifyContent: 'center'
+  },
+
+  updateTranRadioCon: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    borderBottomWidth: 1,
+    borderBottomColor: '#DADADA',
+    padding: 5
+  },
+
+  updateTranRadioBtnCon: {
+    flex: 0.5
+  },
+
+  updateTranRadioBtnItemCon: {
+    flex: 4,
+    paddingVertical: 5
+  },
+
+  updateTranRadioBtnItem: {
+    flex: 0.5,
+    fontFamily: 'QuicksandBook-Regular'
+  },
+
+  updateTranAccDropDown: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+
+  input: {
+    fontFamily: 'QuicksandBook-Regular',
+    height: 48
+  },
+
+  iconRight: {
+    flex: 1,
+    textAlign: 'right'
+  },
+
+  textLeft: {
+    paddingLeft: 20
+  },
+
+  relativeTop: {
+    top: 10
+  },
+
+  bottomCon: {
+    flex: 4
+  },
+
+  loaderView:{
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+
+
+
+
+
 
 });

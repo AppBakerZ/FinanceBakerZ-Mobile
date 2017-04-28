@@ -19,7 +19,7 @@ export default class TransactionTabScreen extends  Component {
 
   renderRow(rowData){
     return(
-      <TouchableOpacity style={TransactionsStyles.listViewContainer} activeOpacity={0.7} onPress={() => this.props.screenProps.navigate('ViewTransaction', {selectedProject: rowData})}>
+      <TouchableOpacity style={TransactionsStyles.listViewContainer} activeOpacity={0.7} onPress={() => this.props.screenProps.navigate('ViewTransaction', {selectedTransaction: rowData})}>
         <View style={TransactionsStyles.listViewContentLeft}>
           <Icon name={rowData.category ? 'left-arrow' : 'right-arrow'} color={rowData.category ?  '#C81113' : '#008041'} style={TransactionsStyles.icons} />
           <Text style={TransactionsStyles.iconText}>

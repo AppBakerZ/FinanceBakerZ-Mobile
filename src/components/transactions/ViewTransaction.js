@@ -16,22 +16,23 @@ export default class ViewTransaction extends Component {
 
   render(){
 
-    let {selectedProject} = this.props.navigation.state.params;
+    let {selectedTransaction} = this.props.navigation.state.params;
+    let {navigate} = this.props.navigation;
 
     return(
       <ViewContainer>
         <Image source={require('FinanceBakerZ/src/images/app-background.png')} style={TransactionsStyles.backgroundImage}>
           <View style={TransactionsStyles.viewTransactionMainCon}>
             <View style={[TransactionsStyles.viewTransactionIdAndDateCon, TransactionsStyles.borderBottom]}>
-              <Text style={[TransactionsStyles.text, TransactionsStyles.paddingBottom]}>{selectedProject.receivedAt ? "Income" : "Expense"} ID : {selectedProject._id}</Text>
-              <Text style={[TransactionsStyles.text]}>Date: {moment(selectedProject.receivedAt || selectedProject.spentAt).format('DD-MMMM-YYYY')}</Text>
+              <Text style={[TransactionsStyles.text, TransactionsStyles.paddingBottom]}>{selectedTransaction.receivedAt ? "Income" : "Expense"} ID : {selectedTransaction._id}</Text>
+              <Text style={[TransactionsStyles.text]}>Date: {moment(selectedTransaction.receivedAt || selectedTransaction.spentAt).format('DD-MMMM-YYYY')}</Text>
             </View>
             <View style={[TransactionsStyles.viewTransactionBankDepositCon, TransactionsStyles.borderBottom]}>
-              <Text style={[TransactionsStyles.textBold, selectedProject.category ? TransactionsStyles.redText : TransactionsStyles.greenText]}>
-                {(selectedProject.receivedAt ?
-                  (selectedProject.type == "project" ?
-                    (selectedProject.project && selectedProject.project.name || selectedProject.project) : selectedProject.type) :
-                  (selectedProject.category.name || selectedProject.category)).toUpperCase()}
+              <Text style={[TransactionsStyles.textBold, TransactionsStyles.greenText]}>
+                {(selectedTransaction.receivedAt ?
+                  (selectedTransaction.type == "project" ?
+                    (selectedTransaction.project && selectedTransaction.project.name || selectedTransaction.project) : selectedTransaction.type) :
+                  (selectedTransaction.category.name || selectedTransaction.category)).toUpperCase()}
               </Text>
             </View>
             <View style={[TransactionsStyles.viewTransactionDepositedInCon, TransactionsStyles.borderBottom]}>
@@ -40,7 +41,7 @@ export default class ViewTransaction extends Component {
               <View style={TransactionsStyles.currencyIconCon}>
                 <Text style={[TransactionsStyles.text]}>Amount: </Text>
                 <CurrencyIcon name={alterIconName(loggedUserCurrency())} size={20} />
-                <Text style={[TransactionsStyles.textBold, selectedProject.category ? TransactionsStyles.redText : TransactionsStyles.greenText]}> {currencyStandardFormat(selectedProject.amount)}</Text>
+                <Text style={[TransactionsStyles.textBold, TransactionsStyles.greenText]}> {currencyStandardFormat(selectedTransaction.amount)}</Text>
               </View>
             </View>
             <View style={TransactionsStyles.viewTransactionUserInfoCon}>
@@ -52,7 +53,7 @@ export default class ViewTransaction extends Component {
               </Text>
             </View>
           </View>
-          <FabButton iconName="edit" style={TransactionsStyles.fabButton} iconColor="#fff" />
+          <FabButton iconName="edit" style={TransactionsStyles.fabButton} iconColor="#fff" onPress={() => navigate('UpdateTransaction', {selectedTransaction})} />
         </Image>
       </ViewContainer>
     );

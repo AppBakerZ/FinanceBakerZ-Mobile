@@ -77,9 +77,7 @@ export const ProjectsStyles = StyleSheet.create({
         flexDirection:'row',
         paddingVertical:15,
     },
-    BankText:{
-        fontFamily: 'QuicksandBook-Regular'
-    },
+
     loader:{
         flex :1,
         justifyContent : 'center',
@@ -280,5 +278,12 @@ export const ProjectsStyles = StyleSheet.create({
     },
     projectId:{
         fontFamily: 'QuicksandBold-Regular',
+    },
+    labelText:{
+        paddingLeft : 10,
+        fontFamily: 'QuicksandBold-Regular'
+    },
+    labelTextStatus:{
+        fontFamily: 'QuicksandBold-Regular'
     }
 });

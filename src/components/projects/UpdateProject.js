@@ -115,7 +115,8 @@ export default class UpdateProject extends  Component {
               <Image source={require('FinanceBakerZ/src/images/app-background.png')} style={ProjectsStyles.backgroundImage}>
                 <View style={[ProjectsStyles.inputProjectNameCon, ProjectsStyles.inputBorderBottom]}>
                   <KeyboardAvoidingView>
-                    <TextInput
+                      <Text style={ProjectsStyles.labelText}>Project Name</Text>
+                          <TextInput
                         placeholder='Project Name'
                         style={ProjectsStyles.input}
                         maxLength = {50}
@@ -128,7 +129,8 @@ export default class UpdateProject extends  Component {
                 </View>
                 <View style={[ProjectsStyles.inputClientName, ProjectsStyles.inputBorderBottom]}>
                   <KeyboardAvoidingView>
-                    <TextInput
+                      <Text style={ProjectsStyles.labelText}>Client Name</Text>
+                      <TextInput
                         placeholder='Client Name'
                         style={ProjectsStyles.input}
                         maxLength = {50}
@@ -141,7 +143,8 @@ export default class UpdateProject extends  Component {
                 </View>
                 <View style={[ProjectsStyles.inputTypeCon, ProjectsStyles.inputBorderBottom]}>
                   <KeyboardAvoidingView>
-                    <TextInput
+                      <Text style={ProjectsStyles.labelText}>Type</Text>
+                      <TextInput
                         placeholder='Type'
                         style={ProjectsStyles.input}
                         maxLength = {50}
@@ -154,7 +157,8 @@ export default class UpdateProject extends  Component {
                 </View>
                 <View style={[ProjectsStyles.inputAmountCon, ProjectsStyles.inputBorderBottom]}>
                   <KeyboardAvoidingView>
-                    <TextInput
+                      <Text style={ProjectsStyles.labelText}>Amount</Text>
+                      <TextInput
                         placeholder='Amount'
                         style={ProjectsStyles.input}
                         maxLength = {30}
@@ -167,7 +171,7 @@ export default class UpdateProject extends  Component {
                   </KeyboardAvoidingView>
                 </View>
                 <View style={[ProjectsStyles.inputPickerCon, ProjectsStyles.inputBorderBottom]}>
-                    {(Platform.OS !== 'ios') ? <View style={ProjectsStyles.statusTextView}><Text style={ProjectsStyles.BankText}>Select Status</Text>{this.renderPicker()}</View> :
+                    {(Platform.OS !== 'ios') ? <View style={ProjectsStyles.statusTextView}><Text style={ProjectsStyles.labelTextStatus}>Status</Text>{this.renderPicker()}</View> :
                         <TouchableOpacity style={ProjectsStyles.projectCardTxtAndIcon} activeOpacity={0.75} onPress={() => {this.refs.modal.open(); this.setState({modalVisible: true})}}>
                           <Text style={[ProjectsStyles.BankText, ProjectsStyles.textLeft]}>{this.state.status ? findStatusLabel(this.state.status) : 'Select Status'}</Text>
                           <Icon size={10} name="down-arrow" style={ProjectsStyles.iconRight} />
@@ -175,7 +179,8 @@ export default class UpdateProject extends  Component {
                     }
                 </View>
                 <View style={[ProjectsStyles.inputDateCon, ProjectsStyles.inputBorderBottom]}>
-                  <TouchableOpacity style={ProjectsStyles.projectCardTxtAndIcon} activeOpacity={0.75} onPress={() => {Platform.OS !== 'ios' ? this.showPicker.bind(this, 'startAt', {date: this.state.date})() : this.showModal.bind(this)()}}>
+                    <Text style={ProjectsStyles.labelText}>Start Date</Text>
+                  <TouchableOpacity style={ProjectsStyles.projectCardTxtAndIcon}  activeOpacity={0.75} onPress={() => {Platform.OS !== 'ios' ? this.showPicker.bind(this, 'startAt', {date: this.state.date})() : this.showModal.bind(this)()}}>
                     <Text style={[ProjectsStyles.BankText, ProjectsStyles.inputDateSelected]}>{this.state.startAt ? formatDate({type: 'getCustomDate', date: this.state.startAt, format: 'MMMM DD, YYYY'}) : 'Select Date'}</Text>
                     <Icon size={10} name="down-arrow" style={ProjectsStyles.iconRight} />
                   </TouchableOpacity>

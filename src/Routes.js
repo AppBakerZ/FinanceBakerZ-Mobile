@@ -9,13 +9,13 @@ import ForgotPasswordScreen from 'FinanceBakerZ/src/screens/auth/ForgotPassword'
 import DashboardScreen, {DashboardTabNavigator} from 'FinanceBakerZ/src/screens/Dashboard';
 import DashboardSelection  from 'FinanceBakerZ/src/components/dashboard/dashboardSelection/DashboardSelection';
 import ProjectsScreen from 'FinanceBakerZ/src/screens/Projects';
+import DetailProject from 'FinanceBakerZ/src/components/projects/projectSelection/DetailProject';
 import ProjectSelectionScreen from 'FinanceBakerZ/src/components/projects/projectSelection/ProjectSelection';
 import CreateProject from 'FinanceBakerZ/src/components/projects/CreateProject';
 import UpdateProject from 'FinanceBakerZ/src/components/projects/UpdateProject';
 import TransactionsScreen from 'FinanceBakerZ/src/screens/Transactions';
 import TransactionSelection from 'FinanceBakerZ/src/components/transactions/transactionSelection/TransactionSelection';
 import ViewTransaction from 'FinanceBakerZ/src/components/transactions/ViewTransaction';
-import UpdateTransaction from 'FinanceBakerZ/src/components/transactions/UpdateTransaction';
 import AccountsScreen from 'FinanceBakerZ/src/screens/Accounts';
 import AddAccount from 'FinanceBakerZ/src/components/accounts/AddAccount';
 import CategoriesScreen from 'FinanceBakerZ/src/screens/Categories';
@@ -134,6 +134,10 @@ const ProjectsStack = StackNavigator({
     screen: CreateProject,
     navigationOptions: nestingHeaders('Create Project')
   },
+    DetailProject:{
+        screen: DetailProject,
+        navigationOptions: nestingHeaders('Detail Project')
+    },
   UpdateProject: {
     screen: UpdateProject,
     navigationOptions: nestingHeaders('Update Project')
@@ -158,11 +162,6 @@ const TransactionsStack = StackNavigator({
   ViewTransaction: {
     screen: ViewTransaction,
     navigationOptions: nestingHeaders('Transactions')
-  },
-  UpdateTransaction: {
-    screen: UpdateTransaction,
-    navigationOptions: nestingHeaders('Update Transaction')
-
   }
 });
 
@@ -197,56 +196,56 @@ const CategoriesStack = StackNavigator({
 });
 
 const SettingsStack = StackNavigator({
-  Settings: {
-    screen: SettingsScreen,
-    navigationOptions: {
-      header: header
+    Settings: {
+        screen: SettingsScreen,
+        navigationOptions: {
+            header: header
+        }
+    },
+    ChangePassword: {
+        screen: ChangePasswordScreen,
+        navigationOptions: nestingHeaders('Change Password')
+    },
+    AccountSettings: {
+        screen: AccountSettingsScreen,
+        navigationOptions: nestingHeaders('Account Settings')
+    },
+    PersonalInformation: {
+        screen: PersonalInformationScreen,
+        navigationOptions: nestingHeaders('Personal Info')
     }
-  },
-  ChangePassword: {
-    screen: ChangePasswordScreen,
-    navigationOptions: nestingHeaders('Change Password')
-  },
-  AccountSettings: {
-    screen: AccountSettingsScreen,
-    navigationOptions: nestingHeaders('Account Settings')
-  },
-  PersonalInformation: {
-    screen: PersonalInformationScreen,
-    navigationOptions: nestingHeaders('Personal Info')
-  }
 });
 
 //Left Menu that will use Many Stack
 export const Drawer = DrawerNavigator({
-  Dashboard: {
-    screen: DashboardStack,
-    drawer: DrawerItemIcon('dashboard')
-  },
-  Projects: {
-    screen: ProjectsStack,
-    drawer: DrawerItemIcon('project')
-  },
-  Transactions: {
-    screen: TransactionsStack,
-    drawer: DrawerItemIcon('transaction')
-  },
-  Accounts: {
-    screen: AccountsStack,
-    drawer: DrawerItemIcon('bank')
-  },
-  Categories: {
-    screen: CategoriesStack,
-    drawer: DrawerItemIcon('category')
-  },
-  Settings: {
-    screen: SettingsStack,
-    drawer: DrawerItemIcon('setting')
-  },
-  Logout: {
-    screen: SettingsStack,
-    drawer: DrawerItemIcon('sign-in')
-  }
+    Dashboard: {
+        screen: DashboardStack,
+        drawer: DrawerItemIcon('dashboard')
+    },
+    Projects: {
+        screen: ProjectsStack,
+        drawer: DrawerItemIcon('project')
+    },
+    Transactions: {
+        screen: TransactionsStack,
+        drawer: DrawerItemIcon('transaction')
+    },
+    Accounts: {
+        screen: AccountsStack,
+        drawer: DrawerItemIcon('bank')
+    },
+    Categories: {
+        screen: CategoriesStack,
+        drawer: DrawerItemIcon('category')
+    },
+    Settings: {
+        screen: SettingsStack,
+        drawer: DrawerItemIcon('setting')
+    },
+    Logout: {
+        screen: SettingsStack,
+        drawer: DrawerItemIcon('sign-in')
+    }
 }, {
-  contentComponent: DrawerItems
+    contentComponent: DrawerItems
 });

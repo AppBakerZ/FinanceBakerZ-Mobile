@@ -14,27 +14,23 @@ import {showAlert} from 'FinanceBakerZ/src/customLibrary';
 import CategoryIcon from 'FinanceBakerZ/src/icons/CategoryIcon';
 import ImagePicker from 'react-native-image-picker';
 import { RNS3 } from 'react-native-aws3';
-// import Settings from 'FinanceBakerZ/settings.json';
 
 
 class UpdateTransaction extends Component{
 
   constructor(props){
     super(props);
-    let {_id, amount, type, project, receivedAt, category, description, billUrl, spentAt} = props.navigation.state.params.selectedTransaction;
 
-    console.log(props.navigation.state.params.selectedTransaction);
-
+    let {_id, amount, type, project, createdAt, receivedAt, category, description, billUrl, spentAt } = props.navigation.state.params.selectedTransaction;
     this.state = {
       _id: _id,
       account: '',
       amount: amount.toString(),
-      receivedAt: receivedAt ? receivedAt : spentAt,
-      receivedTime: receivedAt ? receivedAt : spentAt,
+      receivedAt: !category ? createdAt : spentAt,
+      receivedTime: !category ? receivedAt : spentAt,
       type: type,
       project: project ? project._id : '',
-      active: false,
-      loading: false,
+      loading: true,
       accounts: props.accounts,
       projects: props.projects,
       modalVisible: false,
@@ -59,25 +55,23 @@ class UpdateTransaction extends Component{
 
   componentWillReceiveProps(props){
 
-    let {createdAt, receivedAt, category, account} = props.navigation.state.params.selectedTransaction;
+    let {category, account} = props.navigation.state.params.selectedTransaction;
 
     this.setState({
-      accounts: props.accounts,
-      projects: props.projects,
-      receivedAt: createdAt,
-      receivedTime: receivedAt,
-      categories: props.categories,
-      loading: false
-    }, () => {
-      category ?  this.state.categories.length ? this.setCategory(this.findCategory(category._id)) : '' : ''
-      this.state.accounts.length  ? this.setAccount(this.findBankAccount(account)): ''
-    });
+        accounts: props.accounts,
+        projects: props.projects,
+        categories: props.categories,
+        loading: false
+      }, () => {
+        category ?  this.state.categories.length ? this.setCategory(this.findCategory(category._id)) : '' : '';
+        this.state.accounts.length  ? this.setAccount(this.findBankAccount(account)) : '';
+        this.state.accounts.length  ? this.setState({loading: false}) : '';
+      }
+    );
   }
 
   onChange(name, val){
-    this.setState({
-      [name]: val
-    })
+    this.setState({ [name]: val })
   }
 
   findBankAccount(accountId){
@@ -105,7 +99,7 @@ class UpdateTransaction extends Component{
       index = accounts.indexOf(find);
       accounts.map(account => account.check = false);
       accounts[index].check = true;
-      this.setState({accounts}, () => console.log(accounts));
+      this.setState({accounts});
     }
   }
 
@@ -321,6 +315,7 @@ class UpdateTransaction extends Component{
   }
 
   renderExpenseForm(){
+
     return(
       <ViewContainer style={TransactionsStyles.renderIncomeForm}>
         <TouchableOpacity onPress={() => this.handleMultipleChange.bind(this, {renderBank: true})()} activeOpacity={0.75} style={[TransactionsStyles.updateTranAccountCon, TransactionsStyles.borderBottom]}>
@@ -347,7 +342,7 @@ class UpdateTransaction extends Component{
         <TouchableOpacity onPress={() => this.handleMultipleChange.bind(this, {renderCategories: true})()} activeOpacity={0.75} style={[TransactionsStyles.updateTranAccountCon, TransactionsStyles.borderBottom]}>
           <Text style={TransactionsStyles.textBold}>Select your category</Text>
           <View style={TransactionsStyles.updateTranAccDropDown}>
-            <Text style={TransactionsStyles.text}>{this.state.categoryName || 'Select your account'}</Text>
+            <Text style={TransactionsStyles.text}>{this.state.categoryName || 'Select your category'}</Text>
             <Icon size={10} name="down-arrow" style={TransactionsStyles.iconRight} />
           </View>
         </TouchableOpacity>
@@ -385,10 +380,10 @@ class UpdateTransaction extends Component{
   }
 
   updateIncome(){
-    let {_id, account, amount, receivedAt, receivedTime, type, project} = this.state;
+    let {_id, account, amount, receivedAt, receivedTime, type, project, projects} = this.state;
     let {navigate} = this.props.navigation;
 
-
+    project = type === 'project' && !project ? projects[0]._id : project;
     receivedAt = new Date(receivedAt);
     receivedTime = new Date(receivedTime);
     receivedAt.setHours(receivedTime.getHours(), receivedTime.getMinutes(), 0, 0);
@@ -414,11 +409,16 @@ class UpdateTransaction extends Component{
   }
 
   updateExpense(){
+
     let {_id, account, amount, receivedTime, receivedAt, description, billUrl, category} = this.state;
-    let spentAt;
-    console.log(receivedTime);
-    spentAt = receivedTime;
-    console.log(spentAt);
+    let {navigate} = this.props.navigation;
+
+    let spentAt, spentTime;
+
+    spentAt = new Date(receivedAt);
+    spentTime = new Date(receivedTime);
+    spentAt.setHours(spentTime.getHours(), spentTime.getMinutes(), 0, 0);
+
     category = category && {_id: category};
 
     Meteor.call('expenses.update', {
@@ -435,7 +435,8 @@ class UpdateTransaction extends Component{
       if(err){
         console.warn(err.reason);
       }else{
-        console.warn('success');
+        showAlert('Success', 'Transaction has been updated.');
+        navigate('Transactions');
       }
     });
   }
@@ -494,8 +495,6 @@ class UpdateTransaction extends Component{
         showAlert('Error', 'Failed to upload image to S3');
         this.setState({loading: false});
       } else {
-        // Meteor.collection('users').update(Meteor.userId(), {$set: {"profile.avatar": response.body.postResponse.location}});
-        showAlert('Success', 'Profile updated successfully');
         this.setState({billUrl: response.body.postResponse.location});
       }
     });
@@ -506,10 +505,7 @@ class UpdateTransaction extends Component{
 
     let {selectedTransaction} = this.props.navigation.state.params;
     let {projects, accounts, types, loading, modalVisible, categories} = this.state;
-
     let data = {selectedTransaction, projects, accounts, types, categories};
-
-
 
     if(!loading){
       return(

@@ -4,7 +4,8 @@ import { TransactionsStyles } from 'FinanceBakerZ/src/components/transactions/Tr
 import {loggedUserCurrency, currencyStandardFormat, alterIconName, capitalizeFirstLetter} from 'FinanceBakerZ/src/customLibrary';
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
 import CurrencyIcon from 'FinanceBakerZ/src/icons/CurrencyIcon';
-
+import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
+import FabButton from 'FinanceBakerZ/src/components/button/FabButton';
 
 export default class TransactionTabScreen extends  Component {
 
@@ -45,10 +46,13 @@ export default class TransactionTabScreen extends  Component {
 
     if(incomes.length || expenses.length || transactions.length){
       return (
-        <ListView
-          dataSource={ds.cloneWithRows(eval(state.routeName.toLowerCase()))}
-          renderRow={this.renderRow}
-        />
+        <ViewContainer>
+          <ListView
+            dataSource={ds.cloneWithRows(eval(state.routeName.toLowerCase()))}
+            renderRow={this.renderRow}
+          />
+          {state.routeName !== 'TRANSACTIONS' ?  <FabButton iconName="add"  iconColor="#fff" onPress={() => this.props.screenProps.navigate('', {routeName: state.routeName.toUpperCase()})} /> : <View></View> }
+        </ViewContainer>
       );
     }else{
       return <View></View>

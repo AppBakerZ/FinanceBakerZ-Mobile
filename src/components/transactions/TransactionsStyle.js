@@ -245,7 +245,8 @@ export const TransactionsStyles = StyleSheet.create({
 
   input: {
     fontFamily: 'QuicksandBook-Regular',
-    height: 48
+    height: 48,
+    paddingLeft: -15
   },
 
   iconRight: {

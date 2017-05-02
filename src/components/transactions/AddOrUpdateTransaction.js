@@ -16,58 +16,104 @@ import ImagePicker from 'react-native-image-picker';
 import { RNS3 } from 'react-native-aws3';
 
 
-class UpdateTransaction extends Component{
+class AddOrUpdateTransaction extends Component{
+
 
   constructor(props){
     super(props);
 
-    let {_id, amount, type, project, createdAt, receivedAt, category, description, billUrl, spentAt } = props.navigation.state.params.selectedTransaction;
-    this.state = {
-      _id: _id,
-      account: '',
-      amount: amount.toString(),
-      receivedAt: !category ? createdAt : spentAt,
-      receivedTime: !category ? receivedAt : spentAt,
-      type: type,
-      project: project ? project._id : '',
-      loading: true,
-      accounts: props.accounts,
-      projects: props.projects,
-      modalVisible: false,
-      billUrl: billUrl ? billUrl : '',
-      description: description ? description : '',
-      category: category ? category._id : '',
-      types:  [
-        {   name: 'Salary', _id: 'salary'},
-        { name: 'Project', _id: 'project'}
-      ],
-      render: {renderBank: true}
-    };
+    if(props.navigation.state.params.selectedTransaction){
+      let {_id, amount, type, project, createdAt, receivedAt, category, description, billUrl, spentAt } = props.navigation.state.params.selectedTransaction;
+      this.state = {
+        _id: _id,
+        account: '',
+        amount: amount.toString(),
+        receivedAt: !category ? createdAt : spentAt,
+        receivedTime: !category ? receivedAt : spentAt,
+        type: type || 'project',
+        project: project ? project._id : '',
+        loading: true,
+        accounts: props.accounts,
+        projects: props.projects,
+        modalVisible: false,
+        billUrl: billUrl ? billUrl : '',
+        description: description ? description : '',
+        category: category ? category._id : '',
+        types:  [
+          {   name: 'Salary', _id: 'salary'},
+          { name: 'Project', _id: 'project'}
+        ],
+        render: {renderBank: true},
+        routeName: '',
+      };
+    }else{
+      let {routeName } = props.navigation.state.params;
+      let datetime = new Date();
+      this.state = {
+        routeName: routeName,
+        account: '',
+        amount: '',
+        receivedAt: datetime,
+        receivedTime: datetime,
+        type: 'project',
+        project: '',
+        loading: true,
+        accounts: props.accounts,
+        projects: props.projects,
+        modalVisible: false,
+        billUrl: '',
+        description: '',
+        category: '',
+        types:  [
+          {   name: 'Salary', _id: 'salary'},
+          { name: 'Project', _id: 'project'}
+        ],
+        render: {renderBank: true}
+      }
+    }
 
     this.renderPicker = this.renderPicker.bind(this);
     this.setAccount = this.setAccount.bind(this);
 
   }
+
   componentWillMount(){
-    let { account } = this.props.navigation.state.params.selectedTransaction;
-    this.setAccount(this.findBankAccount(account));
+
+    let {routeName} = this.state;
+    if(!routeName){
+      let { account } = this.props.navigation.state.params.selectedTransaction;
+      this.setAccount(this.findBankAccount(account));
+    }
   }
 
   componentWillReceiveProps(props){
 
-    let {category, account} = props.navigation.state.params.selectedTransaction;
+    let {routeName} = this.state;
+    if(!routeName){
+      let {category, account} = props.navigation.state.params.selectedTransaction;
+      this.setState({
+          accounts: props.accounts,
+          projects: props.projects,
+          categories: props.categories,
+          loading: false
+        }, () => {
+          category ?  this.state.categories.length ? this.setCategory(this.findCategory(category._id)) : '' : '';
+          this.state.accounts.length  ? this.setAccount(this.findBankAccount(account)) : '';
+          this.state.accounts.length  ? this.setState({loading: false}) : '';
+        }
+      );
+    }else{
+      this.setState({
+          accounts: props.accounts,
+          projects: props.projects,
+          categories: props.categories,
+          loading: false
+        }, () => {
+          this.state.accounts.length  ? this.setState({loading: false}) : '';
+        }
+      );
+    }
 
-    this.setState({
-        accounts: props.accounts,
-        projects: props.projects,
-        categories: props.categories,
-        loading: false
-      }, () => {
-        category ?  this.state.categories.length ? this.setCategory(this.findCategory(category._id)) : '' : '';
-        this.state.accounts.length  ? this.setAccount(this.findBankAccount(account)) : '';
-        this.state.accounts.length  ? this.setState({loading: false}) : '';
-      }
-    );
   }
 
   onChange(name, val){
@@ -215,7 +261,12 @@ class UpdateTransaction extends Component{
   }
 
   renderPicker(data, renderFlag){
-    {return data.selectedTransaction.category ? this.renderExpensePicker(data, renderFlag) : this.renderIncomePicker(data, renderFlag)}
+    let {routeName} = this.state;
+    if(!routeName){
+      return data.selectedTransaction.category ? this.renderExpensePicker(data, renderFlag) : this.renderIncomePicker(data, renderFlag)
+    }else{
+      return routeName === 'EXPENSES' ? this.renderExpensePicker(data, renderFlag) : this.renderIncomePicker(data, renderFlag)
+    }
   }
 
   // For Android
@@ -380,6 +431,7 @@ class UpdateTransaction extends Component{
   }
 
   updateIncome(){
+
     let {_id, account, amount, receivedAt, receivedTime, type, project, projects} = this.state;
     let {navigate} = this.props.navigation;
 
@@ -441,9 +493,84 @@ class UpdateTransaction extends Component{
     });
   }
 
+  createExpense(){
+
+    let {account, amount, description, receivedTime, receivedAt, category, billUrl} = this.state;
+
+    let spentAt, spentTime;
+    spentAt = new Date(receivedAt);
+    spentTime = new Date(receivedTime);
+    spentAt.setHours(spentTime.getHours(), spentTime.getMinutes(), 0, 0);
+    category = category && {_id: category};
+    let {goBack} = this.props.navigation;
+
+
+    if(account && amount && category) {
+      Meteor.call('expenses.insert', {
+        expense: {
+          account,
+          amount: Number(amount),
+          spentAt,
+          description,
+          billUrl,
+          category
+        }
+      }, (err, response) => {
+        if(response){
+          showAlert('Success', 'Transaction has been added.');
+          goBack();
+        }else{
+          console.warn(err.reason)
+        }
+      });
+    }else{
+      showAlert('Validation', 'Account, amount and cateogry fields are required.');
+    }
+
+  }
+
+  createIncome(){
+    let {account, amount, receivedAt, receivedTime, type, project, projects} = this.state;
+
+    let {goBack} = this.props.navigation;
+
+    project = type === 'project' && !project ? projects[0]._id : project;
+    receivedAt = new Date(receivedAt);
+    receivedTime = new Date(receivedTime);
+    receivedAt.setHours(receivedTime.getHours(), receivedTime.getMinutes(), 0, 0);
+    project = (project && type == "project" && {_id: project}) || {};
+
+
+    if(account &&  amount ){
+      Meteor.call('incomes.insert', {
+        income: {
+          account,
+          amount: Number(amount),
+          receivedAt,
+          type,
+          project
+        }
+      }, (err, response) => {
+        if(response){
+          showAlert('Success', 'Transaction has been added.');
+          goBack();
+        }else{
+          console.warn(err.reason)
+        }
+      });
+    }else{
+      showAlert('Validation', 'Account and amount fields are required.');
+    }
+
+  }
 
   submit(selectedTransaction){
-    selectedTransaction.category ? this.updateExpense() : this.updateIncome();
+    let {routeName} = this.state;
+    if(!routeName){
+      selectedTransaction.category ? this.updateExpense() : this.updateIncome();
+    }else{
+      routeName === 'EXPENSES' ? this.createExpense() : this.createIncome()
+    }
   }
 
   getImagePicker(){
@@ -500,6 +627,16 @@ class UpdateTransaction extends Component{
     });
   }
 
+  renderFrom(data){
+    let {routeName} = this.state;
+    if(!routeName){
+      let {selectedTransaction} = this.props.navigation.state.params;
+      return selectedTransaction.category ? this.renderExpenseForm(data) : this.renderIncomeForm(data)
+    }else{
+      return routeName === 'EXPENSES' ? this.renderExpenseForm(data) : this.renderIncomeForm(data)
+    }
+  }
+
 
   render(){
 
@@ -511,11 +648,7 @@ class UpdateTransaction extends Component{
       return(
         <ViewContainer>
           <Image source={require('FinanceBakerZ/src/images/app-background.png')} style={TransactionsStyles.backgroundImage}>
-            {selectedTransaction.category ?
-              this.renderExpenseForm(data)
-              :
-              this.renderIncomeForm(data)
-            }
+            {this.renderFrom(data)}
           </Image>
           <Modal style={TransactionsStyles.modal} position={"bottom"} ref={"modal"} swipeArea={20} onClosed={() => this.setState({modalVisible: false})}>
             <View style={TransactionsStyles.renderDetailCon}>
@@ -552,4 +685,4 @@ export default createContainer(() => {
     accounts,
     categories
   };
-}, UpdateTransaction);
+}, AddOrUpdateTransaction);

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, Icon, ScrollView } from 'react-native';
+import { View, Text, Image, Icon, ScrollView, TouchableOpacity } from 'react-native';
 import { AccountsStyles } from 'FinanceBakerZ/src/components/accounts/AccountsStyle';
 import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
 import Meteor, { createContainer } from 'react-native-meteor';
@@ -38,6 +38,7 @@ class Accounts extends Component {
     return this.props.accounts.map((accountData, i, arr) => {
       let icon_name = accountData.bank ? accountData.bank.replace('bank-' , "") : '';
       return(
+          <TouchableOpacity activeOpacity={0.3}  onPress={() => this.props.navigation.navigate('UpdateAccount', {data : accountData})} >
         <View style={arr.length - 1 == i ? AccountsStyles.lastElementPadding : ''} key={i} >
           <View style={[theme.cardStyle, AccountsStyles.card]} elevation={3}>
             <View style={AccountsStyles.imgBox}>
@@ -53,6 +54,7 @@ class Accounts extends Component {
             </View>
           </View>
         </View>
+          </TouchableOpacity>
       )
     })
   }
@@ -65,7 +67,7 @@ class Accounts extends Component {
         <Image source = {require('FinanceBakerZ/src/images/app-background.png')} style={AccountsStyles.backgroundImage}>
           {!this.state.loading ? <ScrollView style={AccountsStyles.scroll}>
               {
-                this.accounts()
+                    this.accounts()
               }
             </ScrollView>: <View style={AccountsStyles.loaderView}><Loader size={35} color="#008142" /></View>
 

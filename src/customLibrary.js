@@ -100,6 +100,9 @@ exports.currencyStandardFormat = (currency) =>{
 exports.capitalizeFirstLetter  = (string) => {
   return typeof string != 'object'? string.charAt(0).toUpperCase() + string.slice(1) : '';
 };
+exports.alertBankName = (bankName) => {
+    return bankName ? bankName.split('-').slice(1).join(' ') : '';
+}
 
 exports.chunk = (array, chunkSize) => {
   return [].concat.apply([],

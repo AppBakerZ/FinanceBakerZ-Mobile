@@ -25,7 +25,7 @@ export const DashboardSelStyles = StyleSheet.create({
     flex: 1,
     paddingLeft: 20,
     paddingRight: 20,
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
   },
 
   DbSelectionTabContainer: {
@@ -36,7 +36,7 @@ export const DashboardSelStyles = StyleSheet.create({
     flex: 1,
     borderBottomColor: '#cbcbcb',
     borderBottomWidth: 1,
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
 
   DbSelectionBankAcc: {
@@ -65,7 +65,6 @@ export const DashboardSelStyles = StyleSheet.create({
     fontSize: 16
   },
 
-
   DbSelectionTag: {
     paddingLeft: 5
   },
@@ -73,7 +72,10 @@ export const DashboardSelStyles = StyleSheet.create({
   DbSelectionAccountsCon: {
     flexWrap: 'wrap',
     flexDirection: 'row',
-    height: 35
+      alignItems: 'flex-start',
+      flex : 1,
+      paddingTop : 20
+
   },
 
   DbSelectionPicker: {

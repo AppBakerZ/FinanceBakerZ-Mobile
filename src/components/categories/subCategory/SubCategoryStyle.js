@@ -184,6 +184,9 @@ export const SubCategoryStyles = StyleSheet.create({
         alignItems: 'center',
         borderBottomWidth: 1,
         borderBottomColor: '#dadada'
+    },
+    SubcategoryTouchable:{
+        flex : 1
     }
 
 });

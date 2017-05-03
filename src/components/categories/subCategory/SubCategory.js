@@ -13,15 +13,15 @@ class SubCategory extends Component {
     super(props);
     this.state = {};
   }
-
   renderSubCategory(children) {
-
     if(children.length){
       return children.map((val) => {
           return(
-            <View style={SubCategoryStyles.subCategoryChildren} key={val} >
+              <TouchableOpacity activeOpacity={0.3} onPress={() => this.props.navigation.navigate('UpdateCategory')} style={SubCategoryStyles.SubcategoryTouchable}>
+              <View style={SubCategoryStyles.subCategoryChildren} key={val} >
               <Text style={SubCategoryStyles.categoryChildren}>{val.toUpperCase()}</Text>
             </View>
+              </TouchableOpacity>
           )})
     }else{
       return <View style={[SubCategoryStyles.subCategoryChildren, SubCategoryStyles.noCategoryChildren]}><Text style={SubCategoryStyles.categoryChildren}>No categories</Text></View>
@@ -30,7 +30,6 @@ class SubCategory extends Component {
   render(){
     let { subCategories } = this.props;
     let {navigate} = this.props.navigation;
-
     let { children } = subCategories;
     let icon = subCategories.icon.replace('icon-' , "");
     return(
@@ -42,9 +41,9 @@ class SubCategory extends Component {
               <View style={SubCategoryStyles.main}>
                 <Image source={require('FinanceBakerZ/src/images/category/img1.png')} style={SubCategoryStyles.Texture1}>
                   <View style={SubCategoryStyles.child2}>
-                    <TouchableOpacity activeOpacity={0.3} style={SubCategoryStyles.touchableOpacity} >
+                    <TouchableOpacity activeOpacity={0.3} onPress={() => this.props.navigation.navigate('UpdateCategory')} style={SubCategoryStyles.touchableOpacity} >
                       <CategoryIcon  style={SubCategoryStyles.customIcon} name={icon} size={50}/>
-                      <Text  style={SubCategoryStyles.customIconText}>{subCategories.name.toUpperCase()}</Text>
+                      <Text style={SubCategoryStyles.customIconText}>{subCategories.name.toUpperCase()}</Text>
                     </TouchableOpacity>
                   </View>
                 </Image>

@@ -21,6 +21,7 @@ import AccountsScreen from 'FinanceBakerZ/src/screens/Accounts';
 import AddAccount from 'FinanceBakerZ/src/components/accounts/AddAccount';
 import CategoriesScreen from 'FinanceBakerZ/src/screens/Categories';
 import SubCategoriesScreen from 'FinanceBakerZ/src/components/categories/subCategory/SubCategory';
+import UpdateCategory from 'FinanceBakerZ/src/components/categories/UpdateCategory';
 import AddCategory from 'FinanceBakerZ/src/components/categories/subCategory/AddCategory';
 import SettingsScreen from 'FinanceBakerZ/src/screens/Settings';
 import ChangePasswordScreen from 'FinanceBakerZ/src/components/settings/changePassword/ChangePassword';
@@ -99,20 +100,20 @@ function nestingHeaders(routeName, renderRightIcon) {
          onPress={() => {state.params.submit()}}
          />);
     }
-    return {
-      title: state.params.myTitle || routeName,
-      right,
-      titleStyle: {
-        fontWeight: Platform.OS === 'ios' ? '500' : '200',
-        fontFamily: 'QuicksandBold-Regular',
-        fontSize: 20
-      },
-      style: {
-        height: 70,
-        backgroundColor: '#fff'
-      },
-      tintColor: '#00562E'
-    }
+    // return {
+    //   title: state.params.myTitle || routeName,
+    //   right,
+    //   titleStyle: {
+    //     fontWeight: Platform.OS === 'ios' ? '500' : '200',
+    //     fontFamily: 'QuicksandBold-Regular',
+    //     fontSize: 20
+    //   },
+    //   style: {
+    //     height: 70,
+    //     backgroundColor: '#fff'
+    //   },
+    //   tintColor: '#00562E'
+    // }
   };
   return {
     header
@@ -205,6 +206,10 @@ const CategoriesStack = StackNavigator({
     screen: SubCategoriesScreen,
     navigationOptions: nestingHeaders('Categories')
   },
+    UpdateCategory: {
+        screen: UpdateCategory,
+        navigationOptions: nestingHeaders('Update Category')
+    },
   AddCategory : {
     screen : AddCategory,
     navigationOptions : nestingHeaders('Add Category')

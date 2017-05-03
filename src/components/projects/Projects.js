@@ -67,31 +67,6 @@ class Projects extends Component {
     }
 
 
-    deleteProject(_id, name){
-        Meteor.call('projects.remove', {
-            project: {
-                _id
-            }
-        }, (err, response) => {
-            if(response){
-                showAlert('Success', name + ' project has been deleted.');
-                this.refs.modal.close();
-            }
-        });
-    }
-
-    removeProject(_id, name) {
-        showAlert('BANK PROJECT',
-            'This will remove your all data \nAre you sure to remove your ' + name + ' project?',
-            [
-                {text: 'Go Back'},
-                {text: 'Yes, Remove', onPress: () => this.deleteProject(_id, name), style: 'cancel'},
-            ],
-        );
-    }
-
-
-
     render() {
 
         const {navigate} = this.props.navigation;

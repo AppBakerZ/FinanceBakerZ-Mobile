@@ -6,11 +6,14 @@ import FabButton from 'FinanceBakerZ/src/components/button/FabButton';
 import Meteor from 'react-native-meteor';
 import {formatDate} from 'FinanceBakerZ/src/customLibrary';
 import {capitalizeFirstLetter, currencyStandardFormat} from 'FinanceBakerZ/src/customLibrary';
+import {showAlert} from 'FinanceBakerZ/src/customLibrary';
+
 
 export default class DetailProject extends  Component {
     constructor(props){
         super(props);
-        this.state = {amountPaid: ''}
+        this.state = {amountPaid: ''};
+        this.submit = this.submit.bind(this);
     }
 
     getPaidAmountOfProject(_id){
@@ -29,6 +32,46 @@ export default class DetailProject extends  Component {
     componentWillMount(){
         let project = this.props.navigation.state.params;
         this.getPaidAmountOfProject(project.detail._id);
+    }
+
+    submit(){
+        let project = this.props.navigation.state.params;
+        let _id, name;
+        _id = project.detail._id;
+        name = project.detail.name.toUpperCase();
+        this.removeProject(_id, name);
+    }
+
+    componentDidMount() {
+        this.props.navigation.setParams({ submit: this.submit }); // setting submit function from Routes to this.submit function
+    }
+
+
+    deleteProject(_id, name){
+
+        let {goBack} = this.props.navigation;
+        Meteor.call('projects.remove', {
+            project: {
+                _id
+            }
+        }, (err, response) => {
+            if(response){
+                showAlert('Success', name + ' project has been deleted.');
+                goBack();
+            }else{
+                console.warn(err.reason)
+            }
+        });
+    }
+
+    removeProject(_id, name) {
+        showAlert('BANK PROJECT',
+            'This will remove your all data \nAre you sure to remove your ' + name + ' project?',
+            [
+                {text: 'Go Back'},
+                {text: 'Yes, Remove', onPress: () => this.deleteProject(_id, name), style: 'cancel'},
+            ],
+        );
     }
 
     render(){

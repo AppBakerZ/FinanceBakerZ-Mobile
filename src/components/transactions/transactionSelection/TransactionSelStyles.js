@@ -36,7 +36,7 @@ export const TransactionSelStyles = StyleSheet.create({
     flex: 1,
     borderBottomColor: '#cbcbcb',
     borderBottomWidth: 1,
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
 
   DbSelectionBankAcc: {
@@ -46,11 +46,11 @@ export const TransactionSelStyles = StyleSheet.create({
 
   DbSelectionText: {
     fontFamily: 'QuicksandBook-Regular',
-    fontSize: 15
+    fontSize: 15,
   },
 
   DbSelectionCardTagCon: {
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
   },
 
   DbSelectionCardTag: {
@@ -73,7 +73,8 @@ export const TransactionSelStyles = StyleSheet.create({
   DbSelectionAccountsCon: {
     flexWrap: 'wrap',
     flexDirection: 'row',
-    height: 35
+      alignItems: 'flex-start'
+
   },
 
   DbSelectionPicker: {

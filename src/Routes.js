@@ -27,6 +27,7 @@ import ChangePasswordScreen from 'FinanceBakerZ/src/components/settings/changePa
 import AccountSettingsScreen from 'FinanceBakerZ/src/components/settings/accountSettings/AccountSettings';
 import PersonalInformationScreen from 'FinanceBakerZ/src/components/settings/personalInformation/PersonalInformation';
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import DrawerItems, {DrawerItemIcon} from 'FinanceBakerZ/src/components/drawerItems/DrawerItems';
 import { StackNavigator, DrawerNavigator } from 'react-navigation';
 
@@ -54,21 +55,21 @@ export const Auth = StackNavigator({
 });
 
 
-const header = ({ state, navigate }) => {
   // The navigation prop has functions like setParams, goBack, and navigate.
+  const header = ({ state, navigate }) => {
   let left = (
-    <Icon  name="menu"
-           color="#45A27A"
-           size={32}
-           style={{marginLeft: 5, padding: 10}}
-           onPress={() => {
+      <Icon  name="menu"
+             color="#45A27A"
+             size={32}
+             style={{marginLeft: 5, padding: 10}}
+             onPress={() => {
              navigate('DrawerOpen')
            }}
-    />
+          />
   );
 
   let title = (
-    <Text style={{fontSize: 20, fontFamily: 'QuicksandBold-Regular', color: '#00562E', paddingLeft: 20}}>{(state.routeName != 'Dashboard') ? state.routeName : ''}</Text>
+      <Text style={{fontSize: 20, fontFamily: 'QuicksandBold-Regular', color: '#00562E', paddingLeft: 20}}>{(state.routeName != 'Dashboard') ? state.routeName : ''}</Text>
   );
 
   style = {
@@ -79,16 +80,27 @@ const header = ({ state, navigate }) => {
   return { left, title, style};
 };
 
-function nestingHeaders(routeName, rightIconVisible) {
+function nestingHeaders(routeName, renderRightIcon) {
 
   let header = ({state}) => {
-    let right = rightIconVisible ? (<Icon
-      name="checked"
-      size={28}
-      style={{paddingRight: 15}}
-      onPress={() => {state.params.submit()}}
-    />) : <Text></Text>;
+    let right;
+    if(renderRightIcon && renderRightIcon.iconChecked){
+       right =  (<Icon
+          name="checked"
+          size={28}
+          style={{paddingRight: 15}}
+          onPress={() => {state.params.submit()}}
+          />);
+    }else if (renderRightIcon && renderRightIcon.iconDelete) {
+      right =  (<Ionicons
+         name="ios-trash"
+         size={35}
+         style={{paddingRight: 15, color: '#c71212'}}
+         onPress={() => {state.params.submit()}}
+         />);
+    }
     return {
+      title: state.params.myTitle || routeName,
       right,
       titleStyle: {
         fontWeight: Platform.OS === 'ios' ? '500' : '200',
@@ -103,7 +115,6 @@ function nestingHeaders(routeName, rightIconVisible) {
     }
   };
   return {
-    title: routeName,
     header
   }
 }
@@ -118,8 +129,8 @@ const DashboardStack = StackNavigator({
   },
   Selection: {
     screen: DashboardSelection,
-    navigationOptions: nestingHeaders('Selection', true)
-  },
+    navigationOptions: nestingHeaders('Selection', {iconChecked: true})
+  }
 }, {
   mode: 'modal'
 });
@@ -137,7 +148,7 @@ const ProjectsStack = StackNavigator({
   },
   DetailProject:{
     screen: DetailProject,
-    navigationOptions: nestingHeaders('Detail Project')
+    navigationOptions: nestingHeaders('Detail Project', {iconDelete: true})
   },
   UpdateProject: {
     screen: UpdateProject,
@@ -145,7 +156,7 @@ const ProjectsStack = StackNavigator({
   },
   ProjectSelection: {
     screen: ProjectSelectionScreen,
-    navigationOptions: nestingHeaders('Selection', true)
+    navigationOptions: nestingHeaders('Selection', {iconChecked: true})
   }
 });
 
@@ -158,16 +169,15 @@ const TransactionsStack = StackNavigator({
   },
   Selection: {
     screen: TransactionSelection,
-    navigationOptions: nestingHeaders('Selection', true)
+    navigationOptions: nestingHeaders('Selection', {iconChecked: true})
   },
   ViewTransaction: {
     screen: ViewTransaction,
-    navigationOptions: nestingHeaders('Transactions')
+    navigationOptions: nestingHeaders('Transactions', {iconDelete: true})
   },
   UpdateTransaction: {
     screen: AddOrUpdateTransaction,
-    navigationOptions: nestingHeaders('Update Transaction')
-
+    navigationOptions: nestingHeaders('Transaction')
   }
 });
 

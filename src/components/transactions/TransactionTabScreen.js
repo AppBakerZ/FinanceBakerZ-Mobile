@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, ListView} from 'react-native';
+import { View, Text, TouchableOpacity, ListView } from 'react-native';
 import { TransactionsStyles } from 'FinanceBakerZ/src/components/transactions/TransactionsStyle';
 import {loggedUserCurrency, currencyStandardFormat, alterIconName, capitalizeFirstLetter} from 'FinanceBakerZ/src/customLibrary';
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
@@ -20,21 +20,21 @@ export default class TransactionTabScreen extends  Component {
 
   renderRow(rowData){
     return(
-      <TouchableOpacity style={TransactionsStyles.listViewContainer} activeOpacity={0.7} onPress={() => this.props.screenProps.navigate('ViewTransaction', {selectedTransaction: rowData})}>
-        <View style={TransactionsStyles.listViewContentLeft}>
-          <Icon name={rowData.category ? 'left-arrow' : 'right-arrow'} color={rowData.category ?  '#C81113' : '#008041'} style={TransactionsStyles.icons} />
-          <Text style={TransactionsStyles.iconText}>
-            {capitalizeFirstLetter(rowData.receivedAt ?
-              (rowData.type == "project" ?
-                (rowData.project && rowData.project.name || rowData.project) : rowData.type) :
-              (rowData.category.name || rowData.category))}
-          </Text>
-        </View>
-        <View style={TransactionsStyles.listViewContentRight}>
-          <CurrencyIcon style={TransactionsStyles.contentCurrIcon} size={14} name={alterIconName(loggedUserCurrency())} />
-          <Text style={TransactionsStyles.contentRightText}>{currencyStandardFormat(rowData.amount)}</Text>
-        </View>
-      </TouchableOpacity>
+        <TouchableOpacity style={TransactionsStyles.listViewContainer} activeOpacity={0.7} onPress={() => this.props.screenProps.navigate('ViewTransaction', {selectedTransaction: rowData})}>
+          <View style={TransactionsStyles.listViewContentLeft}>
+            <Icon name={rowData.category ? 'left-arrow' : 'right-arrow'} color={rowData.category ?  '#C81113' : '#008041'} style={TransactionsStyles.icons} />
+            <Text style={TransactionsStyles.iconText}>
+              {capitalizeFirstLetter(rowData.receivedAt ?
+                  (rowData.type == "project" ?
+                      (rowData.project && rowData.project.name || rowData.project) : rowData.type) :
+                  (rowData.category.name || rowData.category))}
+            </Text>
+          </View>
+          <View style={TransactionsStyles.listViewContentRight}>
+            <CurrencyIcon style={TransactionsStyles.contentCurrIcon} size={14} name={alterIconName(loggedUserCurrency())} />
+            <Text style={TransactionsStyles.contentRightText}>{currencyStandardFormat(rowData.amount)}</Text>
+          </View>
+        </TouchableOpacity>
     );
   }
 
@@ -46,16 +46,18 @@ export default class TransactionTabScreen extends  Component {
 
     if(incomes.length || expenses.length || transactions.length){
       return (
-        <ViewContainer>
-          <ListView
-            dataSource={ds.cloneWithRows(eval(state.routeName.toLowerCase()))}
-            renderRow={this.renderRow}
-          />
-          {state.routeName !== 'TRANSACTIONS' ?  <FabButton iconName="add"  iconColor="#fff" onPress={() => this.props.screenProps.navigate('UpdateTransaction', {routeName: state.routeName.toUpperCase()})} /> : <View></View> }
-        </ViewContainer>
+          <ViewContainer>
+            <ListView
+                dataSource={ds.cloneWithRows(eval(state.routeName.toLowerCase()))}
+                renderRow={this.renderRow}
+                />
+            {state.routeName !== 'TRANSACTIONS' ?  <FabButton iconName="add"  iconColor="#fff" onPress={() => this.props.screenProps.navigate('UpdateTransaction', {routeName: state.routeName.toUpperCase()})} /> : <View></View> }
+          </ViewContainer>
       );
     }else{
-      return <View></View>
+      return <ViewContainer>
+        {state.routeName !== 'TRANSACTIONS' ?  <FabButton iconName="add"  iconColor="#fff" onPress={() => this.props.screenProps.navigate('UpdateTransaction', {routeName: state.routeName.toUpperCase()})} /> : <View></View> }
+      </ViewContainer>
     }
   }
 }

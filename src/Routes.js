@@ -100,20 +100,20 @@ function nestingHeaders(routeName, renderRightIcon) {
          onPress={() => {state.params.submit()}}
          />);
     }
-    // return {
-    //   title: state.params.myTitle || routeName,
-    //   right,
-    //   titleStyle: {
-    //     fontWeight: Platform.OS === 'ios' ? '500' : '200',
-    //     fontFamily: 'QuicksandBold-Regular',
-    //     fontSize: 20
-    //   },
-    //   style: {
-    //     height: 70,
-    //     backgroundColor: '#fff'
-    //   },
-    //   tintColor: '#00562E'
-    // }
+    return {
+      title: (state.params && state.params.myTitle) || routeName,
+      right,
+      titleStyle: {
+        fontWeight: Platform.OS === 'ios' ? '500' : '200',
+        fontFamily: 'QuicksandBold-Regular',
+        fontSize: 20
+      },
+      style: {
+        height: 70,
+        backgroundColor: '#fff'
+      },
+      tintColor: '#00562E'
+    }
   };
   return {
     header

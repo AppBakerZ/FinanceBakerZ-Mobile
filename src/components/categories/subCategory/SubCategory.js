@@ -14,10 +14,15 @@ class SubCategory extends Component {
     this.state = {};
   }
   renderSubCategory(children) {
+    console.log(this.props.subCategories, 'subcategories')
+    let CategoryName = this.props.subCategories.name;
+    let IconName = this.props.subCategories.icon;
+    let _id = this.props.subCategories._id;
+    console.log(_id, 'id');
     if(children.length){
       return children.map((val) => {
           return(
-              <TouchableOpacity activeOpacity={0.3} onPress={() => this.props.navigation.navigate('UpdateCategory')} style={SubCategoryStyles.SubcategoryTouchable}>
+              <TouchableOpacity activeOpacity={0.3} onPress={() => this.props.navigation.navigate('UpdateCategory', {CategoryName,IconName,_id})} style={SubCategoryStyles.SubcategoryTouchable}>
               <View style={SubCategoryStyles.subCategoryChildren} key={val} >
               <Text style={SubCategoryStyles.categoryChildren}>{val.toUpperCase()}</Text>
             </View>
@@ -28,7 +33,10 @@ class SubCategory extends Component {
     }
   }
   render(){
-    let { subCategories } = this.props;
+    let CategoryName = this.props.subCategories.name;
+      let IconName = this.props.subCategories.icon;
+      let _id = this.props.subCategories._id;
+      let { subCategories } = this.props;
     let {navigate} = this.props.navigation;
     let { children } = subCategories;
     let icon = subCategories.icon.replace('icon-' , "");
@@ -41,7 +49,7 @@ class SubCategory extends Component {
               <View style={SubCategoryStyles.main}>
                 <Image source={require('FinanceBakerZ/src/images/category/img1.png')} style={SubCategoryStyles.Texture1}>
                   <View style={SubCategoryStyles.child2}>
-                    <TouchableOpacity activeOpacity={0.3} onPress={() => this.props.navigation.navigate('UpdateCategory')} style={SubCategoryStyles.touchableOpacity} >
+                    <TouchableOpacity activeOpacity={0.3} onPress={() => this.props.navigation.navigate('UpdateCategory',{CategoryName, IconName, _id})} style={SubCategoryStyles.touchableOpacity} >
                       <CategoryIcon  style={SubCategoryStyles.customIcon} name={icon} size={50}/>
                       <Text style={SubCategoryStyles.customIconText}>{subCategories.name.toUpperCase()}</Text>
                     </TouchableOpacity>

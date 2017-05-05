@@ -9,32 +9,38 @@ import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
 import Modal from 'react-native-modalbox';
 import Meteor, { createContainer } from 'react-native-meteor';
 import FabButton from 'FinanceBakerZ/src/components/button/FabButton';
-import {showAlert} from 'FinanceBakerZ/src/customLibrary';
+import {showAlert, } from 'FinanceBakerZ/src/customLibrary';
 
 
 class UpdateCategory extends Component{
 
-    constructor(props){
+    constructor(props, ){
         super(props);
+        let data = this.props.navigation.state.params;
+        console.log(this.props,'props');
+        console.log(data,'data');
         this.state = {
+            _id : data._id,
             parent: '',
             renderCategoryIcon: this.renderCategoryIcon(),
+            name : data.CategoryName,
         };
     }
     submit(){
-        let {name, icon, parent} = this.state;
+        let {_id, name, icon, parent} = this.state;
         if(name && icon){
             icon = icon.value;
 
-            Meteor.call('categories.insert', {
+            Meteor.call('categories.update',{
                 category: {
                     name,
                     icon,
-                    parent
+                    parent,
+                    _id
                 }
             }, (err, response) => {
                 if(response){
-                    showAlert('Success', 'Your category has been added.');
+                    showAlert('Success', 'Your category has been Updated.');
                     this.props.navigation.goBack();
                 }else{
                     console.warn(err.reason)
@@ -91,6 +97,8 @@ class UpdateCategory extends Component{
                 <View style={SubCategoryStyles.categoryIcons} key={i}>
                     {iconArray.map((icon, index ) => {
                         let icon_name = icon.value.replace('icon-' , "");
+                        console.log(icon, 'icon');
+
                         return(
                             <TouchableOpacity style={[SubCategoryStyles.categoryIconsDiv, this.removeBorder(icon) , arr.length-1 == i ? { borderBottomColor: 'transparent', borderBottomWidth: 0 } : '']} onPress={() => this.setState({icon})} activeOpacity={0.75} key={index}>
                                 <CategoryIconShow name={icon_name } size={60}/>
@@ -102,7 +110,6 @@ class UpdateCategory extends Component{
         });
     }
     render(){
-
         return(
             <ViewContainer style = {SubCategoryStyles.addCategoryMain}>
                 <Image source = {require('FinanceBakerZ/src/images/app-background.png')} style={SubCategoryStyles.backgroundImage}>
@@ -125,8 +132,8 @@ class UpdateCategory extends Component{
                         </ViewContainer>
                         <View style={SubCategoryStyles.SelectCategoryIcon}>
                             <View style={SubCategoryStyles.categorySelectionIcon}>
-                                <Text style={[SubCategoryStyles.textBold, SubCategoryStyles.textLeft]}>{this.state.icon ? this.state.icon.label : 'Select Category Icon'}</Text>
-                                <Icon size={10} name="down-arrow" style={SubCategoryStyles.iconRight} />
+                                <Text style={[SubCategoryStyles.textBold, SubCategoryStyles.textLeft]}>{this.state.icon ? this.state.icon.label : 'Select Icon'}</Text>
+                                <Icon size={10} name="down-arrow" style={SubCategoryStyles.iconRight} value = {this.state.icon} />
                             </View>
                         </View>
                         <View style={SubCategoryStyles.CategoryIconList}>

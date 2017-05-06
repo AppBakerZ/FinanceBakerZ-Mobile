@@ -4,7 +4,7 @@ import { ProjectsStyles } from 'FinanceBakerZ/src/components/projects/ProjectsSt
 import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
 import FabButton from 'FinanceBakerZ/src/components/button/FabButton';
 import Meteor from 'react-native-meteor';
-import {formatDate} from 'FinanceBakerZ/src/customLibrary';
+import {formatDate, showAlert} from 'FinanceBakerZ/src/customLibrary';
 import {capitalizeFirstLetter, currencyStandardFormat} from 'FinanceBakerZ/src/customLibrary';
 
 export default class DetailProject extends  Component {

@@ -34,36 +34,39 @@ class SubCategory extends Component {
   render(){
 
 
-    console.log(this.props.subCategories);
-    let {icon, name, _id} = this.props.subCategories;
-    let { subCategories } = this.props;
-    let {navigate} = this.props.navigation;
-    let { children } = subCategories;
-    let iconName = icon.replace('icon-' , "");
+    if(this.props.subCategories){
+      let {icon, name, _id} = this.props.subCategories;
+      let { subCategories } = this.props;
+      let {navigate} = this.props.navigation;
+      let { children } = subCategories;
 
-    return(
+      let iconName = subCategories.icon.replace('icon-' , "");
+      return(
+          <ViewContainer>
+            <Image source={require('FinanceBakerZ/src/images/app-background.png')} style={SubCategoryStyles.backgroundImage}>
+              <ScrollView style={SubCategoryStyles.scroll}>
+                <View style={SubCategoryStyles.mainDiv}>
+                  <View style={SubCategoryStyles.main}>
+                    <Image source={require('FinanceBakerZ/src/images/category/img1.png')} style={SubCategoryStyles.Texture1}>
+                      <View style={SubCategoryStyles.child2}>
+                        <TouchableOpacity activeOpacity={0.75} onPress={() => this.props.navigation.navigate('UpdateCategory',{icon, name, _id})} style={SubCategoryStyles.touchableOpacity} >
+                          <CategoryIcon  style={SubCategoryStyles.customIcon} name={iconName} size={50}/>
+                          <Text style={SubCategoryStyles.customIconText}>{subCategories.name.toUpperCase()}</Text>
+                        </TouchableOpacity>
+                      </View>
+                    </Image>
+                  </View >
+                  {this.renderSubCategory(children)}
+                </View>
+              </ScrollView>
+            </Image>
+            {!this.state.loading ? <FabButton iconName="add" iconColor="#fff" style={SubCategoryStyles.fabButtonBg} onPress={() => navigate('AddCategory')} /> : <Text></Text>}
+          </ViewContainer>
+      )
+    }else {
+      return <View></View>
+    }
 
-        <ViewContainer>
-          <Image source={require('FinanceBakerZ/src/images/app-background.png')} style={SubCategoryStyles.backgroundImage}>
-            <ScrollView style={SubCategoryStyles.scroll}>
-              <View style={SubCategoryStyles.mainDiv}>
-                <View style={SubCategoryStyles.main}>
-                  <Image source={require('FinanceBakerZ/src/images/category/img1.png')} style={SubCategoryStyles.Texture1}>
-                    <View style={SubCategoryStyles.child2}>
-                      <TouchableOpacity activeOpacity={0.75} onPress={() => this.props.navigation.navigate('UpdateCategory',{icon, name, _id})} style={SubCategoryStyles.touchableOpacity} >
-                        <CategoryIcon  style={SubCategoryStyles.customIcon} name={iconName} size={50}/>
-                        <Text style={SubCategoryStyles.customIconText}>{subCategories.name.toUpperCase()}</Text>
-                      </TouchableOpacity>
-                    </View>
-                  </Image>
-                </View >
-                {this.renderSubCategory(children)}
-              </View>
-            </ScrollView>
-          </Image>
-          {!this.state.loading ? <FabButton iconName="add" iconColor="#fff" style={SubCategoryStyles.fabButtonBg} onPress={() => navigate('AddCategory')} /> : <Text></Text>}
-        </ViewContainer>
-    )
   }
 }
 SubCategory.propTypes = {

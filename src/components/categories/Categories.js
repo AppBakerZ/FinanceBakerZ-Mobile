@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, ScrollView, Icon, TouchableOpacity, Alert, ActivityIndicator, Platform} from 'react-native';
+import { View, Text, Image, ScrollView, TouchableOpacity, ActivityIndicator, Platform} from 'react-native';
 import { CategoriesStyles } from 'FinanceBakerZ/src/components/categories/CategoriesStyle';
 import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
 import CategoryIcon from 'FinanceBakerZ/src/icons/CategoryIcon';
@@ -68,6 +68,7 @@ class Categories extends Component {
     this.props.navigation.navigate('SubCategories', {parentId});
   }
   render() {
+
     const { loading } = this.state;
       let {navigate} = this.props.navigation;
     return (

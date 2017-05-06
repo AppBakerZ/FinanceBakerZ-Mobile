@@ -21,7 +21,7 @@ import AccountsScreen from 'FinanceBakerZ/src/screens/Accounts';
 import AddAccount from 'FinanceBakerZ/src/components/accounts/AddAccount';
 import UpdateAccount from 'FinanceBakerZ/src/components/accounts/UpdateAccount';
 import CategoriesScreen from 'FinanceBakerZ/src/screens/Categories';
-import SubCategoriesScreen from 'FinanceBakerZ/src/components/categories/subCategory/SubCategory';
+import SubCategory from 'FinanceBakerZ/src/components/categories/subCategory/SubCategory';
 import UpdateCategory from 'FinanceBakerZ/src/components/categories/UpdateCategory';
 import AddCategory from 'FinanceBakerZ/src/components/categories/subCategory/AddCategory';
 import SettingsScreen from 'FinanceBakerZ/src/screens/Settings';
@@ -57,17 +57,17 @@ export const Auth = StackNavigator({
 });
 
 
-  // The navigation prop has functions like setParams, goBack, and navigate.
-  const header = ({ state, navigate }) => {
+// The navigation prop has functions like setParams, goBack, and navigate.
+const header = ({ state, navigate }) => {
   let left = (
       <Icon  name="menu"
              color="#45A27A"
              size={32}
              style={{marginLeft: 5, padding: 10}}
              onPress={() => {
-             navigate('DrawerOpen')
-           }}
-          />
+               navigate('DrawerOpen')
+             }}
+      />
   );
 
   let title = (
@@ -87,19 +87,19 @@ function nestingHeaders(routeName, renderRightIcon) {
   let header = ({state}) => {
     let right;
     if(renderRightIcon && renderRightIcon.iconChecked){
-       right =  (<Icon
+      right =  (<Icon
           name="checked"
           size={28}
           style={{paddingRight: 15}}
           onPress={() => {state.params.submit()}}
-          />);
+      />);
     }else if (renderRightIcon && renderRightIcon.iconDelete) {
       right =  (<Ionicons
-         name="ios-trash"
-         size={35}
-         style={{paddingRight: 15, color: '#c71212'}}
-         onPress={() => {state.params.submit()}}
-         />);
+          name="ios-trash"
+          size={35}
+          style={{paddingRight: 15, color: '#c71212'}}
+          onPress={() => {state.params.submit()}}
+      />);
     }
     return {
       title: (state.params && state.params.myTitle) || routeName,
@@ -194,10 +194,10 @@ const AccountsStack = StackNavigator({
     screen: AddAccount,
     navigationOptions: nestingHeaders('Add Account')
   },
-    UpdateAccount:{
-        screen: UpdateAccount,
-        navigationOptions: nestingHeaders('Update Account',  {iconDelete: true})
-    }
+  UpdateAccount:{
+    screen: UpdateAccount,
+    navigationOptions: nestingHeaders('Update Account',  {iconDelete: true})
+  }
 });
 
 const CategoriesStack = StackNavigator({
@@ -208,13 +208,13 @@ const CategoriesStack = StackNavigator({
     }
   },
   SubCategories: {
-    screen: SubCategoriesScreen,
+    screen: SubCategory,
     navigationOptions: nestingHeaders('Categories')
   },
-    UpdateCategory: {
-        screen: UpdateCategory,
-        navigationOptions: nestingHeaders('Update Category')
-    },
+  UpdateCategory: {
+    screen: UpdateCategory,
+    navigationOptions: nestingHeaders('Update Category', {iconDelete: true})
+  },
   AddCategory : {
     screen : AddCategory,
     navigationOptions : nestingHeaders('Add Category')

@@ -10,6 +10,8 @@ import Modal from 'react-native-modalbox';
 import Meteor, { createContainer } from 'react-native-meteor';
 import FabButton from 'FinanceBakerZ/src/components/button/FabButton';
 import {showAlert, capitalizeFirstLetter } from 'FinanceBakerZ/src/customLibrary';
+import { NavigationActions } from 'react-navigation'
+
 
 
 class UpdateCategory extends Component{
@@ -24,7 +26,68 @@ class UpdateCategory extends Component{
       name : name,
       icon: this.findCategoryIcon(icon) || null
     };
+    this.deleteCategoryDialog = this.deleteCategoryDialog.bind(this);
   }
+
+
+  componentDidMount() {
+    this.props.navigation.setParams({ submit: this.deleteCategoryDialog }); // setting submit function from Routes to this.submit function
+  }
+
+  findCategoryObjToRemove(){
+    const {_id, name, parent} = this.state;
+    if(!parent){
+      return {
+        category: {
+          _id,
+          name,
+          parent
+        }
+      }
+    }else{
+      return {
+        category: {
+          name
+        }
+      }
+    }
+  }
+
+  deleteCategory(){
+    const {parent} = this.state;
+    let removeCategory = parent === null ? 'categories.remove' : 'categories.removeFromParent';
+
+    Meteor.call(removeCategory, this.findCategoryObjToRemove() , (err, response) => {
+      if(err){
+        showAlert('Error', err.reason)
+      }else{
+        showAlert('Success', 'Category has been deleted.');
+        if(parent !== null){
+          this.props.navigation.goBack();
+        }else{
+          const resetAction = NavigationActions.reset({
+            index: 0,
+            actions: [
+              NavigationActions.navigate({ routeName: 'Categories'})
+            ]
+          });
+          this.props.navigation.dispatch(resetAction);
+        }
+      }
+    });
+  }
+
+  deleteCategoryDialog(){
+    showAlert('REMOVE CATEGORY',
+        'This will remove your all data \nAre you sure to remove your category?',
+        [
+          {text: 'Go Back'},
+          {text: 'Yes, Remove', onPress: () => this.deleteCategory(), style: 'cancel'},
+        ],
+    );
+  }
+
+
 
   componentWillReceiveProps(props){
     if(props.children){

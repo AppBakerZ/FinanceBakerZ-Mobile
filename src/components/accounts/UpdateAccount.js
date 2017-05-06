@@ -25,8 +25,9 @@ export  default class UpdateAccount extends Component {
             bankIcons: this.renderBankIcons(data.country),
             checked: false,
             bank : {label: alertBankName(data.bank)},
-            country : data.country
+            country : data.country,
         };
+        this.submitAccount = this.submitAccount.bind(this);
         this.renderBankIcons = this.renderBankIcons.bind(this);
         //get all countries that have banks.
         let availableBankCountries = Object.keys(bankFonts);
@@ -80,6 +81,46 @@ export  default class UpdateAccount extends Component {
     getCountryName(){
         let {country} = this.state;
         return this.countries.find(countryName => countryName.value == country).label;
+    }
+    submitAccount(){
+        let account = this.props.navigation.state.params;
+        let _id, name;
+        _id = account._id;
+        name = alterName(account.data.bank);
+        this.removeAccount(_id, name);
+    }
+    componentDidMount() {
+        this.props.navigation.setParams({ submit: this.submitAccount }); // setting submit function from Routes to this.submit function
+    }
+
+    removeAccount(_id, name){
+        showAlert('BANK ACCOUNT',
+            'This will remove your all data \nAre you sure to remove your ' + name + ' Account?',
+            [
+                {text: 'Go Back'},
+                {text: 'Yes, Remove', onPress: () => this.deleteAccount(name), style: 'cancel'},
+            ],
+        );
+    }
+    deleteAccount(name){
+
+        const {_id} = this.state;
+        Meteor.call('accounts.remove', {
+            account: {
+                _id
+            }
+        }, (err) => {
+            if(err){
+                console.warn(err.reason)
+            }else{
+                showAlert('Success',  name + ' Account has been deleted.');
+                this.props.navigation.goBack();
+            }
+        });
+        // Close Popup
+        this.setState({
+            openDialog: false
+        });
     }
 
     submit(){

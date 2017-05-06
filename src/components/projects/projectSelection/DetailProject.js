@@ -6,8 +6,6 @@ import FabButton from 'FinanceBakerZ/src/components/button/FabButton';
 import Meteor from 'react-native-meteor';
 import {formatDate} from 'FinanceBakerZ/src/customLibrary';
 import {capitalizeFirstLetter, currencyStandardFormat} from 'FinanceBakerZ/src/customLibrary';
-import {showAlert} from 'FinanceBakerZ/src/customLibrary';
-
 
 export default class DetailProject extends  Component {
     constructor(props){

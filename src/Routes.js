@@ -196,7 +196,7 @@ const AccountsStack = StackNavigator({
   },
     UpdateAccount:{
         screen: UpdateAccount,
-        navigationOptions: nestingHeaders('Update Account')
+        navigationOptions: nestingHeaders('Update Account',  {iconDelete: true})
     }
 });
 

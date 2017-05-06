@@ -191,6 +191,7 @@ class UpdateCategory extends Component{
               <ViewContainer  style = {SubCategoryStyles.addCategoryContainer}>
                 <View style={SubCategoryStyles.categoryNameField}>
                   <KeyboardAvoidingView>
+                    <Text style={SubCategoryStyles.selectParentText}>Name</Text>
                     <TextInput
                         placeholder='Enter Category Name'
                         style={SubCategoryStyles.input}
@@ -204,6 +205,7 @@ class UpdateCategory extends Component{
                 </View>
               </ViewContainer>
               <View style={SubCategoryStyles.SelectCategoryIcon}>
+                <Text style={SubCategoryStyles.selectParentText}>Select Icon</Text>
                 <View style={SubCategoryStyles.categorySelectionIcon}>
                   <Text style={[SubCategoryStyles.textBold, SubCategoryStyles.textLeft]}>{this.state.icon ? capitalizeFirstLetter(this.state.icon.label) : 'Select Icon'}</Text>
                   <Icon size={10} name="down-arrow" style={SubCategoryStyles.iconRight} />

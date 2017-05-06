@@ -9,59 +9,60 @@ import Meteor, { createContainer } from 'react-native-meteor';
 
 class SubCategory extends Component {
 
+
+
   constructor(props) {
     super(props);
     this.state = {};
   }
-  renderSubCategory(children) {
-    console.log(this.props.subCategories, 'subcategories')
-    let CategoryName = this.props.subCategories.name;
-    let IconName = this.props.subCategories.icon;
-    let _id = this.props.subCategories._id;
-    console.log(_id, 'id');
-    if(children.length){
-      return children.map((val) => {
-          return(
-              <TouchableOpacity activeOpacity={0.3} onPress={() => this.props.navigation.navigate('UpdateCategory', {CategoryName,IconName,_id})} style={SubCategoryStyles.SubcategoryTouchable}>
+  renderSubCategory(child) {
+
+    let {name, _id, children} = this.props.subCategories;
+    if(child.length){
+      return child.map((val, i) => {
+        return(
+            <TouchableOpacity key={i} activeOpacity={0.75} onPress={() => this.props.navigation.navigate('UpdateCategory', {_id, parent: name, name: children[i]})} style={SubCategoryStyles.SubcategoryTouchable}>
               <View style={SubCategoryStyles.subCategoryChildren} key={val} >
-              <Text style={SubCategoryStyles.categoryChildren}>{val.toUpperCase()}</Text>
-            </View>
-              </TouchableOpacity>
-          )})
+                <Text style={SubCategoryStyles.categoryChildren}>{val.toUpperCase()}</Text>
+              </View>
+            </TouchableOpacity>
+        )})
     }else{
       return <View style={[SubCategoryStyles.subCategoryChildren, SubCategoryStyles.noCategoryChildren]}><Text style={SubCategoryStyles.categoryChildren}>No categories</Text></View>
     }
   }
   render(){
-    let CategoryName = this.props.subCategories.name;
-      let IconName = this.props.subCategories.icon;
-      let _id = this.props.subCategories._id;
-      let { subCategories } = this.props;
+
+
+    console.log(this.props.subCategories);
+    let {icon, name, _id} = this.props.subCategories;
+    let { subCategories } = this.props;
     let {navigate} = this.props.navigation;
     let { children } = subCategories;
-    let icon = subCategories.icon.replace('icon-' , "");
+    let iconName = icon.replace('icon-' , "");
+
     return(
 
-      <ViewContainer>
-        <Image source={require('FinanceBakerZ/src/images/app-background.png')} style={SubCategoryStyles.backgroundImage}>
-          <ScrollView style={SubCategoryStyles.scroll}>
-            <View style={SubCategoryStyles.mainDiv}>
-              <View style={SubCategoryStyles.main}>
-                <Image source={require('FinanceBakerZ/src/images/category/img1.png')} style={SubCategoryStyles.Texture1}>
-                  <View style={SubCategoryStyles.child2}>
-                    <TouchableOpacity activeOpacity={0.3} onPress={() => this.props.navigation.navigate('UpdateCategory',{CategoryName, IconName, _id})} style={SubCategoryStyles.touchableOpacity} >
-                      <CategoryIcon  style={SubCategoryStyles.customIcon} name={icon} size={50}/>
-                      <Text style={SubCategoryStyles.customIconText}>{subCategories.name.toUpperCase()}</Text>
-                    </TouchableOpacity>
-                  </View>
-                </Image>
-              </View >
-              {this.renderSubCategory(children)}
-            </View>
-          </ScrollView>
-        </Image>
+        <ViewContainer>
+          <Image source={require('FinanceBakerZ/src/images/app-background.png')} style={SubCategoryStyles.backgroundImage}>
+            <ScrollView style={SubCategoryStyles.scroll}>
+              <View style={SubCategoryStyles.mainDiv}>
+                <View style={SubCategoryStyles.main}>
+                  <Image source={require('FinanceBakerZ/src/images/category/img1.png')} style={SubCategoryStyles.Texture1}>
+                    <View style={SubCategoryStyles.child2}>
+                      <TouchableOpacity activeOpacity={0.75} onPress={() => this.props.navigation.navigate('UpdateCategory',{icon, name, _id})} style={SubCategoryStyles.touchableOpacity} >
+                        <CategoryIcon  style={SubCategoryStyles.customIcon} name={iconName} size={50}/>
+                        <Text style={SubCategoryStyles.customIconText}>{subCategories.name.toUpperCase()}</Text>
+                      </TouchableOpacity>
+                    </View>
+                  </Image>
+                </View >
+                {this.renderSubCategory(children)}
+              </View>
+            </ScrollView>
+          </Image>
           {!this.state.loading ? <FabButton iconName="add" iconColor="#fff" style={SubCategoryStyles.fabButtonBg} onPress={() => navigate('AddCategory')} /> : <Text></Text>}
-      </ViewContainer>
+        </ViewContainer>
     )
   }
 }

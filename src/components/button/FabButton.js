@@ -19,6 +19,7 @@ export default class FabButton extends Component{
             <ColoredFab
                 backgroundColor = {MKColor.Teal}
                 onPress = {this.props.onPress}
+                disabled={this.props.disabled}
             >
                 <Icon name = {this.props.iconName} size = {this.props.size || 28} color = {this.props.iconColor}/>
             </ColoredFab>

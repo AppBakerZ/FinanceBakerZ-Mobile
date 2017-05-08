@@ -111,7 +111,7 @@ export const SubCategoryStyles = StyleSheet.create({
         fontFamily: 'QuicksandBook-Regular',
         fontSize: 15,
         height: 50,
-        paddingLeft: 12
+        paddingLeft: 15
     },
     iconParent: {
         flex:1.2,
@@ -119,10 +119,10 @@ export const SubCategoryStyles = StyleSheet.create({
         paddingRight : 15
     },
     febButton:{
-        flex : 2
+        flex : 1.8
     },
     CategoryIconList: {
-        flex: 6,
+        flex: 5,
         borderColor: '#cdcdcd',
         borderWidth: 1,
         margin : 15
@@ -137,9 +137,9 @@ export const SubCategoryStyles = StyleSheet.create({
         justifyContent: 'center'
     },
     selectParentText:{
-        paddingLeft : 10,
+        paddingLeft : 15,
         paddingTop : 10,
-        fontFamily: 'QuicksandBold-Regular'
+        fontFamily: 'QuicksandBold-Regular',
     },
     categorySelectionIcon: {
         flex: 1,
@@ -157,7 +157,7 @@ export const SubCategoryStyles = StyleSheet.create({
         flex : 1,
     },
     textLeft: {
-        paddingLeft: 12,
+        paddingLeft: 15,
         fontFamily: 'QuicksandBook-Regular'
     },
     iconRight: {
@@ -187,6 +187,9 @@ export const SubCategoryStyles = StyleSheet.create({
     },
     SubcategoryTouchable:{
         flex : 1
+    },
+    picker:{
+        marginLeft : 7
     }
 
 });

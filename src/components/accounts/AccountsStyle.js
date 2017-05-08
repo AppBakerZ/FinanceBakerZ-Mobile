@@ -95,7 +95,7 @@ export const AccountsStyles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderBottomWidth: 1,
-    borderBottomColor: '#dadada'
+    borderBottomColor: '#dadada',
   },
 
   iconRight: {
@@ -117,7 +117,7 @@ export const AccountsStyles = StyleSheet.create({
     borderBottomWidth: 1,
     borderLeftWidth: 1,
     borderRightWidth: 1,
-    marginHorizontal: 10
+    marginHorizontal: 10,
   },
 
   bankIconCon: {
@@ -194,6 +194,11 @@ export const AccountsStyles = StyleSheet.create({
     fontSize: 15,
     height: 48,
     paddingLeft: 12
-  }
+  },
+    labelText:{
+        fontFamily: 'QuicksandBold-Regular',
+        paddingTop : 10,
+        paddingLeft : 10
+    }
 
 });

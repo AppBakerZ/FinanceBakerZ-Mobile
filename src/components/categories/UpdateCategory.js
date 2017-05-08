@@ -156,6 +156,7 @@ class UpdateCategory extends Component{
     let category = categories.map((categoryParent, i) =>  <Picker.Item key={i} label={categoryParent.name} value={i === 0 ? '' : categoryParent.name}/>);
     return(
         <Picker
+            style={SubCategoryStyles.picker}
             selectedValue={this.state.parent}
             onValueChange={(parent) => this.setState({parent})}>
           {category}

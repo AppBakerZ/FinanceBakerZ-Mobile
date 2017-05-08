@@ -182,6 +182,7 @@ export  default class UpdateAccount extends Component {
                 <Image source = {require('FinanceBakerZ/src/images/app-background.png')} style={AccountsStyles.backgroundImage}>
                     <View style={AccountsStyles.addAccCon}>
                         <View style={AccountsStyles.pickerAndroidCon}>
+                            <Text style={AccountsStyles.labelText}>Select Country</Text>
                             {(Platform.OS !== 'ios') ? this.getCountries() :
                                 <TouchableOpacity style={AccountsStyles.bankCardTxtAndIcon} activeOpacity={0.75} onPress={() => this.refs.modal.open()}>
                                     <Text style={[AccountsStyles.textBold, AccountsStyles.textLeft]}>{this.getCountryName()}</Text>
@@ -189,6 +190,7 @@ export  default class UpdateAccount extends Component {
                                 </TouchableOpacity>
                             }
                         </View>
+                        <Text style={AccountsStyles.labelText}>Select Bank/Card</Text>
                         <View style={AccountsStyles.bankCardCon}>
                             <View style={AccountsStyles.bankCardTxtAndIcon}>
                                 <Text style={[AccountsStyles.textBold, AccountsStyles.textLeft]}>{this.state.bank ? this.state.bank.label : 'Select Bank / Card'}</Text>
@@ -202,6 +204,7 @@ export  default class UpdateAccount extends Component {
                         }
                         <View style={AccountsStyles.accountNoCon}>
                             <KeyboardAvoidingView>
+                                <Text style={AccountsStyles.labelText}>Account Number</Text>
                                 <TextInput
                                     placeholder='Enter Account Number'
                                     style={AccountsStyles.input}

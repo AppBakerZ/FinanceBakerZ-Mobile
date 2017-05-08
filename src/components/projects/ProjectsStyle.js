@@ -285,5 +285,8 @@ export const ProjectsStyles = StyleSheet.create({
     },
     labelTextStatus:{
         fontFamily: 'QuicksandBold-Regular'
+    },
+    BankText:{
+        fontFamily: 'QuicksandBold-Regular'
     }
 });

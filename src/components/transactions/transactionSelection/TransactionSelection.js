@@ -203,7 +203,7 @@ const TransactionSelectionTabScreen = TabNavigator({
     screen: TransactionSelectionTab
   }
 }, {
-  tabBarComponent: TabView.TabBarTop,
+  // tabBarComponent: TabView.TabBarTop,
   lazyLoad: true,
   swipeEnabled: true,
   tabBarPosition: 'top',

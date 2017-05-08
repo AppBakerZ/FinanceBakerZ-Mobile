@@ -180,7 +180,7 @@ const DashboardBottomTabNavigator = TabNavigator({
     screen: DashboardTabBottomScreen
   }
 }, {
-  tabBarComponent: TabView.TabBarTop,
+  // tabBarComponent: TabView.TabBarTop,
   lazyLoad: true,
   swipeEnabled: true,
   tabBarPosition: 'top',

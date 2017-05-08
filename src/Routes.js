@@ -39,9 +39,7 @@ export const Auth = StackNavigator({
     screen: LoginScreen,
     navigationOptions: {
       title: 'Login',
-      header: {
-        visible: false
-      }
+      header: null
     }
   },
   Register: {
@@ -58,8 +56,9 @@ export const Auth = StackNavigator({
 
 
 // The navigation prop has functions like setParams, goBack, and navigate.
-const header = ({ state, navigate }) => {
-  let left = (
+const header = ({ navigation }) => {
+  let {state, navigate} = navigation;
+  let headerLeft  = (
       <Icon  name="menu"
              color="#45A27A"
              size={32}
@@ -70,31 +69,32 @@ const header = ({ state, navigate }) => {
       />
   );
 
-  let title = (
+  let headerTitle  = (
       <Text style={{fontSize: 20, fontFamily: 'QuicksandBold-Regular', color: '#00562E', paddingLeft: 20}}>{(state.routeName != 'Dashboard') ? state.routeName : ''}</Text>
   );
 
-  style = {
+  let  headerStyle  = {
     height: 70,
     backgroundColor: '#ffffff'
   };
 
-  return { left, title, style};
+  return { headerLeft , headerTitle , headerStyle };
 };
 
 function nestingHeaders(routeName, renderRightIcon) {
 
-  let header = ({state}) => {
-    let right;
+  let header = ({navigation}) => {
+    let headerRight ;
+    let {state} = navigation;
     if(renderRightIcon && renderRightIcon.iconChecked){
-      right =  (<Icon
+      headerRight  =  (<Icon
           name="checked"
           size={28}
           style={{paddingRight: 15}}
           onPress={() => {state.params.submit()}}
       />);
     }else if (renderRightIcon && renderRightIcon.iconDelete) {
-      right =  (<Ionicons
+      headerRight  =  (<Ionicons
           name="ios-trash"
           size={35}
           style={{paddingRight: 15, color: '#c71212'}}
@@ -103,31 +103,27 @@ function nestingHeaders(routeName, renderRightIcon) {
     }
     return {
       title: (state.params && state.params.myTitle) || routeName,
-      right,
-      titleStyle: {
+      headerRight,
+      headerTitleStyle: {
         fontWeight: Platform.OS === 'ios' ? '500' : '200',
         fontFamily: 'QuicksandBold-Regular',
         fontSize: 20
       },
-      style: {
+      headerStyle: {
         height: 70,
         backgroundColor: '#fff'
       },
-      tintColor: '#00562E'
+      headerTintColor: '#00562E'
     }
   };
-  return {
-    header
-  }
+  return header
 }
 
 
 const DashboardStack = StackNavigator({
   Dashboard: {
     screen: DashboardScreen,
-    navigationOptions: {
-      header: header
-    }
+    navigationOptions: header
   },
   Selection: {
     screen: DashboardSelection,
@@ -140,9 +136,7 @@ const DashboardStack = StackNavigator({
 const ProjectsStack = StackNavigator({
   Projects: {
     screen: ProjectsScreen,
-    navigationOptions: {
-      header: header
-    }
+    navigationOptions: header
   },
   CreateProject: {
     screen: CreateProject,
@@ -165,9 +159,8 @@ const ProjectsStack = StackNavigator({
 const TransactionsStack = StackNavigator({
   Transactions: {
     screen: TransactionsScreen,
-    navigationOptions: {
-      header: header
-    }
+    navigationOptions: header
+
   },
   Selection: {
     screen: TransactionSelection,
@@ -186,9 +179,7 @@ const TransactionsStack = StackNavigator({
 const AccountsStack = StackNavigator({
   Accounts: {
     screen: AccountsScreen,
-    navigationOptions: {
-      header: header
-    }
+    navigationOptions: header
   },
   AddAccount: {
     screen: AddAccount,
@@ -203,9 +194,7 @@ const AccountsStack = StackNavigator({
 const CategoriesStack = StackNavigator({
   Categories: {
     screen: CategoriesScreen,
-    navigationOptions: {
-      header: header
-    }
+    navigationOptions: header
   },
   SubCategories: {
     screen: SubCategory,
@@ -224,9 +213,7 @@ const CategoriesStack = StackNavigator({
 const SettingsStack = StackNavigator({
   Settings: {
     screen: SettingsScreen,
-    navigationOptions: {
-      header: header
-    }
+    navigationOptions: header
   },
   ChangePassword: {
     screen: ChangePasswordScreen,

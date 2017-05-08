@@ -6,6 +6,7 @@ import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
 import CurrencyIcon from 'FinanceBakerZ/src/icons/CurrencyIcon';
 import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
 import FabButton from 'FinanceBakerZ/src/components/button/FabButton';
+import Loader from 'FinanceBakerZ/src/components/loader/Loader';
 
 export default class TransactionTabScreen extends  Component {
 
@@ -42,22 +43,26 @@ export default class TransactionTabScreen extends  Component {
 
     const {state} = this.props.navigation;
     let {ds} = this.state;
-    let {incomes, expenses, transactions} = this.props.screenProps;
+    let {incomes, expenses, transactions, transactionsLoading} = this.props.screenProps;
 
-    if(incomes.length || expenses.length || transactions.length){
-      return (
-          <ViewContainer>
-            <ListView
-                dataSource={ds.cloneWithRows(eval(state.routeName.toLowerCase()))}
-                renderRow={this.renderRow}
-                />
-            {state.routeName !== 'TRANSACTIONS' ?  <FabButton iconName="add"  iconColor="#fff" onPress={() => this.props.screenProps.navigate('UpdateTransaction', {routeName: state.routeName.toUpperCase()})} /> : <View></View> }
-          </ViewContainer>
-      );
+    if(!transactionsLoading){
+      if(incomes.length || expenses.length || transactions.length){
+        return (
+            <ViewContainer>
+              <ListView
+                  dataSource={ds.cloneWithRows(eval(state.routeName.toLowerCase()))}
+                  renderRow={this.renderRow}
+              />
+              {state.routeName !== 'TRANSACTIONS' ?  <FabButton iconName="add"  iconColor="#fff" onPress={() => this.props.screenProps.navigate('UpdateTransaction', {routeName: state.routeName.toUpperCase()})} /> : <View></View> }
+            </ViewContainer>
+        );
+      }else{
+        return <ViewContainer>
+          {state.routeName !== 'TRANSACTIONS' ?  <FabButton iconName="add"  iconColor="#fff" onPress={() => this.props.screenProps.navigate('UpdateTransaction', {routeName: state.routeName.toUpperCase()})} /> : <View></View> }
+        </ViewContainer>
+      }
     }else{
-      return <ViewContainer>
-        {state.routeName !== 'TRANSACTIONS' ?  <FabButton iconName="add"  iconColor="#fff" onPress={() => this.props.screenProps.navigate('UpdateTransaction', {routeName: state.routeName.toUpperCase()})} /> : <View></View> }
-      </ViewContainer>
+      return <View style={TransactionsStyles.loadingCon}><Loader size={35} color="#008142" /></View>
     }
   }
 }

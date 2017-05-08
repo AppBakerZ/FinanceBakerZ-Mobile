@@ -75,6 +75,7 @@ class AddCategory extends Component{
         let category = categories.map((categoryParent, i) =>  <Picker.Item key={i} label={categoryParent.name} value={i === 0 ? '' : categoryParent.name}/>);
         return(
             <Picker
+                style={SubCategoryStyles.picker}
                 selectedValue={this.state.parent}
                 onValueChange={(parent) => this.setState({parent})}>
                 {category}
@@ -109,6 +110,7 @@ class AddCategory extends Component{
                         <ViewContainer  style = {SubCategoryStyles.addCategoryContainer}>
                             <View style={SubCategoryStyles.categoryNameField}>
                                 <KeyboardAvoidingView>
+                                    <Text style={SubCategoryStyles.selectParentText}>Name</Text>
                                     <TextInput
                                         placeholder='Enter Category Name'
                                         style={SubCategoryStyles.input}
@@ -122,6 +124,7 @@ class AddCategory extends Component{
 
                         </ViewContainer>
                         <View style={SubCategoryStyles.SelectCategoryIcon}>
+                            <Text style={SubCategoryStyles.selectParentText}>Select Icon</Text>
                             <View style={SubCategoryStyles.categorySelectionIcon}>
                                 <Text style={[SubCategoryStyles.textBold, SubCategoryStyles.textLeft]}>{this.state.icon ? this.state.icon.label : 'Select Category Icon'}</Text>
                                 <Icon size={10} name="down-arrow" style={SubCategoryStyles.iconRight} />

@@ -99,7 +99,7 @@ export const SubCategoryStyles = StyleSheet.create({
         flex : 2,
         borderBottomWidth: 1,
         borderBottomColor: '#dadada',
-        justifyContent: 'flex-end'
+        justifyContent: 'flex-end',
     },
     categoryStyle:{
         flex : 1
@@ -138,7 +138,7 @@ export const SubCategoryStyles = StyleSheet.create({
     },
     selectParentText:{
         paddingLeft : 15,
-        paddingTop : 10,
+        paddingTop : 15,
         fontFamily: 'QuicksandBold-Regular',
     },
     categorySelectionIcon: {
@@ -189,7 +189,7 @@ export const SubCategoryStyles = StyleSheet.create({
         flex : 1
     },
     picker:{
-        marginLeft : 7
+        marginLeft : 8
     }
 
 });

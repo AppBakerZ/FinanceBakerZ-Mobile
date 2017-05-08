@@ -147,6 +147,7 @@ export default class AddAccount extends Component{
         <Image source = {require('FinanceBakerZ/src/images/app-background.png')} style={AccountsStyles.backgroundImage}>
           <View style={AccountsStyles.addAccCon}>
             <View style={AccountsStyles.pickerAndroidCon}>
+              <Text style={AccountsStyles.selectParentText}>Select Country</Text>
               {(Platform.OS !== 'ios') ? this.getCountries() :
                 <TouchableOpacity style={AccountsStyles.bankCardTxtAndIcon} activeOpacity={0.75} onPress={() => this.refs.modal.open()}>
                   <Text style={[AccountsStyles.textBold, AccountsStyles.textLeft]}>{this.getCountryName()}</Text>
@@ -155,8 +156,9 @@ export default class AddAccount extends Component{
               }
             </View>
             <View style={AccountsStyles.bankCardCon}>
+              <Text style={AccountsStyles.selectParentText}>Select Bank/Card</Text>
               <View style={AccountsStyles.bankCardTxtAndIcon}>
-                <Text style={[AccountsStyles.textBold, AccountsStyles.textLeft]}>{this.state.bank ? this.state.bank.label : 'Select Bank / Card'}</Text>
+                <Text style={[AccountsStyles.textBook, AccountsStyles.textLeft]}>{this.state.bank.label}</Text>
                 <Icon size={10} name="down-arrow" style={AccountsStyles.iconRight} />
               </View>
             </View>
@@ -167,6 +169,7 @@ export default class AddAccount extends Component{
             }
             <View style={AccountsStyles.accountNoCon}>
               <KeyboardAvoidingView>
+                <Text style={AccountsStyles.selectParentText}>Account Number</Text>
                 <TextInput
                   placeholder='Enter Account Number'
                   style={AccountsStyles.input}

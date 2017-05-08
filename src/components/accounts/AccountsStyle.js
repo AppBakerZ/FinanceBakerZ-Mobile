@@ -195,10 +195,9 @@ export const AccountsStyles = StyleSheet.create({
     height: 48,
     paddingLeft: 12
   },
-    labelText:{
+    selectParentText:{
         fontFamily: 'QuicksandBold-Regular',
-        paddingTop : 10,
-        paddingLeft : 10
+        paddingLeft : 8
     }
 
 });

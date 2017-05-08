@@ -7,6 +7,7 @@ import TransactionTabScreen from 'FinanceBakerZ/src/components/transactions/Tran
 import { TabNavigator, TabView } from 'react-navigation';
 import Meteor, {createContainer, ReactiveDict} from 'react-native-meteor';
 import _ from 'underscore';
+import Loader from 'FinanceBakerZ/src/components/loader/Loader';
 import {alterName, formatDate} from 'FinanceBakerZ/src/customLibrary';
 
 let query = new ReactiveDict('transactionsDict');
@@ -53,6 +54,7 @@ class Transactions extends Component {
 
   updateQuery(updatedQuery){
     setTimeout(() => query.set('query', updatedQuery));
+    this.setState({transactionsLoading: true});
     this.forceUpdate();
   }
 

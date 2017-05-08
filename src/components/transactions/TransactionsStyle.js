@@ -266,6 +266,12 @@ export const TransactionsStyles = StyleSheet.create({
     flex: 4
   },
 
+  imgLoading:{
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'flex-end'
+  },
+
   loaderView:{
     flex: 1,
     justifyContent: 'center',

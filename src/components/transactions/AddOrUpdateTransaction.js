@@ -22,6 +22,7 @@ class AddOrUpdateTransaction extends Component{
   constructor(props){
     super(props);
 
+
     if(props.navigation.state.params.selectedTransaction){
       let {_id, amount, type, project, createdAt, receivedAt, category, description, billUrl, spentAt } = props.navigation.state.params.selectedTransaction;
       this.state = {
@@ -37,6 +38,7 @@ class AddOrUpdateTransaction extends Component{
         projects: props.projects,
         modalVisible: false,
         billUrl: billUrl ? billUrl : '',
+        copyBillUrl: billUrl ? billUrl : '',
         description: description ? description : '',
         category: category ? category._id : '',
         types:  [
@@ -44,7 +46,8 @@ class AddOrUpdateTransaction extends Component{
           { name: 'Project', _id: 'project'}
         ],
         render: {renderBank: true},
-        routeName: ''
+        routeName: '',
+        imageUploaded: false
       };
     }else{
       let {routeName } = props.navigation.state.params;
@@ -68,13 +71,15 @@ class AddOrUpdateTransaction extends Component{
           {   name: 'Salary', _id: 'salary'},
           { name: 'Project', _id: 'project'}
         ],
-        render: {renderBank: true}
+        render: {renderBank: true},
+        imageUploaded: false
       }
 
     }
 
     this.renderPicker = this.renderPicker.bind(this);
     this.setAccount = this.setAccount.bind(this);
+    this.uploadImage = this.uploadImage.bind(this);
 
   }
 
@@ -187,7 +192,7 @@ class AddOrUpdateTransaction extends Component{
   }
 
   renderCategories(categories){
-      return categories.map((category, i) => {
+    return categories.map((category, i) => {
       let categoryIcon;
       categoryIcon = category.icon.replace('icon-' , "");
       return (
@@ -239,7 +244,7 @@ class AddOrUpdateTransaction extends Component{
         date={renderFlag.showTime ? this.state.receivedTime  : this.state.receivedAt}
         mode={renderFlag.showTime ? 'time' : 'date'}
         onDateChange={this.onChange.bind(this, renderFlag.showTime ? 'receivedTime' : 'receivedAt' )}
-        />
+    />
   }
 
   renderPickerDropDown(data, renderFlag){
@@ -333,7 +338,7 @@ class AddOrUpdateTransaction extends Component{
           </TouchableOpacity>
           <View style={[TransactionsStyles.updateTranAmountCon, TransactionsStyles.borderBottom]}>
             <Text style={[TransactionsStyles.textBold, TransactionsStyles.relativeTop]}>Amount</Text>
-            <KeyboardAvoidingView>
+            <KeyboardAvoidingView behavior={'padding'}>
               <TextInput
                   placeholder='Enter Amount'
                   style={TransactionsStyles.input}
@@ -342,7 +347,7 @@ class AddOrUpdateTransaction extends Component{
                   underlineColorAndroid="transparent"
                   keyboardType="numeric"
                   value={this.state.amount}
-                  />
+              />
             </KeyboardAvoidingView>
           </View>
           <TouchableOpacity onPress={() => {Platform.OS === 'ios' ? this.handleMultipleChange.bind(this, {iosDate: true})() : this.showPicker.bind(this, 'receivedAt', {date: this.state.receivedAt, mode: 'calendar'})() }} style={[TransactionsStyles.updateTranDateCon, TransactionsStyles.borderBottom]}>
@@ -395,8 +400,8 @@ class AddOrUpdateTransaction extends Component{
           </TouchableOpacity>
           <View style={[TransactionsStyles.updateTranAmountCon, TransactionsStyles.borderBottom]}>
             <Text style={[TransactionsStyles.textBold, TransactionsStyles.relativeTop]}>Amount</Text>
-            <KeyboardAvoidingView>
-              <TextInput
+            <KeyboardAvoidingView behavior={'padding'}>
+            <TextInput
                   placeholder='Enter Amount'
                   style={TransactionsStyles.input}
                   autoCorrect={false}
@@ -404,7 +409,7 @@ class AddOrUpdateTransaction extends Component{
                   underlineColorAndroid="transparent"
                   keyboardType="numeric"
                   value={this.state.amount}
-                  />
+              />
             </KeyboardAvoidingView>
           </View>
           <TouchableOpacity onPress={() => this.handleMultipleChange.bind(this, {renderCategories: true})()} activeOpacity={0.75} style={[TransactionsStyles.updateTranAccountCon, TransactionsStyles.borderBottom]}>
@@ -416,8 +421,8 @@ class AddOrUpdateTransaction extends Component{
           </TouchableOpacity>
           <View style={[TransactionsStyles.updateTranAmountCon, TransactionsStyles.borderBottom]}>
             <Text style={[TransactionsStyles.textBold, TransactionsStyles.relativeTop]}>Description</Text>
-            <KeyboardAvoidingView>
-              <TextInput
+            <KeyboardAvoidingView behavior={'padding'}>
+            <TextInput
                   placeholder='Enter Description'
                   style={TransactionsStyles.input}
                   autoCorrect={false}
@@ -425,7 +430,7 @@ class AddOrUpdateTransaction extends Component{
                   underlineColorAndroid="transparent"
                   multiline = {true}
                   value={this.state.description}
-                  />
+              />
             </KeyboardAvoidingView>
           </View>
           <TouchableOpacity onPress={() => {Platform.OS === 'ios' ? this.handleMultipleChange.bind(this, {iosDate: true})() : this.showPicker.bind(this, 'receivedAt', {date: this.state.receivedAt, mode: 'calendar'})() }} style={[TransactionsStyles.updateTranDateCon, TransactionsStyles.borderBottom]}>
@@ -442,7 +447,9 @@ class AddOrUpdateTransaction extends Component{
           <View style={[TransactionsStyles.imageCon, this.state.billUrl  ? TransactionsStyles.borderBottom : '']}>
             {this.state.billUrl ? <Image source = {{uri: this.state.billUrl}} style = {TransactionsStyles.userBill} /> : <Text></Text>}
           </View>
-          <View style={TransactionsStyles.bottomCon}></View>
+          <View style={TransactionsStyles.bottomCon}>
+            {this.state.imageUploaded ? <View style={TransactionsStyles.imgLoading}><Loader size={35} color="#008142" /></View> : <View></View>}
+          </View>
         </ViewContainer>
     );
   }
@@ -457,6 +464,7 @@ class AddOrUpdateTransaction extends Component{
     receivedTime = new Date(receivedTime);
     receivedAt.setHours(receivedTime.getHours(), receivedTime.getMinutes(), 0, 0);
     project = (project && type === "project" && {_id: project}) || {};
+
 
     Meteor.call('incomes.update', {
       income: {
@@ -510,38 +518,43 @@ class AddOrUpdateTransaction extends Component{
     });
   }
 
-  createExpense(){
+  insertExpense(){
 
     let {account, amount, description, receivedTime, receivedAt, category, billUrl} = this.state;
-
     let spentAt, spentTime;
     spentAt = new Date(receivedAt);
     spentTime = new Date(receivedTime);
     spentAt.setHours(spentTime.getHours(), spentTime.getMinutes(), 0, 0);
     category = category && {_id: category};
-    let {goBack} = this.props.navigation;
 
+    let {goBack} = this.props.navigation;
+    Meteor.call('expenses.insert', {
+      expense: {
+        account,
+        amount: Number(amount),
+        spentAt,
+        description,
+        billUrl,
+        category
+      }
+    }, (err, response) => {
+      if(response){
+        showAlert('Success', 'Transaction has been added.');
+        goBack();
+      }else{
+        console.warn(err.reason)
+      }
+    });
+  }
+
+  createExpense(){
+
+    let {billUrl, account, amount, category} = this.state;
 
     if(account && amount && category) {
-      Meteor.call('expenses.insert', {
-        expense: {
-          account,
-          amount: Number(amount),
-          spentAt,
-          description,
-          billUrl,
-          category
-        }
-      }, (err, response) => {
-        if(response){
-          showAlert('Success', 'Transaction has been added.');
-          goBack();
-        }else{
-          console.warn(err.reason)
-        }
-      });
+      billUrl ? this.uploadImage('insertExpense') : this.insertExpense()
     }else{
-      showAlert('Validation', 'Account, amount and cateogry fields are required.');
+      showAlert('Validation', 'Account, amount and category fields are required.');
     }
 
   }
@@ -582,9 +595,9 @@ class AddOrUpdateTransaction extends Component{
   }
 
   submit(selectedTransaction){
-    let {routeName} = this.state;
+    let {routeName, copyBillUrl, billUrl} = this.state;
     if(!routeName){
-      selectedTransaction.category ? this.updateExpense() : this.updateIncome();
+      selectedTransaction.category ? copyBillUrl === billUrl ? this.updateExpense() : this.uploadImage('updateExpense') : this.updateIncome();
     }else{
       routeName === 'EXPENSES' ? this.createExpense() : this.createIncome()
     }
@@ -616,7 +629,10 @@ class AddOrUpdateTransaction extends Component{
     });
   }
 
-  uploadImage(){
+  uploadImage(funcName){
+
+    this.setState({imageUploaded: true});
+
     let obj = this.state.getImage;
     const file = {
       uri: obj.uri,
@@ -627,22 +643,26 @@ class AddOrUpdateTransaction extends Component{
     const options = {
       keyPrefix: "uploads/",
       bucket: "financebakerz",
-      region: Settings.AWSRegion,
-      accessKey: Settings.AWSAccessKeyId,
-      secretKey: Settings.AWSSecretAccessKey,
+      region: '',
+      accessKey: '',
+      secretKey: '',
       successActionStatus: 201
     };
+
 
     RNS3.put(file, options).then(response => {
       if (response.status !== 201){
         //throw new Error("Failed to upload image to S3");
-        showAlert('Error', 'Failed to upload image to S3');
-        this.setState({loading: false});
+        showAlert('Error', 'Failed to upload image. Please try again.');
       } else {
-        this.setState({billUrl: response.body.postResponse.location});
+        this.setState({
+          billUrl: response.body.postResponse.location,
+          imageUploaded: false
+        }, () => this[funcName]());
       }
     });
   }
+
 
   renderFrom(data){
     let {routeName} = this.state;
@@ -673,7 +693,7 @@ class AddOrUpdateTransaction extends Component{
                 </ScrollView>
               </View>
             </Modal>
-            {!modalVisible ? <FabButton iconName="check" iconColor="#fff" onPress={() => this.submit.bind(this, data.selectedTransaction)()} /> : <View></View> }
+            {!modalVisible ? <FabButton disabled={this.state.imageUploaded} iconName="check" iconColor="#fff" onPress={() => this.submit.bind(this, data.selectedTransaction)()} /> : <View></View> }
           </ViewContainer>
       );
     }else{

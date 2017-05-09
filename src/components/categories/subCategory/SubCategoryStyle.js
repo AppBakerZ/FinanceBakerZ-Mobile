@@ -116,7 +116,6 @@ export const SubCategoryStyles = StyleSheet.create({
     iconParent: {
         flex:1.2,
         paddingLeft : 5,
-        paddingRight : 15
     },
     febButton:{
         flex : 1.8
@@ -139,6 +138,7 @@ export const SubCategoryStyles = StyleSheet.create({
     selectParentText:{
         paddingLeft : 15,
         paddingTop : 15,
+        paddingRight : 15,
         fontFamily: 'QuicksandBold-Regular',
     },
     categorySelectionIcon: {
@@ -158,7 +158,11 @@ export const SubCategoryStyles = StyleSheet.create({
     },
     textLeft: {
         paddingLeft: 15,
-        fontFamily: 'QuicksandBook-Regular'
+        fontFamily: 'QuicksandBook-Regular',
+    },
+    textLeftUrdu:{
+        paddingLeft: 15,
+        fontFamily: 'QuicksandBook-Regular',
     },
     iconRight: {
         flex: 1,

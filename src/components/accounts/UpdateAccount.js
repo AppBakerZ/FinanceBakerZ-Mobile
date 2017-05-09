@@ -6,7 +6,7 @@ import countries from 'FinanceBakerZ/src/countries';
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
 import bankFonts from 'FinanceBakerZ/src/bankFonts';
 import Modal from 'react-native-modalbox';
-import {I18n,alterName, chunk, showAlert, alertBankName} from 'FinanceBakerZ/src/customLibrary';
+import {I18n, alterName, chunk, showAlert, alertBankName} from 'FinanceBakerZ/src/customLibrary';
 import BankIcon from 'FinanceBakerZ/src/icons/BankIcon';
 import _ from 'underscore';
 import Loader from 'FinanceBakerZ/src/components/loader/Loader';

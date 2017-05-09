@@ -9,7 +9,7 @@ import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
 import Modal from 'react-native-modalbox';
 import Meteor, { createContainer } from 'react-native-meteor';
 import FabButton from 'FinanceBakerZ/src/components/button/FabButton';
-import {showAlert, capitalizeFirstLetter } from 'FinanceBakerZ/src/customLibrary';
+import {I18n, showAlert, capitalizeFirstLetter } from 'FinanceBakerZ/src/customLibrary';
 import { NavigationActions } from 'react-navigation'
 
 
@@ -192,7 +192,7 @@ class UpdateCategory extends Component{
               <ViewContainer  style = {SubCategoryStyles.addCategoryContainer}>
                 <View style={SubCategoryStyles.categoryNameField}>
                   <KeyboardAvoidingView>
-                    <Text style={SubCategoryStyles.selectParentText}>Name</Text>
+                    <Text style={SubCategoryStyles.selectParentText}>{I18n("CATEGORIES_CATEGORY_NAME")}</Text>
                     <TextInput
                         placeholder='Enter Category Name'
                         style={SubCategoryStyles.input}
@@ -206,7 +206,7 @@ class UpdateCategory extends Component{
                 </View>
               </ViewContainer>
               <View style={SubCategoryStyles.SelectCategoryIcon}>
-                <Text style={SubCategoryStyles.selectParentText}>Select Icon</Text>
+                <Text style={SubCategoryStyles.selectParentText}>{I18n("CATEGORIES_CATEGORY_ICON")}</Text>
                 <View style={SubCategoryStyles.categorySelectionIcon}>
                   <Text style={[SubCategoryStyles.textBold, SubCategoryStyles.textLeft]}>{this.state.icon ? capitalizeFirstLetter(this.state.icon.label) : 'Select Icon'}</Text>
                   <Icon size={10} name="down-arrow" style={SubCategoryStyles.iconRight} />
@@ -222,12 +222,12 @@ class UpdateCategory extends Component{
                 </ScrollView>
               </View>
               <View style={SubCategoryStyles.iconParent}>
-                {(Platform.OS !== 'ios') ? <View><Text style={SubCategoryStyles.selectParentText}>Select Parent Category</Text>{this.getParentCategory()}</View> :
+                {(Platform.OS !== 'ios') ? <View><Text style={SubCategoryStyles.selectParentText}>{I18n("CATEGORIES_PARENT_CATEGORY")}</Text>{this.getParentCategory()}</View> :
                     <TouchableOpacity style={SubCategoryStyles.ParentCategory} activeOpacity={0.75}
                                       onPress={() => this.refs.modal.open()}>
                       <Text style={[SubCategoryStyles.textBold, SubCategoryStyles.textLeft]}></Text>
                       <View style={SubCategoryStyles.categorySelectionParentIcon}>
-                        <Text style={[SubCategoryStyles.textBold, SubCategoryStyles.textLeft]}>{this.state.parent || 'Select Parent Category'}</Text>
+                        <Text style={[SubCategoryStyles.textBold, SubCategoryStyles.textLeftUrdu]}>{this.state.parent || 'Select Parent Category'}</Text>
                         <Icon size={10} name="down-arrow" style={SubCategoryStyles.iconRight}/>
                       </View>
                     </TouchableOpacity>

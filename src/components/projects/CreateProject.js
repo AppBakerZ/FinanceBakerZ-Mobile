@@ -8,6 +8,7 @@ import {formatDate} from 'FinanceBakerZ/src/customLibrary';
 import FabButton from 'FinanceBakerZ/src/components/button/FabButton';
 import Meteor from 'react-native-meteor';
 import {showAlert} from 'FinanceBakerZ/src/customLibrary';
+import {I18n} from 'FinanceBakerZ/src/customLibrary';
 
 
 export default class CreateProject extends Component {
@@ -111,7 +112,7 @@ export default class CreateProject extends Component {
           <View style={[ProjectsStyles.inputProjectNameCon, ProjectsStyles.inputBorderBottom]}>
             <KeyboardAvoidingView>
               <TextInput
-                placeholder='Project Name'
+                placeholder={I18n('PROJECTS_PROJECT_NAME')}
                 style={ProjectsStyles.input}
                 maxLength = {50}
                 autoCorrect={false}
@@ -124,7 +125,7 @@ export default class CreateProject extends Component {
           <View style={[ProjectsStyles.inputClientName, ProjectsStyles.inputBorderBottom]}>
             <KeyboardAvoidingView>
               <TextInput
-                placeholder='Client Name'
+                placeholder={I18n('PROJECTS_CLIENT_NAME')}
                 style={ProjectsStyles.input}
                 maxLength = {50}
                 autoCorrect={false}
@@ -137,7 +138,7 @@ export default class CreateProject extends Component {
           <View style={[ProjectsStyles.inputTypeCon, ProjectsStyles.inputBorderBottom]}>
             <KeyboardAvoidingView>
               <TextInput
-                placeholder='Type'
+                placeholder={I18n('PROJECTS_PROJECT_TYPE')}
                 style={ProjectsStyles.input}
                 maxLength = {50}
                 autoCorrect={false}
@@ -150,7 +151,7 @@ export default class CreateProject extends Component {
           <View style={[ProjectsStyles.inputAmountCon, ProjectsStyles.inputBorderBottom]}>
             <KeyboardAvoidingView>
               <TextInput
-                placeholder='Amount'
+                placeholder={I18n('PROJECTS_PROJECT_AMOUNT')}
                 style={ProjectsStyles.input}
                 maxLength = {30}
                 autoCorrect={false}
@@ -162,7 +163,7 @@ export default class CreateProject extends Component {
             </KeyboardAvoidingView>
           </View>
           <View style={[ProjectsStyles.inputPickerCon, ProjectsStyles.inputBorderBottom]}>
-            {(Platform.OS !== 'ios') ? <View style={ProjectsStyles.statusTextView}><Text style={ProjectsStyles.BankText}>Select Status</Text>{this.renderPicker()}</View> :
+            {(Platform.OS !== 'ios') ? <View style={ProjectsStyles.statusTextView}><Text style={ProjectsStyles.BankText}>{I18n('PROJECTS_STATUS')}</Text>{this.renderPicker()}</View> :
               <TouchableOpacity style={ProjectsStyles.projectCardTxtAndIcon} activeOpacity={0.75} onPress={() => {this.refs.modal.open(); this.setState({modalVisible: true})}}>
                 <Text style={[ProjectsStyles.BankText, ProjectsStyles.textLeft]}>{this.state.status ? findStatusLabel(this.state.status) : 'Select Status'}</Text>
                 <Icon size={10} name="down-arrow" style={ProjectsStyles.iconRight} />
@@ -171,7 +172,7 @@ export default class CreateProject extends Component {
           </View>
           <View style={[ProjectsStyles.inputDateCon, ProjectsStyles.inputBorderBottom]}>
             <TouchableOpacity style={ProjectsStyles.projectCardTxtAndIcon} activeOpacity={0.75} onPress={() => {Platform.OS !== 'ios' ? this.showPicker.bind(this, 'startAt', {date: this.state.date})() : this.showModal.bind(this)()}}>
-              <Text style={[ProjectsStyles.BankText, ProjectsStyles.inputDateSelected]}>{this.state.startAt ? formatDate({type: 'getCustomDate', date: this.state.startAt, format: 'MMMM DD, YYYY'}) : 'Select Date'}</Text>
+              <Text style={[ProjectsStyles.BankText, ProjectsStyles.inputDateSelected]}>{this.state.startAt ? formatDate({type: 'getCustomDate', date: this.state.startAt, format: 'MMMM DD, YYYY'}) : I18n('PROJECTS_START_DATE')}</Text>
               <Icon size={10} name="down-arrow" style={ProjectsStyles.iconRight} />
             </TouchableOpacity>
           </View>

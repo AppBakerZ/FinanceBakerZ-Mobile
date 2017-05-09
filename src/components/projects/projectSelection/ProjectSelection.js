@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import { Text, View, Image, TextInput, Picker, Platform, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
+import { Text, View, TextInput, Picker, Platform, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 import { ProjectSelectionStyles } from 'FinanceBakerZ/src/components/projects/projectSelection/ProjectSelectionStyle';
 import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
 import Modal from 'react-native-modalbox';
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
 import _ from 'underscore';
 import { ReactiveDict } from 'react-native-meteor';
+import {I18n} from 'FinanceBakerZ/src/customLibrary';
 
 
 let updatedQuery = new ReactiveDict('projectsDict');
@@ -85,16 +86,16 @@ export default class ProjectSelectionScreen extends Component{
     return(
       <ViewContainer style={ProjectSelectionStyles.container}>
         <View style={ProjectSelectionStyles.filterShowContainer}>
-          <Text style={ProjectSelectionStyles.text}>Project Name: {filter.name}</Text>
-          <Text style={ProjectSelectionStyles.text}>Client Name: {filter.client.name}</Text>
-          <Text style={ProjectSelectionStyles.text}>Status: {findStatusLabel(filter.status)}</Text>
+          <Text style={ProjectSelectionStyles.text}>{I18n('PROJECTS_PROJECT_NAME')}: {filter.name}</Text>
+          <Text style={ProjectSelectionStyles.text}>{I18n('PROJECTS_CLIENT_NAME')}: {filter.client.name}</Text>
+          <Text style={ProjectSelectionStyles.text}>{I18n('PROJECTS_STATUS')}: {findStatusLabel(filter.status)}</Text>
         </View>
         <View style={ProjectSelectionStyles.filterCon}>
           <View style={ProjectSelectionStyles.projectNameCon}>
             <KeyboardAvoidingView>
               <View style={ProjectSelectionStyles.inputContainer}>
                 <TextInput
-                  placeholder='Filter by Project Name'
+                  placeholder={I18n('PROJECTS_PROJECT_NAME')}
                   style={ProjectSelectionStyles.input}
                   returnKeyType="next"
                   maxLength = {30}
@@ -110,7 +111,7 @@ export default class ProjectSelectionScreen extends Component{
             <KeyboardAvoidingView>
               <View style={ProjectSelectionStyles.inputContainer}>
                 <TextInput
-                  placeholder='Filter by Client Name'
+                  placeholder={I18n('PROJECTS_CLIENT_NAME')}
                   style={ProjectSelectionStyles.input}
                   maxLength = {30}
                   autoCorrect={false}
@@ -122,7 +123,7 @@ export default class ProjectSelectionScreen extends Component{
             </KeyboardAvoidingView>
           </View>
           <View style={ProjectSelectionStyles.filterStatus}>
-            <Text style={[ProjectSelectionStyles.text, ProjectSelectionStyles.textLeft]}>Filter by Status</Text>
+            <Text style={[ProjectSelectionStyles.text, ProjectSelectionStyles.textLeft]}>{I18n('PROJECTS_STATUS')}</Text>
             {(Platform.OS !== 'ios') ? this.renderPicker() :
               <TouchableOpacity style={ProjectSelectionStyles.bankCardTxtAndIcon} activeOpacity={0.75} onPress={() => this.refs.modal.open()}>
                 <Text style={[ProjectSelectionStyles.text, ProjectSelectionStyles.textLeft]}>{findStatusLabel(filter.status) || 'All'}</Text>

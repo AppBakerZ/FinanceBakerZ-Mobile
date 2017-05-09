@@ -5,7 +5,7 @@ import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContai
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
 import Loader from 'FinanceBakerZ/src/components/loader/Loader';
 import CurrencyIcon from 'FinanceBakerZ/src/icons/CurrencyIcon';
-import {loggedUserCurrency, alterIconName, currencyStandardFormat, formatDate} from 'FinanceBakerZ/src/customLibrary';
+import {loggedUserCurrency, alterIconName, currencyStandardFormat, formatDate, I18n} from 'FinanceBakerZ/src/customLibrary';
 import Meteor, { createContainer, ReactiveDict } from 'react-native-meteor';
 import FabButton from 'FinanceBakerZ/src/components/button/FabButton';
 import {showAlert} from 'FinanceBakerZ/src/customLibrary';
@@ -85,9 +85,9 @@ class Projects extends Component {
                                       onPress={()=> {navigate('ProjectSelection', {updateQuery: this.updateQuery, updateProjectState, filter, getUpdatedQuery, updatedQuerySet, statuses: this.statuses, findStatusLabel: this.findStatusLabel})}}>
                       <View style={ProjectsStyles.filterDiv}>
                         <View style={ProjectsStyles.filterText}>
-                          <Text style={ProjectsStyles.BankText}>Project Name: {name}</Text>
-                          <Text style={ProjectsStyles.BankText}>Client Name: {client}</Text>
-                          <Text style={ProjectsStyles.BankText}>Status: {this.findStatusLabel(status)}</Text>
+                          <Text style={ProjectsStyles.BankText}>{I18n('PROJECTS_PROJECT_NAME')}: {name}</Text>
+                          <Text style={ProjectsStyles.BankText}>{I18n('PROJECTS_CLIENT_NAME')}: {client}</Text>
+                          <Text style={ProjectsStyles.BankText}>{I18n('PROJECTS_STATUS')}: {this.findStatusLabel(status)}</Text>
                         </View>
                         <View style={ProjectsStyles.filterIcon}>
                           <Icon name="filter" size={25}/>

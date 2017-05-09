@@ -5,7 +5,7 @@ import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContai
 import FabButton from 'FinanceBakerZ/src/components/button/FabButton';
 import Meteor from 'react-native-meteor';
 import {formatDate, showAlert} from 'FinanceBakerZ/src/customLibrary';
-import {capitalizeFirstLetter, currencyStandardFormat} from 'FinanceBakerZ/src/customLibrary';
+import {capitalizeFirstLetter, currencyStandardFormat, I18n} from 'FinanceBakerZ/src/customLibrary';
 
 export default class DetailProject extends  Component {
     constructor(props){
@@ -63,11 +63,11 @@ export default class DetailProject extends  Component {
     }
 
     removeProject(_id, name) {
-        showAlert('BANK PROJECT',
-            'This will remove your all data \nAre you sure to remove your ' + name + ' project?',
+        showAlert(I18n('PROJECTS_BANK_PROJECTS'),
+            I18n('PROJECTS_INFORM_MESSAGE') + '\n' + I18n('PROJECTS_CONFIRMATION_MESSAGE'),
             [
-                {text: 'Go Back'},
-                {text: 'Yes, Remove', onPress: () => this.deleteProject(_id, name), style: 'cancel'},
+                {text: I18n('PROJECTS_BACK_BUTTON')},
+                {text: I18n('PROJECTS_REMOVE_BUTTON'), onPress: () => this.deleteProject(_id, name), style: 'cancel'},
             ],
         );
     }
@@ -82,7 +82,7 @@ export default class DetailProject extends  Component {
 
                     <View style={ProjectsStyles.projectDetailMain}>
                         <View style={ProjectsStyles.projectDateContainer}>
-                            <Text style={[ProjectsStyles.projectDate,]}>Date : {project.detail.startAt ? formatDate({type: 'getCustomDate', date: project.detail.startAt, format: 'MMMM DD, YYYY'}) : 'Select Date'}</Text>
+                            <Text style={[ProjectsStyles.projectDate,]}>{I18n('PROJECTS_START_DATE')} : {project.detail.startAt ? formatDate({type: 'getCustomDate', date: project.detail.startAt, format: 'MMMM DD, YYYY'}) : 'Select Date'}</Text>
                             <Text style={ProjectsStyles.projectId}>Project ID : {project.detail._id}</Text>
                         </View>
                         <View style={ProjectsStyles.projectName}>
@@ -91,11 +91,11 @@ export default class DetailProject extends  Component {
                             </Text>
                         </View>
                         <View style={ProjectsStyles.projectDetail}>
-                            <Text style={ProjectsStyles.detail}><Text style={ProjectsStyles.detailText}>Client Name</Text>: {capitalizeFirstLetter(project.detail.client.name)}</Text>
-                            <Text style={ProjectsStyles.detail}><Text style={ProjectsStyles.detailText}>Amount Agreed</Text>: {project.detail.amount}</Text>
-                            <Text style={ProjectsStyles.detail}><Text style={ProjectsStyles.detailText}>Amount Paid</Text>: {this.state.amountPaid || 0}</Text>
-                            <Text style={ProjectsStyles.detail}><Text style={ProjectsStyles.detailText}>Amount Remaining</Text>: {project.detail.amount - this.state.amountPaid || project.detail.amount}</Text>
-                            <Text style={ProjectsStyles.detail}><Text style={ProjectsStyles.detailText}>Project Status</Text>: {capitalizeFirstLetter(project.detail.status)}</Text>
+                            <Text style={ProjectsStyles.detail}><Text style={ProjectsStyles.detailText}>{I18n('PROJECTS_CLIENT')}</Text> {capitalizeFirstLetter(project.detail.client.name)}</Text>
+                            <Text style={ProjectsStyles.detail}><Text style={ProjectsStyles.detailText}>{I18n('PROJECTS_AMOUNT_AGREED')}</Text> {project.detail.amount}</Text>
+                            <Text style={ProjectsStyles.detail}><Text style={ProjectsStyles.detailText}>{I18n('PROJECTS_AMOUNT_PAID')}</Text> {this.state.amountPaid || 0}</Text>
+                            <Text style={ProjectsStyles.detail}><Text style={ProjectsStyles.detailText}>{I18n('PROJECTS_AMOUNT_REMAINING')}</Text> {project.detail.amount - this.state.amountPaid || project.detail.amount}</Text>
+                            <Text style={ProjectsStyles.detail}><Text style={ProjectsStyles.detailText}>{I18n('PROJECTS_PROJECT_STATUS')}</Text> {capitalizeFirstLetter(project.detail.status)}</Text>
                         </View>
                     </View>
                     <View style={ProjectsStyles.projectFebIcon}>

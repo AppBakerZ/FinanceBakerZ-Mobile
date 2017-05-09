@@ -9,7 +9,7 @@ import { getTheme } from 'react-native-material-kit';
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
 import CurrencyIcon from 'FinanceBakerZ/src/icons/CurrencyIcon';
 const theme = getTheme();
-import {formatDate, filterDate, alterName, loggedUserCurrency, currencyStandardFormat, alterIconName} from 'FinanceBakerZ/src/customLibrary';
+import {I18n, formatDate, filterDate, alterName, loggedUserCurrency, currencyStandardFormat, alterIconName} from 'FinanceBakerZ/src/customLibrary';
 import moment from 'moment';
 import Loader from 'FinanceBakerZ/src/components/loader/Loader';
 
@@ -111,7 +111,7 @@ class Dashboard extends Component {
         <View style={DashboardStyles.imgContainer}>
           {(!loading  ?
           <Image style={DashboardStyles.img} source={require('FinanceBakerZ/src/images/dashboard/dollars.png')}>
-              <Text style={DashboardStyles.textWhite}>Your Remaining Amount is</Text>
+              <Text style={DashboardStyles.textWhite}>{I18n('DASHBOARD_AVAILABLE_BALANCE')}</Text>
                 <View style={DashboardStyles.currencyCon}>
                   {(loggedUserCurrency() ? <CurrencyIcon style={DashboardStyles.currencyIcon} size={30} color="#fff" name={alterIconName(loggedUserCurrency())} /> : <Text></Text>)}
                   <Text style={DashboardStyles.textPrice}>{currencyStandardFormat(this.state.availableBalance)}

@@ -63,6 +63,10 @@
 		F2FF77E2390C467BA0E385D0 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3193E37AAEED4D418CEE340A /* MaterialCommunityIcons.ttf */; };
 		F4F793510F534F779B622164 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2E18B5D5F4D54F7BA078FB3B /* SimpleLineIcons.ttf */; };
 		E6BF31EDB9D448D891A4089E /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABF8A98A50A7464CBB10410C /* libRNImagePicker.a */; };
+		DEC0165F1ACA43FD9F8A7AF4 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC5835BB6DE1473DB760C796 /* libReact.a */; };
+		B76E08240ED14A9C896EBA65 /* libyoga.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9470ED1D217748FB9EC092DB /* libyoga.a */; };
+		B1037AFDB93742DB89F80221 /* libcxxreact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FE85F19B9A434B87E12658 /* libcxxreact.a */; };
+		45332975D1044C02B249A04E /* libjschelpers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DA42EAECB9D45B8AB124538 /* libjschelpers.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -384,6 +388,11 @@
 		F6ACED63CD3B471889C25E92 /* Courier New.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Courier New.ttf"; path = "../node_modules/native-base/Fonts/Courier New.ttf"; sourceTree = "<group>"; };
 		9309B306F8AD4EAF84B2D540 /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; name = "RNImagePicker.xcodeproj"; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		ABF8A98A50A7464CBB10410C /* libRNImagePicker.a */ = {isa = PBXFileReference; name = "libRNImagePicker.a"; path = "libRNImagePicker.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		5120E3021A464A26B06304DD /* RNI18n.xcodeproj */ = {isa = PBXFileReference; name = "RNI18n.xcodeproj"; path = "../node_modules/react-native-i18n/RNI18n.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		EC5835BB6DE1473DB760C796 /* libReact.a */ = {isa = PBXFileReference; name = "libReact.a"; path = "libReact.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		9470ED1D217748FB9EC092DB /* libyoga.a */ = {isa = PBXFileReference; name = "libyoga.a"; path = "libyoga.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		14FE85F19B9A434B87E12658 /* libcxxreact.a */ = {isa = PBXFileReference; name = "libcxxreact.a"; path = "libcxxreact.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		7DA42EAECB9D45B8AB124538 /* libjschelpers.a */ = {isa = PBXFileReference; name = "libjschelpers.a"; path = "libjschelpers.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -415,6 +424,10 @@
 				D76A15E2F2384273A45DEF14 /* libRCTSplashScreen.a in Frameworks */,
 				6F23C349EF4E41FC9EF31025 /* libRCTMaterialKit.a in Frameworks */,
 				E6BF31EDB9D448D891A4089E /* libRNImagePicker.a in Frameworks */,
+				DEC0165F1ACA43FD9F8A7AF4 /* libReact.a in Frameworks */,
+				B76E08240ED14A9C896EBA65 /* libyoga.a in Frameworks */,
+				B1037AFDB93742DB89F80221 /* libcxxreact.a in Frameworks */,
+				45332975D1044C02B249A04E /* libjschelpers.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -652,6 +665,7 @@
 				B49344077C2849888128B38C /* RCTSplashScreen.xcodeproj */,
 				320CBCD178094EBD9F2A0708 /* RCTMaterialKit.xcodeproj */,
 				9309B306F8AD4EAF84B2D540 /* RNImagePicker.xcodeproj */,
+				5120E3021A464A26B06304DD /* RNI18n.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1274,12 +1288,17 @@
 					"$(SRCROOT)..\node_modules\neact-native-smart-splash-screeniosRCTSplashScreenRCTSplashScreen",
 					"$(SRCROOT)..\node_modules\neact-native-material-kitiOSRCTMaterialKit",
 					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
+					"$(SRCROOT)\..\node_modules\react-native-i18n\RNI18n",
 				);
 				INFOPLIST_FILE = FinanceBakerZTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1305,12 +1324,17 @@
 					"$(SRCROOT)..\node_modules\neact-native-smart-splash-screeniosRCTSplashScreenRCTSplashScreen",
 					"$(SRCROOT)..\node_modules\neact-native-material-kitiOSRCTMaterialKit",
 					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
+					"$(SRCROOT)\..\node_modules\react-native-i18n\RNI18n",
 				);
 				INFOPLIST_FILE = FinanceBakerZTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1342,6 +1366,7 @@
 					ode_modules,
 					"eact-native-material-kitiOSRCTMaterialKit",
 					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
+					"$(SRCROOT)\..\node_modules\react-native-i18n\RNI18n",
 				);
 				INFOPLIST_FILE = FinanceBakerZ/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1373,6 +1398,7 @@
 					ode_modules,
 					"eact-native-material-kitiOSRCTMaterialKit",
 					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
+					"$(SRCROOT)\..\node_modules\react-native-i18n\RNI18n",
 				);
 				INFOPLIST_FILE = FinanceBakerZ/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1406,11 +1432,16 @@
 					"$(SRCROOT)..\node_modules\neact-native-smart-splash-screeniosRCTSplashScreenRCTSplashScreen",
 					"$(SRCROOT)..\node_modules\neact-native-material-kitiOSRCTMaterialKit",
 					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
+					"$(SRCROOT)\..\node_modules\react-native-i18n\RNI18n",
 				);
 				INFOPLIST_FILE = "FinanceBakerZ-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1446,11 +1477,16 @@
 					"$(SRCROOT)..\node_modules\neact-native-smart-splash-screeniosRCTSplashScreenRCTSplashScreen",
 					"$(SRCROOT)..\node_modules\neact-native-material-kitiOSRCTMaterialKit",
 					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
+					"$(SRCROOT)\..\node_modules\react-native-i18n\RNI18n",
 				);
 				INFOPLIST_FILE = "FinanceBakerZ-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1488,6 +1524,10 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.FinanceBakerZ-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1513,6 +1553,10 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",

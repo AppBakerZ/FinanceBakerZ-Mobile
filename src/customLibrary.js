@@ -2,6 +2,8 @@ import {Alert} from 'react-native';
 import moment from 'moment';
 import numeral from 'numeral';
 import Meteor from 'react-native-meteor';
+import I18n from 'react-native-i18n'
+import translations from 'FinanceBakerZ/src/i18n.json';
 
 
 exports.validateEmail = (email)  => {
@@ -100,9 +102,10 @@ exports.currencyStandardFormat = (currency) =>{
 exports.capitalizeFirstLetter  = (string) => {
   return typeof string != 'object'? string.charAt(0).toUpperCase() + string.slice(1) : '';
 };
+
 exports.alertBankName = (bankName) => {
     return bankName ? bankName.split('-').slice(1).join(' ') : '';
-}
+};
 
 exports.chunk = (array, chunkSize) => {
   return [].concat.apply([],
@@ -110,4 +113,14 @@ exports.chunk = (array, chunkSize) => {
       return i % chunkSize ? [] : [array.slice(i, i + chunkSize)];
     })
   );
+};
+
+exports.I18n = (translate) => {
+
+  let userSelectedLanguage = Meteor.user().profile.language;
+  I18n.translations = translations;
+  I18n.defaultLocale = userSelectedLanguage;
+  I18n.locale = userSelectedLanguage;
+  return I18n.t(translate);
+
 };

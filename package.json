@@ -13,6 +13,7 @@
     "react-native": "^0.42.0",
     "react-native-aws3": "0.0.8",
     "react-native-gravatar": "^1.0.2",
+    "react-native-i18n": "^1.0.0",
     "react-native-image-picker": "^0.26.3",
     "react-native-loader": "^1.1.0",
     "react-native-material-kit": "^0.4.1",

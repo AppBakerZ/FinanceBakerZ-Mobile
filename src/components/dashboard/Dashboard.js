@@ -111,7 +111,7 @@ class Dashboard extends Component {
         <View style={DashboardStyles.imgContainer}>
           {(!loading  ?
           <Image style={DashboardStyles.img} source={require('FinanceBakerZ/src/images/dashboard/dollars.png')}>
-              <Text style={DashboardStyles.textWhite}>{I18n('DASHBOARD_AVAILABLE_BALANCE')}</Text>
+              <Text style={DashboardStyles.textWhite}>{I18n("DASHBOARD_AVAILABLE_BALANCE")}</Text>
                 <View style={DashboardStyles.currencyCon}>
                   {(loggedUserCurrency() ? <CurrencyIcon style={DashboardStyles.currencyIcon} size={30} color="#fff" name={alterIconName(loggedUserCurrency())} /> : <Text></Text>)}
                   <Text style={DashboardStyles.textPrice}>{currencyStandardFormat(this.state.availableBalance)}
@@ -143,7 +143,7 @@ class Dashboard extends Component {
           <View style={[theme.cardStyle, DashboardStyles.card]} elevation={5}>
             {(!loading ?
               <View style={[DashboardStyles.childContainer, DashboardStyles.childContainerBorder]}>
-              <Text style={DashboardStyles.textHeading}>Your Incomes</Text>
+              <Text style={DashboardStyles.textHeading}>{I18n("DASHBOARD_TOTAL_INCOMES")}</Text>
                 <View style={DashboardStyles.currencyCon}>
                   {loggedUserCurrency() ? <CurrencyIcon style={DashboardStyles.currencyIcon} size={20} color="#1F9058" name={alterIconName(loggedUserCurrency())} /> : <Text></Text>}
                   <Text style={DashboardStyles.greenText}>{currencyStandardFormat(this.state.totalIncomes)}</Text>
@@ -152,7 +152,7 @@ class Dashboard extends Component {
               : <View style={[DashboardStyles.childContainer, DashboardStyles.childContainerBorder]}><Loader size={20} color="#008142" /></View>)}
             {(!loading ?
                 <View style={DashboardStyles.childContainer}>
-                  <Text style={DashboardStyles.textHeading}>Your Expenses</Text>
+                  <Text style={DashboardStyles.textHeading}>{I18n("DASHBOARD_TOTAL_EXPENSES")}</Text>
                   <View style={DashboardStyles.currencyCon}>
                     {loggedUserCurrency() ? <CurrencyIcon style={DashboardStyles.currencyIcon} size={20} color="#C71818" name={alterIconName(loggedUserCurrency())} /> : <Text></Text>}
                     <Text style={DashboardStyles.redText}>{currencyStandardFormat(this.state.totalExpenses)}</Text>

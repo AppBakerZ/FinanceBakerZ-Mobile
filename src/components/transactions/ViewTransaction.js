@@ -4,7 +4,7 @@ import { TransactionsStyles } from 'FinanceBakerZ/src/components/transactions/Tr
 import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
 import moment from 'moment';
 import FabButton from 'FinanceBakerZ/src/components/button/FabButton';
-import {currencyStandardFormat, loggedUserCurrency, alterIconName, showAlert} from 'FinanceBakerZ/src/customLibrary';
+import {I18n,currencyStandardFormat, loggedUserCurrency, alterIconName, showAlert} from 'FinanceBakerZ/src/customLibrary';
 import CurrencyIcon from 'FinanceBakerZ/src/icons/CurrencyIcon';
 import Meteor from 'react-native-meteor';
 
@@ -81,19 +81,20 @@ export default class ViewTransaction extends Component {
                             </Text>
                         </View>
                         <View style={[TransactionsStyles.viewTransactionDepositedInCon, TransactionsStyles.borderBottom]}>
-                            <Text style={[TransactionsStyles.text]}>Deposited in: Standard Chartered</Text>
-                            <Text style={[TransactionsStyles.text]}>Account Number: 090078601</Text>
+                            <Text style={[TransactionsStyles.text]}>{I18n("TRANSACTIONS_DEPOSITED_BANK")} Standard Chartered</Text>
+                            <Text style={[TransactionsStyles.text]}>{I18n("TRANSACTIONS_ACCOUNT_NUMBER")} 090078601</Text>
                             <View style={TransactionsStyles.currencyIconCon}>
-                                <Text style={[TransactionsStyles.text]}>Amount: </Text>
-                                <CurrencyIcon name={alterIconName(loggedUserCurrency())} size={20} />
-                                <Text style={[TransactionsStyles.textBold, TransactionsStyles.greenText]}> {currencyStandardFormat(selectedTransaction.amount)}</Text>
+                                <Text style={[TransactionsStyles.text]}>{I18n("TRANSACTIONS_TRANSACTION_AMOUNT")}
+                                    <CurrencyIcon name={alterIconName(loggedUserCurrency())} size={18}/>
+                                    <Text style={[TransactionsStyles.textBold, TransactionsStyles.greenText]}> {currencyStandardFormat(selectedTransaction.amount)}</Text>
+                                </Text>
                             </View>
                         </View>
                         <View style={TransactionsStyles.viewTransactionUserInfoCon}>
-                            <Text style={[TransactionsStyles.text, TransactionsStyles.paddingBottom]}>Sender Name: AB De Villiers</Text>
-                            <Text style={[TransactionsStyles.text, TransactionsStyles.paddingBottom]}>Sender Bank: Habib Bank</Text>
-                            <Text style={[TransactionsStyles.text, TransactionsStyles.paddingBottom]}>Account Number: 09007801</Text>
-                            <Text style={[TransactionsStyles.text]}>Project:
+                            <Text style={[TransactionsStyles.text, TransactionsStyles.paddingBottom]}>{I18n("TRANSACTIONS_SENDER_NAME")} AB De Villiers</Text>
+                            <Text style={[TransactionsStyles.text, TransactionsStyles.paddingBottom]}>{I18n("TRANSACTIONS_SENDER_BANK")} Habib Bank</Text>
+                            <Text style={[TransactionsStyles.text, TransactionsStyles.paddingBottom]}>{I18n("TRANSACTIONS_ACCOUNT_NUMBER")} 09007801</Text>
+                            <Text style={[TransactionsStyles.text]}>{I18n("TRANSACTIONS_PROJECT")}
                                 <Text style={[TransactionsStyles.textBold, TransactionsStyles.greenText]}> Logo Design</Text>
                             </Text>
                         </View>

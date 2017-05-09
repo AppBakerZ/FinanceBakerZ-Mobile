@@ -5,7 +5,7 @@ import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContai
 import Meteor, { createContainer } from 'react-native-meteor';
 import BankIcon from 'FinanceBakerZ/src/icons/BankIcon';
 import { getTheme } from 'react-native-material-kit';
-import {currencyStandardFormat, loggedUserCurrency, alterIconName} from 'FinanceBakerZ/src/customLibrary';
+import {I18n,currencyStandardFormat, loggedUserCurrency, alterIconName} from 'FinanceBakerZ/src/customLibrary';
 import CurrencyIcon from 'FinanceBakerZ/src/icons/CurrencyIcon';
 import Loader from 'FinanceBakerZ/src/components/loader/Loader';
 import FabButton from 'FinanceBakerZ/src/components/button/FabButton';

@@ -109,7 +109,7 @@ class AddCategory extends Component{
                     <View style = {SubCategoryStyles.addCategorySub}>
                         <ViewContainer  style = {SubCategoryStyles.addCategoryContainer}>
                             <View style={SubCategoryStyles.categoryNameField}>
-                                <KeyboardAvoidingView>
+                                <KeyboardAvoidingView behavior={'padding'}>
                                     <Text style={SubCategoryStyles.selectParentText}>{I18n("CATEGORIES_CATEGORY_NAME")}</Text>
                                     <TextInput
                                         placeholder={I18n("CATEGORIES_ENTER_CATEGORY_NAME")}

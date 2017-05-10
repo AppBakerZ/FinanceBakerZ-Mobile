@@ -194,7 +194,7 @@ class UpdateCategory extends Component{
                   <View style={SubCategoryStyles.labelContainer}>
                     <Text style={SubCategoryStyles.selectParentText}>{I18n("CATEGORIES_CATEGORY_NAME")}</Text>
                   </View>
-                  <KeyboardAvoidingView>
+                  <KeyboardAvoidingView behavior={'padding'}>
                     <TextInput
                         placeholder='Enter Category Name'
                         style={SubCategoryStyles.input}

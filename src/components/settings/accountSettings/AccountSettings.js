@@ -19,19 +19,20 @@ class AccountSettings extends Component {
         super(props);
         let userInfo = Meteor.user();
         this.radioGroup = new MKRadioButton.Group();
-        this.state = {
-            userCurrency: userInfo.profile.currency ? userInfo.profile.currency.value : '',
-            currencyObj: userInfo.profile.currency.label,
-            languageSelected: userInfo.profile.language || '',
-            languageName : '',
-            check2: userInfo.profile.emailNotification,
-            loading: false
-        };
-
         this.languages = [
             { value: 'en', label: 'English' },
             { value: 'ur', label: 'Urdu' }
         ];
+        this.state = {
+            userCurrency: userInfo.profile.currency ? userInfo.profile.currency.value : '',
+            currencyObj: userInfo.profile.currency.label,
+            languageSelected: userInfo.profile.language || '',
+            languageName : this.setCurrency(userInfo.profile.language, 'languageSelected').label,
+            check2: userInfo.profile.emailNotification,
+            loading: false
+        };
+
+
     }
 
     languageOrCurrency(seletedItem, name, iosModal){

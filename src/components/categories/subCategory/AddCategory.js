@@ -124,6 +124,7 @@ class AddCategory extends Component{
                                         onChangeText={name => this.setState({name})}
                                     />
                                 </KeyboardAvoidingView>
+                                </KeyboardAvoidingView>
                             </View>
 
                         </ViewContainer>

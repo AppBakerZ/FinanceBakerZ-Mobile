@@ -113,6 +113,8 @@ class AddCategory extends Component{
                                     <View style={SubCategoryStyles.categoryNameLabel}>
                                         <Text style={SubCategoryStyles.selectParentText}>{I18n("CATEGORIES_CATEGORY_NAME")}</Text>
                                     </View>
+                                <KeyboardAvoidingView behavior={'padding'}>
+                                    <Text style={SubCategoryStyles.selectParentText}>{I18n("CATEGORIES_CATEGORY_NAME")}</Text>
                                     <TextInput
                                         placeholder={I18n("CATEGORIES_ENTER_CATEGORY_NAME")}
                                         style={SubCategoryStyles.input}
@@ -126,9 +128,7 @@ class AddCategory extends Component{
 
                         </ViewContainer>
                         <View style={SubCategoryStyles.SelectCategoryIcon}>
-                            <View style={SubCategoryStyles.SelectCategoryIconLabel}>
-                                <Text style={SubCategoryStyles.selectParentText}>{I18n("CATEGORIES_CATEGORY_ICON")}</Text>
-                            </View>
+                            <Text style={SubCategoryStyles.selectParentText}>{I18n("CATEGORIES_CATEGORY_ICON")}</Text>
                             <View style={SubCategoryStyles.categorySelectionIcon}>
                                 <Text style={[SubCategoryStyles.textBold, SubCategoryStyles.textLeft]}>{this.state.icon ? this.state.icon.label : I18n("CATEGORIES_SELECT_CATEGORY_ICON")}</Text>
                                 <Icon size={10} name="down-arrow" style={SubCategoryStyles.iconRight} />

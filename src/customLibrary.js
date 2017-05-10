@@ -117,7 +117,7 @@ exports.chunk = (array, chunkSize) => {
 
 exports.I18n = (translate) => {
 
-  let userSelectedLanguage = Meteor.user().profile.language;
+  let userSelectedLanguage = Meteor.user().profile.language || 'en';
   I18n.translations = translations;
   I18n.defaultLocale = userSelectedLanguage;
   I18n.locale = userSelectedLanguage;

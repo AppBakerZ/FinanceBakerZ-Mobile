@@ -208,7 +208,7 @@ class UpdateCategory extends Component{
                 </View>
               </ViewContainer>
               <View style={SubCategoryStyles.SelectCategoryIcon}>
-                <Text style={SubCategoryStyles.selectParentText}>{I18n("CATEGORIES_CATEGORY_ICON")}</Text>
+                <View style={SubCategoryStyles.categorySelectLabel}><Text style={SubCategoryStyles.selectParentText}>{I18n("CATEGORIES_CATEGORY_ICON")}</Text></View>
                 <View style={SubCategoryStyles.categorySelectionIcon}>
                   <Text style={[SubCategoryStyles.textBold, SubCategoryStyles.textLeft]}>{this.state.icon ? capitalizeFirstLetter(this.state.icon.label) : 'Select Icon'}</Text>
                   <Icon size={10} name="down-arrow" style={SubCategoryStyles.iconRight} />
@@ -224,7 +224,7 @@ class UpdateCategory extends Component{
                 </ScrollView>
               </View>
               <View style={SubCategoryStyles.iconParent}>
-                {(Platform.OS !== 'ios') ? <View><Text style={SubCategoryStyles.selectParentText}>{I18n("CATEGORIES_PARENT_CATEGORY")}</Text>{this.getParentCategory()}</View> :
+                {(Platform.OS !== 'ios') ? <View style={SubCategoryStyles.SelParentCategoryLabel}><Text style={SubCategoryStyles.selectParentText}>{I18n("CATEGORIES_PARENT_CATEGORY")}</Text>{this.getParentCategory()}</View> :
                     <TouchableOpacity style={SubCategoryStyles.ParentCategory} activeOpacity={0.75}
                                       onPress={() => this.refs.modal.open()}>
                       <Text style={[SubCategoryStyles.textBold, SubCategoryStyles.textLeft]}></Text>

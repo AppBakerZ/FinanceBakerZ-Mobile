@@ -138,7 +138,15 @@ export const SubCategoryStyles = StyleSheet.create({
     },
     SelectCategoryIcon:{
         flex : 1,
-        justifyContent: 'center'
+        justifyContent: 'center',
+    },
+    SelectCategoryIconLabel:{
+        flex : 0.5,
+        justifyContent: 'flex-end',
+    },
+    categorySelectLabel:{
+     flex : 0.6,
+        justifyContent : 'flex-end'
     },
     selectParentText:{
         fontFamily: 'QuicksandBold-Regular',
@@ -146,9 +154,8 @@ export const SubCategoryStyles = StyleSheet.create({
     },
     categorySelectionIcon: {
         flex: 1,
-        paddingTop: 10,
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     categorySelectionParentIcon:{
         flex: 1,

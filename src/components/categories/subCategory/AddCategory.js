@@ -109,10 +109,7 @@ class AddCategory extends Component{
                     <View style = {SubCategoryStyles.addCategorySub}>
                         <ViewContainer  style = {SubCategoryStyles.addCategoryContainer}>
                             <View style={SubCategoryStyles.categoryNameField}>
-                                <KeyboardAvoidingView>
-                                    <View style={SubCategoryStyles.categoryNameLabel}>
-                                        <Text style={SubCategoryStyles.selectParentText}>{I18n("CATEGORIES_CATEGORY_NAME")}</Text>
-                                    </View>
+
                                 <KeyboardAvoidingView behavior={'padding'}>
                                     <Text style={SubCategoryStyles.selectParentText}>{I18n("CATEGORIES_CATEGORY_NAME")}</Text>
                                     <TextInput
@@ -124,7 +121,7 @@ class AddCategory extends Component{
                                         onChangeText={name => this.setState({name})}
                                     />
                                 </KeyboardAvoidingView>
-                                </KeyboardAvoidingView>
+
                             </View>
 
                         </ViewContainer>

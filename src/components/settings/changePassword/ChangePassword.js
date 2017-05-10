@@ -4,7 +4,7 @@ import { ChangePasswordStyle } from 'FinanceBakerZ/src/components/settings/chang
 import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
 import Button from 'FinanceBakerZ/src/components/button/Button';
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
-import {showAlert} from 'FinanceBakerZ/src/customLibrary';
+import {I18n, showAlert} from 'FinanceBakerZ/src/customLibrary';
 import  {Accounts} from 'react-native-meteor';
 
 export default class ChangePassword extends Component {
@@ -58,7 +58,7 @@ export default class ChangePassword extends Component {
                         <View style = {ChangePasswordStyle.borderBottom}>
                             <Icon size = {18} name = "password" style = {ChangePasswordStyle.inputIcon}></Icon>
                             <TextInput
-                                placeholder = 'Current Password'
+                                placeholder = {I18n("SETTINGS_CURRENT_PASSWORD")}
                                 style = {[ChangePasswordStyle.input]}
                                 returnKeyType = "next"
                                 maxLength = {30}
@@ -71,7 +71,7 @@ export default class ChangePassword extends Component {
                         <View style = {ChangePasswordStyle.borderBottom}>
                             <Icon size = {18} name = "password" style = {ChangePasswordStyle.inputIcon}></Icon>
                             <TextInput
-                                placeholder = 'Enter New Password'
+                                placeholder = {I18n("SETTINGS_NEW_PASSWORD")}
                                 style = {[ChangePasswordStyle.input]}
                                 returnKeyType = "next"
                                 maxLength = {30}
@@ -84,7 +84,7 @@ export default class ChangePassword extends Component {
                         <View style = {ChangePasswordStyle.borderBottom}>
                             <Icon size = {18} name = "password" style = {ChangePasswordStyle.inputIcon}></Icon>
                             <TextInput
-                                placeholder = 'Re-Enter New Password'
+                                placeholder = {I18n("SETTINGS_REPEAT_NEW_PASSWORD")}
                                 style = {[ChangePasswordStyle.input]}
                                 returnKeyType = "next"
                                 maxLength = {30}

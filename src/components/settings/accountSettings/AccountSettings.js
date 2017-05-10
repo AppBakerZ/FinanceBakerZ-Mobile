@@ -4,7 +4,7 @@ import { AccountSettingsStyle } from 'FinanceBakerZ/src/components/settings/acco
 import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
 import Button from 'FinanceBakerZ/src/components/button/Button';
 import Icon from 'react-native-vector-icons/MaterialIcons'
-import {showAlert} from 'FinanceBakerZ/src/customLibrary';
+import {I18n, showAlert} from 'FinanceBakerZ/src/customLibrary';
 import currencyIcon from 'FinanceBakerZ/src/currencyIcon';
 import { MKRadioButton } from 'react-native-material-kit';
 import _ from 'underscore';
@@ -129,12 +129,12 @@ class AccountSettings extends Component {
                     <ScrollView>
                         <View style = {AccountSettingsStyle.inputContainer}>
                             <View style = {[AccountSettingsStyle.borderBottom, AccountSettingsStyle.pickerContainer]}>
-                                <Text>Select your currency</Text>
+                                <Text>{I18n("SETTINGS_SELECT_CURRENCY")}</Text>
                                 {this.languageOrCurrency(currencyIcon, 'userCurrency')}
                             </View>
 
                             <View style = {[AccountSettingsStyle.borderBottom, AccountSettingsStyle.pickerContainer]}>
-                                <Text>Select language</Text>
+                                <Text>{I18n("SETTINGS_SELECT_LANGUAGE")}</Text>
                                 {this.languageOrCurrency(this.languages, 'languageSelected')}
                             </View>
 
@@ -142,7 +142,7 @@ class AccountSettings extends Component {
 
                                 <View style = {AccountSettingsStyle.row}>
                                     <Icon size = {18} name = "notifications" style = {AccountSettingsStyle.notificationIcon}></Icon>
-                                    <Text style = {AccountSettingsStyle.notificationText}>Email Notification:</Text>
+                                    <Text style = {AccountSettingsStyle.notificationText}>{I18n("SETTINGS_EMAIL_NOTIFICATION")}</Text>
                                 </View>
 
                                 <View style = {AccountSettingsStyle.notificationRadio}>

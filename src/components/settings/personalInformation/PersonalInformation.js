@@ -4,7 +4,7 @@ import { PersonalInformationStyle } from 'FinanceBakerZ/src/components/settings/
 import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
 import Button from 'FinanceBakerZ/src/components/button/Button';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {showAlert, validateEmail} from 'FinanceBakerZ/src/customLibrary';
+import {I18n,showAlert, validateEmail} from 'FinanceBakerZ/src/customLibrary';
 import  Meteor, { createContainer } from 'react-native-meteor';
 import ImagePicker from 'react-native-image-picker';
 import { RNS3 } from 'react-native-aws3';
@@ -124,7 +124,7 @@ class PersonalInformation extends Component {
                         <View style = {PersonalInformationStyle.borderBottom}>
                             <Icon size = {18} name = "person" style = {PersonalInformationStyle.inputIcon}></Icon>
                             <TextInput
-                                placeholder = 'Name'
+                                placeholder = {I18n("SETTINGS_NAME")}
                                 style = {[PersonalInformationStyle.input]}
                                 returnKeyType = "next"
                                 maxLength = {25}
@@ -137,7 +137,7 @@ class PersonalInformation extends Component {
                         <View style = {PersonalInformationStyle.borderBottom}>
                             <Icon size = {18} name = "phone-iphone" style = {PersonalInformationStyle.inputIcon}></Icon>
                             <TextInput
-                                placeholder = 'Contact Number'
+                                placeholder = {I18n("SETTINGS_CONTACT_NUMBER")}
                                 style = {[PersonalInformationStyle.input]}
                                 returnKeyType = "next"
                                 maxLength = {50}
@@ -151,7 +151,7 @@ class PersonalInformation extends Component {
                         <View style={PersonalInformationStyle.borderBottom}>
                             <Icon size={18} name="email" style={PersonalInformationStyle.inputIcon}></Icon>
                             <TextInput
-                                placeholder='Email'
+                                placeholder={I18n("SETTINGS_EMAIL")}
                                 style={[PersonalInformationStyle.input]}
                                 returnKeyType="next"
                                 autoCorrect={false}
@@ -164,7 +164,7 @@ class PersonalInformation extends Component {
                         <View style={PersonalInformationStyle.borderBottom}>
                             <Icon size={18} name="person" style={PersonalInformationStyle.inputIcon}></Icon>
                             <TextInput
-                                placeholder='User Name'
+                                placeholder={I18n("SETTINGS_USER_NAME")}
                                 style={[PersonalInformationStyle.input]}
                                 returnKeyType="next"
                                 autoCorrect={false}
@@ -177,7 +177,7 @@ class PersonalInformation extends Component {
                         <View style = {PersonalInformationStyle.borderBottom}>
                             <Icon size = {18} name = "location-on" style = {PersonalInformationStyle.inputIcon}></Icon>
                             <TextInput
-                                placeholder = 'Address'
+                                placeholder = {I18n("SETTINGS_ADDRESS")}
                                 style = {[PersonalInformationStyle.input]}
                                 returnKeyType = "next"
                                 autoCorrect = {false}

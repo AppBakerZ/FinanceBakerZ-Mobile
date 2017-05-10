@@ -93,13 +93,18 @@ export const SubCategoryStyles = StyleSheet.create({
         flex : 1
     },
     addCategoryContainer:{
-        flex : 1
+        flex : 1.3
     },
     categoryNameField: {
         flex : 2,
         borderBottomWidth: 1,
         borderBottomColor: '#dadada',
         justifyContent: 'flex-end',
+    },
+    labelContainer:{
+        flex :1,
+        justifyContent : 'flex-end'
+
     },
     categoryStyle:{
         flex : 1
@@ -111,7 +116,7 @@ export const SubCategoryStyles = StyleSheet.create({
         fontFamily: 'QuicksandBook-Regular',
         fontSize: 15,
         height: 50,
-        paddingLeft: 15
+        paddingLeft: 15,
     },
     iconParent: {
         flex:1.2,
@@ -136,10 +141,8 @@ export const SubCategoryStyles = StyleSheet.create({
         justifyContent: 'center'
     },
     selectParentText:{
-        paddingLeft : 15,
-        paddingTop : 15,
-        paddingRight : 15,
         fontFamily: 'QuicksandBold-Regular',
+        paddingLeft : 15
     },
     categorySelectionIcon: {
         flex: 1,

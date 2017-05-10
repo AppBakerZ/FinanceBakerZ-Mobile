@@ -191,8 +191,10 @@ class UpdateCategory extends Component{
             <View style = {SubCategoryStyles.addCategorySub}>
               <ViewContainer  style = {SubCategoryStyles.addCategoryContainer}>
                 <View style={SubCategoryStyles.categoryNameField}>
-                  <KeyboardAvoidingView>
+                  <View style={SubCategoryStyles.labelContainer}>
                     <Text style={SubCategoryStyles.selectParentText}>{I18n("CATEGORIES_CATEGORY_NAME")}</Text>
+                  </View>
+                  <KeyboardAvoidingView>
                     <TextInput
                         placeholder='Enter Category Name'
                         style={SubCategoryStyles.input}

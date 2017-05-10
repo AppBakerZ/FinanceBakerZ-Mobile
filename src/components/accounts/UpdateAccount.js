@@ -182,7 +182,7 @@ export  default class UpdateAccount extends Component {
                 <Image source = {require('FinanceBakerZ/src/images/app-background.png')} style={AccountsStyles.backgroundImage}>
                     <View style={AccountsStyles.addAccCon}>
                         <View style={AccountsStyles.pickerAndroidCon}>
-                            <Text style={AccountsStyles.labelText}>{I18n("ACCOUNTS_SELECT_COUNTRY")}</Text>
+                            <Text style={[AccountsStyles.textBold, AccountsStyles.selectParentText]}>{I18n("ACCOUNTS_SELECT_COUNTRY")}</Text>
                             {(Platform.OS !== 'ios') ? this.getCountries() :
                                 <TouchableOpacity style={AccountsStyles.bankCardTxtAndIcon} activeOpacity={0.75} onPress={() => this.refs.modal.open()}>
                                     <Text style={[AccountsStyles.textBold, AccountsStyles.textLeft]}>{this.getCountryName()}</Text>
@@ -190,10 +190,10 @@ export  default class UpdateAccount extends Component {
                                 </TouchableOpacity>
                             }
                         </View>
-                        <Text style={AccountsStyles.labelText}>{I18n("ACCOUNTS_SELECT_BANK")}</Text>
+                        <Text style={[AccountsStyles.textBold, AccountsStyles.selectParentText]}>{I18n("ACCOUNTS_SELECT_BANK")}</Text>
                         <View style={AccountsStyles.bankCardCon}>
                             <View style={AccountsStyles.bankCardTxtAndIcon}>
-                                <Text style={[AccountsStyles.textBold, AccountsStyles.textLeft]}>{this.state.bank ? this.state.bank.label : 'Select Bank / Card'}</Text>
+                                <Text style={[AccountsStyles.textLeft, AccountsStyles.text, {top: 10}]}>{this.state.bank ? this.state.bank.label : 'Select Bank / Card'}</Text>
                                 <Icon size={10} name="down-arrow" style={AccountsStyles.iconRight} value = {this.state.bank}/>
                             </View>
                         </View>
@@ -203,8 +203,8 @@ export  default class UpdateAccount extends Component {
                             <View style={AccountsStyles.loaderBank}><ActivityIndicator size="large" color="#008142" /></View>
                         }
                         <View style={AccountsStyles.accountNoCon}>
-                            <KeyboardAvoidingView>
-                                <Text style={AccountsStyles.labelText}>{I18n("ACCOUNTS_SELECT_ACCOUNT_NUMBER")}</Text>
+                            <KeyboardAvoidingView behavior={'padding'}>
+                                <Text style={[AccountsStyles.textBold, AccountsStyles.selectParentText, AccountsStyles.textLeft]}>{I18n("ACCOUNTS_SELECT_ACCOUNT_NUMBER")}</Text>
                                 <TextInput
                                     placeholder='Enter Account Number'
                                     style={AccountsStyles.input}

@@ -6,7 +6,7 @@ import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
 import countries from 'FinanceBakerZ/src/countries';
 import bankFonts from 'FinanceBakerZ/src/bankFonts';
 import Modal from 'react-native-modalbox';
-import {alterName, chunk, showAlert} from 'FinanceBakerZ/src/customLibrary';
+import {I18n, alterName, chunk, showAlert} from 'FinanceBakerZ/src/customLibrary';
 import BankIcon from 'FinanceBakerZ/src/icons/BankIcon';
 import _ from 'underscore';
 import Loader from 'FinanceBakerZ/src/components/loader/Loader';
@@ -147,7 +147,7 @@ export default class AddAccount extends Component{
         <Image source = {require('FinanceBakerZ/src/images/app-background.png')} style={AccountsStyles.backgroundImage}>
           <View style={AccountsStyles.addAccCon}>
             <View style={AccountsStyles.pickerAndroidCon}>
-              <Text style={[AccountsStyles.textBold, AccountsStyles.selectParentText]}>Select Country</Text>
+              <Text style={[AccountsStyles.textBold, AccountsStyles.selectParentText]}>{I18n("ACCOUNTS_SELECT_COUNTRY")}</Text>
               {(Platform.OS !== 'ios') ? this.getCountries() :
                 <TouchableOpacity style={AccountsStyles.bankCardTxtAndIcon} activeOpacity={0.75} onPress={() => this.refs.modal.open()}>
                   <Text style={[AccountsStyles.textBold, AccountsStyles.textLeft]}>{this.getCountryName()}</Text>
@@ -156,7 +156,7 @@ export default class AddAccount extends Component{
               }
             </View>
             <View style={AccountsStyles.bankCardCon}>
-              <Text style={[AccountsStyles.textBold, AccountsStyles.selectParentText]}>Select Bank/Card</Text>
+              <Text style={[AccountsStyles.textBold, AccountsStyles.selectParentText]}>{I18n("ACCOUNTS_SELECT_BANK")}</Text>
               <View style={AccountsStyles.bankCardTxtAndIcon}>
                 <Text style={[AccountsStyles.textLeft, AccountsStyles.text, {top: 10}]}>{this.state.bank.label}</Text>
                 <Icon size={10} name="down-arrow" style={AccountsStyles.iconRight} />
@@ -169,9 +169,9 @@ export default class AddAccount extends Component{
             }
             <View style={AccountsStyles.accountNoCon}>
               <KeyboardAvoidingView behavior={'padding'}>
-                <Text style={[AccountsStyles.textBold, AccountsStyles.selectParentText, AccountsStyles.textLeft]}>Account Number</Text>
+                <Text style={[AccountsStyles.textBold, AccountsStyles.selectParentText, AccountsStyles.textLeft]}>{I18n("ACCOUNTS_ACCOUNT_NUMBER")}</Text>
                 <TextInput
-                  placeholder='Enter Account Number'
+                  placeholder={I18n("ACCOUNTS_ACCOUNT_NUMBER_")}
                   style={AccountsStyles.input}
                   maxLength = {30}
                   autoCorrect={false}

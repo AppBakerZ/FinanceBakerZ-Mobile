@@ -33,7 +33,8 @@ export const ProjectsStyles = StyleSheet.create({
     filterIcon:{
         flex : 1,
         alignItems : 'center',
-        justifyContent : 'center'
+        justifyContent : 'center',
+        backgroundColor: 'transparent'
     },
 
     listViewContentLeft: {
@@ -287,6 +288,7 @@ export const ProjectsStyles = StyleSheet.create({
         fontFamily: 'QuicksandBold-Regular'
     },
     BankText:{
-        fontFamily: 'QuicksandBold-Regular'
+        fontFamily: 'QuicksandBold-Regular',
+        backgroundColor: 'transparent'
     }
 });

@@ -99,7 +99,7 @@ class Projects extends Component {
                       {projects.length ? <ListView
                               dataSource={ds.cloneWithRows(projects)}
                               renderRow={this.renderRow.bind(this)}
-                          /> : <View style={ProjectsStyles.errorMsg}><Text style={ProjectsStyles.BankText}>YOU DO NOT HAVE ANY PROJECTS</Text></View>}
+                          /> : <View style={ProjectsStyles.errorMsg}><Text style={ProjectsStyles.BankText}>{I18n('PROJECTS_NO_PROJECTS_ADDED')}</Text></View>}
                   </View>
                   <FabButton iconName="add" iconColor="#fff" onPress={() => navigate('CreateProject', {statuses: this.statuses, findStatusLabel: this.findStatusLabel})} />
                 </ViewContainer>

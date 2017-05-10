@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text , ScrollView, TouchableOpacity } from 'react-native';
 import { TransactionSelStyles } from 'FinanceBakerZ/src/components/transactions/transactionSelection/TransactionSelStyles';
 import TransactionSelectionTab from 'FinanceBakerZ/src/components/transactions/transactionSelection/TransactionSelectionTab';
-import { TabNavigator, TabView } from 'react-navigation';
+import { TabNavigator, TabBarTop } from 'react-navigation';
 import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
 import Modal from 'react-native-modalbox';
@@ -203,8 +203,8 @@ const TransactionSelectionTabScreen = TabNavigator({
     screen: TransactionSelectionTab
   }
 }, {
-  // tabBarComponent: TabView.TabBarTop,
-  lazyLoad: true,
+  tabBarComponent: TabBarTop,
+  lazy: true,
   swipeEnabled: true,
   tabBarPosition: 'top',
   animationEnabled: true,

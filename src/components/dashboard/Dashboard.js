@@ -3,7 +3,7 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { DashboardStyles } from 'FinanceBakerZ/src/components/dashboard/DashboardStyle';
 import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
 import DashboardTabBottomScreen from 'FinanceBakerZ/src/components/dashboard/DashboardTabBottomScreen';
-import { TabNavigator, TabView } from 'react-navigation';
+import { TabNavigator, TabBarTop } from 'react-navigation';
 import Meteor, {createContainer} from 'react-native-meteor';
 import { getTheme } from 'react-native-material-kit';
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
@@ -168,7 +168,6 @@ class Dashboard extends Component {
   }
 }
 
-
 const DashboardBottomTabNavigator = TabNavigator({
   'TRANSACTIONS': {
     screen: DashboardTabBottomScreen
@@ -180,8 +179,8 @@ const DashboardBottomTabNavigator = TabNavigator({
     screen: DashboardTabBottomScreen
   }
 }, {
-  // tabBarComponent: TabView.TabBarTop,
-  lazyLoad: true,
+  tabBarComponent: TabBarTop,
+  lazy: true,
   swipeEnabled: true,
   tabBarPosition: 'top',
   animationEnabled: true,
@@ -196,7 +195,8 @@ const DashboardBottomTabNavigator = TabNavigator({
       fontSize: 11,
       color: '#ffffff',
       marginTop: 15
-    }
+    },
+    tabBarVisible: true
   }
 });
 

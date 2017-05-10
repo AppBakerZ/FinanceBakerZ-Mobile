@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import {View, Text, Picker, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import {View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
 import { DashboardSelStyles } from 'FinanceBakerZ/src/components/dashboard/dashboardSelection/DashboardSelStyles';
 import DashboardSelectionTab from 'FinanceBakerZ/src/components/dashboard/dashboardSelection/DashboardSelectionTab';
-import { TabNavigator, TabView } from 'react-navigation';
+import { TabNavigator, TabBarTop } from 'react-navigation';
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
 import Modal from 'react-native-modalbox';
 import { MKCheckbox, getTheme } from 'react-native-material-kit';
@@ -191,8 +191,8 @@ const DashboardSelectionTabScreen = TabNavigator({
     screen: DashboardSelectionTab
   }
 }, {
-  // tabBarComponent: TabView.TabBarTop,
-  lazyLoad: true,
+  tabBarComponent: TabBarTop,
+  lazy: true,
   swipeEnabled: true,
   tabBarPosition: 'top',
   animationEnabled: true,

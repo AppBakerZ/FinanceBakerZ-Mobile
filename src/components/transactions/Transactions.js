@@ -4,10 +4,9 @@ import { TransactionsStyles } from 'FinanceBakerZ/src/components/transactions/Tr
 import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
 import TransactionTabScreen from 'FinanceBakerZ/src/components/transactions/TransactionTabScreen';
-import { TabNavigator, TabView } from 'react-navigation';
+import { TabNavigator, TabBarTop} from 'react-navigation';
 import Meteor, {createContainer, ReactiveDict} from 'react-native-meteor';
 import _ from 'underscore';
-import Loader from 'FinanceBakerZ/src/components/loader/Loader';
 import {alterName, formatDate} from 'FinanceBakerZ/src/customLibrary';
 
 let query = new ReactiveDict('transactionsDict');
@@ -114,8 +113,8 @@ const TransactionTabNavigator = TabNavigator({
     screen: TransactionTabScreen
   }
 }, {
-  // tabBarComponent: TabView.TabBarTop,
-  lazyLoad: true,
+  tabBarComponent: TabBarTop,
+  lazy: true,
   swipeEnabled: true,
   tabBarPosition: 'top',
   animationEnabled: true,

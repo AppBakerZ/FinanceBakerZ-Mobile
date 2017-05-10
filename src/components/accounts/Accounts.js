@@ -30,7 +30,7 @@ class Accounts extends Component {
     accounts = accounts || [];
     Meteor.call('statistics.availableBalance', {accounts}, (err, ab) => {
       this.setState({availableBalance: [...this.state.availableBalance, ab ? ab : 0]});
-      this.state.availableBalance.length == this.props.accounts.length ? this.setState({loading: false}) : false
+      this.state.availableBalance.length === this.props.accounts.length ? this.setState({loading: false}) : false
     });
   }
 
@@ -38,22 +38,22 @@ class Accounts extends Component {
     return this.props.accounts.map((accountData, i, arr) => {
       let icon_name = accountData.bank ? accountData.bank.replace('bank-' , "") : '';
       return(
-          <TouchableOpacity activeOpacity={0.3}  onPress={() => this.props.navigation.navigate('UpdateAccount', {data : accountData})} >
-        <View style={arr.length - 1 == i ? AccountsStyles.lastElementPadding : ''} key={i} >
-          <View style={[theme.cardStyle, AccountsStyles.card]} elevation={3}>
-            <View style={AccountsStyles.imgBox}>
-              <BankIcon name ={icon_name} size={45} />
-            </View>
-            <View style={AccountsStyles.detailBox}>
-              <Text style={AccountsStyles.text}>{icon_name.split('-').map(bankName => bankName  + ' ')}</Text>
-              <Text style={AccountsStyles.accNo}>{accountData.number}</Text>
-              <View style={AccountsStyles.currencyAndAmount}>
-                <CurrencyIcon name={alterIconName(loggedUserCurrency())} size={15} />
-                <Text style={AccountsStyles.amount}>{currencyStandardFormat(this.state.availableBalance[i])}</Text>
+          <TouchableOpacity activeOpacity={0.3} key={i} onPress={() => this.props.navigation.navigate('UpdateAccount', {data : accountData})} >
+            <View style={arr.length - 1 == i ? AccountsStyles.lastElementPadding : ''} key={i} >
+              <View style={[theme.cardStyle, AccountsStyles.card]} elevation={3}>
+                <View style={AccountsStyles.imgBox}>
+                  <BankIcon name ={icon_name} size={45} />
+                </View>
+                <View style={AccountsStyles.detailBox}>
+                  <Text style={AccountsStyles.text}>{icon_name.split('-').map(bankName => bankName  + ' ')}</Text>
+                  <Text style={AccountsStyles.accNo}>{accountData.number}</Text>
+                  <View style={AccountsStyles.currencyAndAmount}>
+                    <CurrencyIcon name={alterIconName(loggedUserCurrency())} size={15} />
+                    <Text style={AccountsStyles.amount}>{currencyStandardFormat(this.state.availableBalance[i])}</Text>
+                  </View>
+                </View>
               </View>
             </View>
-          </View>
-        </View>
           </TouchableOpacity>
       )
     })
@@ -63,18 +63,18 @@ class Accounts extends Component {
     let {navigate} = this.props.navigation;
 
     return (
-      <ViewContainer>
-        <Image source = {require('FinanceBakerZ/src/images/app-background.png')} style={AccountsStyles.backgroundImage}>
-          {!this.state.loading ? <ScrollView style={AccountsStyles.scroll}>
+        <ViewContainer>
+          <Image source = {require('FinanceBakerZ/src/images/app-background.png')} style={AccountsStyles.backgroundImage}>
+            {!this.state.loading ? <ScrollView style={AccountsStyles.scroll}>
               {
-                    this.accounts()
+                this.accounts()
               }
             </ScrollView>: <View style={AccountsStyles.loaderView}><Loader size={35} color="#008142" /></View>
 
-          }
-        </Image>
-        {!this.state.loading ? <FabButton iconName="add" iconColor="#fff" style={AccountsStyles.fabButtonBg} onPress={() => navigate('AddAccount')} /> : <Text></Text>}
-      </ViewContainer>
+            }
+          </Image>
+          {!this.state.loading ? <FabButton iconName="add" iconColor="#fff" style={AccountsStyles.fabButtonBg} onPress={() => navigate('AddAccount')} /> : <Text></Text>}
+        </ViewContainer>
     );
   }
 }

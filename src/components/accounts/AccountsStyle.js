@@ -76,24 +76,26 @@ export const AccountsStyles = StyleSheet.create({
 
   addAccCon: {
     flex: 1,
-    padding: 20
+    paddingHorizontal: 20
   },
 
   pickerAndroidCon: {
-    flex: 1,
+    flex: 1.6,
     borderBottomWidth: 1,
     borderBottomColor: '#dadada',
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
+    position: 'relative'
   },
 
   bankCardCon: {
-    flex: 0.8
+    flex: 1,
+    justifyContent: 'center',
+    position: 'relative'
   },
 
   bankCardTxtAndIcon: {
     flex: 1,
     flexDirection: 'row',
-    alignItems: 'center',
     borderBottomWidth: 1,
     borderBottomColor: '#dadada',
   },
@@ -109,8 +111,7 @@ export const AccountsStyles = StyleSheet.create({
   },
 
   bankIconsCon: {
-    minHeight: screen.height * 0.1,
-    maxHeight: screen.height * 0.5,
+    flex: 5,
     borderBottomColor: '#dadada',
     borderLeftColor: '#dadada',
     borderRightColor: '#dadada',
@@ -142,10 +143,11 @@ export const AccountsStyles = StyleSheet.create({
   },
 
   accountNoCon: {
-    flex: 1,
+    flex: 1.2,
     borderBottomWidth: 1,
     borderBottomColor: '#dadada',
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
+    position: 'relative'
   },
 
   checkMarkCon: {
@@ -176,7 +178,7 @@ export const AccountsStyles = StyleSheet.create({
 
   BtnCon: {
     flex: 1
-   },
+  },
 
   modal: {
     justifyContent: 'center',
@@ -195,9 +197,11 @@ export const AccountsStyles = StyleSheet.create({
     height: 48,
     paddingLeft: 12
   },
-    selectParentText:{
-        fontFamily: 'QuicksandBold-Regular',
-        paddingLeft : 8
-    }
+
+  selectParentText:{
+    paddingLeft : 8,
+    top: 10
+  }
+
 
 });

@@ -87,7 +87,7 @@ class Projects extends Component {
                         <View style={ProjectsStyles.filterText}>
                           <Text style={ProjectsStyles.BankText}>{I18n('PROJECTS_PROJECT_NAME')}: {name}</Text>
                           <Text style={ProjectsStyles.BankText}>{I18n('PROJECTS_CLIENT_NAME')}: {client}</Text>
-                          <Text style={ProjectsStyles.BankText}>{I18n('PROJECTS_STATUS')}: {this.findStatusLabel(status)}</Text>
+                          <Text style={ProjectsStyles.BankText}>{I18n('PROJECTS_STATUS')} {this.findStatusLabel(status)}</Text>
                         </View>
                         <View style={ProjectsStyles.filterIcon}>
                           <Icon name="filter" size={25}/>

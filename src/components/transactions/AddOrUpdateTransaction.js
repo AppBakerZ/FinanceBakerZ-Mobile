@@ -7,7 +7,7 @@ import Meteor, { createContainer } from 'react-native-meteor';
 import BankIcon from 'FinanceBakerZ/src/icons/BankIcon';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
-import {formatDate, capitalizeFirstLetter} from 'FinanceBakerZ/src/customLibrary';
+import {formatDate, capitalizeFirstLetter, I18n} from 'FinanceBakerZ/src/customLibrary';
 import FabButton from 'FinanceBakerZ/src/components/button/FabButton';
 import Loader from 'FinanceBakerZ/src/components/loader/Loader';
 import {showAlert} from 'FinanceBakerZ/src/customLibrary';
@@ -330,17 +330,17 @@ class AddOrUpdateTransaction extends Component{
     return(
         <ViewContainer style={TransactionsStyles.renderIncomeForm}>
           <TouchableOpacity onPress={() => this.handleMultipleChange.bind(this, {renderBank: true})()} activeOpacity={0.75} style={[TransactionsStyles.updateTranAccountCon, TransactionsStyles.borderBottom]}>
-            <Text style={TransactionsStyles.textBold}>Select your account</Text>
+            <Text style={TransactionsStyles.textBold}>{I18n('TRANSACTIONS_SELECT_ACCOUNT')}</Text>
             <View style={TransactionsStyles.updateTranAccDropDown}>
-              <Text style={TransactionsStyles.text}>{this.alertBankName(this.state.accountName) || 'Select your account'}</Text>
+              <Text style={TransactionsStyles.text}>{this.alertBankName(this.state.accountName) || I18n('TRANSACTIONS_SELECT_ACCOUNT')}</Text>
               <Icon size={10} name="down-arrow" style={TransactionsStyles.iconRight} />
             </View>
           </TouchableOpacity>
           <View style={[TransactionsStyles.updateTranAmountCon, TransactionsStyles.borderBottom]}>
-            <Text style={[TransactionsStyles.textBold, TransactionsStyles.relativeTop]}>Amount</Text>
+            <Text style={[TransactionsStyles.textBold, TransactionsStyles.relativeTop]}>{I18n('TRANSACTIONS_AMOUNT')}</Text>
             <KeyboardAvoidingView behavior={'padding'}>
               <TextInput
-                  placeholder='Enter Amount'
+                  placeholder={I18n('TRANSACTIONS_AMOUNT')}
                   style={TransactionsStyles.input}
                   autoCorrect={false}
                   onChangeText={this.onChange.bind(this, 'amount')}
@@ -351,35 +351,35 @@ class AddOrUpdateTransaction extends Component{
             </KeyboardAvoidingView>
           </View>
           <TouchableOpacity onPress={() => {Platform.OS === 'ios' ? this.handleMultipleChange.bind(this, {iosDate: true})() : this.showPicker.bind(this, 'receivedAt', {date: this.state.receivedAt, mode: 'calendar'})() }} style={[TransactionsStyles.updateTranDateCon, TransactionsStyles.borderBottom]}>
-            <Text style={TransactionsStyles.textBold}>Receiving Date</Text>
+            <Text style={TransactionsStyles.textBold}>{I18n('TRANSACTIONS_RECEIVING_DATE')}</Text>
             <Text style={TransactionsStyles.text}>{formatDate({type: 'getCustomDate', date: this.state.receivedAt, format: 'MMMM DD, YYYY'})}</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => {Platform.OS === 'ios' ? this.handleMultipleChange.bind(this, {iosDate: true, showTime: true})() : this.timePicker.bind(this, 'receivedTime')() }} style={[TransactionsStyles.updateTranTimeCon, TransactionsStyles.borderBottom]}>
-            <Text style={TransactionsStyles.textBold}>Receiving Time</Text>
+            <Text style={TransactionsStyles.textBold}>{I18n('TRANSACTIONS_RECEIVING_TIME')}</Text>
             <Text style={TransactionsStyles.text}>{formatDate({type: 'getCustomDate', format: 'hh:mm A', date: this.state.receivedTime})}</Text>
           </TouchableOpacity>
           {Platform.OS === 'ios' ? <TouchableOpacity onPress={() => this.handleMultipleChange.bind(this, {renderPickerType: true})()}  style={[TransactionsStyles.updateTranTypeCon, TransactionsStyles.borderBottom]}>
-            <Text style={[TransactionsStyles.textBold]}>Select type</Text>
+            <Text style={[TransactionsStyles.textBold]}>{I18n('TRANSACTIONS_SELECT_TYPE')}</Text>
             <View style={TransactionsStyles.updateTranAccDropDown}>
               <Text style={TransactionsStyles.text}>{capitalizeFirstLetter(this.state.type)|| 'Select type'}</Text>
               <Icon size={10} name="down-arrow" style={TransactionsStyles.iconRight} />
             </View>
           </TouchableOpacity> :
               <View style={[TransactionsStyles.updateTranTypeCon, TransactionsStyles.borderBottom]}>
-                <Text style={[TransactionsStyles.textBold, TransactionsStyles.relativeTop]}>Select type</Text>
+                <Text style={[TransactionsStyles.textBold, TransactionsStyles.relativeTop]}>{I18n('TRANSACTIONS_SELECT_TYPE')}</Text>
                 {this.renderIncomePicker(data.types, {renderPickerType: true})}
               </View>
           }
           {this.state.type !== 'salary' ?
               Platform.OS === 'ios' ? <TouchableOpacity onPress={() => this.handleMultipleChange.bind(this, {renderPickerProject: true})()} style={[TransactionsStyles.updateTranTypeCon, TransactionsStyles.borderBottom]}>
-                <Text style={[TransactionsStyles.textBold]}>Select Project</Text>
+                <Text style={[TransactionsStyles.textBold]}>{I18n('TRANSACTIONS_SELECT_PROJECT')}</Text>
                 <View style={TransactionsStyles.updateTranAccDropDown}>
                   <Text style={TransactionsStyles.text}>{this.findProjectName(this.state.project) || 'Select Project'}</Text>
                   <Icon size={10} name="down-arrow" style={TransactionsStyles.iconRight} />
                 </View>
               </TouchableOpacity> :
                   <View style={[TransactionsStyles.updateTranTypeCon, TransactionsStyles.borderBottom]}>
-                    <Text style={[TransactionsStyles.textBold, TransactionsStyles.relativeTop]}>Select project</Text>
+                    <Text style={[TransactionsStyles.textBold, TransactionsStyles.relativeTop]}>{I18n('TRANSACTIONS_SELECT_PROJECT')}</Text>
                     {this.renderIncomePicker(data.projects, {renderPickerProject: true})}
                   </View> : <View></View>}
           <View style={TransactionsStyles.bottomCon}></View>
@@ -392,17 +392,17 @@ class AddOrUpdateTransaction extends Component{
     return(
         <ViewContainer style={TransactionsStyles.renderIncomeForm}>
           <TouchableOpacity onPress={() => this.handleMultipleChange.bind(this, {renderBank: true})()} activeOpacity={0.75} style={[TransactionsStyles.updateTranAccountCon, TransactionsStyles.borderBottom]}>
-            <Text style={TransactionsStyles.textBold}>Select your account</Text>
+            <Text style={TransactionsStyles.textBold}>{I18n('TRANSACTIONS_SELECT_ACCOUNT')}</Text>
             <View style={TransactionsStyles.updateTranAccDropDown}>
-              <Text style={TransactionsStyles.text}>{this.alertBankName(this.state.accountName) || 'Select your account'}</Text>
+              <Text style={TransactionsStyles.text}>{this.alertBankName(this.state.accountName) || I18n('TRANSACTIONS_SELECT_ACCOUNT')}</Text>
               <Icon size={10} name="down-arrow" style={TransactionsStyles.iconRight} />
             </View>
           </TouchableOpacity>
           <View style={[TransactionsStyles.updateTranAmountCon, TransactionsStyles.borderBottom]}>
-            <Text style={[TransactionsStyles.textBold, TransactionsStyles.relativeTop]}>Amount</Text>
+            <Text style={[TransactionsStyles.textBold, TransactionsStyles.relativeTop]}>{I18n('TRANSACTIONS_AMOUNT')}</Text>
             <KeyboardAvoidingView behavior={'padding'}>
             <TextInput
-                  placeholder='Enter Amount'
+                  placeholder={I18n('TRANSACTIONS_AMOUNT')}
                   style={TransactionsStyles.input}
                   autoCorrect={false}
                   onChangeText={this.onChange.bind(this, 'amount')}
@@ -413,17 +413,17 @@ class AddOrUpdateTransaction extends Component{
             </KeyboardAvoidingView>
           </View>
           <TouchableOpacity onPress={() => this.handleMultipleChange.bind(this, {renderCategories: true})()} activeOpacity={0.75} style={[TransactionsStyles.updateTranAccountCon, TransactionsStyles.borderBottom]}>
-            <Text style={TransactionsStyles.textBold}>Select your category</Text>
+            <Text style={TransactionsStyles.textBold}>{I18n('TRANSACTIONS_SELECT_CATEGORY')}</Text>
             <View style={TransactionsStyles.updateTranAccDropDown}>
-              <Text style={TransactionsStyles.text}>{this.state.categoryName || 'Select your category'}</Text>
+              <Text style={TransactionsStyles.text}>{this.state.categoryName || I18n('TRANSACTIONS_SELECT_CATEGORY')}</Text>
               <Icon size={10} name="down-arrow" style={TransactionsStyles.iconRight} />
             </View>
           </TouchableOpacity>
           <View style={[TransactionsStyles.updateTranAmountCon, TransactionsStyles.borderBottom]}>
-            <Text style={[TransactionsStyles.textBold, TransactionsStyles.relativeTop]}>Description</Text>
+            <Text style={[TransactionsStyles.textBold, TransactionsStyles.relativeTop]}>{I18n('TRANSACTIONS_DESCRIPTION')}</Text>
             <KeyboardAvoidingView behavior={'padding'}>
             <TextInput
-                  placeholder='Enter Description'
+                  placeholder={I18n('TRANSACTIONS_DESCRIPTION')}
                   style={TransactionsStyles.input}
                   autoCorrect={false}
                   onChangeText={this.onChange.bind(this, 'description')}
@@ -434,11 +434,11 @@ class AddOrUpdateTransaction extends Component{
             </KeyboardAvoidingView>
           </View>
           <TouchableOpacity onPress={() => {Platform.OS === 'ios' ? this.handleMultipleChange.bind(this, {iosDate: true})() : this.showPicker.bind(this, 'receivedAt', {date: this.state.receivedAt, mode: 'calendar'})() }} style={[TransactionsStyles.updateTranDateCon, TransactionsStyles.borderBottom]}>
-            <Text style={TransactionsStyles.textBold}>Creation Date</Text>
+            <Text style={TransactionsStyles.textBold}>{I18n('TRANSACTIONS_CREATION_DATE')}</Text>
             <Text style={TransactionsStyles.text}>{formatDate({type: 'getCustomDate', date: this.state.receivedAt, format: 'MMMM DD, YYYY'})}</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => {Platform.OS === 'ios' ? this.handleMultipleChange.bind(this, {iosDate: true, showTime: true})() : this.timePicker.bind(this, 'receivedTime')() }} style={[TransactionsStyles.updateTranTimeCon, TransactionsStyles.borderBottom]}>
-            <Text style={TransactionsStyles.textBold}>Creation Time</Text>
+            <Text style={TransactionsStyles.textBold}>{I18n('TRANSACTIONS_CREATION_TIME')}</Text>
             <Text style={TransactionsStyles.text}>{formatDate({type: 'getCustomDate', format: 'hh:mm A', date: this.state.receivedTime})}</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress ={this.getImagePicker.bind(this)} style={[TransactionsStyles.updateTranTimeCon, !this.state.billUrl  ? TransactionsStyles.borderBottom : '']}>

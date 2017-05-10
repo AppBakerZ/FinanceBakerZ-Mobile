@@ -8,6 +8,8 @@ import {formatDate} from 'FinanceBakerZ/src/customLibrary';
 import FabButton from 'FinanceBakerZ/src/components/button/FabButton';
 import Meteor from 'react-native-meteor';
 import {showAlert} from 'FinanceBakerZ/src/customLibrary';
+import {I18n} from 'FinanceBakerZ/src/customLibrary';
+
 
 export default class UpdateProject extends  Component {
     constructor(props){
@@ -115,9 +117,9 @@ export default class UpdateProject extends  Component {
               <Image source={require('FinanceBakerZ/src/images/app-background.png')} style={ProjectsStyles.backgroundImage}>
                 <View style={[ProjectsStyles.inputProjectNameCon, ProjectsStyles.inputBorderBottom]}>
                   <KeyboardAvoidingView>
-                      <Text style={ProjectsStyles.labelText}>Project Name</Text>
+                      <Text style={ProjectsStyles.labelText}>{I18n('PROJECTS_PROJECT_NAME')}</Text>
                           <TextInput
-                        placeholder='Project Name'
+                        placeholder={I18n('PROJECTS_PROJECT_NAME')}
                         style={ProjectsStyles.input}
                         maxLength = {50}
                         autoCorrect={false}
@@ -129,9 +131,9 @@ export default class UpdateProject extends  Component {
                 </View>
                 <View style={[ProjectsStyles.inputClientName, ProjectsStyles.inputBorderBottom]}>
                   <KeyboardAvoidingView>
-                      <Text style={ProjectsStyles.labelText}>Client Name</Text>
+                      <Text style={ProjectsStyles.labelText}>{I18n('PROJECTS_CLIENT_NAME')}</Text>
                       <TextInput
-                        placeholder='Client Name'
+                        placeholder={I18n('PROJECTS_CLIENT_NAME')}
                         style={ProjectsStyles.input}
                         maxLength = {50}
                         autoCorrect={false}
@@ -143,9 +145,9 @@ export default class UpdateProject extends  Component {
                 </View>
                 <View style={[ProjectsStyles.inputTypeCon, ProjectsStyles.inputBorderBottom]}>
                   <KeyboardAvoidingView>
-                      <Text style={ProjectsStyles.labelText}>Type</Text>
+                      <Text style={ProjectsStyles.labelText}>{I18n('PROJECTS_PROJECT_TYPE')}</Text>
                       <TextInput
-                        placeholder='Type'
+                        placeholder={I18n('PROJECTS_PROJECT_TYPE')}
                         style={ProjectsStyles.input}
                         maxLength = {50}
                         autoCorrect={false}
@@ -157,9 +159,9 @@ export default class UpdateProject extends  Component {
                 </View>
                 <View style={[ProjectsStyles.inputAmountCon, ProjectsStyles.inputBorderBottom]}>
                   <KeyboardAvoidingView>
-                      <Text style={ProjectsStyles.labelText}>Amount</Text>
+                      <Text style={ProjectsStyles.labelText}>{I18n('PROJECTS_PROJECT_AMOUNT')}</Text>
                       <TextInput
-                        placeholder='Amount'
+                        placeholder={I18n('PROJECTS_PROJECT_AMOUNT')}
                         style={ProjectsStyles.input}
                         maxLength = {30}
                         autoCorrect={false}
@@ -171,7 +173,7 @@ export default class UpdateProject extends  Component {
                   </KeyboardAvoidingView>
                 </View>
                 <View style={[ProjectsStyles.inputPickerCon, ProjectsStyles.inputBorderBottom]}>
-                    {(Platform.OS !== 'ios') ? <View style={ProjectsStyles.statusTextView}><Text style={ProjectsStyles.labelTextStatus}>Status</Text>{this.renderPicker()}</View> :
+                    {(Platform.OS !== 'ios') ? <View style={ProjectsStyles.statusTextView}><Text style={ProjectsStyles.labelTextStatus}>{I18n('PROJECTS_STATUS')}</Text>{this.renderPicker()}</View> :
                         <TouchableOpacity style={ProjectsStyles.projectCardTxtAndIcon} activeOpacity={0.75} onPress={() => {this.refs.modal.open(); this.setState({modalVisible: true})}}>
                           <Text style={[ProjectsStyles.BankText, ProjectsStyles.textLeft]}>{this.state.status ? findStatusLabel(this.state.status) : 'Select Status'}</Text>
                           <Icon size={10} name="down-arrow" style={ProjectsStyles.iconRight} />
@@ -179,7 +181,7 @@ export default class UpdateProject extends  Component {
                     }
                 </View>
                 <View style={[ProjectsStyles.inputDateCon, ProjectsStyles.inputBorderBottom]}>
-                    <Text style={ProjectsStyles.labelText}>Start Date</Text>
+                    <Text style={ProjectsStyles.labelText}>{I18n('PROJECTS_START_DATE')}</Text>
                   <TouchableOpacity style={ProjectsStyles.projectCardTxtAndIcon}  activeOpacity={0.75} onPress={() => {Platform.OS !== 'ios' ? this.showPicker.bind(this, 'startAt', {date: this.state.date})() : this.showModal.bind(this)()}}>
                     <Text style={[ProjectsStyles.BankText, ProjectsStyles.inputDateSelected]}>{this.state.startAt ? formatDate({type: 'getCustomDate', date: this.state.startAt, format: 'MMMM DD, YYYY'}) : 'Select Date'}</Text>
                     <Icon size={10} name="down-arrow" style={ProjectsStyles.iconRight} />

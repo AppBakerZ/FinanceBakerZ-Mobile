@@ -111,14 +111,13 @@ export const AccountsStyles = StyleSheet.create({
   },
 
   bankIconsCon: {
-    flex: 3.3,
+    flex: 3,
     borderBottomColor: '#dadada',
     borderLeftColor: '#dadada',
     borderRightColor: '#dadada',
     borderBottomWidth: 1,
     borderLeftWidth: 1,
-    borderRightWidth: 1,
-    marginHorizontal: 10,
+    borderRightWidth: 1
   },
 
   bankIconCon: {
@@ -134,12 +133,10 @@ export const AccountsStyles = StyleSheet.create({
     borderRightWidth: 1,
     borderBottomColor: '#dadada',
     borderBottomWidth: 1,
-    maxWidth: screen.width * .265
+    maxWidth: screen.width * .3
   },
 
   scrollViewCon: {
-    padding: 10,
-    marginBottom: 5
   },
 
   accountNoCon: {

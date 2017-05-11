@@ -117,6 +117,7 @@ export const SubCategoryStyles = StyleSheet.create({
         fontSize: 15,
         height: 50,
         paddingLeft: 15,
+        paddingRight: 15,
     },
     iconParent: {
         flex:1.2,
@@ -150,7 +151,9 @@ export const SubCategoryStyles = StyleSheet.create({
     },
     selectParentText:{
         fontFamily: 'QuicksandBold-Regular',
-        paddingLeft : 15
+        paddingLeft : 15,
+        paddingRight : 15,
+        paddingTop : 10
     },
     categorySelectionIcon: {
         flex: 1,
@@ -203,7 +206,8 @@ export const SubCategoryStyles = StyleSheet.create({
         flex : 1
     },
     picker:{
-        marginLeft : 8
+        marginLeft : 8,
+        marginRight : 15
     }
 
 });

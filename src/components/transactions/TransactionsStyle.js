@@ -14,7 +14,8 @@ export const TransactionsStyles = StyleSheet.create({
     marginLeft: 15,
     marginRight: 15,
     flex: 1,
-    flexDirection: 'row'
+    flexDirection: 'row',
+      backgroundColor: 'transparent'
   },
 
   filterContainerTxt: {
@@ -26,7 +27,8 @@ export const TransactionsStyles = StyleSheet.create({
   filterIconContainer: {
     flex: 1,
     alignItems: 'flex-end',
-    justifyContent: 'center'
+    justifyContent: 'center',
+      backgroundColor: 'transparent'
   },
   transitionFilterBg:{
     flex : 1,

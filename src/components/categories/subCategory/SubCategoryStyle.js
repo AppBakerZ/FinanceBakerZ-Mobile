@@ -153,7 +153,7 @@ export const SubCategoryStyles = StyleSheet.create({
         fontFamily: 'QuicksandBold-Regular',
         paddingLeft : 15,
         paddingRight : 15,
-        paddingTop : 10
+        paddingTop : 15,
     },
     categorySelectionIcon: {
         flex: 1,

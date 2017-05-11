@@ -88,14 +88,14 @@ export const AccountsStyles = StyleSheet.create({
   },
 
   bankCardCon: {
-    flex: 1,
-    justifyContent: 'center',
-    position: 'relative'
+    flex: 1.3,
+    justifyContent: 'center'
   },
 
   bankCardTxtAndIcon: {
     flex: 1,
     flexDirection: 'row',
+    alignItems: 'center',
     borderBottomWidth: 1,
     borderBottomColor: '#dadada',
   },
@@ -111,7 +111,7 @@ export const AccountsStyles = StyleSheet.create({
   },
 
   bankIconsCon: {
-    flex: 5,
+    flex: 3.3,
     borderBottomColor: '#dadada',
     borderLeftColor: '#dadada',
     borderRightColor: '#dadada',
@@ -143,11 +143,10 @@ export const AccountsStyles = StyleSheet.create({
   },
 
   accountNoCon: {
-    flex: 1.2,
+    flex: 1.4,
     borderBottomWidth: 1,
     borderBottomColor: '#dadada',
-    justifyContent: 'flex-end',
-    position: 'relative'
+    justifyContent: 'flex-end'
   },
 
   checkMarkCon: {
@@ -162,7 +161,7 @@ export const AccountsStyles = StyleSheet.create({
   },
 
   loaderBank: {
-    flex: 4,
+    flex: 3.3,
     alignItems: 'center',
     justifyContent: 'center',
     borderBottomColor: '#dadada',
@@ -201,6 +200,11 @@ export const AccountsStyles = StyleSheet.create({
   selectParentText:{
     paddingLeft : 8,
     top: 10
+  },
+
+  labelCon: {
+    flex: 1,
+    justifyContent: 'flex-end'
   }
 
 

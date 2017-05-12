@@ -29,7 +29,7 @@ import ChangePasswordScreen from 'FinanceBakerZ/src/components/settings/changePa
 import AccountSettingsScreen from 'FinanceBakerZ/src/components/settings/accountSettings/AccountSettings';
 import PersonalInformationScreen from 'FinanceBakerZ/src/components/settings/personalInformation/PersonalInformation';
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import DrawerItems, {DrawerItemIcon} from 'FinanceBakerZ/src/components/drawerItems/DrawerItems';
 import { StackNavigator, DrawerNavigator } from 'react-navigation';
 
@@ -94,10 +94,10 @@ function nestingHeaders(routeName, renderRightIcon) {
           onPress={() => {state.params.submit()}}
       />);
     }else if (renderRightIcon && renderRightIcon.iconDelete) {
-      headerRight  =  (<Ionicons
-          name="ios-trash"
+      headerRight  =  (<MaterialIcons
+          name="delete"
           size={35}
-          style={{paddingRight: 15, color: '#c71212'}}
+          style={{paddingRight: 15,}}
           onPress={() => {state.params.submit()}}
       />);
     }

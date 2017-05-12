@@ -113,10 +113,10 @@ export default class AddAccount extends Component{
     }
   }
 
-  removeBorder(bankName){
+  removeBorder(bankName, arr, i){
     if(bankName.removeRightBorder) {
       return {borderRightColor: 'transparent', borderRightWidth: 0}
-    }else if(bankName.removeBottomBorder){
+    }else if(bankName.removeBottomBorder || arr.length - 1 === i){
       return {borderBottomColor: 'transparent', borderBottomWidth: 0}
     }
   }
@@ -126,14 +126,14 @@ export default class AddAccount extends Component{
     let bankFonts = this.setBanks(country);
     let bankIcons = chunk(bankFonts, 3);
 
-    return bankIcons.map((bank, i) => {
+    return bankIcons.map((bank, i, arr) => {
       return(
-          <View style={AccountsStyles.bankIconCon} key={i}>
+          <View style={[AccountsStyles.bankIconCon]} key={i}>
             {bank.map((bankName, index) => {
               let icon_name = bankName.value.replace('bank-' , '');
               return(
-                  <TouchableOpacity style={[AccountsStyles.bankIcon, this.removeBorder(bankName)]} onPress={() => this.setState({bank: bankName})} activeOpacity={0.75} key={index}>
-                    <BankIcon name={icon_name } size={30}/>
+                  <TouchableOpacity style={[AccountsStyles.bankIcon, this.removeBorder(bankName, arr, i)]} onPress={() => this.setState({bank: bankName})} activeOpacity={0.75} key={index}>
+                    <BankIcon name={icon_name } size={35}/>
                   </TouchableOpacity>
               );
             })}
@@ -163,7 +163,7 @@ export default class AddAccount extends Component{
                   <Text style={[AccountsStyles.textBold]}>{I18n("ACCOUNTS_SELECT_BANK")}</Text>
                 </View>
                 <View style={AccountsStyles.bankCardTxtAndIcon}>
-                  <Text style={[AccountsStyles.textLeft, AccountsStyles.text]}>{this.state.bank.label}</Text>
+                  <Text style={[AccountsStyles.textLeft, AccountsStyles.text]}>{this.state.bank.label || I18n("ACCOUNTS_SELECT_BANK")}</Text>
                   <Icon size={10} name="down-arrow" style={AccountsStyles.iconRight} />
                 </View>
               </View>

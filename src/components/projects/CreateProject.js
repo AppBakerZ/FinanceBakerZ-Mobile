@@ -67,6 +67,7 @@ export default class CreateProject extends Component {
     let statuses = this.statuses.map((status, i) =>  <Picker.Item key={i} label={status.label} value={status.value}/>);
     return(
       <Picker
+          style={ProjectsStyles.picker}
         selectedValue={this.state.status}
         onValueChange={this.onChange.bind(this, 'status')}>
         {statuses}

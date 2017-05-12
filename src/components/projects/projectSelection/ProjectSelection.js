@@ -71,6 +71,7 @@ export default class ProjectSelectionScreen extends Component{
     let statuses = this.statuses.map((status, i) =>  <Picker.Item key={i} label={status.label} value={status.value}/>);
     return(
       <Picker
+          style={ProjectSelectionStyles.picker}
         selectedValue={this.state.filter.status}
         onValueChange={this.onChangeFilter.bind(this, 'status')}>
         {statuses}
@@ -88,7 +89,7 @@ export default class ProjectSelectionScreen extends Component{
         <View style={ProjectSelectionStyles.filterShowContainer}>
           <Text style={ProjectSelectionStyles.text}>{I18n('PROJECTS_PROJECT_NAME')}: {filter.name}</Text>
           <Text style={ProjectSelectionStyles.text}>{I18n('PROJECTS_CLIENT_NAME')}: {filter.client.name}</Text>
-          <Text style={ProjectSelectionStyles.text}>{I18n('PROJECTS_STATUS')}: {findStatusLabel(filter.status)}</Text>
+          <Text style={ProjectSelectionStyles.text}>{I18n('PROJECTS_STATUS')} {findStatusLabel(filter.status)}</Text>
         </View>
         <View style={ProjectSelectionStyles.filterCon}>
           <View style={ProjectSelectionStyles.projectNameCon}>

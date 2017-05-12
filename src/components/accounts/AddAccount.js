@@ -77,6 +77,7 @@ export default class AddAccount extends Component{
     });
     return(
         <Picker
+            style={AccountsStyles.pickerCountry}
             selectedValue={this.state.country}
             onValueChange={country => this.handleChange(country)}>
           {countryItems}

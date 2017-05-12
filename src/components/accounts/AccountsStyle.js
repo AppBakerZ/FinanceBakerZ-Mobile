@@ -39,24 +39,22 @@ export const AccountsStyles = StyleSheet.create({
 
   text: {
     fontFamily: 'QuicksandBook-Regular',
-    color: '#696969'
+    color: '#696969',
+      paddingLeft : -10,
   },
 
   textBold: {
     fontFamily: 'QuicksandBold-Regular'
   },
-
   scroll:{
     flex :1,
     padding: 20
   },
-
   currencyAndAmount: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center'
   },
-
   loaderView:{
     flex: 1,
     justifyContent: 'center',
@@ -78,15 +76,19 @@ export const AccountsStyles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 20
   },
-
+    pickerCountry:{
+    marginLeft: -8,
+    },
   pickerAndroidCon: {
     flex: 1.6,
     borderBottomWidth: 1,
     borderBottomColor: '#dadada',
     justifyContent: 'flex-end',
-    position: 'relative'
+    position: 'relative',
   },
-
+    picker:{
+        marginLeft : -7
+    },
   bankCardCon: {
     flex: 1.3,
     justifyContent: 'center'
@@ -103,11 +105,11 @@ export const AccountsStyles = StyleSheet.create({
   iconRight: {
     flex: 1,
     textAlign: 'right',
-    paddingRight: 19
+    paddingRight: 5
   },
 
   textLeft: {
-    paddingLeft: 12
+    paddingLeft: 12,
   },
 
   bankIconsCon: {
@@ -133,12 +135,8 @@ export const AccountsStyles = StyleSheet.create({
     borderRightWidth: 1,
     borderBottomColor: '#dadada',
     borderBottomWidth: 1,
-    maxWidth: screen.width * .3
+    maxWidth: screen.width * .4
   },
-
-  scrollViewCon: {
-  },
-
   accountNoCon: {
     flex: 1.4,
     borderBottomWidth: 1,
@@ -191,7 +189,6 @@ export const AccountsStyles = StyleSheet.create({
     fontFamily: 'QuicksandBook-Regular',
     fontSize: 15,
     height: 48,
-    paddingLeft: 12
   },
 
   selectParentText:{
@@ -201,7 +198,7 @@ export const AccountsStyles = StyleSheet.create({
 
   labelCon: {
     flex: 1,
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
   }
 
 

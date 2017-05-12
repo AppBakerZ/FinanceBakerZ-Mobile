@@ -84,10 +84,14 @@ export default class ViewTransaction extends Component {
                             <Text style={[TransactionsStyles.text]}>{I18n("TRANSACTIONS_DEPOSITED_BANK")} Standard Chartered</Text>
                             <Text style={[TransactionsStyles.text]}>{I18n("TRANSACTIONS_ACCOUNT_NUMBER")} 090078601</Text>
                             <View style={TransactionsStyles.currencyIconCon}>
-                                <Text style={[TransactionsStyles.text]}>{I18n("TRANSACTIONS_TRANSACTION_AMOUNT")}
-                                    <CurrencyIcon name={alterIconName(loggedUserCurrency())} size={18}/>
-                                    <Text style={[TransactionsStyles.textBold, TransactionsStyles.greenText]}> {currencyStandardFormat(selectedTransaction.amount)}</Text>
-                                </Text>
+
+                                <View style={TransactionsStyles.CurrencyViewContainer}>
+                                    <Text style={[TransactionsStyles.text]}> {I18n("TRANSACTIONS_TRANSACTION_AMOUNT")}
+                                    </Text>
+                                        <CurrencyIcon name={alterIconName(loggedUserCurrency())} size={18}/>
+                                        <Text style={[TransactionsStyles.textBold, TransactionsStyles.greenText]}> {currencyStandardFormat(selectedTransaction.amount)}</Text>
+                                </View>
+
                             </View>
                         </View>
                         <View style={TransactionsStyles.viewTransactionUserInfoCon}>

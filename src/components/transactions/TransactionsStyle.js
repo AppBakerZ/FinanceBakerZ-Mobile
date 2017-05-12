@@ -38,7 +38,7 @@ export const TransactionsStyles = StyleSheet.create({
 
   text: {
     fontFamily: 'QuicksandBook-Regular',
-    fontSize: 14
+    fontSize: 14,
   },
 
   textBold:{
@@ -162,9 +162,11 @@ export const TransactionsStyles = StyleSheet.create({
 
 
   currencyIconCon: {
-    flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
   },
+    CurrencyViewContainer:{
+    flexDirection : 'row'
+    },
 
   /*UpdateTransaction Styling*/
 

@@ -134,7 +134,7 @@ export const ProjectsStyles = StyleSheet.create({
     inputBorderBottom: {
         justifyContent: 'flex-end',
         borderBottomWidth: 1,
-        borderBottomColor: '#F5F5F5'
+        borderBottomColor: '#F5F5F5',
     },
 
     inputProjectNameCon:{
@@ -177,19 +177,21 @@ export const ProjectsStyles = StyleSheet.create({
     projectCardTxtAndIcon: {
         flex: 1,
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
     },
 
     iconRight: {
         flex: 1,
         textAlign: 'right',
-        paddingRight: 19
+        paddingRight: 15
     },
 
     textLeft: {
-        paddingLeft: 20
+        paddingLeft: 20,
     },
-
+    picker:{
+        marginLeft : -7
+    },
     renderPickerCon: {
         width: screen.width,
         paddingLeft: 15
@@ -198,7 +200,8 @@ export const ProjectsStyles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         paddingTop: 8,
-        paddingLeft: 10
+        paddingLeft: 10,
+        paddingRight: 10,
     },
     inputDateText: {
         paddingLeft: 10
@@ -206,7 +209,7 @@ export const ProjectsStyles = StyleSheet.create({
 
     inputDateSelected: {
         paddingVertical: 10,
-        paddingLeft: 20
+        paddingLeft: 10
     },
 
     bottomCon: {
@@ -267,7 +270,7 @@ export const ProjectsStyles = StyleSheet.create({
         flex : 0.5,
     },
     detailText:{
-        color : '#008000'
+        fontFamily: 'QuicksandBold-Regular',
     },
     projectDateContainer:{
         flex : 3,
@@ -288,7 +291,7 @@ export const ProjectsStyles = StyleSheet.create({
         fontFamily: 'QuicksandBold-Regular'
     },
     BankText:{
-        fontFamily: 'QuicksandBold-Regular',
+        fontFamily: 'QuicksandBook-Regular',
         backgroundColor: 'transparent'
     }
 });

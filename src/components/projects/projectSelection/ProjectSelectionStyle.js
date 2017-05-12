@@ -88,8 +88,10 @@ export const ProjectSelectionStyles = StyleSheet.create({
 
   textLeft: {
     paddingLeft: 5
-  }
-
+  },
+    picker:{
+        marginRight : 10
+    }
 
 });
 

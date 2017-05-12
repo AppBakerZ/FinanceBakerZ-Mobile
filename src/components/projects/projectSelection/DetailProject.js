@@ -95,7 +95,7 @@ export default class DetailProject extends  Component {
                             <Text style={ProjectsStyles.detail}><Text style={ProjectsStyles.detailText}>{I18n('PROJECTS_AMOUNT_AGREED')}</Text> {project.detail.amount}</Text>
                             <Text style={ProjectsStyles.detail}><Text style={ProjectsStyles.detailText}>{I18n('PROJECTS_AMOUNT_PAID')}</Text> {this.state.amountPaid || 0}</Text>
                             <Text style={ProjectsStyles.detail}><Text style={ProjectsStyles.detailText}>{I18n('PROJECTS_AMOUNT_REMAINING')}</Text> {project.detail.amount - this.state.amountPaid || project.detail.amount}</Text>
-                            <Text style={ProjectsStyles.detail}><Text style={ProjectsStyles.detailText}>{I18n('PROJECTS_PROJECT_STATUS')}</Text> {capitalizeFirstLetter(project.detail.status)}</Text>
+                            <Text style={ProjectsStyles.detail}><Text style={ProjectsStyles.detailText}>{I18n('PROJECTS_PROJECT_STATUS')} :</Text> {capitalizeFirstLetter(project.detail.status)}</Text>
                         </View>
                     </View>
                     <View style={ProjectsStyles.projectFebIcon}>

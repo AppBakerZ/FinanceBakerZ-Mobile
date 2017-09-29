@@ -39,7 +39,7 @@ class Projects extends Component {
                 <Text style={ProjectsStyles.contentRightText}>{rowData.name}</Text>
                 <View style={ProjectsStyles.AmountContainer}>
                   <View>
-                      {loggedUserCurrency() ? <CurrencyIcon name={alterIconName(loggedUserCurrency())} size={18}/> : <Text></Text>}
+                      {loggedUserCurrency() ? <CurrencyIcon name={alterIconName(loggedUserCurrency())} size={18}/> : <Text/>}
                   </View>
                   <View style={ProjectsStyles.CurrencySymbol}>
                     <Text style={ProjectsStyles.iconText}>{currencyStandardFormat(rowData.amount)}</Text>

@@ -118,15 +118,15 @@ export default class UpdateProject extends  Component {
                 <View style={[ProjectsStyles.inputProjectNameCon, ProjectsStyles.inputBorderBottom]}>
                   <KeyboardAvoidingView>
                       <Text style={ProjectsStyles.labelText}>{I18n('PROJECTS_PROJECT_NAME')}</Text>
-                          <TextInput
-                        placeholder={I18n('PROJECTS_PROJECT_NAME')}
-                        style={ProjectsStyles.input}
-                        maxLength = {50}
-                        autoCorrect={false}
-                        onChangeText={this.onChange.bind(this, 'name')}
-                        underlineColorAndroid="transparent"
-                        value={this.state.name}
-                    />
+                      <TextInput
+                          placeholder={I18n('PROJECTS_PROJECT_NAME')}
+                          style={ProjectsStyles.input}
+                          maxLength = {50}
+                          autoCorrect={false}
+                          onChangeText={this.onChange.bind(this, 'name')}
+                          underlineColorAndroid="transparent"
+                          value={this.state.name}
+                      />
                   </KeyboardAvoidingView>
                 </View>
                 <View style={[ProjectsStyles.inputClientName, ProjectsStyles.inputBorderBottom]}>
@@ -187,7 +187,7 @@ export default class UpdateProject extends  Component {
                     <Icon size={10} name="down-arrow" style={ProjectsStyles.iconRight} />
                   </TouchableOpacity>
                 </View>
-                <View style={ProjectsStyles.bottomCon}></View>
+                <View style={ProjectsStyles.bottomCon}/>
               </Image>
                 {!this.state.modalVisible ? <FabButton iconName="check" iconColor="#fff" onPress={this.submit} disabled={this.state.loading} /> : <View></View>}
               <Modal style={ProjectsStyles.modal} onClosed={() => this.setState({modalVisible: false})}  position={"bottom"} ref={"modal"} swipeArea={20}>

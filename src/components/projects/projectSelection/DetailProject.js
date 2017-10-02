@@ -100,7 +100,7 @@ export default class DetailProject extends  Component {
                         </View>
                     </View>
                     <View style={ProjectsStyles.projectFebIcon}>
-                        <FabButton iconName="edit" style={ProjectsStyles.fabButton} onPress={() => this.props.navigation.navigate('UpdateProject',{projectDetails:project, statuses: project.statuses, name : project.detail.name})} iconColor="#fff" />
+                        <FabButton iconName="edit" style={ProjectsStyles.fabButton} onPress={() => this.props.navigation.navigate('UpdateProject',{projectDetails:project, statuses: project.statuses, types:project.types,  name : project.detail.name})} iconColor="#fff" />
                     </View>
                 </Image>
             </ViewContainer>

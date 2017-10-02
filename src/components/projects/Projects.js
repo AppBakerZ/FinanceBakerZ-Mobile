@@ -27,13 +27,20 @@ class Projects extends Component {
             { label: 'Waiting for Feedback', value: 'waiting' },
             { label: 'Completed',  value: 'completed' }
         ];
+        this.types = [
+            { label: 'Fixed', value: 'fixed' },
+            { label: 'Hourly', value: 'hourly' },
+            { label: 'Weekly', value: 'weekly' },
+            { label: 'Monthly', value: 'monthly' }
+        ];
+
         setTimeout(() => query.set('query', {limit: 20 }));
         this.findStatusLabel = this.findStatusLabel.bind(this);
     }
 
     renderRow(rowData){
         return(
-            <TouchableOpacity style={ProjectsStyles.listViewContainerItem} activeOpacity={0.75}  onPress={() => this.props.navigation.navigate('DetailProject',{detail:rowData, statuses : this.statuses})}>
+            <TouchableOpacity style={ProjectsStyles.listViewContainerItem} activeOpacity={0.75}  onPress={() => this.props.navigation.navigate('DetailProject',{detail:rowData, statuses : this.statuses, types: this.types})}>
               <View style={ProjectsStyles.listViewContentLeft}>
                 <Icon name='checked' style={ProjectsStyles.icons} color={this.getIconColor(rowData.status)}/>
                 <Text style={ProjectsStyles.contentRightText}>{rowData.name}</Text>
@@ -101,7 +108,7 @@ class Projects extends Component {
                               renderRow={this.renderRow.bind(this)}
                           /> : <View style={ProjectsStyles.errorMsg}><Text style={ProjectsStyles.BankText}>{I18n('PROJECTS_NO_PROJECTS_ADDED')}</Text></View>}
                   </View>
-                  <FabButton iconName="add" iconColor="#fff" onPress={() => navigate('CreateProject', {statuses: this.statuses, findStatusLabel: this.findStatusLabel})} />
+                  <FabButton iconName="add" iconColor="#fff" onPress={() => navigate('CreateProject', {statuses: this.statuses, types: this.types, findStatusLabel: this.findStatusLabel})} />
                 </ViewContainer>
             );
         }

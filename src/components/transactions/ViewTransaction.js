@@ -74,7 +74,7 @@ export default class ViewTransaction extends Component {
                         </View>
                         <View style={[TransactionsStyles.viewTransactionBankDepositCon, TransactionsStyles.borderBottom]}>
                             <Text style={[TransactionsStyles.textBold, TransactionsStyles.greenText]}>
-                                {(selectedTransaction.receivedAt ?
+                                {(selectedTransaction.transactionAt ?
                                     (selectedTransaction.type == "project" ?
                                         (selectedTransaction.project && selectedTransaction.project.name || selectedTransaction.project) : selectedTransaction.type) :
                                     (selectedTransaction.category.name || selectedTransaction.category)).toUpperCase()}

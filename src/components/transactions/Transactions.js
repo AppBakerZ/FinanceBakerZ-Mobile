@@ -140,12 +140,12 @@ Transactions.propTypes = {
 
 export default createContainer(() => {
 
-  let transactionsHandle = Meteor.subscribe('transactions', query.get('query'));
+  let transactionsHandle = Meteor.subscribe('transaction', query.get('query'));
   Meteor.subscribe('accounts');
 
   let incomes, expenses, transactions;
-  incomes =  Meteor.collection('incomes').find({}).reverse();
-  expenses = Meteor.collection('expenses').find({}).reverse();
+  incomes =  Meteor.collection('transactions').find({type: 'income'}).reverse();
+  expenses = Meteor.collection('transactions').find({type: 'expense'}).reverse();
   transactions = _.sortBy(incomes.concat(expenses), function(transaction){return transaction.receivedAt || transaction.spentAt }).reverse();
   const transactionsLoading = !transactionsHandle.ready();
 

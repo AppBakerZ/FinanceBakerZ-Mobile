@@ -146,7 +146,8 @@ export default createContainer(() => {
   let incomes, expenses, transactions;
   incomes =  Meteor.collection('transactions').find({type: 'income'}).reverse();
   expenses = Meteor.collection('transactions').find({type: 'expense'}).reverse();
-  transactions = _.sortBy(incomes.concat(expenses), function(transaction){return transaction.receivedAt || transaction.spentAt }).reverse();
+  transactions =  Meteor.collection('transactions').find();
+  transactions = _.sortBy(transactions, 'transactionAt').reverse();
   const transactionsLoading = !transactionsHandle.ready();
 
   return {

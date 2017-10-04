@@ -75,14 +75,17 @@ DashboardTabBottomScreen.propTypes = {
 export default createContainer(() => {
   Meteor.subscribe('transactions.incomes', 10);
   Meteor.subscribe('transactions.expenses', 10);
+  let transactionsHandle = Meteor.subscribe('transaction');
 
-  let incomes, expenses;
-  incomes =  Meteor.collection('transactions').find({type: 'income'});
-  expenses = Meteor.collection('transactions').find({type: 'expense'});
+  let incomes, expenses, transactions;
+  incomes =  Meteor.collection('transactions').find({type: 'income'}).reverse();
+  expenses = Meteor.collection('transactions').find({type: 'expense'}).reverse();
+  transactions =  Meteor.collection('transactions').find();
+  transactions = _.sortBy(transactions, 'transactionAt').reverse();
 
   return {
-    incomes: incomes,
-    expenses: expenses,
-    transactions: _.sortBy(incomes.concat(expenses)).reverse()
+    incomes: incomes.reverse(),
+    expenses: expenses.reverse(),
+    transactions
   };
 }, DashboardTabBottomScreen);

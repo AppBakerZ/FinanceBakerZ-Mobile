@@ -53,12 +53,12 @@ export default class TransactionTabScreen extends  Component {
                   dataSource={ds.cloneWithRows(eval(state.routeName.toLowerCase()))}
                   renderRow={this.renderRow}
               />
-              {state.routeName !== 'TRANSACTIONS' ?  <FabButton iconName="add"  iconColor="#fff" onPress={() => this.props.screenProps.navigate('UpdateTransaction', {routeName: state.routeName.toUpperCase()})} /> : <View></View> }
+              {state.routeName !== 'TRANSACTIONS' ?  <FabButton iconName="add"  iconColor="#fff" onPress={() => this.props.screenProps.navigate('UpdateTransaction', {routeName: state.routeName.toUpperCase()})} /> : <View/> }
             </ViewContainer>
         );
       }else{
         return <ViewContainer>
-          {state.routeName !== 'TRANSACTIONS' ?  <FabButton iconName="add"  iconColor="#fff" onPress={() => this.props.screenProps.navigate('UpdateTransaction', {routeName: state.routeName.toUpperCase()})} /> : <View></View> }
+          {state.routeName !== 'TRANSACTIONS' ?  <FabButton iconName="add"  iconColor="#fff" onPress={() => this.props.screenProps.navigate('UpdateTransaction', {routeName: state.routeName.toUpperCase()})} /> : <View/> }
         </ViewContainer>
       }
     }else{

@@ -561,22 +561,35 @@ class AddOrUpdateTransaction extends Component{
 
   createIncome(){
     let {account, amount, receivedAt, receivedTime, type, project, projects} = this.state;
-
+    let creditType = type;
+    account = {_id: account};
+    type = 'income';
+    let accountExists = Meteor.collection('accounts').findOne({_id: account._id});
+    if(accountExists){
+      account.bank = accountExists.bank;
+      accountExists.number && (account.number = accountExists.number)
+    }
     let {goBack} = this.props.navigation;
-
-    project = type === 'project' && !project ? projects[0]._id : project;
-    receivedAt = new Date(receivedAt);
+    project = (project && creditType === "project" && {_id: project}) || {};
+    let projectExists = Meteor.collection('projects').findOne({_id: project._id});
+    if(projectExists){
+      project.name = projectExists.name;
+    }
+    else if(Object.keys(project).length){
+      //fall back for old records in old transactions
+      project.name = this.state.projectName
+    }
+    transactionAt = new Date(receivedAt);
     receivedTime = new Date(receivedTime);
-    receivedAt.setHours(receivedTime.getHours(), receivedTime.getMinutes(), 0, 0);
-    project = (project && type == "project" && {_id: project}) || {};
-
+    transactionAt.setHours(receivedTime.getHours(), receivedTime.getMinutes(), 0, 0);
 
     if(account &&  amount ){
-      Meteor.call('incomes.insert', {
-        income: {
+      Meteor.call('transactions.insert', {
+        transaction: {
           account,
+          creditType,
           amount: Number(amount),
-          receivedAt,
+          transactionAt,
           type,
           project
         }
@@ -693,7 +706,7 @@ class AddOrUpdateTransaction extends Component{
                 </ScrollView>
               </View>
             </Modal>
-            {!modalVisible ? <FabButton disabled={this.state.imageUploaded} iconName="check" iconColor="#fff" onPress={() => this.submit.bind(this, data.selectedTransaction)()} /> : <View></View> }
+            {!modalVisible ? <FabButton disabled={this.state.imageUploaded} iconName="check" iconColor="#fff" onPress={() => this.submit.bind(this, data.selectedTransaction)()} /> : <View/> }
           </ViewContainer>
       );
     }else{

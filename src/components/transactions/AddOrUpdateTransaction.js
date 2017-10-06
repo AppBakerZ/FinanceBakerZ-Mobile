@@ -24,14 +24,14 @@ class AddOrUpdateTransaction extends Component{
 
 
     if(props.navigation.state.params.selectedTransaction){
-      let {_id, amount, type, project, createdAt, receivedAt, category, description, billUrl, spentAt } = props.navigation.state.params.selectedTransaction;
+      let {_id, amount, type, account, project, createdAt, creditType, transactionAt, category, description, billUrl, spentAt } = props.navigation.state.params.selectedTransaction;
       this.state = {
         _id: _id,
-        account: '',
+        account: account,
+        accountName: account.bank || '',
         amount: amount.toString(),
-        receivedAt: !category ? createdAt : spentAt,
-        receivedTime: !category ? receivedAt : spentAt,
-        type: type || 'project',
+        receivedAt: transactionAt,
+        receivedTime: transactionAt,
         project: project ? project._id : '',
         loading: true,
         accounts: props.accounts,
@@ -41,9 +41,10 @@ class AddOrUpdateTransaction extends Component{
         copyBillUrl: billUrl ? billUrl : '',
         description: description ? description : '',
         category: category ? category._id : '',
-        types:  [
-          {   name: 'Salary', _id: 'salary'},
-          { name: 'Project', _id: 'project'}
+        creditType: creditType || 'project',
+        types: [
+          { name: 'Salary', _id: 'salary' },
+          { name: 'Project', _id: 'project' }
         ],
         render: {renderBank: true},
         routeName: '',
@@ -58,7 +59,7 @@ class AddOrUpdateTransaction extends Component{
         amount: '',
         receivedAt: datetime,
         receivedTime: datetime,
-        type: 'project',
+        creditType: 'project',
         project: '',
         loading: true,
         accounts: props.accounts,
@@ -67,9 +68,9 @@ class AddOrUpdateTransaction extends Component{
         billUrl: '',
         description: '',
         category: '',
-        types:  [
-          {   name: 'Salary', _id: 'salary'},
-          { name: 'Project', _id: 'project'}
+        types: [
+          { name: 'Salary', _id: 'salary' },
+          { name: 'Project', _id: 'project' }
         ],
         render: {renderBank: true},
         imageUploaded: false
@@ -211,7 +212,6 @@ class AddOrUpdateTransaction extends Component{
 
 
   renderAccounts(accounts){
-
     return accounts.map((account, i) => {
       let bankName, bankIcon;
       bankName = this.alertBankName(account.bank);
@@ -256,8 +256,8 @@ class AddOrUpdateTransaction extends Component{
     let projectsRenderItems = data.map((data, i) =>  <Picker.Item key={i} label={data.name} value={data._id}/>);
     return(
         <Picker
-            selectedValue={renderFlag.renderPickerType ? this.state.type : this.state.project}
-            onValueChange={this.onChange.bind(this, renderFlag.renderPickerType ? 'type' : 'project')}>
+            selectedValue={renderFlag.renderPickerType ? this.state.creditType : this.state.project}
+            onValueChange={this.onChange.bind(this, renderFlag.renderPickerType ? 'creditType' : 'project')}>
           {projectsRenderItems}
         </Picker>
     );
@@ -323,7 +323,8 @@ class AddOrUpdateTransaction extends Component{
 
   findProjectName(project_id){
     let {projects} = this.state;
-    return projects.find(project => project._id === project_id)['name'];
+    let project = projects.find(project => project._id === project_id);
+    return project && project.name
   }
 
   renderIncomeForm(data){
@@ -361,7 +362,7 @@ class AddOrUpdateTransaction extends Component{
           {Platform.OS === 'ios' ? <TouchableOpacity onPress={() => this.handleMultipleChange.bind(this, {renderPickerType: true})()}  style={[TransactionsStyles.updateTranTypeCon, TransactionsStyles.borderBottom]}>
             <Text style={[TransactionsStyles.textBold]}>{I18n('TRANSACTIONS_SELECT_TYPE')}</Text>
             <View style={TransactionsStyles.updateTranAccDropDown}>
-              <Text style={TransactionsStyles.text}>{capitalizeFirstLetter(this.state.type)|| 'Select type'}</Text>
+              <Text style={TransactionsStyles.text}>{capitalizeFirstLetter(this.state.creditType)|| 'Select type'}</Text>
               <Icon size={10} name="down-arrow" style={TransactionsStyles.iconRight} />
             </View>
           </TouchableOpacity> :
@@ -370,7 +371,7 @@ class AddOrUpdateTransaction extends Component{
                 {this.renderIncomePicker(data.types, {renderPickerType: true})}
               </View>
           }
-          {this.state.type !== 'salary' ?
+          {this.state.creditType !== 'salary' ?
               Platform.OS === 'ios' ? <TouchableOpacity onPress={() => this.handleMultipleChange.bind(this, {renderPickerProject: true})()} style={[TransactionsStyles.updateTranTypeCon, TransactionsStyles.borderBottom]}>
                 <Text style={[TransactionsStyles.textBold]}>{I18n('TRANSACTIONS_SELECT_PROJECT')}</Text>
                 <View style={TransactionsStyles.updateTranAccDropDown}>
@@ -381,8 +382,8 @@ class AddOrUpdateTransaction extends Component{
                   <View style={[TransactionsStyles.updateTranTypeCon, TransactionsStyles.borderBottom]}>
                     <Text style={[TransactionsStyles.textBold, TransactionsStyles.relativeTop]}>{I18n('TRANSACTIONS_SELECT_PROJECT')}</Text>
                     {this.renderIncomePicker(data.projects, {renderPickerProject: true})}
-                  </View> : <View></View>}
-          <View style={TransactionsStyles.bottomCon}></View>
+                  </View> : <View/>}
+          <View style={TransactionsStyles.bottomCon}/>
         </ViewContainer>
     );
   }
@@ -456,25 +457,31 @@ class AddOrUpdateTransaction extends Component{
 
   updateIncome(){
 
-    let {_id, account, amount, receivedAt, receivedTime, type, project, projects} = this.state;
+    let {_id, account, amount, receivedAt, receivedTime, creditType, type, project, projects} = this.state;
     let {navigate} = this.props.navigation;
-
-    project = type === 'project' && !project ? projects[0]._id : project;
-    receivedAt = new Date(receivedAt);
+    type = 'income';
+    project = (project && creditType === "project" && {_id: project}) || {};
+    let accountExists = Meteor.collection('accounts').findOne({_id: account._id});
+    if(accountExists){
+      account.bank = accountExists.bank;
+      accountExists.number && (account.number = accountExists.number)
+    }
+    transactionAt = new Date(receivedAt);
     receivedTime = new Date(receivedTime);
-    receivedAt.setHours(receivedTime.getHours(), receivedTime.getMinutes(), 0, 0);
-    project = (project && type === "project" && {_id: project}) || {};
-
-
-    Meteor.call('incomes.update', {
-      income: {
-        _id,
-        account,
-        amount: Number(amount),
-        receivedAt,
-        type,
-        project
-      }
+    transactionAt.setHours(receivedTime.getHours(), receivedTime.getMinutes(), 0, 0);
+    let transaction = {
+      _id,
+      account,
+      creditType,
+      amount: Number(amount),
+      transactionAt,
+      type
+    };
+    if(creditType === 'project') {
+      transaction.project = project
+    }
+    Meteor.call('transactions.update', {
+      transaction
     }, (err, response) => {
       if(err){
         console.warn(err.reason);
@@ -560,8 +567,7 @@ class AddOrUpdateTransaction extends Component{
   }
 
   createIncome(){
-    let {account, amount, receivedAt, receivedTime, type, project, projects} = this.state;
-    let creditType = type;
+    let {account, amount, receivedAt, receivedTime, creditType, project, projects} = this.state;
     account = {_id: account};
     type = 'income';
     let accountExists = Meteor.collection('accounts').findOne({_id: account._id});
@@ -584,15 +590,18 @@ class AddOrUpdateTransaction extends Component{
     transactionAt.setHours(receivedTime.getHours(), receivedTime.getMinutes(), 0, 0);
 
     if(account &&  amount ){
+      let transaction = {
+        account,
+        creditType,
+        amount: Number(amount),
+        transactionAt,
+        type
+      };
+      if(creditType === 'project') {
+        transaction.project = project
+      }
       Meteor.call('transactions.insert', {
-        transaction: {
-          account,
-          creditType,
-          amount: Number(amount),
-          transactionAt,
-          type,
-          project
-        }
+        transaction
       }, (err, response) => {
         if(response){
           showAlert('Success', 'Transaction has been added.');
@@ -697,7 +706,9 @@ class AddOrUpdateTransaction extends Component{
       return(
           <ViewContainer>
             <Image source={require('FinanceBakerZ/src/images/app-background.png')} style={TransactionsStyles.backgroundImage}>
-              {this.renderFrom(data)}
+              <ScrollView>
+                {this.renderFrom(data)}
+              </ScrollView>
             </Image>
             <Modal style={TransactionsStyles.modal} position={"bottom"} ref={"modal"} swipeArea={20} onClosed={() => this.setState({modalVisible: false})}>
               <View style={TransactionsStyles.renderDetailCon}>

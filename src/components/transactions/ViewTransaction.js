@@ -55,6 +55,10 @@ export default class ViewTransaction extends Component {
         this.props.navigation.setParams({ submit: this.submit }); // setting submit function from Routes to this.submit function
     }
 
+    alertBankName(bankName){
+        return bankName ? bankName.split('-').slice(1).join(' ') : '';
+    }
+
     render(){
 
         let {selectedTransaction} = this.props.navigation.state.params;
@@ -74,7 +78,7 @@ export default class ViewTransaction extends Component {
                             </Text>
                         </View>
                         <View style={[TransactionsStyles.viewTransactionDepositedInCon, TransactionsStyles.borderBottom]}>
-                            <Text style={[TransactionsStyles.text]}>{I18n("TRANSACTIONS_DEPOSITED_BANK")} {selectedTransaction.account.bank}</Text>
+                            <Text style={[TransactionsStyles.text]}>{I18n("TRANSACTIONS_DEPOSITED_BANK")} {this.alertBankName(selectedTransaction.account.bank)}</Text>
                             <Text style={[TransactionsStyles.text]}>{I18n("TRANSACTIONS_ACCOUNT_NUMBER")} {selectedTransaction.account.number}</Text>
                             <View style={TransactionsStyles.currencyIconCon}>
 

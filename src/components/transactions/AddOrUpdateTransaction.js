@@ -14,7 +14,7 @@ import {showAlert} from 'FinanceBakerZ/src/customLibrary';
 import CategoryIcon from 'FinanceBakerZ/src/icons/CategoryIcon';
 import ImagePicker from 'react-native-image-picker';
 import { RNS3 } from 'react-native-aws3';
-
+import Settings from 'FinanceBakerZ/settings.json';
 
 class AddOrUpdateTransaction extends Component{
 
@@ -402,15 +402,15 @@ class AddOrUpdateTransaction extends Component{
           <View style={[TransactionsStyles.updateTranAmountCon, TransactionsStyles.borderBottom]}>
             <Text style={[TransactionsStyles.textBold, TransactionsStyles.relativeTop]}>{I18n('TRANSACTIONS_AMOUNT')}</Text>
             <KeyboardAvoidingView behavior={'padding'}>
-            <TextInput
-                  placeholder={I18n('TRANSACTIONS_AMOUNT')}
-                  style={TransactionsStyles.input}
-                  autoCorrect={false}
-                  onChangeText={this.onChange.bind(this, 'amount')}
-                  underlineColorAndroid="transparent"
-                  keyboardType="numeric"
-                  value={this.state.amount}
-              />
+              <TextInput
+                    placeholder={I18n('TRANSACTIONS_AMOUNT')}
+                    style={TransactionsStyles.input}
+                    autoCorrect={false}
+                    onChangeText={this.onChange.bind(this, 'amount')}
+                    underlineColorAndroid="transparent"
+                    keyboardType="numeric"
+                    value={this.state.amount}
+                />
             </KeyboardAvoidingView>
           </View>
           <TouchableOpacity onPress={() => this.handleMultipleChange.bind(this, {renderCategories: true})()} activeOpacity={0.75} style={[TransactionsStyles.updateTranAccountCon, TransactionsStyles.borderBottom]}>
@@ -423,7 +423,7 @@ class AddOrUpdateTransaction extends Component{
           <View style={[TransactionsStyles.updateTranAmountCon, TransactionsStyles.borderBottom]}>
             <Text style={[TransactionsStyles.textBold, TransactionsStyles.relativeTop]}>{I18n('TRANSACTIONS_DESCRIPTION')}</Text>
             <KeyboardAvoidingView behavior={'padding'}>
-            <TextInput
+              <TextInput
                   placeholder={I18n('TRANSACTIONS_DESCRIPTION')}
                   style={TransactionsStyles.input}
                   autoCorrect={false}
@@ -446,10 +446,10 @@ class AddOrUpdateTransaction extends Component{
             <Text style={TransactionsStyles.textBold}>Choose Bill</Text>
           </TouchableOpacity>
           <View style={[TransactionsStyles.imageCon, this.state.billUrl  ? TransactionsStyles.borderBottom : '']}>
-            {this.state.billUrl ? <Image source = {{uri: this.state.billUrl}} style = {TransactionsStyles.userBill} /> : <Text></Text>}
+            {this.state.billUrl ? <Image source = {{uri: this.state.billUrl}} style = {TransactionsStyles.userBill} /> : <Text/>}
           </View>
           <View style={TransactionsStyles.bottomCon}>
-            {this.state.imageUploaded ? <View style={TransactionsStyles.imgLoading}><Loader size={35} color="#008142" /></View> : <View></View>}
+            {this.state.imageUploaded ? <View style={TransactionsStyles.imgLoading}><Loader size={35} color="#008142" /></View> : <View/>}
           </View>
         </ViewContainer>
     );
@@ -497,23 +497,37 @@ class AddOrUpdateTransaction extends Component{
     let {_id, account, amount, receivedTime, receivedAt, description, billUrl, category} = this.state;
     let {navigate} = this.props.navigation;
 
-    let spentAt, spentTime;
-
-    spentAt = new Date(receivedAt);
+    type = 'expense';
+    let transactionAt, spentTime;
+    transactionAt = new Date(receivedAt);
     spentTime = new Date(receivedTime);
-    spentAt.setHours(spentTime.getHours(), spentTime.getMinutes(), 0, 0);
+    transactionAt.setHours(spentTime.getHours(), spentTime.getMinutes(), 0, 0);
 
+    if(!(account && account._id)){
+      account = {_id: account}
+    }
+    let accountExists = Meteor.collection('accounts').findOne({_id: account._id});
+    if(accountExists){
+      account.bank = accountExists.bank;
+      accountExists.number && (account.number = accountExists.number)
+    }
     category = category && {_id: category};
+    let categoryExists = Meteor.collection('categories').findOne({_id: category._id});
+    if(categoryExists){
+      category.icon = categoryExists.icon;
+      category.name = categoryExists.name;
+    }
 
-    Meteor.call('expenses.update', {
-      expense: {
+    Meteor.call('transactions.update', {
+      transaction: {
         _id,
         account,
         amount: Number(amount),
-        spentAt,
+        transactionAt,
         description,
         billUrl,
-        category
+        category,
+        type
       }
     }, (err, response) => {
       if(err){
@@ -528,21 +542,37 @@ class AddOrUpdateTransaction extends Component{
   insertExpense(){
 
     let {account, amount, description, receivedTime, receivedAt, category, billUrl} = this.state;
-    let spentAt, spentTime;
-    spentAt = new Date(receivedAt);
-    spentTime = new Date(receivedTime);
-    spentAt.setHours(spentTime.getHours(), spentTime.getMinutes(), 0, 0);
+
+    account = {_id: account};
+    let accountExists = Meteor.collection('accounts').findOne({_id: account._id});
+    if(accountExists){
+      account.bank = accountExists.bank;
+      accountExists.number && (account.number = accountExists.number)
+    }
+
     category = category && {_id: category};
+    let categoryExists = Meteor.collection('categories').findOne({_id: category._id});
+    if(categoryExists){
+      category.icon = categoryExists.icon;
+      category.name = categoryExists.name;
+    }
+
+    type = 'expense';
+    let transactionAt = new Date(receivedAt);
+    let spentTime = new Date(receivedTime);
+    transactionAt.setHours(spentTime.getHours(), spentTime.getMinutes(), 0, 0);
+
 
     let {goBack} = this.props.navigation;
-    Meteor.call('expenses.insert', {
-      expense: {
+    Meteor.call('transactions.insert', {
+      transaction: {
         account,
         amount: Number(amount),
-        spentAt,
+        transactionAt,
         description,
         billUrl,
-        category
+        category,
+        type
       }
     }, (err, response) => {
       if(response){
@@ -665,9 +695,9 @@ class AddOrUpdateTransaction extends Component{
     const options = {
       keyPrefix: "uploads/",
       bucket: "financebakerz",
-      region: '',
-      accessKey: '',
-      secretKey: '',
+      region: Settings.AWSRegion,
+      accessKey: Settings.AWSAccessKeyId,
+      secretKey: Settings.AWSSecretAccessKey,
       successActionStatus: 201
     };
 

@@ -137,6 +137,11 @@ export const TransactionsStyles = StyleSheet.create({
     borderBottomWidth: 1
   },
 
+  borderTop: {
+    borderTopColor: '#EEEEEE',
+    borderTopWidth: 1
+  },
+
   backgroundImage: {
     flex: 1,
     resizeMode: 'cover', // or 'stretch'

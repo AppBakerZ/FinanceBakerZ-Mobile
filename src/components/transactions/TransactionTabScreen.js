@@ -25,10 +25,10 @@ export default class TransactionTabScreen extends  Component {
           <View style={TransactionsStyles.listViewContentLeft}>
             <Icon name={rowData.category ? 'left-arrow' : 'right-arrow'} color={rowData.category ?  '#C81113' : '#008041'} style={TransactionsStyles.icons} />
             <Text style={TransactionsStyles.iconText}>
-              {capitalizeFirstLetter(rowData.receivedAt ?
+              {capitalizeFirstLetter(rowData.transactionAt ?
                   (rowData.type == "project" ?
                       (rowData.project && rowData.project.name || rowData.project) : rowData.type) :
-                  (rowData.category.name || rowData.category))}
+                  (rowData.category ? rowData.category.name : rowData.category))}
             </Text>
           </View>
           <View style={TransactionsStyles.listViewContentRight}>
@@ -53,12 +53,12 @@ export default class TransactionTabScreen extends  Component {
                   dataSource={ds.cloneWithRows(eval(state.routeName.toLowerCase()))}
                   renderRow={this.renderRow}
               />
-              {state.routeName !== 'TRANSACTIONS' ?  <FabButton iconName="add"  iconColor="#fff" onPress={() => this.props.screenProps.navigate('UpdateTransaction', {routeName: state.routeName.toUpperCase()})} /> : <View></View> }
+              {state.routeName !== 'TRANSACTIONS' ?  <FabButton iconName="add"  iconColor="#fff" onPress={() => this.props.screenProps.navigate('UpdateTransaction', {routeName: state.routeName.toUpperCase()})} /> : <View/> }
             </ViewContainer>
         );
       }else{
         return <ViewContainer>
-          {state.routeName !== 'TRANSACTIONS' ?  <FabButton iconName="add"  iconColor="#fff" onPress={() => this.props.screenProps.navigate('UpdateTransaction', {routeName: state.routeName.toUpperCase()})} /> : <View></View> }
+          {state.routeName !== 'TRANSACTIONS' ?  <FabButton iconName="add"  iconColor="#fff" onPress={() => this.props.screenProps.navigate('UpdateTransaction', {routeName: state.routeName.toUpperCase()})} /> : <View/> }
         </ViewContainer>
       }
     }else{

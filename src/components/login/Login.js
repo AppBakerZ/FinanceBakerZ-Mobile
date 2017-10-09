@@ -14,8 +14,8 @@ export default class Login extends Component {
         super(props);
 
         this.state = {
-            usernameOrEmail: 'furqan',
-            password: '1234',
+            usernameOrEmail: 'raza2022',
+            password: '123456',
             loading: false
         };
     }
@@ -42,12 +42,7 @@ export default class Login extends Component {
                     this.setState({loading: false});
                     var useraccount = {account: {owner: Meteor.user()._id}};
                     Meteor.call('profileAssets', useraccount, function (err, result) {
-                        // console.log('err:', err);
-                        // console.log('result:', result);
                     });
-                    setTimeout(() => {
-                        // this.props.history.push('/app/dashboard');
-                    }, 1000);
                 }
             });
         }else {

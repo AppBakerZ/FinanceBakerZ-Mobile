@@ -67,8 +67,8 @@ export default class DetailProject extends  Component {
             I18n('PROJECTS_INFORM_MESSAGE') + '\n' + I18n('PROJECTS_CONFIRMATION_MESSAGE'),
             [
                 {text: I18n('PROJECTS_BACK_BUTTON')},
-                {text: I18n('PROJECTS_REMOVE_BUTTON'), onPress: () => this.deleteProject(_id, name), style: 'cancel'},
-            ],
+                {text: I18n('PROJECTS_REMOVE_BUTTON'), onPress: () => this.deleteProject(_id, name), style: 'cancel'}
+            ]
         );
     }
 
@@ -82,7 +82,7 @@ export default class DetailProject extends  Component {
 
                     <View style={ProjectsStyles.projectDetailMain}>
                         <View style={ProjectsStyles.projectDateContainer}>
-                            <Text style={[ProjectsStyles.projectDate,]}>{I18n('PROJECTS_START_DATE')} : {project.detail.startAt ? formatDate({type: 'getCustomDate', date: project.detail.startAt, format: 'MMMM DD, YYYY'}) : 'Select Date'}</Text>
+                            <Text style={[ProjectsStyles.projectDate]}>{I18n('PROJECTS_START_DATE')} : {project.detail.startAt ? formatDate({type: 'getCustomDate', date: project.detail.startAt, format: 'MMMM DD, YYYY'}) : 'Select Date'}</Text>
                             <Text style={ProjectsStyles.projectId}>Project ID : {project.detail._id}</Text>
                         </View>
                         <View style={ProjectsStyles.projectName}>
@@ -91,15 +91,16 @@ export default class DetailProject extends  Component {
                             </Text>
                         </View>
                         <View style={ProjectsStyles.projectDetail}>
-                            <Text style={ProjectsStyles.detail}><Text style={ProjectsStyles.detailText}>{I18n('PROJECTS_CLIENT')}</Text> {capitalizeFirstLetter(project.detail.client.name)}</Text>
+                            <Text style={ProjectsStyles.detail}><Text style={ProjectsStyles.detailText}>{I18n('PROJECTS_DESCRIPTION')}</Text> {project.detail.description}</Text>
+                            <Text style={ProjectsStyles.detail}><Text style={ProjectsStyles.detailText}>{I18n('PROJECTS_CLIENT')}</Text> {capitalizeFirstLetter(Object.keys(project.detail.client).length ? project.detail.client.name : '-')}</Text>
                             <Text style={ProjectsStyles.detail}><Text style={ProjectsStyles.detailText}>{I18n('PROJECTS_AMOUNT_AGREED')}</Text> {project.detail.amount}</Text>
                             <Text style={ProjectsStyles.detail}><Text style={ProjectsStyles.detailText}>{I18n('PROJECTS_AMOUNT_PAID')}</Text> {this.state.amountPaid || 0}</Text>
                             <Text style={ProjectsStyles.detail}><Text style={ProjectsStyles.detailText}>{I18n('PROJECTS_AMOUNT_REMAINING')}</Text> {project.detail.amount - this.state.amountPaid || project.detail.amount}</Text>
-                            <Text style={ProjectsStyles.detail}><Text style={ProjectsStyles.detailText}>{I18n('PROJECTS_PROJECT_STATUS')} :</Text> {capitalizeFirstLetter(project.detail.status)}</Text>
+                            <Text style={ProjectsStyles.detail}><Text style={ProjectsStyles.detailText}>{I18n('PROJECTS_PROJECT_STATUS')}</Text> {capitalizeFirstLetter(project.detail.status)}</Text>
                         </View>
                     </View>
                     <View style={ProjectsStyles.projectFebIcon}>
-                        <FabButton iconName="edit" style={ProjectsStyles.fabButton} onPress={() => this.props.navigation.navigate('UpdateProject',{projectDetails:project, statuses: project.statuses, name : project.detail.name})} iconColor="#fff" />
+                        <FabButton iconName="edit" style={ProjectsStyles.fabButton} onPress={() => this.props.navigation.navigate('UpdateProject',{projectDetails:project, statuses: project.statuses, types:project.types,  name : project.detail.name})} iconColor="#fff" />
                     </View>
                 </Image>
             </ViewContainer>

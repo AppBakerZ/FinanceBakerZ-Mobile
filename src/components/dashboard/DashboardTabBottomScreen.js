@@ -33,12 +33,12 @@ class DashboardTabBottomScreen extends Component {
     return(
       <View style={DashboardStyles.listViewContainer}>
         <View style={DashboardStyles.listViewContentLeft}>
-          <Icon name={rowData.category ? 'left-arrow' : 'right-arrow'} color={rowData.category ?  '#C81113' : '#008041'} style={DashboardStyles.icons}></Icon>
+          <Icon name={rowData.category ? 'left-arrow' : 'right-arrow'} color={rowData.category ?  '#C81113' : '#008041'} style={DashboardStyles.icons}/>
           <Text style={DashboardStyles.iconText}>
-            {capitalizeFirstLetter(rowData.receivedAt ?
+            {capitalizeFirstLetter(rowData.transactionAt ?
               (rowData.type == "project" ?
                 (rowData.project && rowData.project.name || rowData.project) : rowData.type) :
-              (rowData.category.name || rowData.category))}
+              (rowData.category ? rowData.category.name : rowData.category))}
           </Text>
         </View>
         <View style={DashboardStyles.listViewContentRight}>
@@ -73,16 +73,19 @@ DashboardTabBottomScreen.propTypes = {
 };
 
 export default createContainer(() => {
-  Meteor.subscribe('incomes', 10);
-  Meteor.subscribe('expenses', 10);
+  Meteor.subscribe('transactions.incomes', 10);
+  Meteor.subscribe('transactions.expenses', 10);
+  let transactionsHandle = Meteor.subscribe('transaction');
 
-  let incomes, expenses;
-  incomes =  Meteor.collection('incomes').find({});
-  expenses = Meteor.collection('expenses').find({});
+  let incomes, expenses, transactions;
+  incomes =  Meteor.collection('transactions').find({type: 'income'}).reverse();
+  expenses = Meteor.collection('transactions').find({type: 'expense'}).reverse();
+  transactions =  Meteor.collection('transactions').find();
+  transactions = _.sortBy(transactions, 'transactionAt').reverse();
 
   return {
-    incomes: incomes,
-    expenses: expenses,
-    transactions: _.sortBy(incomes.concat(expenses), function(transaction){return transaction.receivedAt || transaction.spentAt }).reverse()
+    incomes: incomes.reverse(),
+    expenses: expenses.reverse(),
+    transactions
   };
 }, DashboardTabBottomScreen);

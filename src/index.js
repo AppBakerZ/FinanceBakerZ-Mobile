@@ -14,7 +14,7 @@ class FinanceBakerZ extends Component {
     SplashScreen.close({
       animationType: SplashScreen.animationType.scale,
       duration: 850,
-      delay: 500,
+      delay: 500
     })
   }
 
@@ -23,7 +23,7 @@ class FinanceBakerZ extends Component {
     }
     render() {
         console.log('this.props.user ', this.props.user);
-        return this.props.user ? <Drawer /> : <Auth />
+        return this.props.user ? <Drawer screenProps={{...this.props}}/> : <Auth />
     }
 }
 

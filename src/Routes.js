@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, Platform} from 'react-native';
+import {Text, Platform, TouchableOpacity, Image} from 'react-native';
 
 
 import LoginScreen from 'FinanceBakerZ/src/screens/auth/Login';
@@ -56,7 +56,7 @@ export const Auth = StackNavigator({
 
 
 // The navigation prop has functions like setParams, goBack, and navigate.
-const header = ({ navigation }) => {
+const header = ({ navigation, screenProps }) => {
   let {state, navigate} = navigation;
   let headerLeft  = (
       <Icon  name="menu"
@@ -70,7 +70,22 @@ const header = ({ navigation }) => {
   );
 
   let headerTitle  = (
-      <Text style={{fontSize: 20, fontFamily: 'QuicksandBold-Regular', color: '#00562E', paddingLeft: 20}}>{(state.routeName != 'Dashboard') ? state.routeName : ''}</Text>
+      <Text style={{fontSize: 20, fontFamily: 'QuicksandBold-Regular', color: '#00562E', paddingLeft: 20}}>{state.routeName}</Text>
+  );
+
+  let defaultAvatar = './images/default-avatar.gif';
+  let { user } = screenProps;
+  let setUserAvatar = user.profile.avatar.length ? user.profile.avatar : defaultAvatar;
+  let headerRight = (
+      <TouchableOpacity
+          style={{width: 50, height: 50, marginRight: 10}}
+          activeOpacity={0.7}
+          onPress={() => {
+               navigate('Settings')
+             }}>
+        <Image style={{width: '100%', height: '100%', borderRadius: Platform.OS === 'ios' ? 25 : 100}}
+               source={{uri: setUserAvatar}}/>
+      </TouchableOpacity>
   );
 
   let  headerStyle  = {
@@ -78,7 +93,7 @@ const header = ({ navigation }) => {
     backgroundColor: '#ffffff'
   };
 
-  return { headerLeft , headerTitle , headerStyle };
+  return { headerLeft , headerTitle , headerStyle, headerRight };
 };
 
 function nestingHeaders(routeName, renderRightIcon) {
@@ -97,7 +112,7 @@ function nestingHeaders(routeName, renderRightIcon) {
       headerRight  =  (<MaterialIcons
           name="delete"
           size={35}
-          style={{paddingRight: 15,}}
+          style={{paddingRight: 15}}
           onPress={() => {state.params.submit()}}
       />);
     }

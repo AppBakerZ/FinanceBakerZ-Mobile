@@ -21,9 +21,9 @@ class SubCategory extends Component {
     if(child.length){
       return child.map((val, i) => {
         return(
-            <TouchableOpacity key={i} activeOpacity={0.75} onPress={() => this.props.navigation.navigate('UpdateCategory', {_id, parent: name, name: children[i]})} style={SubCategoryStyles.SubcategoryTouchable}>
-              <View style={SubCategoryStyles.subCategoryChildren} key={val} >
-                <Text style={SubCategoryStyles.categoryChildren}>{val.toUpperCase()}</Text>
+            <TouchableOpacity key={i} activeOpacity={0.75} onPress={() => this.props.navigation.navigate('UpdateCategory', {_id, name: children[i].name, childId: children[i].id})} style={SubCategoryStyles.SubcategoryTouchable}>
+              <View style={SubCategoryStyles.subCategoryChildren}>
+                <Text style={SubCategoryStyles.categoryChildren}>{val.name.toUpperCase()}</Text>
               </View>
             </TouchableOpacity>
         )})
@@ -32,7 +32,7 @@ class SubCategory extends Component {
     }
   }
   render(){
-
+    console.log('==>subCategories', this.props.subCategories);
 
     if(this.props.subCategories){
       let {icon, name, _id} = this.props.subCategories;

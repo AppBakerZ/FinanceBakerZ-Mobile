@@ -17,7 +17,7 @@ class AddCategory extends Component{
     constructor(props){
         super(props);
         this.state = {
-            parent: '',
+            parent: null,
             renderCategoryIcon: this.renderCategoryIcon()
         };
     }
@@ -142,10 +142,17 @@ class AddCategory extends Component{
                             </ScrollView>
                         </View>
                         <View style={SubCategoryStyles.iconParent}>
-                            {(Platform.OS !== 'ios') ? <View><Text style={SubCategoryStyles.selectParentText}>{I18n("CATEGORIES_PARENT_CATEGORY")}</Text>{this.getParentCategory()}</View> :
-                                <TouchableOpacity style={SubCategoryStyles.ParentCategory} activeOpacity={0.75}
-                                                  onPress={() => this.refs.modal.open()}>
-                                    <Text style={[SubCategoryStyles.textBold, SubCategoryStyles.textLeft]}></Text>
+                            {(Platform.OS !== 'ios') ?
+                                <View>
+                                    <Text style={SubCategoryStyles.selectParentText}>{I18n("CATEGORIES_PARENT_CATEGORY")}</Text>
+                                    {this.getParentCategory()}
+                                </View>
+                                :
+                                <TouchableOpacity
+                                    style={SubCategoryStyles.ParentCategory}
+                                    activeOpacity={0.75}
+                                    onPress={() => this.refs.modal.open()}>
+                                    <Text style={[SubCategoryStyles.textBold, SubCategoryStyles.textLeft]}/>
                                     <View style={SubCategoryStyles.categorySelectionParentIcon}>
                                         <Text style={[SubCategoryStyles.textBold, SubCategoryStyles.textLeft]}>{this.state.parent || 'Select Parent Category'}</Text>
                                         <Icon size={10} name="down-arrow" style={SubCategoryStyles.iconRight}/>

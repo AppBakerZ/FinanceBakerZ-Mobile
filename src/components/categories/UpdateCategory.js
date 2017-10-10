@@ -16,9 +16,11 @@ import { NavigationActions } from 'react-navigation'
 
 class UpdateCategory extends Component{
 
-  constructor(props, ){
+  constructor(props){
     super(props);
-    let {_id, name, icon, parent} = props.navigation.state.params;
+    console.log('===>props.navigation.state.params', props.navigation.state.params);
+    let {_id, name, icon} = props.navigation.state.params;
+    let { parent } = props.children;
     this.state = {
       _id : _id,
       parent: parent || null,
@@ -26,6 +28,7 @@ class UpdateCategory extends Component{
       name : name,
       icon: this.findCategoryIcon(icon) || null
     };
+    console.log('===>parent', this.state.parent);
     this.deleteCategoryDialog = this.deleteCategoryDialog.bind(this);
   }
 
@@ -82,8 +85,8 @@ class UpdateCategory extends Component{
         'This will remove your all data \nAre you sure to remove your category?',
         [
           {text: 'Go Back'},
-          {text: 'Yes, Remove', onPress: () => this.deleteCategory(), style: 'cancel'},
-        ],
+          {text: 'Yes, Remove', onPress: () => this.deleteCategory(), style: 'cancel'}
+        ]
     );
   }
 
@@ -152,12 +155,15 @@ class UpdateCategory extends Component{
   }
 
   getParentCategory(){
+    let { parent } = this.state;
+    console.log('==>parent', parent)
     let categories = this.props.categories;
-    let category = categories.map((categoryParent, i) =>  <Picker.Item key={i} label={categoryParent.name} value={i === 0 ? '' : categoryParent.name}/>);
+    console.log('==>categories', categories)
+    let category = categories.map((categoryParent, i) =>  <Picker.Item key={i} label={categoryParent.name} value={i === 0 ? '' : {name: categoryParent.name, id: categoryParent._id}} />);
     return(
         <Picker
             style={SubCategoryStyles.picker}
-            selectedValue={this.state.parent}
+            selectedValue={parent && parent.name}
             onValueChange={(parent) => this.setState({parent})}>
           {category}
         </Picker>
@@ -227,7 +233,7 @@ class UpdateCategory extends Component{
                 {(Platform.OS !== 'ios') ? <View style={SubCategoryStyles.SelParentCategoryLabel}><Text style={SubCategoryStyles.selectParentText}>{I18n("CATEGORIES_PARENT_CATEGORY")}</Text>{this.getParentCategory()}</View> :
                     <TouchableOpacity style={SubCategoryStyles.ParentCategory} activeOpacity={0.75}
                                       onPress={() => this.refs.modal.open()}>
-                      <Text style={[SubCategoryStyles.textBold, SubCategoryStyles.textLeft]}></Text>
+                      <Text style={[SubCategoryStyles.textBold, SubCategoryStyles.textLeft]}/>
                       <View style={SubCategoryStyles.categorySelectionParentIcon}>
                         <Text style={[SubCategoryStyles.textBold, SubCategoryStyles.textLeftUrdu]}>{this.state.parent || 'Select Parent Category'}</Text>
                         <Icon size={10} name="down-arrow" style={SubCategoryStyles.iconRight}/>
@@ -256,8 +262,8 @@ export default createContainer((props) => {
   }, {sort: {createdAt: -1}});
   categories.unshift({name: 'No Parent Category'});
 
-  let {parent, name} = props.navigation.state.params;
-  let children = Meteor.collection('categories').findOne({name, parent});
+  let { childId, _id} = props.navigation.state.params;
+  let children = Meteor.collection('categories').findOne({_id: childId});
 
   return {
     categoriesReady: categoriesHandle.ready(),

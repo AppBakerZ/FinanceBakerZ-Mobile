@@ -75,7 +75,6 @@ const header = ({ navigation, screenProps }) => {
 
   let defaultAvatar = './images/default-avatar.gif';
   let { user } = screenProps;
-  let setUserAvatar = user.profile.avatar.length ? user.profile.avatar : defaultAvatar;
   let headerRight = (
       <TouchableOpacity
           style={{width: 50, height: 50, marginRight: 10}}
@@ -83,7 +82,7 @@ const header = ({ navigation, screenProps }) => {
           onPress={() => {navigate('Settings')}}
       >
         <Image style={{width: '100%', height: '100%', borderRadius: Platform.OS === 'ios' ? 25 : 100}}
-               source={{uri: setUserAvatar}}/>
+               source={user.profile.avatar.length ? {uri: user.profile.avatar} : require('./images/default-avatar.gif')}/>
       </TouchableOpacity>
   );
 
@@ -117,7 +116,6 @@ function nestingHeaders(routeName, renderRightIcon) {
     } else if (renderRightIcon && renderRightIcon.userAvatar) {
       let defaultAvatar = './images/default-avatar.gif';
       let { user } = screenProps;
-      let setUserAvatar = user.profile.avatar.length ? user.profile.avatar : defaultAvatar;
       headerRight = (
           <TouchableOpacity
               style={{width: 50, height: 50, marginRight: 10}}
@@ -125,7 +123,7 @@ function nestingHeaders(routeName, renderRightIcon) {
               onPress={() => {navigate('Settings')}}
           >
             <Image style={{width: '100%', height: '100%', borderRadius: Platform.OS === 'ios' ? 25 : 100}}
-                   source={{uri: setUserAvatar}}/>
+                   source={user.profile.avatar.length ? {uri: user.profile.avatar} : require('./images/default-avatar.gif')}/>
           </TouchableOpacity>
       );
     }

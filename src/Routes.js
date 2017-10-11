@@ -73,7 +73,6 @@ const header = ({ navigation, screenProps }) => {
       <Text style={{fontSize: 20, fontFamily: 'QuicksandBold-Regular', color: '#00562E', paddingLeft: 20}}>{state.routeName}</Text>
   );
 
-  let defaultAvatar = './images/default-avatar.gif';
   let { user } = screenProps;
   let headerRight = (
       <TouchableOpacity
@@ -114,7 +113,6 @@ function nestingHeaders(routeName, renderRightIcon) {
           onPress={() => {state.params.submit()}}
       />);
     } else if (renderRightIcon && renderRightIcon.userAvatar) {
-      let defaultAvatar = './images/default-avatar.gif';
       let { user } = screenProps;
       headerRight = (
           <TouchableOpacity

@@ -80,9 +80,8 @@ const header = ({ navigation, screenProps }) => {
       <TouchableOpacity
           style={{width: 50, height: 50, marginRight: 10}}
           activeOpacity={0.7}
-          onPress={() => {
-               navigate('Settings')
-             }}>
+          onPress={() => {navigate('Settings')}}
+      >
         <Image style={{width: '100%', height: '100%', borderRadius: Platform.OS === 'ios' ? 25 : 100}}
                source={{uri: setUserAvatar}}/>
       </TouchableOpacity>
@@ -98,9 +97,9 @@ const header = ({ navigation, screenProps }) => {
 
 function nestingHeaders(routeName, renderRightIcon) {
 
-  let header = ({navigation}) => {
+  let header = ({navigation, screenProps}) => {
     let headerRight ;
-    let {state} = navigation;
+    let {state, navigate} = navigation;
     if(renderRightIcon && renderRightIcon.iconChecked){
       headerRight  =  (<Icon
           name="checked"
@@ -108,13 +107,27 @@ function nestingHeaders(routeName, renderRightIcon) {
           style={{paddingRight: 15}}
           onPress={() => {state.params.submit()}}
       />);
-    }else if (renderRightIcon && renderRightIcon.iconDelete) {
+    } else if (renderRightIcon && renderRightIcon.iconDelete) {
       headerRight  =  (<MaterialIcons
           name="delete"
           size={35}
           style={{paddingRight: 15}}
           onPress={() => {state.params.submit()}}
       />);
+    } else if (renderRightIcon && renderRightIcon.userAvatar) {
+      let defaultAvatar = './images/default-avatar.gif';
+      let { user } = screenProps;
+      let setUserAvatar = user.profile.avatar.length ? user.profile.avatar : defaultAvatar;
+      headerRight = (
+          <TouchableOpacity
+              style={{width: 50, height: 50, marginRight: 10}}
+              activeOpacity={0.7}
+              onPress={() => {navigate('Settings')}}
+          >
+            <Image style={{width: '100%', height: '100%', borderRadius: Platform.OS === 'ios' ? 25 : 100}}
+                   source={{uri: setUserAvatar}}/>
+          </TouchableOpacity>
+      );
     }
     return {
       title: (state.params && state.params.myTitle) || routeName,
@@ -155,7 +168,7 @@ const ProjectsStack = StackNavigator({
   },
   CreateProject: {
     screen: CreateProject,
-    navigationOptions: nestingHeaders('Create Project')
+    navigationOptions: nestingHeaders('Create Project', {userAvatar: true})
   },
   DetailProject:{
     screen: DetailProject,
@@ -163,7 +176,7 @@ const ProjectsStack = StackNavigator({
   },
   UpdateProject: {
     screen: UpdateProject,
-    navigationOptions: nestingHeaders('Update Project')
+    navigationOptions: nestingHeaders('Update Project', {userAvatar: true})
   },
   ProjectSelection: {
     screen: ProjectSelectionScreen,
@@ -187,7 +200,7 @@ const TransactionsStack = StackNavigator({
   },
   UpdateTransaction: {
     screen: AddOrUpdateTransaction,
-    navigationOptions: nestingHeaders('Transaction')
+    navigationOptions: nestingHeaders('Transaction', {userAvatar: true})
   }
 });
 
@@ -198,7 +211,7 @@ const AccountsStack = StackNavigator({
   },
   AddAccount: {
     screen: AddAccount,
-    navigationOptions: nestingHeaders('Add Account')
+    navigationOptions: nestingHeaders('Add Account', {userAvatar: true})
   },
   UpdateAccount:{
     screen: UpdateAccount,
@@ -213,7 +226,7 @@ const CategoriesStack = StackNavigator({
   },
   SubCategories: {
     screen: SubCategory,
-    navigationOptions: nestingHeaders('Categories')
+    navigationOptions: nestingHeaders('Categories', {userAvatar: true})
   },
   UpdateCategory: {
     screen: UpdateCategory,
@@ -221,7 +234,7 @@ const CategoriesStack = StackNavigator({
   },
   AddCategory : {
     screen : AddCategory,
-    navigationOptions : nestingHeaders('Add Category')
+    navigationOptions : nestingHeaders('Add Category', {userAvatar: true})
   }
 });
 
@@ -232,7 +245,7 @@ const SettingsStack = StackNavigator({
   },
   ChangePassword: {
     screen: ChangePasswordScreen,
-    navigationOptions: nestingHeaders('Change Password')
+    navigationOptions: nestingHeaders('Change Password', {userAvatar: true})
   },
   AccountSettings: {
     screen: AccountSettingsScreen,

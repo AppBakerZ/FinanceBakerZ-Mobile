@@ -1,7 +1,6 @@
 import {StyleSheet, Dimensions} from 'react-native';
 let screen = Dimensions.get('window');
 
-
 export const ProjectSelectionStyles = StyleSheet.create({
 
   container: {
@@ -18,16 +17,13 @@ export const ProjectSelectionStyles = StyleSheet.create({
   },
 
   filterShowContainer: {
-    flex: 1.2,
-    justifyContent: 'space-around',
     paddingLeft: 10,
     borderBottomColor: '#cbcbcb',
     borderBottomWidth: 1
   },
 
   filterCon: {
-    flex: 3,
-    paddingVertical: 12,
+    flex: 1
   },
 
   projectNameCon: {
@@ -35,17 +31,15 @@ export const ProjectSelectionStyles = StyleSheet.create({
   },
 
   clientNameCon: {
-    flex: 1,
     justifyContent: 'center'
 
   },
 
   filterStatus: {
-    flex: 1,
-    justifyContent: 'center',
     borderBottomColor: '#F5F5F5',
     borderBottomWidth: 1,
-    paddingLeft: 10
+    paddingTop: 5,
+    paddingLeft: 5
   },
 
   input: {
@@ -57,10 +51,6 @@ export const ProjectSelectionStyles = StyleSheet.create({
   inputContainer: {
     borderBottomWidth: 1,
     borderBottomColor: '#F5F5F5'
-  },
-
-  bottomCon: {
-    flex: 3
   },
 
   modal: {
@@ -75,23 +65,32 @@ export const ProjectSelectionStyles = StyleSheet.create({
   },
 
   bankCardTxtAndIcon: {
-    flex: 1,
+    paddingVertical: 10.2,
+    paddingLeft: 3,
     flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center'
   },
 
   iconRight: {
-    flex: 1,
     textAlign: 'right',
-    paddingRight: 19
+    paddingRight: 30
   },
 
   textLeft: {
     paddingLeft: 5
   },
-    picker:{
-        marginRight : 10
-    }
 
+  picker:{
+    marginRight : 10,
+    height: 40
+  },
+
+  statusBtnText: {
+    fontSize: 17
+  },
+
+  filterShowText: {
+    marginVertical: 6.5
+  }
 });
-

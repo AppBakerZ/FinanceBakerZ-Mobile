@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, Platform} from 'react-native';
+import {Text, Platform, TouchableOpacity, Image} from 'react-native';
 
 
 import LoginScreen from 'FinanceBakerZ/src/screens/auth/Login';
@@ -56,7 +56,7 @@ export const Auth = StackNavigator({
 
 
 // The navigation prop has functions like setParams, goBack, and navigate.
-const header = ({ navigation }) => {
+const header = ({ navigation, screenProps }) => {
   let {state, navigate} = navigation;
   let headerLeft  = (
       <Icon  name="menu"
@@ -70,7 +70,19 @@ const header = ({ navigation }) => {
   );
 
   let headerTitle  = (
-      <Text style={{fontSize: 20, fontFamily: 'QuicksandBold-Regular', color: '#00562E', paddingLeft: 20}}>{(state.routeName != 'Dashboard') ? state.routeName : ''}</Text>
+      <Text style={{fontSize: 20, fontFamily: 'QuicksandBold-Regular', color: '#00562E', paddingLeft: 20}}>{state.routeName}</Text>
+  );
+
+  let { user } = screenProps;
+  let headerRight = (
+      <TouchableOpacity
+          style={{width: 50, height: 50, marginRight: 10}}
+          activeOpacity={0.7}
+          onPress={() => {navigate('Settings')}}
+      >
+        <Image style={{width: '100%', height: '100%', borderRadius: Platform.OS === 'ios' ? 25 : 100}}
+               source={user.profile.avatar.length ? {uri: user.profile.avatar} : require('./images/default-avatar.gif')}/>
+      </TouchableOpacity>
   );
 
   let  headerStyle  = {
@@ -78,14 +90,14 @@ const header = ({ navigation }) => {
     backgroundColor: '#ffffff'
   };
 
-  return { headerLeft , headerTitle , headerStyle };
+  return { headerLeft , headerTitle , headerStyle, headerRight };
 };
 
 function nestingHeaders(routeName, renderRightIcon) {
 
-  let header = ({navigation}) => {
+  let header = ({navigation, screenProps}) => {
     let headerRight ;
-    let {state} = navigation;
+    let {state, navigate} = navigation;
     if(renderRightIcon && renderRightIcon.iconChecked){
       headerRight  =  (<Icon
           name="checked"
@@ -93,13 +105,25 @@ function nestingHeaders(routeName, renderRightIcon) {
           style={{paddingRight: 15}}
           onPress={() => {state.params.submit()}}
       />);
-    }else if (renderRightIcon && renderRightIcon.iconDelete) {
+    } else if (renderRightIcon && renderRightIcon.iconDelete) {
       headerRight  =  (<MaterialIcons
           name="delete"
           size={35}
-          style={{paddingRight: 15,}}
+          style={{paddingRight: 15}}
           onPress={() => {state.params.submit()}}
       />);
+    } else if (renderRightIcon && renderRightIcon.userAvatar) {
+      let { user } = screenProps;
+      headerRight = (
+          <TouchableOpacity
+              style={{width: 50, height: 50, marginRight: 10}}
+              activeOpacity={0.7}
+              onPress={() => {navigate('Settings')}}
+          >
+            <Image style={{width: '100%', height: '100%', borderRadius: Platform.OS === 'ios' ? 25 : 100}}
+                   source={user.profile.avatar.length ? {uri: user.profile.avatar} : require('./images/default-avatar.gif')}/>
+          </TouchableOpacity>
+      );
     }
     return {
       title: (state.params && state.params.myTitle) || routeName,
@@ -140,7 +164,7 @@ const ProjectsStack = StackNavigator({
   },
   CreateProject: {
     screen: CreateProject,
-    navigationOptions: nestingHeaders('Create Project')
+    navigationOptions: nestingHeaders('Create Project', {userAvatar: true})
   },
   DetailProject:{
     screen: DetailProject,
@@ -148,7 +172,7 @@ const ProjectsStack = StackNavigator({
   },
   UpdateProject: {
     screen: UpdateProject,
-    navigationOptions: nestingHeaders('Update Project')
+    navigationOptions: nestingHeaders('Update Project', {userAvatar: true})
   },
   ProjectSelection: {
     screen: ProjectSelectionScreen,
@@ -172,7 +196,7 @@ const TransactionsStack = StackNavigator({
   },
   UpdateTransaction: {
     screen: AddOrUpdateTransaction,
-    navigationOptions: nestingHeaders('Transaction')
+    navigationOptions: nestingHeaders('Transaction', {userAvatar: true})
   }
 });
 
@@ -183,7 +207,7 @@ const AccountsStack = StackNavigator({
   },
   AddAccount: {
     screen: AddAccount,
-    navigationOptions: nestingHeaders('Add Account')
+    navigationOptions: nestingHeaders('Add Account', {userAvatar: true})
   },
   UpdateAccount:{
     screen: UpdateAccount,
@@ -198,7 +222,7 @@ const CategoriesStack = StackNavigator({
   },
   SubCategories: {
     screen: SubCategory,
-    navigationOptions: nestingHeaders('Categories')
+    navigationOptions: nestingHeaders('Categories', {userAvatar: true})
   },
   UpdateCategory: {
     screen: UpdateCategory,
@@ -206,7 +230,7 @@ const CategoriesStack = StackNavigator({
   },
   AddCategory : {
     screen : AddCategory,
-    navigationOptions : nestingHeaders('Add Category')
+    navigationOptions : nestingHeaders('Add Category', {userAvatar: true})
   }
 });
 
@@ -217,7 +241,7 @@ const SettingsStack = StackNavigator({
   },
   ChangePassword: {
     screen: ChangePasswordScreen,
-    navigationOptions: nestingHeaders('Change Password')
+    navigationOptions: nestingHeaders('Change Password', {userAvatar: true})
   },
   AccountSettings: {
     screen: AccountSettingsScreen,

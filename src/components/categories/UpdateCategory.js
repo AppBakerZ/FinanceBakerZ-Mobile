@@ -18,17 +18,18 @@ class UpdateCategory extends Component{
 
   constructor(props){
     super(props);
-    console.log('===>props.navigation.state.params', props.navigation.state.params);
     let {_id, name, icon} = props.navigation.state.params;
-    let { parent } = props.children;
+    let parent = null;
+    if(props.children){
+      parent = props.children.parent;
+    }
     this.state = {
       _id : _id,
-      parent: parent || null,
+      parent: parent,
       renderCategoryIcon: this.renderCategoryIcon(),
       name : name,
       icon: this.findCategoryIcon(icon) || null
     };
-    console.log('===>parent', this.state.parent);
     this.deleteCategoryDialog = this.deleteCategoryDialog.bind(this);
   }
 
@@ -154,17 +155,26 @@ class UpdateCategory extends Component{
     });
   }
 
+  onParentChange(parentId){
+      let { categories} = this.props;
+      let parent = categories.find(category =>  category._id === parentId);
+      this.setState({
+        parent:{
+          name: parent.name,
+          id: parent._id
+        }
+      })
+  }
+
   getParentCategory(){
     let { parent } = this.state;
-    console.log('==>parent', parent)
     let categories = this.props.categories;
-    console.log('==>categories', categories)
-    let category = categories.map((categoryParent, i) =>  <Picker.Item key={i} label={categoryParent.name} value={i === 0 ? '' : {name: categoryParent.name, id: categoryParent._id}} />);
+    let category = categories.map((categoryParent, i) =>  <Picker.Item key={i} label={categoryParent.name} value={i === 0 ? '' : categoryParent._id} />);
     return(
         <Picker
             style={SubCategoryStyles.picker}
-            selectedValue={parent && parent.name}
-            onValueChange={(parent) => this.setState({parent})}>
+            selectedValue={parent && parent.id}
+            onValueChange={this.onParentChange.bind(this)}>
           {category}
         </Picker>
     );
@@ -191,6 +201,7 @@ class UpdateCategory extends Component{
     });
   }
   render(){
+    let { children } = this.props;
     return(
         <ViewContainer style = {SubCategoryStyles.addCategoryMain}>
           <Image source = {require('FinanceBakerZ/src/images/app-background.png')} style={SubCategoryStyles.backgroundImage}>
@@ -229,18 +240,26 @@ class UpdateCategory extends Component{
                   </View>
                 </ScrollView>
               </View>
-              <View style={SubCategoryStyles.iconParent}>
-                {(Platform.OS !== 'ios') ? <View style={SubCategoryStyles.SelParentCategoryLabel}><Text style={SubCategoryStyles.selectParentText}>{I18n("CATEGORIES_PARENT_CATEGORY")}</Text>{this.getParentCategory()}</View> :
-                    <TouchableOpacity style={SubCategoryStyles.ParentCategory} activeOpacity={0.75}
-                                      onPress={() => this.refs.modal.open()}>
-                      <Text style={[SubCategoryStyles.textBold, SubCategoryStyles.textLeft]}/>
-                      <View style={SubCategoryStyles.categorySelectionParentIcon}>
-                        <Text style={[SubCategoryStyles.textBold, SubCategoryStyles.textLeftUrdu]}>{this.state.parent || 'Select Parent Category'}</Text>
-                        <Icon size={10} name="down-arrow" style={SubCategoryStyles.iconRight}/>
+              {(children) ?
+                <View style={SubCategoryStyles.iconParent}>
+                  {(Platform.OS !== 'ios') ?
+                      <View style={SubCategoryStyles.SelParentCategoryLabel}>
+                        <Text style={SubCategoryStyles.selectParentText}>{I18n("CATEGORIES_PARENT_CATEGORY")}</Text>
+                        {this.getParentCategory()}
                       </View>
-                    </TouchableOpacity>
-                }
-              </View>
+                      :
+                      <TouchableOpacity style={SubCategoryStyles.ParentCategory} activeOpacity={0.75}
+                                        onPress={() => this.refs.modal.open()}>
+                        <Text style={[SubCategoryStyles.textBold, SubCategoryStyles.textLeft]}/>
+                        <View style={SubCategoryStyles.categorySelectionParentIcon}>
+                          <Text style={[SubCategoryStyles.textBold, SubCategoryStyles.textLeftUrdu]}>{this.state.parent || 'Select Parent Category'}</Text>
+                          <Icon size={10} name="down-arrow" style={SubCategoryStyles.iconRight}/>
+                        </View>
+                      </TouchableOpacity>
+                  }
+                </View>
+                : <View/>
+              }
               <View style={SubCategoryStyles.febButton}>
                 <FabButton iconName="check" iconColor="#fff" onPress={this.submit.bind(this)}/>
               </View>

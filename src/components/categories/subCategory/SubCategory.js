@@ -64,7 +64,7 @@ class SubCategory extends Component {
           </ViewContainer>
       )
     }else {
-      return <View></View>
+      return <View/>
     }
 
   }

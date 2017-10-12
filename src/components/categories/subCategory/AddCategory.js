@@ -23,9 +23,15 @@ class AddCategory extends Component{
     }
     submit(){
         let {name, icon, parent} = this.state;
+        if(parent) {
+            parent = {id: parent};
+            let parentExists = Meteor.collection('categories').findOne({_id: parent.id});
+            if(parentExists) {
+                parent.name = parentExists.name
+            }
+        }
         if(name && icon){
           icon = icon.value;
-
           Meteor.call('categories.insert', {
             category: {
                 name,
@@ -72,7 +78,7 @@ class AddCategory extends Component{
 
     getParentCategory(){
         let categories = this.props.categories;
-        let category = categories.map((categoryParent, i) =>  <Picker.Item key={i} label={categoryParent.name} value={i === 0 ? '' : categoryParent.name}/>);
+        let category = categories.map((categoryParent, i) =>  <Picker.Item key={i} label={categoryParent.name} value={i === 0 ? '' : categoryParent._id}/>);
         return(
             <Picker
                 style={SubCategoryStyles.picker}

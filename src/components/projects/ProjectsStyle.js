@@ -146,6 +146,12 @@ export const ProjectsStyles = StyleSheet.create({
         height: 48
     },
 
+    inputWithLabel: {
+        fontFamily: 'QuicksandBook-Regular',
+        paddingLeft: 10,
+        height: 37
+    },
+
     inputDate: {
         borderBottomWidth: 1,
         borderBottomColor: '#F5F5F5',
@@ -173,6 +179,14 @@ export const ProjectsStyles = StyleSheet.create({
         paddingRight: 15
     },
 
+    datePickerWithLabel: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingVertical: 0.5,
+        paddingRight: 15
+    },
+
     picker:{
         marginLeft : -7,
         height: 40
@@ -186,6 +200,7 @@ export const ProjectsStyles = StyleSheet.create({
         paddingLeft: 10,
         paddingRight: 15
     },
+
     inputDateText: {
         paddingLeft: 10
     },
@@ -263,6 +278,7 @@ export const ProjectsStyles = StyleSheet.create({
         fontFamily: 'QuicksandBold-Regular'
     },
     labelText:{
+        marginTop: 8,
         paddingLeft : 10,
         fontFamily: 'QuicksandBold-Regular'
     },

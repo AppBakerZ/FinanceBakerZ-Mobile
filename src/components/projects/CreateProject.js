@@ -187,7 +187,7 @@ export default class CreateProject extends Component {
                 }
               </View>
 
-              <View style={[ProjectsStyles.inputDateCon, ProjectsStyles.inputBorderBottom]}>
+              <View style={[ProjectsStyles.inputBorderBottom]}>
                 <TouchableOpacity style={[ProjectsStyles.projectCardTxtAndIcon, ProjectsStyles.datePickerBtn]} activeOpacity={0.75} onPress={() => {Platform.OS !== 'ios' ? this.showPicker.bind(this, 'startAt', {date: this.state.date})() : this.showModal.bind(this)()}}>
                   <Text style={[ProjectsStyles.BankText, ProjectsStyles.inputDateSelected]}>{this.state.startAt ? formatDate({type: 'getCustomDate', date: this.state.startAt, format: 'MMMM DD, YYYY'}) : I18n('PROJECTS_START_DATE')}</Text>
                   <Icon size={10} name="down-arrow" style={ProjectsStyles.iconRight} />

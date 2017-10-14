@@ -48,11 +48,11 @@ class UpdateCategory extends Component{
           parent
         }
       }
-    }else{
-      return {
-        category: {
-          name
-        }
+    }
+    return {
+      category: {
+        name,
+        _id
       }
     }
   }
@@ -156,14 +156,17 @@ class UpdateCategory extends Component{
   }
 
   onParentChange(parentId){
-      let { categories} = this.props;
-      let parent = categories.find(category =>  category._id === parentId);
-      this.setState({
-        parent:{
-          name: parent.name,
-          id: parent._id
-        }
-      })
+    let { categories} = this.props, parentCategory = null;
+    let parent = categories.find(category =>  category._id === parentId);
+    if(parent) {
+      parentCategory = {
+        name: parent.name,
+        id: parent._id
+      }
+    }
+    this.setState({
+      parent: parentCategory
+    })
   }
 
   getParentCategory(){
@@ -201,7 +204,10 @@ class UpdateCategory extends Component{
     });
   }
   render(){
-    let { children } = this.props;
+    let children = [];
+    if(this.props.category) {
+      children = this.props.category;
+    }
     return(
         <ViewContainer style = {SubCategoryStyles.addCategoryMain}>
           <Image source = {require('FinanceBakerZ/src/images/app-background.png')} style={SubCategoryStyles.backgroundImage}>
@@ -240,7 +246,7 @@ class UpdateCategory extends Component{
                   </View>
                 </ScrollView>
               </View>
-              {(children) ?
+              {!children.length ?
                 <View style={SubCategoryStyles.iconParent}>
                   {(Platform.OS !== 'ios') ?
                       <View style={SubCategoryStyles.SelParentCategoryLabel}>
@@ -276,17 +282,20 @@ class UpdateCategory extends Component{
 }
 export default createContainer((props) => {
   const categoriesHandle = Meteor.subscribe('categories');
+  let { childId, _id, categoryId} = props.navigation.state.params;
   let categories =  Meteor.collection('categories').find({
     parent: null
   }, {sort: {createdAt: -1}});
+  categories = categories.filter((category) => {
+    return category._id !== categoryId
+  });
   categories.unshift({name: 'No Parent Category'});
-
-  let { childId, _id} = props.navigation.state.params;
   let children = Meteor.collection('categories').findOne({_id: childId});
-
+  let category = Meteor.collection('categories').findOne({_id: categoryId});
   return {
     categoriesReady: categoriesHandle.ready(),
     categories,
-    children
+    children,
+    category
   };
 }, UpdateCategory);

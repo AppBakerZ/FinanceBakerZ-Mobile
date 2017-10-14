@@ -21,7 +21,7 @@ class SubCategory extends Component {
     if(child.length){
       return child.map((val, i) => {
         return(
-            <TouchableOpacity key={i} activeOpacity={0.75} onPress={() => this.props.navigation.navigate('UpdateCategory', {_id, name: children[i].name, childId: children[i].id})} style={SubCategoryStyles.SubcategoryTouchable}>
+            <TouchableOpacity key={i} activeOpacity={0.75} onPress={() => this.props.navigation.navigate('UpdateCategory', {_id, name: children[i].name, childId: children[i].id, categoryId: children[i].id})} style={SubCategoryStyles.SubcategoryTouchable}>
               <View style={SubCategoryStyles.subCategoryChildren}>
                 <Text style={SubCategoryStyles.categoryChildren}>{val.name.toUpperCase()}</Text>
               </View>
@@ -49,7 +49,7 @@ class SubCategory extends Component {
                   <View style={SubCategoryStyles.main}>
                     <Image source={require('FinanceBakerZ/src/images/category/img1.png')} style={SubCategoryStyles.Texture1}>
                       <View style={SubCategoryStyles.child2}>
-                        <TouchableOpacity activeOpacity={0.75} onPress={() => this.props.navigation.navigate('UpdateCategory',{icon, name, _id})} style={SubCategoryStyles.touchableOpacity} >
+                        <TouchableOpacity activeOpacity={0.75} onPress={() => this.props.navigation.navigate('UpdateCategory',{icon, name, _id, categoryId: _id})} style={SubCategoryStyles.touchableOpacity} >
                           <CategoryIcon  style={SubCategoryStyles.customIcon} name={iconName} size={50}/>
                           <Text style={SubCategoryStyles.customIconText}>{subCategories.name.toUpperCase()}</Text>
                         </TouchableOpacity>

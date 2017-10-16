@@ -21,7 +21,7 @@ export const ProjectsStyles = StyleSheet.create({
         resizeMode : 'cover'
     },
     listViewContainer: {
-        flex : 8,
+        flex : 8
     },
     filterDiv:{
         flexDirection : 'row'
@@ -40,7 +40,7 @@ export const ProjectsStyles = StyleSheet.create({
     listViewContentLeft: {
         flex: 1,
         flexDirection: 'row',
-        alignItems: 'center',
+        alignItems: 'center'
     },
 
     listViewContentRight:{
@@ -76,7 +76,7 @@ export const ProjectsStyles = StyleSheet.create({
         borderBottomColor : '#ddd',
         borderBottomWidth: 1,
         flexDirection:'row',
-        paddingVertical:15,
+        paddingVertical:15
     },
 
     loader:{
@@ -132,40 +132,24 @@ export const ProjectsStyles = StyleSheet.create({
   /* CreateProject Styling */
 
     inputBorderBottom: {
-        justifyContent: 'flex-end',
         borderBottomWidth: 1,
-        borderBottomColor: '#F5F5F5',
+        borderBottomColor: '#F5F5F5'
     },
 
-    inputProjectNameCon:{
-        flex: 1,
-        justifyContent: 'center'
-    },
-
-    inputClientName:{
-        flex: 1
-    },
-
-    inputTypeCon:{
-        flex: 1
-    },
-
-    inputAmountCon:{
-        flex: 1
-    },
-
-    inputPickerCon: {
-        flex: 1
-    },
-
-    inputDateCon: {
-        flex: 1
+    inputContainer: {
+        paddingVertical: 6.5
     },
 
     input: {
         fontFamily: 'QuicksandBook-Regular',
         paddingLeft: 10,
         height: 48
+    },
+
+    inputWithLabel: {
+        fontFamily: 'QuicksandBook-Regular',
+        paddingLeft: 10,
+        height: 37
     },
 
     inputDate: {
@@ -175,34 +159,48 @@ export const ProjectsStyles = StyleSheet.create({
     },
 
     projectCardTxtAndIcon: {
-        flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingVertical: 10.8
     },
 
     iconRight: {
-        flex: 1,
         textAlign: 'right',
+        paddingRight: 20
+    },
+
+    pickerBtnText: {
+        fontSize: 16
+    },
+
+    datePickerBtn: {
+        paddingVertical: 12.5,
         paddingRight: 15
     },
 
-    textLeft: {
-        paddingLeft: 20,
+    datePickerWithLabel: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingVertical: 0.5,
+        paddingRight: 15
     },
+
     picker:{
-        marginLeft : -7
+        marginLeft : -7,
+        height: 40
     },
     renderPickerCon: {
         width: screen.width,
         paddingLeft: 15
     },
     statusTextView: {
-        flex: 1,
-        justifyContent: 'center',
-        paddingTop: 8,
+        paddingTop: 5,
         paddingLeft: 10,
-        paddingRight: 10,
+        paddingRight: 15
     },
+
     inputDateText: {
         paddingLeft: 10
     },
@@ -210,10 +208,6 @@ export const ProjectsStyles = StyleSheet.create({
     inputDateSelected: {
         paddingVertical: 10,
         paddingLeft: 10
-    },
-
-    bottomCon: {
-        flex: 4
     },
 
     projectTitleAndBtn: {
@@ -241,7 +235,7 @@ export const ProjectsStyles = StyleSheet.create({
         color: '#c71212'
     },
     projectDetailMain:{
-        flex : 1,
+        flex : 1
     },
     projectDetail : {
         flex: 7,
@@ -252,7 +246,7 @@ export const ProjectsStyles = StyleSheet.create({
     detail:{
         fontFamily: 'QuicksandBook-Regular',
         fontSize : 15,
-        padding : 10,
+        padding : 10
     },
     projectName:{
         flex : 1.5,
@@ -264,26 +258,27 @@ export const ProjectsStyles = StyleSheet.create({
     projectText:{
         fontSize : 15,
         fontFamily: 'QuicksandBold-Regular',
-        color : '#008000',
+        color : '#008000'
     },
     projectFebIcon : {
-        flex : 0.5,
+        flex : 0.5
     },
     detailText:{
-        fontFamily: 'QuicksandBold-Regular',
+        fontFamily: 'QuicksandBold-Regular'
     },
     projectDateContainer:{
         flex : 3,
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'center'
     },
     projectDate:{
-        fontFamily: 'QuicksandBold-Regular',
+        fontFamily: 'QuicksandBold-Regular'
     },
     projectId:{
-        fontFamily: 'QuicksandBold-Regular',
+        fontFamily: 'QuicksandBold-Regular'
     },
     labelText:{
+        marginTop: 8,
         paddingLeft : 10,
         fontFamily: 'QuicksandBold-Regular'
     },

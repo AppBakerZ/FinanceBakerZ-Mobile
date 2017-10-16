@@ -79,7 +79,7 @@ class Categories extends Component {
             </ScrollView>
             : <View style={{flex: 1, justifyContent: 'center'}}><ActivityIndicator size={Platform.OS === 'ios' ? 'large' : 150} color="#008142"/></View>}
         </Image>
-          {!this.state.loading ? <FabButton iconName="add" iconColor="#fff" style={CategoriesStyles.fabButtonBg} onPress={() => navigate('AddCategory')} /> : <Text></Text>}
+          {!this.state.loading ? <FabButton iconName="add" iconColor="#fff" style={CategoriesStyles.fabButtonBg} onPress={() => navigate('AddCategory')} /> : <Text/>}
       </ViewContainer>
     );
   }

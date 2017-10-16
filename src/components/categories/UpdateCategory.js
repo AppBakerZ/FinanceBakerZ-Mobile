@@ -11,6 +11,7 @@ import Meteor, { createContainer } from 'react-native-meteor';
 import FabButton from 'FinanceBakerZ/src/components/button/FabButton';
 import {I18n, showAlert, capitalizeFirstLetter } from 'FinanceBakerZ/src/customLibrary';
 import { NavigationActions } from 'react-navigation'
+import _ from 'underscore';
 
 
 
@@ -40,12 +41,26 @@ class UpdateCategory extends Component{
 
   findCategoryObjToRemove(){
     const {_id, name, parent} = this.state;
+    let { children } = this.props.category;
+    let ids = [], names = [];
+    children.map((catName) =>{
+      //get all ids of children for backend
+      if(_.values(children).length && catName.id){
+        ids.push(catName.id)
+      }
+      //fall back for old categories
+      else{
+        names.push(catName)
+      }
+    });
     if(!parent){
       return {
         category: {
           _id,
           name,
-          parent
+          parent,
+          ids,
+          names
         }
       }
     }
@@ -83,11 +98,11 @@ class UpdateCategory extends Component{
 
   deleteCategoryDialog(){
     showAlert('REMOVE CATEGORY',
-        'This will remove your all data \nAre you sure to remove your category?',
-        [
-          {text: 'Go Back'},
-          {text: 'Yes, Remove', onPress: () => this.deleteCategory(), style: 'cancel'}
-        ]
+      'This will remove your all data \nAre you sure to remove your category?',
+      [
+        {text: 'Go Back'},
+        {text: 'Yes, Remove', onPress: () => this.deleteCategory(), style: 'cancel'}
+      ]
     );
   }
 
@@ -174,12 +189,12 @@ class UpdateCategory extends Component{
     let categories = this.props.categories;
     let category = categories.map((categoryParent, i) =>  <Picker.Item key={i} label={categoryParent.name} value={i === 0 ? '' : categoryParent._id} />);
     return(
-        <Picker
-            style={SubCategoryStyles.picker}
-            selectedValue={parent && parent.id}
-            onValueChange={this.onParentChange.bind(this)}>
-          {category}
-        </Picker>
+      <Picker
+          style={SubCategoryStyles.picker}
+          selectedValue={parent && parent.id}
+          onValueChange={this.onParentChange.bind(this)}>
+        {category}
+      </Picker>
     );
 
   }
@@ -189,94 +204,94 @@ class UpdateCategory extends Component{
     let categoryIcons = chunk(CategoryFonts, 3);
     return categoryIcons.map((iconArray, i, arr) => {
       return(
-          <View style={SubCategoryStyles.categoryIcons} key={i}>
-            {iconArray.map((icon, index ) => {
-              let icon_name = icon.value.replace('icon-' , "");
+        <View style={SubCategoryStyles.categoryIcons} key={i}>
+          {iconArray.map((icon, index ) => {
+            let icon_name = icon.value.replace('icon-' , "");
 
-              return(
-                  <TouchableOpacity style={[SubCategoryStyles.categoryIconsDiv, this.removeBorder(icon) , arr.length-1 == i ? { borderBottomColor: 'transparent', borderBottomWidth: 0 } : '']} onPress={() => this.setState({icon})} activeOpacity={0.75} key={index}>
-                    <CategoryIconShow name={icon_name } size={60}/>
-                  </TouchableOpacity>
-              );
-            })}
-          </View>
+            return(
+                <TouchableOpacity style={[SubCategoryStyles.categoryIconsDiv, this.removeBorder(icon) , arr.length-1 == i ? { borderBottomColor: 'transparent', borderBottomWidth: 0 } : '']} onPress={() => this.setState({icon})} activeOpacity={0.75} key={index}>
+                  <CategoryIconShow name={icon_name } size={60}/>
+                </TouchableOpacity>
+            );
+          })}
+        </View>
       );
     });
   }
   render(){
     let children = [];
     if(this.props.category) {
-      children = this.props.category;
+      children = this.props.category.children;
     }
     return(
-        <ViewContainer style = {SubCategoryStyles.addCategoryMain}>
-          <Image source = {require('FinanceBakerZ/src/images/app-background.png')} style={SubCategoryStyles.backgroundImage}>
-            <View style = {SubCategoryStyles.addCategorySub}>
-              <ViewContainer  style = {SubCategoryStyles.addCategoryContainer}>
-                <View style={SubCategoryStyles.categoryNameField}>
-                  <View style={SubCategoryStyles.labelContainer}>
-                    <Text style={SubCategoryStyles.selectParentText}>{I18n("CATEGORIES_CATEGORY_NAME")}</Text>
-                  </View>
-                  <KeyboardAvoidingView behavior={'padding'}>
-                    <TextInput
-                        placeholder='Enter Category Name'
-                        style={SubCategoryStyles.input}
-                        maxLength = {30}
-                        autoCorrect={false}
-                        underlineColorAndroid="transparent"
-                        value={this.state.name}
-                        onChangeText={name => this.setState({name})}
-                    />
-                  </KeyboardAvoidingView>
+      <ViewContainer style = {SubCategoryStyles.addCategoryMain}>
+        <Image source = {require('FinanceBakerZ/src/images/app-background.png')} style={SubCategoryStyles.backgroundImage}>
+          <View style = {SubCategoryStyles.addCategorySub}>
+            <ViewContainer  style = {SubCategoryStyles.addCategoryContainer}>
+              <View style={SubCategoryStyles.categoryNameField}>
+                <View style={SubCategoryStyles.labelContainer}>
+                  <Text style={SubCategoryStyles.selectParentText}>{I18n("CATEGORIES_CATEGORY_NAME")}</Text>
                 </View>
-              </ViewContainer>
-              <View style={SubCategoryStyles.SelectCategoryIcon}>
-                <View style={SubCategoryStyles.categorySelectLabel}><Text style={SubCategoryStyles.selectParentText}>{I18n("CATEGORIES_CATEGORY_ICON")}</Text></View>
-                <View style={SubCategoryStyles.categorySelectionIcon}>
-                  <Text style={[SubCategoryStyles.textBold, SubCategoryStyles.textLeft]}>{this.state.icon ? capitalizeFirstLetter(this.state.icon.label) : 'Select Icon'}</Text>
-                  <Icon size={10} name="down-arrow" style={SubCategoryStyles.iconRight} />
-                </View>
+                <KeyboardAvoidingView behavior={'padding'}>
+                  <TextInput
+                      placeholder='Enter Category Name'
+                      style={SubCategoryStyles.input}
+                      maxLength = {30}
+                      autoCorrect={false}
+                      underlineColorAndroid="transparent"
+                      value={this.state.name}
+                      onChangeText={name => this.setState({name})}
+                  />
+                </KeyboardAvoidingView>
               </View>
-              <View style={SubCategoryStyles.CategoryIconList}>
-                <ScrollView>
-                  <View>
-                    <TouchableOpacity>
-                      {this.state.renderCategoryIcon}
-                    </TouchableOpacity>
-                  </View>
-                </ScrollView>
-              </View>
-              {!children.length ?
-                <View style={SubCategoryStyles.iconParent}>
-                  {(Platform.OS !== 'ios') ?
-                      <View style={SubCategoryStyles.SelParentCategoryLabel}>
-                        <Text style={SubCategoryStyles.selectParentText}>{I18n("CATEGORIES_PARENT_CATEGORY")}</Text>
-                        {this.getParentCategory()}
-                      </View>
-                      :
-                      <TouchableOpacity style={SubCategoryStyles.ParentCategory} activeOpacity={0.75}
-                                        onPress={() => this.refs.modal.open()}>
-                        <Text style={[SubCategoryStyles.textBold, SubCategoryStyles.textLeft]}/>
-                        <View style={SubCategoryStyles.categorySelectionParentIcon}>
-                          <Text style={[SubCategoryStyles.textBold, SubCategoryStyles.textLeftUrdu]}>{this.state.parent || 'Select Parent Category'}</Text>
-                          <Icon size={10} name="down-arrow" style={SubCategoryStyles.iconRight}/>
-                        </View>
-                      </TouchableOpacity>
-                  }
-                </View>
-                : <View/>
-              }
-              <View style={SubCategoryStyles.febButton}>
-                <FabButton iconName="check" iconColor="#fff" onPress={this.submit.bind(this)}/>
+            </ViewContainer>
+            <View style={SubCategoryStyles.SelectCategoryIcon}>
+              <View style={SubCategoryStyles.categorySelectLabel}><Text style={SubCategoryStyles.selectParentText}>{I18n("CATEGORIES_CATEGORY_ICON")}</Text></View>
+              <View style={SubCategoryStyles.categorySelectionIcon}>
+                <Text style={[SubCategoryStyles.textBold, SubCategoryStyles.textLeft]}>{this.state.icon ? capitalizeFirstLetter(this.state.icon.label) : 'Select Icon'}</Text>
+                <Icon size={10} name="down-arrow" style={SubCategoryStyles.iconRight} />
               </View>
             </View>
-            <Modal style={SubCategoryStyles.modal} position={"bottom"} ref={"modal"} swipeArea={20}>
-              <View style={SubCategoryStyles.renderListCon}>
-                {this.getParentCategory()}
+            <View style={SubCategoryStyles.CategoryIconList}>
+              <ScrollView>
+                <View>
+                  <TouchableOpacity>
+                    {this.state.renderCategoryIcon}
+                  </TouchableOpacity>
+                </View>
+              </ScrollView>
+            </View>
+            {!children.length ?
+              <View style={SubCategoryStyles.iconParent}>
+                {(Platform.OS !== 'ios') ?
+                    <View style={SubCategoryStyles.SelParentCategoryLabel}>
+                      <Text style={SubCategoryStyles.selectParentText}>{I18n("CATEGORIES_PARENT_CATEGORY")}</Text>
+                      {this.getParentCategory()}
+                    </View>
+                    :
+                    <TouchableOpacity style={SubCategoryStyles.ParentCategory} activeOpacity={0.75}
+                                      onPress={() => this.refs.modal.open()}>
+                      <Text style={[SubCategoryStyles.textBold, SubCategoryStyles.textLeft]}/>
+                      <View style={SubCategoryStyles.categorySelectionParentIcon}>
+                        <Text style={[SubCategoryStyles.textBold, SubCategoryStyles.textLeftUrdu]}>{this.state.parent || 'Select Parent Category'}</Text>
+                        <Icon size={10} name="down-arrow" style={SubCategoryStyles.iconRight}/>
+                      </View>
+                    </TouchableOpacity>
+                }
               </View>
-            </Modal>
-          </Image>
-        </ViewContainer>
+              : <View/>
+            }
+            <View style={SubCategoryStyles.febButton}>
+              <FabButton iconName="check" iconColor="#fff" onPress={this.submit.bind(this)}/>
+            </View>
+          </View>
+          <Modal style={SubCategoryStyles.modal} position={"bottom"} ref={"modal"} swipeArea={20}>
+            <View style={SubCategoryStyles.renderListCon}>
+              {this.getParentCategory()}
+            </View>
+          </Modal>
+        </Image>
+      </ViewContainer>
     );
   }
 }

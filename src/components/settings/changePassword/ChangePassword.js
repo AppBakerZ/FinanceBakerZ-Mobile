@@ -56,43 +56,49 @@ export default class ChangePassword extends Component {
                 <Image source = {require('FinanceBakerZ/src/images/app-background.png')} style = {ChangePasswordStyle.backgroundImage}>
                     <View style = {ChangePasswordStyle.inputContainer}>
                         <View style = {ChangePasswordStyle.borderBottom}>
-                            <Icon size = {18} name = "password" style = {ChangePasswordStyle.inputIcon}></Icon>
-                            <TextInput
-                                placeholder = {I18n("SETTINGS_CURRENT_PASSWORD")}
-                                style = {[ChangePasswordStyle.input]}
-                                returnKeyType = "next"
-                                maxLength = {30}
-                                autoCorrect = {false}
-                                onChangeText = {this.onChange.bind(this, 'oldPassword')}
-                                underlineColorAndroid = "transparent"
-                                value = {this.state.oldPassword}
-                            />
+                            <KeyboardAvoidingView>
+                                <Icon size = {18} name = "password" style = {ChangePasswordStyle.inputIcon}/>
+                                <TextInput
+                                    placeholder = {I18n("SETTINGS_CURRENT_PASSWORD")}
+                                    style = {[ChangePasswordStyle.input]}
+                                    returnKeyType = "next"
+                                    maxLength = {30}
+                                    autoCorrect = {false}
+                                    onChangeText = {this.onChange.bind(this, 'oldPassword')}
+                                    underlineColorAndroid = "transparent"
+                                    value = {this.state.oldPassword}
+                                />
+                            </KeyboardAvoidingView>
                         </View>
                         <View style = {ChangePasswordStyle.borderBottom}>
-                            <Icon size = {18} name = "password" style = {ChangePasswordStyle.inputIcon}></Icon>
-                            <TextInput
-                                placeholder = {I18n("SETTINGS_NEW_PASSWORD")}
-                                style = {[ChangePasswordStyle.input]}
-                                returnKeyType = "next"
-                                maxLength = {30}
-                                autoCorrect = {false}
-                                onChangeText = {this.onChange.bind(this, 'newPassword')}
-                                underlineColorAndroid = "transparent"
-                                value = {this.state.newPassword}
-                            />
+                            <KeyboardAvoidingView>
+                                <Icon size = {18} name = "password" style = {ChangePasswordStyle.inputIcon}/>
+                                <TextInput
+                                    placeholder = {I18n("SETTINGS_NEW_PASSWORD")}
+                                    style = {[ChangePasswordStyle.input]}
+                                    returnKeyType = "next"
+                                    maxLength = {30}
+                                    autoCorrect = {false}
+                                    onChangeText = {this.onChange.bind(this, 'newPassword')}
+                                    underlineColorAndroid = "transparent"
+                                    value = {this.state.newPassword}
+                                />
+                            </KeyboardAvoidingView>
                         </View>
                         <View style = {ChangePasswordStyle.borderBottom}>
-                            <Icon size = {18} name = "password" style = {ChangePasswordStyle.inputIcon}></Icon>
-                            <TextInput
-                                placeholder = {I18n("SETTINGS_REPEAT_NEW_PASSWORD")}
-                                style = {[ChangePasswordStyle.input]}
-                                returnKeyType = "next"
-                                maxLength = {30}
-                                autoCorrect = {false}
-                                onChangeText = {this.onChange.bind(this, 'alterPassword')}
-                                underlineColorAndroid = "transparent"
-                                value = {this.state.alterPassword}
-                            />
+                            <KeyboardAvoidingView>
+                                <Icon size = {18} name = "password" style = {ChangePasswordStyle.inputIcon}/>
+                                <TextInput
+                                    placeholder = {I18n("SETTINGS_REPEAT_NEW_PASSWORD")}
+                                    style = {[ChangePasswordStyle.input]}
+                                    returnKeyType = "next"
+                                    maxLength = {30}
+                                    autoCorrect = {false}
+                                    onChangeText = {this.onChange.bind(this, 'alterPassword')}
+                                    underlineColorAndroid = "transparent"
+                                    value = {this.state.alterPassword}
+                                />
+                            </KeyboardAvoidingView>
                         </View>
 
                     </View>

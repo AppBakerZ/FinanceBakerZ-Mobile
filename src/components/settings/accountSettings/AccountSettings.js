@@ -20,19 +20,19 @@ class AccountSettings extends Component {
         let userInfo = Meteor.user();
         this.radioGroup = new MKRadioButton.Group();
         this.languages = [
-            { value: 'en', label: 'English' },
-            { value: 'ur', label: 'Urdu' }
+            { value: 'en', label: 'English', direction: 'ltr' },
+            { value: 'ur', label: 'Urdu', direction: 'rtl' }
         ];
         this.state = {
             userCurrency: userInfo.profile.currency ? userInfo.profile.currency.value : '',
             currencyObj: userInfo.profile.currency.label,
-            languageSelected: userInfo.profile.language || '',
-            languageName : this.setCurrency(userInfo.profile.language, 'languageSelected').label,
+            languageName : userInfo.profile.language.label,
+            languageSelected: userInfo.profile.language.value || '',
             check2: userInfo.profile.emailNotification,
-            loading: false
+            loading: false,
+            language: userInfo.profile.language,
+            currency: userInfo.profile.currency
         };
-
-
     }
 
     languageOrCurrency(seletedItem, name, iosModal){
@@ -57,7 +57,7 @@ class AccountSettings extends Component {
                         <Text style = {[AccountSettingsStyle.notificationText, AccountSettingsStyle.dropdownText]}>
                             {name == 'userCurrency'? this.state.currencyObj : this.state.languageName}
                         </Text>
-                        <Icon size = {22} name = "arrow-drop-down"></Icon>
+                        <Icon size = {22} name = "arrow-drop-down"/>
                     </TouchableOpacity>
                 )
             } else {
@@ -74,7 +74,10 @@ class AccountSettings extends Component {
     }
 
     setCurrency(currency, name){
-        return currencyItem = _.findWhere(name === 'userCurrency' ? currencyIcon : this.languages, {value: currency});
+        let currencyItem = _.findWhere(name === 'userCurrency' ? currencyIcon : this.languages, {value: currency});
+        name === 'userCurrency' && this.setState({currency: currencyItem});
+        name !== 'userCurrency' && this.setState({language: currencyItem});
+        return currencyItem
     }
 
     emailNotify(){
@@ -90,9 +93,10 @@ class AccountSettings extends Component {
     update() {
         currencyObj = this.setCurrency(this.state.userCurrency, 'userCurrency');
         const {languageSelected} = this.state;
-        let accountinfo = {settings: {currencyObj, languageSelected}};
+        const {language, currency} = this.state;
+        let accountInfo = {settings: {currency, language}};
         this.setState({loading: true});
-        Meteor.call('updateAccountSettings', accountinfo, (err) => {
+        Meteor.call('settings.updateAccount', accountInfo, (err) => {
             if(!err){
                 this.emailNotify();
                 showAlert('Success', 'Account updated successfully');
@@ -142,7 +146,7 @@ class AccountSettings extends Component {
                             <View style = {AccountSettingsStyle.row}>
 
                                 <View style = {AccountSettingsStyle.row}>
-                                    <Icon size = {18} name = "notifications" style = {AccountSettingsStyle.notificationIcon}></Icon>
+                                    <Icon size = {18} name = "notifications" style = {AccountSettingsStyle.notificationIcon}/>
                                     <Text style = {AccountSettingsStyle.notificationText}>{I18n("SETTINGS_EMAIL_NOTIFICATION")}</Text>
                                 </View>
 

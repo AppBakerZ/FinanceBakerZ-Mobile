@@ -6,6 +6,7 @@ import SplashScreen from 'react-native-smart-splash-screen';
 import Meteor, { createContainer } from 'react-native-meteor';
 
 const SERVER_URL = 'ws://development-financebakerz.herokuapp.com/websocket';
+//const SERVER_URL = 'ws://192.168.100.21:3000/websocket';
 
 class FinanceBakerZ extends Component {
 

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { View, Text, Image, KeyboardAvoidingView, TextInput, TouchableOpacity} from 'react-native';
+import { View, Text, Image, KeyboardAvoidingView, TextInput, TouchableOpacity, ScrollView} from 'react-native';
 import { PersonalInformationStyle } from 'FinanceBakerZ/src/components/settings/personalInformation/PersonalInformationStyle';
 import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
 import Button from 'FinanceBakerZ/src/components/button/Button';
@@ -8,7 +8,7 @@ import {I18n,showAlert, validateEmail} from 'FinanceBakerZ/src/customLibrary';
 import  Meteor, { createContainer } from 'react-native-meteor';
 import ImagePicker from 'react-native-image-picker';
 import { RNS3 } from 'react-native-aws3';
-//import Settings from 'FinanceBakerZ/settings.json';
+import Settings from 'FinanceBakerZ/settings.json';
 
 class PersonalInformation extends Component {
     constructor(props) {
@@ -21,26 +21,28 @@ class PersonalInformation extends Component {
             email: user.emails ? user.emails[0].address : '',
             address: user.profile.address,
             avatar: user.profile.avatar,
-            loading: false
+            loading: false,
+            imageChanged: false
         };
     }
     update() {
-        const {name, number, email, address, username} = this.state;
+        const {name, number, email, address, username, imageChanged} = this.state;
         let info = {users: {name, number, email, address, username}};
         this.setState({loading: true});
-        if(validateEmail(email)){
-            Meteor.call('updateProfile', info, (err) => {
-                if(!err){
+        Meteor.call('settings.updateProfile', info, (err) => {
+            if(!err){
+                if(imageChanged) {
                     setTimeout(()=> this.uploadImage());
-                } else{
-                    showAlert('Error', err.reason);
+                } else {
+                    showAlert('Success', 'Profile updated successfully');
                     this.setState({loading: false});
+                    this.props.navigation.goBack();
                 }
-            });
-        } else {
-            showAlert('Error', 'Email address is not valid');
-            this.setState({loading: false});
-        }
+            } else{
+                showAlert('Error', err.reason);
+                this.setState({loading: false});
+            }
+        });
     }
 
     onChange (name, val) {
@@ -63,13 +65,14 @@ class PersonalInformation extends Component {
                 console.log('User cancelled image picker');
             }
             else if (response.error) {
-                console.log('ImagePicker Error: ', response.error);
+                showAlert('Error', response.error);
             }
             else {
                 let source = response.uri;
                 this.setState({
                     avatar: source,
-                    getImage: response
+                    getImage: response,
+                    imageChanged: true
                 });
             }
         });
@@ -98,11 +101,18 @@ class PersonalInformation extends Component {
                 showAlert('Error', 'Failed to upload image to S3');
                 this.setState({loading: false});
             } else {
-                Meteor.collection('users').update(Meteor.userId(), {$set: {"profile.avatar": response.body.postResponse.location}});
-                showAlert('Success', 'Profile updated successfully');
-                this.setState({name: '', number: '', email: '', address: '', username: ''});
-                this.setState({loading: false});
-                this.props.navigation.goBack();
+                let update = {users: {imageUrl: response.body.postResponse.location}};
+                Meteor.call('settings.updateProfileImage', update, (err) => {
+                    if(!err){
+                        showAlert('Success', 'Profile updated successfully');
+                        this.setState({name: '', number: '', email: '', address: '', username: ''});
+                        this.setState({loading: false});
+                        this.props.navigation.goBack();
+                    } else{
+                        showAlert('Error', err.reason);
+                        this.setState({loading: false});
+                    }
+                });
             }
         });
     }
@@ -117,12 +127,12 @@ class PersonalInformation extends Component {
                         <View style = {PersonalInformationStyle.avatarContainer}>
                             <TouchableOpacity
                                 onPress = {this.getImagePicker.bind(this)}>
-                                <Image source = {userAvatar} style = {PersonalInformationStyle.userAvatar}></Image>
+                                <Image source = {userAvatar} style = {PersonalInformationStyle.userAvatar}/>
                             </TouchableOpacity>
                         </View>
 
                         <View style = {PersonalInformationStyle.borderBottom}>
-                            <Icon size = {18} name = "person" style = {PersonalInformationStyle.inputIcon}></Icon>
+                            <Icon size = {18} name = "person" style = {PersonalInformationStyle.inputIcon}/>
                             <TextInput
                                 placeholder = {I18n("SETTINGS_NAME")}
                                 style = {[PersonalInformationStyle.input]}
@@ -135,7 +145,7 @@ class PersonalInformation extends Component {
                             />
                         </View>
                         <View style = {PersonalInformationStyle.borderBottom}>
-                            <Icon size = {18} name = "phone-iphone" style = {PersonalInformationStyle.inputIcon}></Icon>
+                            <Icon size = {18} name = "phone-iphone" style = {PersonalInformationStyle.inputIcon}/>
                             <TextInput
                                 placeholder = {I18n("SETTINGS_CONTACT_NUMBER")}
                                 style = {[PersonalInformationStyle.input]}
@@ -149,7 +159,7 @@ class PersonalInformation extends Component {
                         </View>
 
                         <View style={PersonalInformationStyle.borderBottom}>
-                            <Icon size={18} name="email" style={PersonalInformationStyle.inputIcon}></Icon>
+                            <Icon size={18} name="email" style={PersonalInformationStyle.inputIcon}/>
                             <TextInput
                                 placeholder={I18n("SETTINGS_EMAIL")}
                                 style={[PersonalInformationStyle.input]}
@@ -162,7 +172,7 @@ class PersonalInformation extends Component {
                         </View>
 
                         <View style={PersonalInformationStyle.borderBottom}>
-                            <Icon size={18} name="person" style={PersonalInformationStyle.inputIcon}></Icon>
+                            <Icon size={18} name="person" style={PersonalInformationStyle.inputIcon}/>
                             <TextInput
                                 placeholder={I18n("SETTINGS_USER_NAME")}
                                 style={[PersonalInformationStyle.input]}
@@ -175,7 +185,7 @@ class PersonalInformation extends Component {
                         </View>
 
                         <View style = {PersonalInformationStyle.borderBottom}>
-                            <Icon size = {18} name = "location-on" style = {PersonalInformationStyle.inputIcon}></Icon>
+                            <Icon size = {18} name = "location-on" style = {PersonalInformationStyle.inputIcon}/>
                             <TextInput
                                 placeholder = {I18n("SETTINGS_ADDRESS")}
                                 style = {[PersonalInformationStyle.input]}

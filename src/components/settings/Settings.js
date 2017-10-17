@@ -28,7 +28,7 @@ class Settings extends Component {
                                 onPress = {() => navigate('PersonalInformation')}>
                                 <Text style = {SettingsStyles.headingText}>{I18n("SETTINGS_PERSONAL_INFORMATION")}</Text>
                                 <View style = {[SettingsStyles.row, SettingsStyles.notificationRadio]}>
-                                    <Image source={userAvatar} style = {SettingsStyles.userAvatar}></Image>
+                                    <Image source={userAvatar} style = {SettingsStyles.userAvatar}/>
                                     <Text style = {SettingsStyles.contentText}>{I18n("SETTINGS_EDIT_IMAGE_BUTTON")}</Text>
                                 </View>
                                 <Text style = {SettingsStyles.contentText}>{I18n("SETTINGS_USERNAME")}{user.profile.fullName}</Text>
@@ -45,7 +45,7 @@ class Settings extends Component {
                                 onPress = {() => navigate('AccountSettings')}>
                                 <Text style = {SettingsStyles.headingText}>{I18n("SETTINGS_ACCOUNT_SETTINGS")}</Text>
                                 <Text style = {SettingsStyles.contentText}>{I18n("SETTINGS_CURRENCY")}{user.profile.currency.label ? user.profile.currency.label : 'Not Available'}</Text>
-                                <Text style = {SettingsStyles.contentText}>{I18n("SETTINGS_LANGUAGE")}{user.profile.language ? capitalizeFirstLetter(user.profile.language) : 'Not Available'}</Text>
+                                <Text style = {SettingsStyles.contentText}>{I18n("SETTINGS_LANGUAGE")}{user.profile.language.label ? capitalizeFirstLetter(user.profile.language.label) : 'Not Available'}</Text>
                                 <View style = {SettingsStyles.row}>
                                     <Text style = {SettingsStyles.contentText}>{I18n("SETTINGS_EMAIL_NOTIFICATION")}</Text>
 

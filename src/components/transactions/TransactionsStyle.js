@@ -15,7 +15,7 @@ export const TransactionsStyles = StyleSheet.create({
     marginRight: 15,
     flex: 1,
     flexDirection: 'row',
-      backgroundColor: 'transparent'
+    backgroundColor: 'transparent'
   },
 
   filterContainerTxt: {
@@ -28,7 +28,7 @@ export const TransactionsStyles = StyleSheet.create({
     flex: 1,
     alignItems: 'flex-end',
     justifyContent: 'center',
-      backgroundColor: 'transparent'
+    backgroundColor: 'transparent'
   },
   transitionFilterBg:{
     flex : 1,
@@ -38,11 +38,11 @@ export const TransactionsStyles = StyleSheet.create({
 
   text: {
     fontFamily: 'QuicksandBook-Regular',
-    fontSize: 14,
+    fontSize: 14
   },
 
   textBold:{
-    fontFamily: 'QuicksandBold-Regular',
+    fontFamily: 'QuicksandBold-Regular'
   },
 
   tabContainer:{
@@ -107,28 +107,27 @@ export const TransactionsStyles = StyleSheet.create({
   },
 
   viewTransactionIdAndDateCon:{
-    flex: 0.6,
+    paddingTop: 20,
+    paddingBottom: 15,
     justifyContent: 'center',
     alignItems: 'center'
   },
 
   viewTransactionBankDepositCon: {
-    flex: 0.3,
+    paddingVertical: 20,
     justifyContent: 'center',
     alignItems: 'center'
   },
 
   viewTransactionDepositedInCon: {
-    flex: 0.6,
-    paddingVertical: 10,
-    justifyContent: 'space-around',
+    paddingVertical: 15,
+    justifyContent: 'center',
     alignItems: 'center'
   },
 
   viewTransactionUserInfoCon: {
-    flex: 2,
     alignItems: 'center',
-    paddingTop: 20
+    paddingVertical: 15
 
   },
 
@@ -165,13 +164,10 @@ export const TransactionsStyles = StyleSheet.create({
     backgroundColor: '#ff9c00'
   },
 
-
-  currencyIconCon: {
-    alignItems: 'center',
+  CurrencyViewContainer:{
+    flexDirection : 'row',
+    alignItems: 'center'
   },
-    CurrencyViewContainer:{
-    flexDirection : 'row'
-    },
 
   /*UpdateTransaction Styling*/
 
@@ -289,7 +285,7 @@ export const TransactionsStyles = StyleSheet.create({
 
   userBill: {
     width: 80,
-    height: 80,
+    height: 80
   },
 
   imageCon: {

@@ -79,14 +79,12 @@ export default class ViewTransaction extends Component {
                                 </Text>
                             </View>
                             <View style={[TransactionsStyles.viewTransactionDepositedInCon, TransactionsStyles.borderBottom]}>
-                                <Text style={[TransactionsStyles.text]}>{I18n("TRANSACTIONS_DEPOSITED_BANK")} {this.alertBankName(selectedTransaction.account.bank)}</Text>
-                                <Text style={[TransactionsStyles.text]}>{I18n("TRANSACTIONS_ACCOUNT_NUMBER")} {selectedTransaction.account.number}</Text>
-                                <View style={TransactionsStyles.currencyIconCon}>
-                                    <View style={TransactionsStyles.CurrencyViewContainer}>
-                                        <Text style={[TransactionsStyles.text]}> {I18n("TRANSACTIONS_TRANSACTION_AMOUNT")}</Text>
-                                        <CurrencyIcon name={alterIconName(loggedUserCurrency())} size={18}/>
-                                        <Text style={[TransactionsStyles.textBold, TransactionsStyles.greenText]}> {currencyStandardFormat(selectedTransaction.amount)}</Text>
-                                    </View>
+                                <Text style={[TransactionsStyles.text, TransactionsStyles.paddingBottom]}>{I18n("TRANSACTIONS_DEPOSITED_BANK")} {this.alertBankName(selectedTransaction.account.bank)}</Text>
+                                <Text style={[TransactionsStyles.text, TransactionsStyles.paddingBottom]}>{I18n("TRANSACTIONS_ACCOUNT_NUMBER")} {selectedTransaction.account.number}</Text>
+                                <View style={[TransactionsStyles.CurrencyViewContainer, selectedTransaction.description ? TransactionsStyles.paddingBottom : null]}>
+                                    <Text style={[TransactionsStyles.text]}> {I18n("TRANSACTIONS_TRANSACTION_AMOUNT")}</Text>
+                                    <CurrencyIcon name={alterIconName(loggedUserCurrency())} size={18}/>
+                                    <Text style={[TransactionsStyles.textBold, TransactionsStyles.greenText]}> {currencyStandardFormat(selectedTransaction.amount)}</Text>
                                 </View>
                                 {selectedTransaction.description ?
                                     <Text style={[TransactionsStyles.text]}>{I18n("TRANSACTIONS_DESCRIPTION")}: {selectedTransaction.description}</Text>
@@ -103,7 +101,7 @@ export default class ViewTransaction extends Component {
                             </View>
                             {selectedTransaction.type === 'expense' ?
                                 <View style={[TransactionsStyles.viewTransactionUserInfoCon, TransactionsStyles.borderTop]}>
-                                    <Text style={[TransactionsStyles.text, TransactionsStyles.paddingBottom]}>{I18n("TRANSACTIONS_TRANSACTION_CATEGORY")} : {selectedTransaction.category.name}</Text>
+                                    <Text style={[TransactionsStyles.text]}>{I18n("TRANSACTIONS_TRANSACTION_CATEGORY")} : {selectedTransaction.category.name}</Text>
                                 </View>
                                 : null
                             }

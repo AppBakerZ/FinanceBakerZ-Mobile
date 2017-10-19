@@ -172,7 +172,8 @@ export const TransactionsStyles = StyleSheet.create({
   /*UpdateTransaction Styling*/
 
   renderIncomeForm: {
-    padding: 15
+    paddingHorizontal: 15,
+    paddingVertical: 10
   },
 
   modal: {
@@ -188,35 +189,54 @@ export const TransactionsStyles = StyleSheet.create({
   },
 
   updateTranAccountCon: {
-    flex: 1,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    paddingVertical: 8.5
   },
 
   updateTranAmountCon: {
-    flex: 1,
     justifyContent: 'center',
     position: 'relative'
   },
 
-  updateTranDateCon: {
-    flex: 1,
-    justifyContent: 'center'
+  tranDateTimeCon: {
+    justifyContent: 'center',
+    paddingVertical: 12
   },
 
   updateTranTypeCon: {
-    flex: 1,
     justifyContent: 'center',
     position: 'relative'
   },
 
-  updateTranTimeCon:{
-    flex: 1,
-    justifyContent: 'center'
+  updateTranTypeConIOS: {
+    justifyContent: 'center',
+    position: 'relative',
+    paddingVertical: 8.5
   },
 
-  updateTranProjectCon: {
-    flex: 1,
-    justifyContent: 'center'
+  picker:{
+    marginLeft : -7,
+    height: 40,
+    marginTop: 5
+  },
+
+  titleText: {
+    paddingBottom: 5
+  },
+
+  chooseBill: {
+    paddingTop: 22.5
+  },
+
+  widthoutBillImage: {
+    paddingBottom: 22.5,
+    borderBottomColor: '#EEEEEE',
+    borderBottomWidth: 1
+  },
+
+  widthBillImage: {
+    paddingTop: 15,
+    marginBottom: 10
   },
 
   updateTranRadioCon: {
@@ -245,7 +265,9 @@ export const TransactionsStyles = StyleSheet.create({
 
   updateTranAccDropDown: {
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingVertical: 6
   },
 
   input: {
@@ -254,8 +276,14 @@ export const TransactionsStyles = StyleSheet.create({
     paddingLeft: -15
   },
 
+  inputWithTitle: {
+    fontFamily: 'QuicksandBook-Regular',
+    height: 45,
+    paddingLeft: -15
+  },
+
   iconRight: {
-    flex: 1,
+    paddingRight: 20,
     textAlign: 'right'
   },
 
@@ -290,7 +318,7 @@ export const TransactionsStyles = StyleSheet.create({
 
   imageCon: {
     flex: 1,
-    paddingBottom: 10
+    paddingBottom: 15
   }
 
 });

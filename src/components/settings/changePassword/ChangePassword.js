@@ -6,6 +6,7 @@ import Button from 'FinanceBakerZ/src/components/button/Button';
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
 import {I18n, showAlert} from 'FinanceBakerZ/src/customLibrary';
 import  {Accounts} from 'react-native-meteor';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 export default class ChangePassword extends Component {
     constructor(props) {
@@ -54,9 +55,9 @@ export default class ChangePassword extends Component {
         return (
             <ViewContainer>
                 <Image source = {require('FinanceBakerZ/src/images/app-background.png')} style = {ChangePasswordStyle.backgroundImage}>
-                    <View style = {ChangePasswordStyle.inputContainer}>
-                        <View style = {ChangePasswordStyle.borderBottom}>
-                            <KeyboardAvoidingView>
+                    <KeyboardAwareScrollView>
+                        <View style = {ChangePasswordStyle.inputContainer}>
+                            <View style = {ChangePasswordStyle.borderBottom}>
                                 <Icon size = {18} name = "password" style = {ChangePasswordStyle.inputIcon}/>
                                 <TextInput
                                     placeholder = {I18n("SETTINGS_CURRENT_PASSWORD")}
@@ -68,10 +69,8 @@ export default class ChangePassword extends Component {
                                     underlineColorAndroid = "transparent"
                                     value = {this.state.oldPassword}
                                 />
-                            </KeyboardAvoidingView>
-                        </View>
-                        <View style = {ChangePasswordStyle.borderBottom}>
-                            <KeyboardAvoidingView>
+                            </View>
+                            <View style = {ChangePasswordStyle.borderBottom}>
                                 <Icon size = {18} name = "password" style = {ChangePasswordStyle.inputIcon}/>
                                 <TextInput
                                     placeholder = {I18n("SETTINGS_NEW_PASSWORD")}
@@ -83,10 +82,8 @@ export default class ChangePassword extends Component {
                                     underlineColorAndroid = "transparent"
                                     value = {this.state.newPassword}
                                 />
-                            </KeyboardAvoidingView>
-                        </View>
-                        <View style = {ChangePasswordStyle.borderBottom}>
-                            <KeyboardAvoidingView>
+                            </View>
+                            <View style = {ChangePasswordStyle.borderBottom}>
                                 <Icon size = {18} name = "password" style = {ChangePasswordStyle.inputIcon}/>
                                 <TextInput
                                     placeholder = {I18n("SETTINGS_REPEAT_NEW_PASSWORD")}
@@ -98,10 +95,9 @@ export default class ChangePassword extends Component {
                                     underlineColorAndroid = "transparent"
                                     value = {this.state.alterPassword}
                                 />
-                            </KeyboardAvoidingView>
+                            </View>
                         </View>
-
-                    </View>
+                    </KeyboardAwareScrollView>
 
                     <View style={ChangePasswordStyle.btnContainer}>
                         <Button

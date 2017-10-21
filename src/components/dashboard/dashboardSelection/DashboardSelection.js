@@ -157,7 +157,7 @@ export default class DashboardSelection extends Component{
           <View style={DashboardSelStyles.DbSelectionBankAcc}>
             <TouchableOpacity style={DashboardSelStyles.DbSelectionBankAccBtn} onPress={() => this.refs.modal.open()} activeOpacity={0.7}>
               <Text style={[DashboardSelStyles.DbSelectionText, DashboardSelStyles.DbSelectionBankAccText]}>Bank Account</Text>
-              <Icon size={20} style={DashboardSelStyles.DbSelectionBankAccIcon} name="down-arrow"></Icon>
+              <Icon size={20} style={DashboardSelStyles.DbSelectionBankAccIcon} name="down-arrow"/>
             </TouchableOpacity>
           </View>
         </View>

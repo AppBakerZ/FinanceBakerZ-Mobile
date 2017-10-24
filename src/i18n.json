@@ -1,9 +1,9 @@
 {
   "en": {
     "DASHBOARD_AVAILABLE_BALANCE": "Your Available Balance is",
-    "DASHBOARD_TOTAL_INCOMES": "Your Total Incomes are",
+    "DASHBOARD_TOTAL_INCOMES": "Your Incomes",
     "DASHBOARD_TOTAL_INCOMES_BUTTON": "Incomes Report",
-    "DASHBOARD_TOTAL_EXPENSES": "Your Total Expenses are",
+    "DASHBOARD_TOTAL_EXPENSES": "Your Expenses",
     "DASHBOARD_TOTAL_EXPENSES_BUTTON": "Expenses Report",
     "DASHBOARD_RECENT_INCOMES": "Recent Incomes",
     "DASHBOARD_RECENT_EXPENSES": "Recent Expenses",

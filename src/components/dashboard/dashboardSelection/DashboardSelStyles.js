@@ -212,4 +212,3 @@ export const DashboardSelStyles = StyleSheet.create({
     fontSize: 25
   }
 });
-

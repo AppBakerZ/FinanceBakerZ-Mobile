@@ -319,6 +319,11 @@ export const TransactionsStyles = StyleSheet.create({
   imageCon: {
     flex: 1,
     paddingBottom: 15
-  }
+  },
 
+  filterApplied: {
+    color: '#1F9058',
+    fontSize: 22,
+    fontFamily: 'QuicksandBold-Regular'
+  }
 });

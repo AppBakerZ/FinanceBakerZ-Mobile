@@ -167,7 +167,7 @@ export  default  class TransactionSelection extends  Component {
           <View style={TransactionSelStyles.DbSelectionBankAcc}>
             <TouchableOpacity style={TransactionSelStyles.DbSelectionBankAccBtn} onPress={() => this.refs.modal.open()} activeOpacity={0.7}>
               <Text style={[TransactionSelStyles.DbSelectionText, TransactionSelStyles.DbSelectionBankAccText]}>Bank Account</Text>
-              <Icon size={20} style={TransactionSelStyles.DbSelectionBankAccIcon} name="down-arrow"></Icon>
+              <Icon size={20} style={TransactionSelStyles.DbSelectionBankAccIcon} name="down-arrow"/>
             </TouchableOpacity>
           </View>
         </View>

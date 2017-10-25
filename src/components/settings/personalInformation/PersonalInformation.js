@@ -9,6 +9,7 @@ import  Meteor, { createContainer } from 'react-native-meteor';
 import ImagePicker from 'react-native-image-picker';
 import { RNS3 } from 'react-native-aws3';
 import Settings from 'FinanceBakerZ/settings.json';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 class PersonalInformation extends Component {
     constructor(props) {
@@ -123,81 +124,81 @@ class PersonalInformation extends Component {
         return (
             <ViewContainer>
                 <Image source = {require('FinanceBakerZ/src/images/app-background.png')} style = {PersonalInformationStyle.backgroundImage}>
-                    <View style = {PersonalInformationStyle.inputContainer}>
-                        <View style = {PersonalInformationStyle.avatarContainer}>
-                            <TouchableOpacity
-                                onPress = {this.getImagePicker.bind(this)}>
-                                <Image source = {userAvatar} style = {PersonalInformationStyle.userAvatar}/>
-                            </TouchableOpacity>
-                        </View>
+                    <KeyboardAwareScrollView>
+                        <View style = {PersonalInformationStyle.inputContainer}>
+                            <View style = {PersonalInformationStyle.avatarContainer}>
+                                <TouchableOpacity onPress = {this.getImagePicker.bind(this)}>
+                                    <Image source = {userAvatar} style = {PersonalInformationStyle.userAvatar}/>
+                                </TouchableOpacity>
+                            </View>
 
-                        <View style = {PersonalInformationStyle.borderBottom}>
-                            <Icon size = {18} name = "person" style = {PersonalInformationStyle.inputIcon}/>
-                            <TextInput
-                                placeholder = {I18n("SETTINGS_NAME")}
-                                style = {[PersonalInformationStyle.input]}
-                                returnKeyType = "next"
-                                maxLength = {25}
-                                autoCorrect = {false}
-                                onChangeText = {this.onChange.bind(this, 'name')}
-                                underlineColorAndroid = "transparent"
-                                value = {this.state.name}
-                            />
-                        </View>
-                        <View style = {PersonalInformationStyle.borderBottom}>
-                            <Icon size = {18} name = "phone-iphone" style = {PersonalInformationStyle.inputIcon}/>
-                            <TextInput
-                                placeholder = {I18n("SETTINGS_CONTACT_NUMBER")}
-                                style = {[PersonalInformationStyle.input]}
-                                returnKeyType = "next"
-                                maxLength = {50}
-                                autoCorrect = {false}
-                                onChangeText = {this.onChange.bind(this, 'number')}
-                                underlineColorAndroid = "transparent"
-                                value = {this.state.number}
-                            />
-                        </View>
+                            <View style = {PersonalInformationStyle.borderBottom}>
+                                <Icon size = {18} name = "person" style = {PersonalInformationStyle.inputIcon}/>
+                                <TextInput
+                                    placeholder = {I18n("SETTINGS_NAME")}
+                                    style = {[PersonalInformationStyle.input]}
+                                    returnKeyType = "next"
+                                    maxLength = {25}
+                                    autoCorrect = {false}
+                                    onChangeText = {this.onChange.bind(this, 'name')}
+                                    underlineColorAndroid = "transparent"
+                                    value = {this.state.name}
+                                />
+                            </View>
+                            <View style = {PersonalInformationStyle.borderBottom}>
+                                <Icon size = {18} name = "phone-iphone" style = {PersonalInformationStyle.inputIcon}/>
+                                <TextInput
+                                    placeholder = {I18n("SETTINGS_CONTACT_NUMBER")}
+                                    style = {[PersonalInformationStyle.input]}
+                                    returnKeyType = "next"
+                                    maxLength = {50}
+                                    autoCorrect = {false}
+                                    onChangeText = {this.onChange.bind(this, 'number')}
+                                    underlineColorAndroid = "transparent"
+                                    value = {this.state.number}
+                                />
+                            </View>
 
-                        <View style={PersonalInformationStyle.borderBottom}>
-                            <Icon size={18} name="email" style={PersonalInformationStyle.inputIcon}/>
-                            <TextInput
-                                placeholder={I18n("SETTINGS_EMAIL")}
-                                style={[PersonalInformationStyle.input]}
-                                returnKeyType="next"
-                                autoCorrect={false}
-                                onChangeText={this.onChange.bind(this, 'email')}
-                                underlineColorAndroid="transparent"
-                                value={this.state.email}
-                            />
-                        </View>
+                            <View style={PersonalInformationStyle.borderBottom}>
+                                <Icon size={18} name="email" style={PersonalInformationStyle.inputIcon}/>
+                                <TextInput
+                                    placeholder={I18n("SETTINGS_EMAIL")}
+                                    style={[PersonalInformationStyle.input]}
+                                    returnKeyType="next"
+                                    autoCorrect={false}
+                                    onChangeText={this.onChange.bind(this, 'email')}
+                                    underlineColorAndroid="transparent"
+                                    value={this.state.email}
+                                />
+                            </View>
 
-                        <View style={PersonalInformationStyle.borderBottom}>
-                            <Icon size={18} name="person" style={PersonalInformationStyle.inputIcon}/>
-                            <TextInput
-                                placeholder={I18n("SETTINGS_USER_NAME")}
-                                style={[PersonalInformationStyle.input]}
-                                returnKeyType="next"
-                                autoCorrect={false}
-                                onChangeText={this.onChange.bind(this, 'username')}
-                                underlineColorAndroid="transparent"
-                                value={this.state.username}
-                            />
-                        </View>
+                            <View style={PersonalInformationStyle.borderBottom}>
+                                <Icon size={18} name="person" style={PersonalInformationStyle.inputIcon}/>
+                                <TextInput
+                                    placeholder={I18n("SETTINGS_USER_NAME")}
+                                    style={[PersonalInformationStyle.input]}
+                                    returnKeyType="next"
+                                    autoCorrect={false}
+                                    onChangeText={this.onChange.bind(this, 'username')}
+                                    underlineColorAndroid="transparent"
+                                    value={this.state.username}
+                                />
+                            </View>
 
-                        <View style = {PersonalInformationStyle.borderBottom}>
-                            <Icon size = {18} name = "location-on" style = {PersonalInformationStyle.inputIcon}/>
-                            <TextInput
-                                placeholder = {I18n("SETTINGS_ADDRESS")}
-                                style = {[PersonalInformationStyle.input]}
-                                returnKeyType = "next"
-                                autoCorrect = {false}
-                                onChangeText = {this.onChange.bind(this, 'address')}
-                                underlineColorAndroid = "transparent"
-                                value = {this.state.address}
-                            />
+                            <View style = {[PersonalInformationStyle.borderBottom]}>
+                                <Icon size = {18} name = "location-on" style = {PersonalInformationStyle.inputIcon}/>
+                                <TextInput
+                                    placeholder = {I18n("SETTINGS_ADDRESS")}
+                                    style = {[PersonalInformationStyle.input]}
+                                    returnKeyType = "next"
+                                    autoCorrect = {false}
+                                    onChangeText = {this.onChange.bind(this, 'address')}
+                                    underlineColorAndroid = "transparent"
+                                    value = {this.state.address}
+                                />
+                            </View>
                         </View>
-                    </View>
-
+                    </KeyboardAwareScrollView>
                     <View style={PersonalInformationStyle.btnContainer}>
                         <Button
                             title="Update"

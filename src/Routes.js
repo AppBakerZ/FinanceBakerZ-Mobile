@@ -59,14 +59,9 @@ export const Auth = StackNavigator({
 const header = ({ navigation, screenProps }) => {
   let {state, navigate} = navigation;
   let headerLeft  = (
-      <Icon  name="menu"
-             color="#45A27A"
-             size={32}
-             style={{marginLeft: 5, padding: 10}}
-             onPress={() => {
-               navigate('DrawerOpen')
-             }}
-      />
+      <TouchableOpacity onPress={() => navigate('DrawerOpen')} activeOpacity={0.7}>
+        <MaterialIcons name="menu" size={32} color='#45A27A' style={{marginLeft: 5, padding: 10}}/>
+      </TouchableOpacity>
   );
 
   let headerTitle  = (
@@ -76,7 +71,7 @@ const header = ({ navigation, screenProps }) => {
   let { user } = screenProps;
   let headerRight = (
       <TouchableOpacity
-          style={{width: 50, height: 50, marginRight: 10}}
+          style={{width: 45, height: 45, marginRight: 10}}
           activeOpacity={0.7}
           onPress={() => {navigate('Settings')}}
       >
@@ -86,7 +81,7 @@ const header = ({ navigation, screenProps }) => {
   );
 
   let  headerStyle  = {
-    height: 70,
+    height: 60,
     backgroundColor: '#ffffff'
   };
 
@@ -99,12 +94,7 @@ function nestingHeaders(routeName, renderRightIcon) {
     let headerRight ;
     let {state, navigate} = navigation;
     if(renderRightIcon && renderRightIcon.iconChecked){
-      headerRight  =  (<Icon
-          name="checked"
-          size={28}
-          style={{paddingRight: 15}}
-          onPress={() => {state.params.submit()}}
-      />);
+      headerRight  =  (<MaterialIcons name="check" size={30} style={{paddingRight: 15}} onPress={() => {state.params.submit()}}/>);
     } else if (renderRightIcon && renderRightIcon.iconDelete) {
       headerRight  =  (<MaterialIcons
           name="delete"
@@ -116,7 +106,7 @@ function nestingHeaders(routeName, renderRightIcon) {
       let { user } = screenProps;
       headerRight = (
           <TouchableOpacity
-              style={{width: 50, height: 50, marginRight: 10}}
+              style={{width: 40, height: 40, marginRight: 10}}
               activeOpacity={0.7}
               onPress={() => {navigate('Settings')}}
           >
@@ -134,7 +124,7 @@ function nestingHeaders(routeName, renderRightIcon) {
         fontSize: 20
       },
       headerStyle: {
-        height: 70,
+        height: 60,
         backgroundColor: '#fff'
       },
       headerTintColor: '#00562E'

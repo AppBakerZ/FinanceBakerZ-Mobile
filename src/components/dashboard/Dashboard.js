@@ -110,31 +110,28 @@ class Dashboard extends Component {
       <ViewContainer>
         <View style={DashboardStyles.imgContainer}>
           {(!loading  ?
-          <Image style={DashboardStyles.img} source={require('FinanceBakerZ/src/images/dashboard/dollars.png')}>
+            <Image style={DashboardStyles.img} source={require('FinanceBakerZ/src/images/dashboard/dollars.png')}>
               <Text style={DashboardStyles.textWhite}>{I18n("DASHBOARD_AVAILABLE_BALANCE")}</Text>
-                <View style={DashboardStyles.currencyCon}>
-                  {(loggedUserCurrency() ? <CurrencyIcon style={DashboardStyles.currencyIcon} size={30} color="#fff" name={alterIconName(loggedUserCurrency())} /> : <Text></Text>)}
-                  <Text style={DashboardStyles.textPrice}>{currencyStandardFormat(this.state.availableBalance)}
-                  </Text>
-                </View>
-          </Image>
+              <View style={DashboardStyles.currencyCon}>
+                {(loggedUserCurrency() ? <CurrencyIcon style={DashboardStyles.currencyIcon} size={30} color="#fff" name={alterIconName(loggedUserCurrency())} /> : <Text/>)}
+                <Text style={DashboardStyles.textPrice}>{currencyStandardFormat(this.state.availableBalance)}
+                </Text>
+              </View>
+            </Image>
             : <Image style={DashboardStyles.img} source={require('FinanceBakerZ/src/images/dashboard/dollars.png')}><Loader size={30} color="#fff" /></Image>)}
         </View>
         <View style={DashboardStyles.dateTabContainer} >
           <TouchableOpacity style={DashboardStyles.filterMainContainer} disabled={this.state.loading} activeOpacity={0.7} onPress={() => navigate('Selection', [{params}, this.state.updateParentState, this.updateByAccount, this.state.multiple, this.state.bankAcc])}>
             <View style={DashboardStyles.filterContainer}>
-              <Text style={DashboardStyles.text}>Accounts: {(bankList.length ? bankList.map((val, i, arr) => (val.check ? ' ' + val.name + ' |' : '')) : 'All')}</Text>
-              <Text style={DashboardStyles.text}>
-                {(date.length ? date.map((val, i, arr) => {
-                    if(val.checked){
-                      if(val.selected == 'Custom'){
-                        return (i == arr.length - 1 ?  val.selected + ': ' + arr[i - 1].selectedDate + ' - ' + val.selectedDate : false);
-                      }else{
-                        return val.selected + ': ' + val.selectedDate;
-                      }
-                    }
-                  }) : 'Custom: ' + formatDate({type: 'startOf', duration: 'month', format: 'MMM DD, YYYY'}) + ' - ' + formatDate({format: 'MMM DD, YYYY'}))}
-              </Text>
+              {bankList.length || date.length ?
+                <Text style={DashboardStyles.greenText}>Filters Applied</Text>
+                :
+                <View>
+                  <Text style={DashboardStyles.text}>Accounts: All</Text>
+                  <Text style={DashboardStyles.text}>Custom: {formatDate({type: 'startOf', duration: 'month', format: 'MMM DD, YYYY'}) + ' - ' + formatDate({format: 'MMM DD, YYYY'})}
+                  </Text>
+                </View>
+              }
             </View>
             <View style={DashboardStyles.filterIconContainer}>
               <Icon name="filter" size={25} />
@@ -145,19 +142,19 @@ class Dashboard extends Component {
               <View style={[DashboardStyles.childContainer, DashboardStyles.childContainerBorder]}>
               <Text style={DashboardStyles.textHeading}>{I18n("DASHBOARD_TOTAL_INCOMES")}</Text>
                 <View style={DashboardStyles.currencyCon}>
-                  {loggedUserCurrency() ? <CurrencyIcon style={DashboardStyles.currencyIcon} size={20} color="#1F9058" name={alterIconName(loggedUserCurrency())} /> : <Text></Text>}
+                  {loggedUserCurrency() ? <CurrencyIcon style={DashboardStyles.currencyIcon} size={20} color="#1F9058" name={alterIconName(loggedUserCurrency())} /> : <Text/>}
                   <Text style={DashboardStyles.greenText}>{currencyStandardFormat(this.state.totalIncomes)}</Text>
                 </View>
             </View>
               : <View style={[DashboardStyles.childContainer, DashboardStyles.childContainerBorder]}><Loader size={20} color="#008142" /></View>)}
             {(!loading ?
-                <View style={DashboardStyles.childContainer}>
-                  <Text style={DashboardStyles.textHeading}>{I18n("DASHBOARD_TOTAL_EXPENSES")}</Text>
-                  <View style={DashboardStyles.currencyCon}>
-                    {loggedUserCurrency() ? <CurrencyIcon style={DashboardStyles.currencyIcon} size={20} color="#C71818" name={alterIconName(loggedUserCurrency())} /> : <Text></Text>}
-                    <Text style={DashboardStyles.redText}>{currencyStandardFormat(this.state.totalExpenses)}</Text>
-                  </View>
-                </View> : <View style={DashboardStyles.childContainer}><Loader size={20} color="#008142" /></View>)}
+              <View style={DashboardStyles.childContainer}>
+                <Text style={DashboardStyles.textHeading}>{I18n("DASHBOARD_TOTAL_EXPENSES")}</Text>
+                <View style={DashboardStyles.currencyCon}>
+                  {loggedUserCurrency() ? <CurrencyIcon style={DashboardStyles.currencyIcon} size={20} color="#C71818" name={alterIconName(loggedUserCurrency())} /> : <Text/>}
+                  <Text style={DashboardStyles.redText}>{currencyStandardFormat(this.state.totalExpenses)}</Text>
+                </View>
+              </View> : <View style={DashboardStyles.childContainer}><Loader size={20} color="#008142" /></View>)}
           </View>
         </View>
         <View style={DashboardStyles.bottomTabContainer}>

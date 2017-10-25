@@ -98,35 +98,31 @@ export default class ProjectSelectionScreen extends Component{
           </View>
         </View>
         <View style={ProjectSelectionStyles.filterCon}>
-          <View style={ProjectSelectionStyles.projectNameCon}>
+          <View style={ProjectSelectionStyles.inputContainer}>
             <KeyboardAvoidingView>
-              <View style={ProjectSelectionStyles.inputContainer}>
-                <TextInput
-                  placeholder={I18n('PROJECTS_PROJECT_NAME')}
-                  style={ProjectSelectionStyles.input}
-                  returnKeyType="next"
-                  maxLength = {30}
-                  autoCorrect={false}
-                  onChangeText={this.onChangeFilter.bind(this, 'name')}
-                  underlineColorAndroid="transparent"
-                  value={filter.name}
-                />
-              </View>
+              <TextInput
+                placeholder={I18n('PROJECTS_PROJECT_NAME')}
+                style={ProjectSelectionStyles.input}
+                returnKeyType="next"
+                maxLength = {30}
+                autoCorrect={false}
+                onChangeText={this.onChangeFilter.bind(this, 'name')}
+                underlineColorAndroid="transparent"
+                value={filter.name}
+              />
             </KeyboardAvoidingView>
           </View>
-          <View style={ProjectSelectionStyles.clientNameCon}>
+          <View style={ProjectSelectionStyles.inputContainer}>
             <KeyboardAvoidingView>
-              <View style={ProjectSelectionStyles.inputContainer}>
-                <TextInput
-                  placeholder={I18n('PROJECTS_CLIENT_NAME')}
-                  style={ProjectSelectionStyles.input}
-                  maxLength = {30}
-                  autoCorrect={false}
-                  onChangeText={this.onChangeFilter.bind(this, 'client.name')}
-                  underlineColorAndroid="transparent"
-                  value={filter.client.name}
-                />
-              </View>
+              <TextInput
+                placeholder={I18n('PROJECTS_CLIENT_NAME')}
+                style={ProjectSelectionStyles.input}
+                maxLength = {30}
+                autoCorrect={false}
+                onChangeText={this.onChangeFilter.bind(this, 'client.name')}
+                underlineColorAndroid="transparent"
+                value={filter.client.name}
+              />
             </KeyboardAvoidingView>
           </View>
           <View style={ProjectSelectionStyles.filterStatus}>

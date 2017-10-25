@@ -15,7 +15,7 @@ export const TransactionsStyles = StyleSheet.create({
     marginRight: 15,
     flex: 1,
     flexDirection: 'row',
-      backgroundColor: 'transparent'
+    backgroundColor: 'transparent'
   },
 
   filterContainerTxt: {
@@ -28,7 +28,7 @@ export const TransactionsStyles = StyleSheet.create({
     flex: 1,
     alignItems: 'flex-end',
     justifyContent: 'center',
-      backgroundColor: 'transparent'
+    backgroundColor: 'transparent'
   },
   transitionFilterBg:{
     flex : 1,
@@ -38,11 +38,11 @@ export const TransactionsStyles = StyleSheet.create({
 
   text: {
     fontFamily: 'QuicksandBook-Regular',
-    fontSize: 14,
+    fontSize: 14
   },
 
   textBold:{
-    fontFamily: 'QuicksandBold-Regular',
+    fontFamily: 'QuicksandBold-Regular'
   },
 
   tabContainer:{
@@ -107,28 +107,27 @@ export const TransactionsStyles = StyleSheet.create({
   },
 
   viewTransactionIdAndDateCon:{
-    flex: 0.6,
+    paddingTop: 20,
+    paddingBottom: 15,
     justifyContent: 'center',
     alignItems: 'center'
   },
 
   viewTransactionBankDepositCon: {
-    flex: 0.3,
+    paddingVertical: 20,
     justifyContent: 'center',
     alignItems: 'center'
   },
 
   viewTransactionDepositedInCon: {
-    flex: 0.6,
-    paddingVertical: 10,
-    justifyContent: 'space-around',
+    paddingVertical: 15,
+    justifyContent: 'center',
     alignItems: 'center'
   },
 
   viewTransactionUserInfoCon: {
-    flex: 2,
     alignItems: 'center',
-    paddingTop: 20
+    paddingVertical: 15
 
   },
 
@@ -165,18 +164,16 @@ export const TransactionsStyles = StyleSheet.create({
     backgroundColor: '#ff9c00'
   },
 
-
-  currencyIconCon: {
-    alignItems: 'center',
+  CurrencyViewContainer:{
+    flexDirection : 'row',
+    alignItems: 'center'
   },
-    CurrencyViewContainer:{
-    flexDirection : 'row'
-    },
 
   /*UpdateTransaction Styling*/
 
   renderIncomeForm: {
-    padding: 15
+    paddingHorizontal: 15,
+    paddingVertical: 10
   },
 
   modal: {
@@ -192,35 +189,54 @@ export const TransactionsStyles = StyleSheet.create({
   },
 
   updateTranAccountCon: {
-    flex: 1,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    paddingVertical: 8.5
   },
 
   updateTranAmountCon: {
-    flex: 1,
     justifyContent: 'center',
     position: 'relative'
   },
 
-  updateTranDateCon: {
-    flex: 1,
-    justifyContent: 'center'
+  tranDateTimeCon: {
+    justifyContent: 'center',
+    paddingVertical: 12
   },
 
   updateTranTypeCon: {
-    flex: 1,
     justifyContent: 'center',
     position: 'relative'
   },
 
-  updateTranTimeCon:{
-    flex: 1,
-    justifyContent: 'center'
+  updateTranTypeConIOS: {
+    justifyContent: 'center',
+    position: 'relative',
+    paddingVertical: 8.5
   },
 
-  updateTranProjectCon: {
-    flex: 1,
-    justifyContent: 'center'
+  picker:{
+    marginLeft : -7,
+    height: 40,
+    marginTop: 5
+  },
+
+  titleText: {
+    paddingBottom: 5
+  },
+
+  chooseBill: {
+    paddingTop: 22.5
+  },
+
+  widthoutBillImage: {
+    paddingBottom: 22.5,
+    borderBottomColor: '#EEEEEE',
+    borderBottomWidth: 1
+  },
+
+  widthBillImage: {
+    paddingTop: 15,
+    marginBottom: 10
   },
 
   updateTranRadioCon: {
@@ -249,7 +265,9 @@ export const TransactionsStyles = StyleSheet.create({
 
   updateTranAccDropDown: {
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingVertical: 6
   },
 
   input: {
@@ -258,8 +276,14 @@ export const TransactionsStyles = StyleSheet.create({
     paddingLeft: -15
   },
 
+  inputWithTitle: {
+    fontFamily: 'QuicksandBook-Regular',
+    height: 45,
+    paddingLeft: -15
+  },
+
   iconRight: {
-    flex: 1,
+    paddingRight: 20,
     textAlign: 'right'
   },
 
@@ -289,12 +313,17 @@ export const TransactionsStyles = StyleSheet.create({
 
   userBill: {
     width: 80,
-    height: 80,
+    height: 80
   },
 
   imageCon: {
     flex: 1,
-    paddingBottom: 10
-  }
+    paddingBottom: 15
+  },
 
+  filterApplied: {
+    color: '#1F9058',
+    fontSize: 22,
+    fontFamily: 'QuicksandBold-Regular'
+  }
 });

@@ -8,11 +8,11 @@ export const PersonalInformationStyle = StyleSheet.create({
         height: null
     },
     inputContainer: {
-        flex: 4,
+        //flex: 4,
         paddingTop: 30
     },
     btnContainer: {
-        flex: 1.8,
+        //flex: 1.8,
         justifyContent: 'flex-end'
     },
     btn: {

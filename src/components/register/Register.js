@@ -47,12 +47,17 @@ export default class Register extends Component {
         selector = {email: usernameOrEmail};
         const key = Object.keys(selector)[0];
         let avatar = this.getImgFromGravatar(usernameOrEmail);
-        let currency = {symbol: "$", name: "Dollar", symbol_native: "$", decimal_digits: 2, rounding: 0},
-          emailNotification = true;
+        //let currency = {symbol: "$", name: "Dollar", symbol_native: "$", decimal_digits: 2, rounding: 0},
+        //emailNotification = true;
+        let currency = {label: "Pakistani Rupee", value: "currency-Pakistani-Rupee"},
+            language = { label: 'English', value: 'en', direction: 'ltr' },
+            businessPlan = 'Free',
+            emailNotification = true;
+
         Accounts.createUser({
           [key]: selector[key],
           password,
-          profile: {fullName, currency, emailNotification, avatar }
+          profile: {fullName, currency, emailNotification, avatar, language, businessPlan }
         }, (err) => {
           if(err){
             this.setState({loading: false});
@@ -82,7 +87,7 @@ export default class Register extends Component {
             <KeyboardAvoidingView>
               <ScrollView>
                 <View style={RegisterStyles.borderBottom}>
-                  <Icon size={18} name="person" style={RegisterStyles.inputIcon} ></Icon>
+                  <Icon size={18} name="person" style={RegisterStyles.inputIcon}/>
                   <TextInput
                     placeholder='Full Name'
                     style={RegisterStyles.input}
@@ -94,7 +99,7 @@ export default class Register extends Component {
                   />
                 </View>
                 <View style={RegisterStyles.borderBottom}>
-                  <Icon size={18} name="email" style={RegisterStyles.inputIcon} ></Icon>
+                  <Icon size={18} name="email" style={RegisterStyles.inputIcon}/>
                   <TextInput
                     placeholder='Email'
                     keyboardType="email-address"
@@ -109,7 +114,7 @@ export default class Register extends Component {
                   />
                 </View>
                 <View style={RegisterStyles.borderBottom}>
-                  <Icon size={18} name="password" style={RegisterStyles.inputIcon} ></Icon>
+                  <Icon size={18} name="password" style={RegisterStyles.inputIcon}/>
                   <TextInput
                     placeholder='Password'
                     secureTextEntry

@@ -26,15 +26,6 @@ export const ProjectSelectionStyles = StyleSheet.create({
     flex: 1
   },
 
-  projectNameCon: {
-    justifyContent: 'center'
-  },
-
-  clientNameCon: {
-    justifyContent: 'center'
-
-  },
-
   filterStatus: {
     borderBottomColor: '#F5F5F5',
     borderBottomWidth: 1,
@@ -50,7 +41,9 @@ export const ProjectSelectionStyles = StyleSheet.create({
 
   inputContainer: {
     borderBottomWidth: 1,
-    borderBottomColor: '#F5F5F5'
+    borderBottomColor: '#F5F5F5',
+    paddingVertical: 6.5,
+    justifyContent: 'center'
   },
 
   modal: {

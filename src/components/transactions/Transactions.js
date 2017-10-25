@@ -75,18 +75,16 @@ class Transactions extends Component {
             <Image source={require('FinanceBakerZ/src/images/filterBg.png')} style={TransactionsStyles.transitionFilterBg}>
               <TouchableOpacity style={TransactionsStyles.filterMainContainer}  activeOpacity={0.7} onPress={() => navigate('Selection', {params, multiple, bankAcc, updateParentState, transactionQuery, updateQuery})} >
                 <View style={TransactionsStyles.filterContainerTxt}>
-                  <Text style={TransactionsStyles.text}>Accounts: {(bankList.length ? bankList.map((val, i, arr) => (val.check ? ' ' + val.name + ' |' : '')) : 'All')}</Text>
-                  <Text style={TransactionsStyles.text}>
-                    {(date.length ? date.map((val, i, arr) => {
-                      if(val.checked){
-                        if(val.selected == 'Custom'){
-                          return (i == arr.length - 1 ?  val.selected + ': ' + arr[i - 1].selectedDate + ' - ' + val.selectedDate : false);
-                        }else{
-                          return val.selected + ': ' + val.selectedDate;
-                        }
-                      }
-                    }) : 'Custom: ' + formatDate({type: 'startOf', duration: 'month', format: 'MMM DD, YYYY'}) + ' - ' + formatDate({format: 'MMM DD, YYYY'}))}
-                  </Text>
+                  {bankList.length || date.length ?
+                      <Text style={TransactionsStyles.filterApplied}>Filters Applied</Text>
+                      :
+                      <View>
+                        <Text style={TransactionsStyles.text}>Accounts: All</Text>
+                        <Text style={TransactionsStyles.text}>
+                          Custom: {formatDate({type: 'startOf', duration: 'month', format: 'MMM DD, YYYY'}) + ' - ' + formatDate({format: 'MMM DD, YYYY'})}
+                        </Text>
+                      </View>
+                  }
                 </View>
                 <View style={TransactionsStyles.filterIconContainer}>
                   <Icon name="filter" size={25} />

@@ -64,7 +64,7 @@ export default class Login extends Component {
                     <View style={LoginStyles.formContainer}>
                         <KeyboardAvoidingView>
                             <View style={LoginStyles.borderBottom}>
-                                <Icon size={18}  name="person" style={LoginStyles.inputIcon} ></Icon>
+                                <Icon size={18}  name="person" style={LoginStyles.inputIcon}/>
                                 <TextInput
                                     placeholder='Username'
                                     style={[LoginStyles.input]}
@@ -79,7 +79,7 @@ export default class Login extends Component {
                                     />
                             </View>
                             <View style={LoginStyles.borderBottom}>
-                                <Icon size={18} name="email"  style={LoginStyles.inputIcon} ></Icon>
+                                <Icon size={18} name="password"  style={LoginStyles.inputIcon}/>
                                 <TextInput
                                     placeholder='Password'
                                     style={LoginStyles.input}

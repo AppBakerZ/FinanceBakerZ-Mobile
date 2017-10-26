@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, Platform, TouchableOpacity, Image} from 'react-native';
+import {Text, Platform, TouchableOpacity, Image, View} from 'react-native';
 
 
 import LoginScreen from 'FinanceBakerZ/src/screens/auth/Login';
@@ -65,7 +65,9 @@ const header = ({ navigation, screenProps }) => {
   );
 
   let headerTitle  = (
-      <Text style={{fontSize: 20, fontFamily: 'QuicksandBold-Regular', color: '#00562E', paddingLeft: 20}}>{state.routeName}</Text>
+      <View style={{flex: 1, width: '95%', alignItems: 'center', justifyContent: 'center'}}>
+        <Text style={{fontSize: 20, fontFamily: 'QuicksandBold-Regular', color: '#00562E'}}>{state.routeName}</Text>
+      </View>
   );
 
   let { user } = screenProps;
@@ -114,6 +116,10 @@ function nestingHeaders(routeName, renderRightIcon) {
                    source={user.profile.avatar.length ? {uri: user.profile.avatar} : require('./images/default-avatar.gif')}/>
           </TouchableOpacity>
       );
+    } else if (renderRightIcon && renderRightIcon.empty) {
+      headerRight = (
+          <View style={{width: 50, height: 40}}/>
+      );
     }
     return {
       title: (state.params && state.params.myTitle) || routeName,
@@ -121,7 +127,10 @@ function nestingHeaders(routeName, renderRightIcon) {
       headerTitleStyle: {
         fontWeight: Platform.OS === 'ios' ? '500' : '200',
         fontFamily: 'QuicksandBold-Regular',
-        fontSize: 20
+        fontSize: 20,
+        width: '95%',
+        textAlign: 'center',
+        marginLeft: -1
       },
       headerStyle: {
         height: 60,
@@ -174,7 +183,6 @@ const TransactionsStack = StackNavigator({
   Transactions: {
     screen: TransactionsScreen,
     navigationOptions: header
-
   },
   Selection: {
     screen: TransactionSelection,
@@ -231,15 +239,15 @@ const SettingsStack = StackNavigator({
   },
   ChangePassword: {
     screen: ChangePasswordScreen,
-    navigationOptions: nestingHeaders('Change Password', {userAvatar: true})
+    navigationOptions: nestingHeaders('Change Password', {empty: true})
   },
   AccountSettings: {
     screen: AccountSettingsScreen,
-    navigationOptions: nestingHeaders('Account Settings')
+    navigationOptions: nestingHeaders('Account Settings', {empty: true})
   },
   PersonalInformation: {
     screen: PersonalInformationScreen,
-    navigationOptions: nestingHeaders('Personal Info')
+    navigationOptions: nestingHeaders('Personal Info', {empty: true})
   }
 });
 

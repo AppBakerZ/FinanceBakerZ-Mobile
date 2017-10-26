@@ -150,7 +150,7 @@ class AddCategory extends Component{
 
                         <View style={SubCategoryStyles.iconParent}>
                             {(Platform.OS !== 'ios') ?
-                                <View style={{borderBottomWidth: 1, borderBottomColor: '#dadada'}}>
+                                <View style={SubCategoryStyles.SelParentCategoryLabel}>
                                     <Text style={SubCategoryStyles.selectParentText}>{I18n("CATEGORIES_PARENT_CATEGORY")}</Text>
                                     {this.getParentCategory()}
                                 </View>

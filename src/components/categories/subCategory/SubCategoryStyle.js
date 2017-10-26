@@ -102,10 +102,9 @@ export const SubCategoryStyles = StyleSheet.create({
         borderBottomColor: '#dadada',
         //justifyContent: 'flex-end'
     },
-    labelContainer:{
-        flex :1,
-        justifyContent : 'flex-end'
-
+    SelParentCategoryLabel:{
+        borderBottomWidth: 1,
+        borderBottomColor: '#dadada'
     },
     categoryStyle:{
         flex : 1

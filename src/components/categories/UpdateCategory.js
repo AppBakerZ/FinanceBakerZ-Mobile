@@ -227,12 +227,10 @@ class UpdateCategory extends Component{
       <ViewContainer style = {SubCategoryStyles.addCategoryMain}>
         <Image source = {require('FinanceBakerZ/src/images/app-background.png')} style={SubCategoryStyles.backgroundImage}>
           <View style = {SubCategoryStyles.addCategorySub}>
-            <ViewContainer  style = {SubCategoryStyles.addCategoryContainer}>
+            <View  style = {SubCategoryStyles.addCategoryContainer}>
               <View style={SubCategoryStyles.categoryNameField}>
-                <View style={SubCategoryStyles.labelContainer}>
-                  <Text style={SubCategoryStyles.selectParentText}>{I18n("CATEGORIES_CATEGORY_NAME")}</Text>
-                </View>
                 <KeyboardAvoidingView behavior={'padding'}>
+                  <Text style={SubCategoryStyles.selectParentText}>{I18n("CATEGORIES_CATEGORY_NAME")}</Text>
                   <TextInput
                       placeholder='Enter Category Name'
                       style={SubCategoryStyles.input}
@@ -244,14 +242,16 @@ class UpdateCategory extends Component{
                   />
                 </KeyboardAvoidingView>
               </View>
-            </ViewContainer>
+            </View>
+
             <View style={SubCategoryStyles.SelectCategoryIcon}>
-              <View style={SubCategoryStyles.categorySelectLabel}><Text style={SubCategoryStyles.selectParentText}>{I18n("CATEGORIES_CATEGORY_ICON")}</Text></View>
+              <Text style={SubCategoryStyles.selectParentText}>{I18n("CATEGORIES_CATEGORY_ICON")}</Text>
               <View style={SubCategoryStyles.categorySelectionIcon}>
                 <Text style={[SubCategoryStyles.textBold, SubCategoryStyles.textLeft]}>{this.state.icon ? capitalizeFirstLetter(this.state.icon.label) : 'Select Icon'}</Text>
                 <Icon size={10} name="down-arrow" style={SubCategoryStyles.iconRight} />
               </View>
             </View>
+
             <View style={SubCategoryStyles.CategoryIconList}>
               <ScrollView>
                 <View>
@@ -261,6 +261,7 @@ class UpdateCategory extends Component{
                 </View>
               </ScrollView>
             </View>
+
             {!children.length ?
               <View style={SubCategoryStyles.iconParent}>
                 {(Platform.OS !== 'ios') ?

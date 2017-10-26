@@ -1,4 +1,4 @@
-import {StyleSheet, Dimensions} from 'react-native';
+import {StyleSheet, Dimensions, Platform} from 'react-native';
 let screen = Dimensions.get('window');
 
 export const AccountsStyles = StyleSheet.create({
@@ -40,7 +40,8 @@ export const AccountsStyles = StyleSheet.create({
   text: {
     fontFamily: 'QuicksandBook-Regular',
     color: '#696969',
-      paddingLeft : -10,
+    paddingLeft : -10,
+    fontSize: 15
   },
 
   textBold: {
@@ -77,14 +78,14 @@ export const AccountsStyles = StyleSheet.create({
     paddingHorizontal: 20
   },
     pickerCountry:{
-    marginLeft: -8,
+    marginLeft: -8
     },
   pickerAndroidCon: {
     flex: 1.6,
-    borderBottomWidth: 1,
+    borderBottomWidth: Platform.OS === 'ios' ? 0 : 1,
     borderBottomColor: '#dadada',
     justifyContent: 'flex-end',
-    position: 'relative',
+    position: 'relative'
   },
     picker:{
         marginLeft : -7
@@ -98,18 +99,20 @@ export const AccountsStyles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
     borderBottomWidth: 1,
-    borderBottomColor: '#dadada',
+    borderBottomColor: '#dadada'
   },
 
   iconRight: {
-    flex: 1,
-    textAlign: 'right',
-    paddingRight: 5
+    //flex: 1,
+    //textAlign: 'right',
+    paddingRight: 20
+    //backgroundColor: 'red'
   },
 
   textLeft: {
-    paddingLeft: 12,
+    paddingLeft: 12
   },
 
   bankIconsCon: {
@@ -167,7 +170,6 @@ export const AccountsStyles = StyleSheet.create({
     borderRightWidth: 1,
     marginHorizontal: 10,
     padding: 10
-
   },
 
   BtnCon: {
@@ -188,7 +190,7 @@ export const AccountsStyles = StyleSheet.create({
   input: {
     fontFamily: 'QuicksandBook-Regular',
     fontSize: 15,
-    height: 48,
+    height: 48
   },
 
   selectParentText:{
@@ -198,7 +200,7 @@ export const AccountsStyles = StyleSheet.create({
 
   labelCon: {
     flex: 1,
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-end'
   }
 
 

@@ -154,7 +154,7 @@ export default class AddAccount extends Component{
                 </View>
                 {(Platform.OS !== 'ios') ? this.getCountries() :
                     <TouchableOpacity style={AccountsStyles.bankCardTxtAndIcon} activeOpacity={0.75} onPress={() => this.refs.modal.open()}>
-                      <Text style={[AccountsStyles.text, AccountsStyles.textLeft]}>{this.getCountryName()}</Text>
+                      <Text style={[AccountsStyles.text]}>{this.getCountryName()}</Text>
                       <Icon size={10} name="down-arrow" style={AccountsStyles.iconRight} />
                     </TouchableOpacity>
                 }

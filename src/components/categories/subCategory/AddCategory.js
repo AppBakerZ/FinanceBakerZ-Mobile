@@ -113,9 +113,8 @@ class AddCategory extends Component{
             <ViewContainer style = {SubCategoryStyles.addCategoryMain}>
                 <Image source = {require('FinanceBakerZ/src/images/app-background.png')} style={SubCategoryStyles.backgroundImage}>
                     <View style = {SubCategoryStyles.addCategorySub}>
-                        <ViewContainer  style = {SubCategoryStyles.addCategoryContainer}>
+                        <View style = {SubCategoryStyles.addCategoryContainer}>
                             <View style={SubCategoryStyles.categoryNameField}>
-
                                 <KeyboardAvoidingView behavior={'padding'}>
                                     <Text style={SubCategoryStyles.selectParentText}>{I18n("CATEGORIES_CATEGORY_NAME")}</Text>
                                     <TextInput
@@ -127,10 +126,9 @@ class AddCategory extends Component{
                                         onChangeText={name => this.setState({name})}
                                     />
                                 </KeyboardAvoidingView>
-
                             </View>
+                        </View>
 
-                        </ViewContainer>
                         <View style={SubCategoryStyles.SelectCategoryIcon}>
                             <Text style={SubCategoryStyles.selectParentText}>{I18n("CATEGORIES_CATEGORY_ICON")}</Text>
                             <View style={SubCategoryStyles.categorySelectionIcon}>
@@ -138,6 +136,7 @@ class AddCategory extends Component{
                                 <Icon size={10} name="down-arrow" style={SubCategoryStyles.iconRight} />
                             </View>
                         </View>
+
                         <View style={SubCategoryStyles.CategoryIconList}>
                             <ScrollView>
                                 <View>
@@ -147,9 +146,11 @@ class AddCategory extends Component{
                                 </View>
                             </ScrollView>
                         </View>
+
+
                         <View style={SubCategoryStyles.iconParent}>
                             {(Platform.OS !== 'ios') ?
-                                <View>
+                                <View style={{borderBottomWidth: 1, borderBottomColor: '#dadada'}}>
                                     <Text style={SubCategoryStyles.selectParentText}>{I18n("CATEGORIES_PARENT_CATEGORY")}</Text>
                                     {this.getParentCategory()}
                                 </View>

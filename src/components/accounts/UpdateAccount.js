@@ -40,23 +40,37 @@ export  default class UpdateAccount extends Component {
     this.countries = [{value: 'All', label: 'All Countries'}, ...this.countries];
   }
 
-  setBanks(country){
-    let bankIcons = country == 'All' ? Object.values(bankFonts).reduce((prev, curr) => [...prev, ...curr]) : bankFonts[country];
-    return bankIcons.map((font, index) => {
-      index++;
-      //delete pre keys if attach.
-      delete font.removeRightBorder;
-      delete font.removeBottomBorder;
-      if(index % 3 == 0){
-        font.removeRightBorder = true
-      }
-      let lastItems = bankIcons.length % 3 == 0 ? 3 : bankIcons.length % 3;
-      if(index > bankIcons.length - lastItems){
-        font.removeBottomBorder = true
-      }
-      return font
-    });
-  }
+    setBanks(country){
+        let bankIcons = country == 'All' ? Object.values(bankFonts).reduce((prev, curr) => [...prev, ...curr]) : bankFonts[country];
+        let lastArray = [];
+        for(var i = bankIcons.length; i % 3 != 0; i--) {
+            lastArray.push(i);
+        }
+        return bankIcons.map((font, index) => {
+            index++;
+            //delete pre keys if attach.
+            delete font.removeRightBorder;
+            delete font.removeBottomBorder;
+            if(index < 3) return font;
+            if(index % 3 == 0){
+                font.removeRightBorder = true;
+            }
+            if(bankIcons.length == 3) return font;
+            if(lastArray.length == 0) {
+                if(bankIcons.length - 1 == index || bankIcons.length - 2 == index || bankIcons.length == index) {
+                    font.removeBottomBorder = true;
+                }
+            }
+            else if(index == lastArray[0]) {
+                font.removeBottomBorder = true;
+                font.removeRightBorder = true;
+            }
+            else if(index == lastArray[1]) {
+                font.removeBottomBorder = true;
+            }
+            return font
+        });
+    }
 
   handleChange(country){
     this.setState({checked: true});
@@ -149,11 +163,16 @@ export  default class UpdateAccount extends Component {
   }
 
   removeBorder(bankName){
-    if(bankName.removeRightBorder) {
-      return {borderRightColor: 'transparent', borderRightWidth: 0}
-    }else if(bankName.removeBottomBorder){
-      return {borderBottomColor: 'transparent', borderBottomWidth: 0}
-    }
+      let style = {};
+      if(bankName.removeRightBorder) {
+          style.borderRightColor = 'transparent';
+          style.borderRightWidth = 0;
+      }
+      if(bankName.removeBottomBorder){
+          style.borderBottomColor = 'transparent';
+          style.borderBottomWidth = 0;
+      }
+      return style;
   }
 
   renderBankIcons(country = 'PK'){

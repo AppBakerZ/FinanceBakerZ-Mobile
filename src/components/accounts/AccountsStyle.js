@@ -138,7 +138,7 @@ export const AccountsStyles = StyleSheet.create({
     borderRightWidth: 1,
     borderBottomColor: '#dadada',
     borderBottomWidth: 1,
-    maxWidth: screen.width * .4
+    //maxWidth: screen.width * .4
   },
   accountNoCon: {
     flex: 1.4,

@@ -78,7 +78,7 @@ const header = ({ navigation, screenProps }) => {
           onPress={() => {navigate('Settings')}}
       >
         <Image style={{width: '100%', height: '100%', borderRadius: Platform.OS === 'ios' ? 25 : 100}}
-               source={user.profile.avatar.length ? {uri: user.profile.avatar} : require('./images/default-avatar.gif')}/>
+               source={user.profile.avatar && user.profile.avatar.length ? {uri: user.profile.avatar} : require('./images/default-avatar.gif')}/>
       </TouchableOpacity>
   );
 
@@ -113,7 +113,7 @@ function nestingHeaders(routeName, renderRightIcon) {
               onPress={() => {navigate('Settings')}}
           >
             <Image style={{width: '100%', height: '100%', borderRadius: Platform.OS === 'ios' ? 25 : 100}}
-                   source={user.profile.avatar.length ? {uri: user.profile.avatar} : require('./images/default-avatar.gif')}/>
+                   source={user.profile.avatar && user.profile.avatar.length ? {uri: user.profile.avatar} : require('./images/default-avatar.gif')}/>
           </TouchableOpacity>
       );
     } else if (renderRightIcon && renderRightIcon.empty) {

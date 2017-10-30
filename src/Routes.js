@@ -28,6 +28,7 @@ import SettingsScreen from 'FinanceBakerZ/src/screens/Settings';
 import ChangePasswordScreen from 'FinanceBakerZ/src/components/settings/changePassword/ChangePassword';
 import AccountSettingsScreen from 'FinanceBakerZ/src/components/settings/accountSettings/AccountSettings';
 import PersonalInformationScreen from 'FinanceBakerZ/src/components/settings/personalInformation/PersonalInformation';
+import ReportsScreen from 'FinanceBakerZ/src/screens/Reports';
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import DrawerItems, {DrawerItemIcon} from 'FinanceBakerZ/src/components/drawerItems/DrawerItems';
@@ -251,6 +252,13 @@ const SettingsStack = StackNavigator({
   }
 });
 
+const ReportsStack = StackNavigator({
+  Reports: {
+    screen: ReportsScreen,
+    navigationOptions: header
+  }
+});
+
 //Left Menu that will use Many Stack
 export const Drawer = DrawerNavigator({
   Dashboard: {
@@ -276,6 +284,10 @@ export const Drawer = DrawerNavigator({
   Settings: {
     screen: SettingsStack,
     drawer: DrawerItemIcon('setting')
+  },
+  Reports: {
+    screen: ReportsStack,
+    drawer: DrawerItemIcon('sign-in')
   },
   Logout: {
     screen: SettingsStack,

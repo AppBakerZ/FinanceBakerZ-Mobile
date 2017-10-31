@@ -48,7 +48,7 @@ export const ReportsStyles = StyleSheet.create({
         backgroundColor: '#00562f'
     },
     generateBtnText: {
-        color: '#fff',
+        color: '#f1f1f1',
         fontSize: 21,
         fontFamily: 'QuicksandBold-Regular'
     },

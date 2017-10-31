@@ -33,15 +33,14 @@ class Reports extends Component {
     }
 
     render() {
-
+        const { navigate } = this.props.navigation;
         return (
             <ViewContainer>
                 <Image source = {require('FinanceBakerZ/src/images/app-background.png')} style={ReportsStyles.backgroundImage}>
                     <View style={ReportsStyles.filterContainer}>
                         <TouchableOpacity style={ReportsStyles.filterBtnContainer}
-                                          disabled={this.state.loading}
                                           activeOpacity={0.7}
-                                          onPress={() => console.warn('Clicked')}>
+                                          onPress={() => navigate('Selection')}>
                             <View style={ReportsStyles.filterTextContainer}>
                                 <Text style={ReportsStyles.filterText}>Apply Filters</Text>
                             </View>

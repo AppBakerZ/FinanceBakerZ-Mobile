@@ -29,6 +29,7 @@ import ChangePasswordScreen from 'FinanceBakerZ/src/components/settings/changePa
 import AccountSettingsScreen from 'FinanceBakerZ/src/components/settings/accountSettings/AccountSettings';
 import PersonalInformationScreen from 'FinanceBakerZ/src/components/settings/personalInformation/PersonalInformation';
 import ReportsScreen from 'FinanceBakerZ/src/screens/Reports';
+import ReportSelection from 'FinanceBakerZ/src/components/reports/reportSelection/ReportSelection';
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import DrawerItems, {DrawerItemIcon} from 'FinanceBakerZ/src/components/drawerItems/DrawerItems';
@@ -256,6 +257,10 @@ const ReportsStack = StackNavigator({
   Reports: {
     screen: ReportsScreen,
     navigationOptions: header
+  },
+  Selection: {
+    screen: ReportSelection,
+    navigationOptions: nestingHeaders('Selection', {iconChecked: true})
   }
 });
 

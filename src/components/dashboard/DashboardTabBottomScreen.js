@@ -35,10 +35,7 @@ class DashboardTabBottomScreen extends Component {
         <View style={DashboardStyles.listViewContentLeft}>
           <Icon name={rowData.category ? 'left-arrow' : 'right-arrow'} color={rowData.category ?  '#C81113' : '#008041'} style={DashboardStyles.icons}/>
           <Text style={DashboardStyles.iconText}>
-            {capitalizeFirstLetter(rowData.transactionAt ?
-              (rowData.type == "project" ?
-                (rowData.project && rowData.project.name || rowData.project) : rowData.type) :
-              (rowData.category ? rowData.category.name : rowData.category))}
+            {capitalizeFirstLetter(rowData.type === "income" ? (rowData.project && rowData.project.name || rowData.creditType || rowData.type) : (rowData.category && rowData.category.name || rowData.type))}
           </Text>
         </View>
         <View style={DashboardStyles.listViewContentRight}>

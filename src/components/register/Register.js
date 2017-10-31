@@ -124,6 +124,7 @@ export default class Register extends Component {
                     ref={(ref) => {this.password = ref}}
                     maxLength={ 20 }
                     onChangeText={this.onChange.bind(this, 'password')}
+                    underlineColorAndroid="transparent"
                   />
                 </View>
               </ScrollView>

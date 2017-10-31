@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, Platform, TouchableOpacity, Image} from 'react-native';
+import {Text, Platform, TouchableOpacity, Image, View} from 'react-native';
 
 
 import LoginScreen from 'FinanceBakerZ/src/screens/auth/Login';
@@ -28,6 +28,8 @@ import SettingsScreen from 'FinanceBakerZ/src/screens/Settings';
 import ChangePasswordScreen from 'FinanceBakerZ/src/components/settings/changePassword/ChangePassword';
 import AccountSettingsScreen from 'FinanceBakerZ/src/components/settings/accountSettings/AccountSettings';
 import PersonalInformationScreen from 'FinanceBakerZ/src/components/settings/personalInformation/PersonalInformation';
+import ReportsScreen from 'FinanceBakerZ/src/screens/Reports';
+import ReportSelection from 'FinanceBakerZ/src/components/reports/reportSelection/ReportSelection';
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import DrawerItems, {DrawerItemIcon} from 'FinanceBakerZ/src/components/drawerItems/DrawerItems';
@@ -65,7 +67,9 @@ const header = ({ navigation, screenProps }) => {
   );
 
   let headerTitle  = (
-      <Text style={{fontSize: 20, fontFamily: 'QuicksandBold-Regular', color: '#00562E', paddingLeft: 20}}>{state.routeName}</Text>
+      <View style={{flex: 1, width: '95%', alignItems: 'center', justifyContent: 'center'}}>
+        <Text style={{fontSize: 20, fontFamily: 'QuicksandBold-Regular', color: '#00562E'}}>{state.routeName}</Text>
+      </View>
   );
 
   let { user } = screenProps;
@@ -76,7 +80,7 @@ const header = ({ navigation, screenProps }) => {
           onPress={() => {navigate('Settings')}}
       >
         <Image style={{width: '100%', height: '100%', borderRadius: Platform.OS === 'ios' ? 25 : 100}}
-               source={user.profile.avatar.length ? {uri: user.profile.avatar} : require('./images/default-avatar.gif')}/>
+               source={user.profile.avatar && user.profile.avatar.length ? {uri: user.profile.avatar} : require('./images/default-avatar.gif')}/>
       </TouchableOpacity>
   );
 
@@ -111,8 +115,12 @@ function nestingHeaders(routeName, renderRightIcon) {
               onPress={() => {navigate('Settings')}}
           >
             <Image style={{width: '100%', height: '100%', borderRadius: Platform.OS === 'ios' ? 25 : 100}}
-                   source={user.profile.avatar.length ? {uri: user.profile.avatar} : require('./images/default-avatar.gif')}/>
+                   source={user.profile.avatar && user.profile.avatar.length ? {uri: user.profile.avatar} : require('./images/default-avatar.gif')}/>
           </TouchableOpacity>
+      );
+    } else if (renderRightIcon && renderRightIcon.empty) {
+      headerRight = (
+          <View style={{width: 50, height: 40}}/>
       );
     }
     return {
@@ -121,7 +129,10 @@ function nestingHeaders(routeName, renderRightIcon) {
       headerTitleStyle: {
         fontWeight: Platform.OS === 'ios' ? '500' : '200',
         fontFamily: 'QuicksandBold-Regular',
-        fontSize: 20
+        fontSize: 20,
+        width: '95%',
+        textAlign: 'center',
+        marginLeft: -1
       },
       headerStyle: {
         height: 60,
@@ -174,7 +185,6 @@ const TransactionsStack = StackNavigator({
   Transactions: {
     screen: TransactionsScreen,
     navigationOptions: header
-
   },
   Selection: {
     screen: TransactionSelection,
@@ -231,15 +241,26 @@ const SettingsStack = StackNavigator({
   },
   ChangePassword: {
     screen: ChangePasswordScreen,
-    navigationOptions: nestingHeaders('Change Password', {userAvatar: true})
+    navigationOptions: nestingHeaders('Change Password', {empty: true})
   },
   AccountSettings: {
     screen: AccountSettingsScreen,
-    navigationOptions: nestingHeaders('Account Settings')
+    navigationOptions: nestingHeaders('Account Settings', {empty: true})
   },
   PersonalInformation: {
     screen: PersonalInformationScreen,
-    navigationOptions: nestingHeaders('Personal Info')
+    navigationOptions: nestingHeaders('Personal Info', {empty: true})
+  }
+});
+
+const ReportsStack = StackNavigator({
+  Reports: {
+    screen: ReportsScreen,
+    navigationOptions: header
+  },
+  Selection: {
+    screen: ReportSelection,
+    navigationOptions: nestingHeaders('Selection', {iconChecked: true})
   }
 });
 
@@ -268,6 +289,10 @@ export const Drawer = DrawerNavigator({
   Settings: {
     screen: SettingsStack,
     drawer: DrawerItemIcon('setting')
+  },
+  Reports: {
+    screen: ReportsStack,
+    drawer: DrawerItemIcon('sign-in')
   },
   Logout: {
     screen: SettingsStack,

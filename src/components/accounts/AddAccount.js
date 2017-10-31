@@ -47,18 +47,31 @@ export default class AddAccount extends Component{
 
   setBanks(country){
     let bankIcons = country == 'All' ? Object.values(bankFonts).reduce((prev, curr) => [...prev, ...curr]) : bankFonts[country];
+    let lastArray = [];
+    for(var i = bankIcons.length; i % 3 != 0; i--) {
+      lastArray.push(i);
+    }
     return bankIcons.map((font, index) => {
-
       index++;
       //delete pre keys if attach.
       delete font.removeRightBorder;
       delete font.removeBottomBorder;
+      if(index < 3) return font;
       if(index % 3 == 0){
-        font.removeRightBorder = true
+        font.removeRightBorder = true;
       }
-      let lastItems = bankIcons.length % 3 == 0 ? 3 : bankIcons.length % 3;
-      if(index > bankIcons.length - lastItems){
-        font.removeBottomBorder = true
+      if(bankIcons.length == 3) return font;
+      if(lastArray.length == 0) {
+        if(bankIcons.length - 1 == index || bankIcons.length - 2 == index || bankIcons.length == index) {
+          font.removeBottomBorder = true;
+        }
+      }
+      else if(index == lastArray[0]) {
+        font.removeBottomBorder = true;
+        font.removeRightBorder = true;
+      }
+      else if(index == lastArray[1]) {
+        font.removeBottomBorder = true;
       }
       return font
     });
@@ -114,12 +127,17 @@ export default class AddAccount extends Component{
     }
   }
 
-  removeBorder(bankName, arr, i){
+  removeBorder(bankName){
+    let style = {};
     if(bankName.removeRightBorder) {
-      return {borderRightColor: 'transparent', borderRightWidth: 0}
-    }else if(bankName.removeBottomBorder || arr.length - 1 === i){
-      return {borderBottomColor: 'transparent', borderBottomWidth: 0}
+      style.borderRightColor = 'transparent';
+      style.borderRightWidth = 0;
     }
+    if(bankName.removeBottomBorder){
+      style.borderBottomColor = 'transparent';
+      style.borderBottomWidth = 0;
+    }
+    return style;
   }
 
   renderBankIcons(country = 'PK'){
@@ -129,82 +147,84 @@ export default class AddAccount extends Component{
 
     return bankIcons.map((bank, i, arr) => {
       return(
-          <View style={[AccountsStyles.bankIconCon]} key={i}>
-            {bank.map((bankName, index) => {
-              let icon_name = bankName.value.replace('bank-' , '');
-              return(
-                  <TouchableOpacity style={[AccountsStyles.bankIcon, this.removeBorder(bankName, arr, i)]} onPress={() => this.setState({bank: bankName})} activeOpacity={0.75} key={index}>
-                    <BankIcon name={icon_name } size={35}/>
-                  </TouchableOpacity>
-              );
-            })}
-          </View>
+        <View style={[AccountsStyles.bankIconCon]} key={i}>
+          {bank.map((bankName, index) => {
+            let icon_name = bankName.value.replace('bank-' , '');
+            return(
+                <TouchableOpacity style={[AccountsStyles.bankIcon, this.removeBorder(bankName, arr, i)]} onPress={() => this.setState({bank: bankName})} activeOpacity={0.75} key={index}>
+                  <BankIcon name={icon_name } size={35}/>
+                </TouchableOpacity>
+            );
+          })}
+        </View>
       );
     });
   }
 
   render(){
     return(
-        <ViewContainer>
-          <Image source = {require('FinanceBakerZ/src/images/app-background.png')} style={AccountsStyles.backgroundImage}>
-            <View style={AccountsStyles.addAccCon}>
-              <View style={AccountsStyles.pickerAndroidCon}>
-                <View style={AccountsStyles.labelCon}>
-                  <Text style={[AccountsStyles.textBold]}>{I18n("ACCOUNTS_SELECT_COUNTRY")}</Text>
-                </View>
-                {(Platform.OS !== 'ios') ? this.getCountries() :
-                    <TouchableOpacity style={AccountsStyles.bankCardTxtAndIcon} activeOpacity={0.75} onPress={() => this.refs.modal.open()}>
-                      <Text style={[AccountsStyles.text, AccountsStyles.textLeft]}>{this.getCountryName()}</Text>
-                      <Icon size={10} name="down-arrow" style={AccountsStyles.iconRight} />
-                    </TouchableOpacity>
-                }
+      <ViewContainer>
+        <Image source = {require('FinanceBakerZ/src/images/app-background.png')} style={AccountsStyles.backgroundImage}>
+          <View style={AccountsStyles.addAccCon}>
+            <View style={AccountsStyles.pickerAndroidCon}>
+              <View style={AccountsStyles.labelCon}>
+                <Text style={[AccountsStyles.textBold]}>{I18n("ACCOUNTS_SELECT_COUNTRY")}</Text>
               </View>
-              <View style={AccountsStyles.bankCardCon}>
-                <View style={AccountsStyles.labelCon}>
-                  <Text style={[AccountsStyles.textBold]}>{I18n("ACCOUNTS_SELECT_BANK")}</Text>
-                </View>
-                <View style={AccountsStyles.bankCardTxtAndIcon}>
-                  <Text style={[AccountsStyles.textLeft, AccountsStyles.text]}>{this.state.bank.label || I18n("ACCOUNTS_SELECT_BANK")}</Text>
-                  <Icon size={10} name="down-arrow" style={AccountsStyles.iconRight} />
-                </View>
-              </View>
-              {!this.state.checked ? <View style={AccountsStyles.bankIconsCon}>
-                <ScrollView style={AccountsStyles.scrollViewCon}>{this.state.bankIcons}
-                </ScrollView></View > :
-                  <View style={AccountsStyles.loaderBank}><ActivityIndicator size="large" color="#008142" /></View>
+              {(Platform.OS !== 'ios') ? this.getCountries() :
+                  <TouchableOpacity style={AccountsStyles.bankCardTxtAndIcon} activeOpacity={0.75} onPress={() => this.refs.modal.open()}>
+                    <Text style={[AccountsStyles.text]}>{this.getCountryName()}</Text>
+                    <Icon size={10} name="down-arrow" style={AccountsStyles.iconRight} />
+                  </TouchableOpacity>
               }
-              <View style={AccountsStyles.accountNoCon}>
-                <View style={AccountsStyles.labelCon}>
-                  <Text style={[AccountsStyles.textBold]}>{I18n("ACCOUNTS_ACCOUNT_NUMBER")}</Text>
-                </View>
-                <KeyboardAvoidingView behavior={'padding'} >
-                  <TextInput
-                      placeholder={capitalizeFirstLetter(I18n("ACCOUNTS_ACCOUNT_NUMBER_"))}
-                      style={AccountsStyles.input}
-                      maxLength = {30}
-                      autoCorrect={false}
-                      onChangeText={number => this.setState({number})}
-                      underlineColorAndroid="transparent"
-                      keyboardType="numeric"
-                  />
-                </KeyboardAvoidingView>
+            </View>
+            <View style={AccountsStyles.bankCardCon}>
+              <View style={AccountsStyles.labelCon}>
+                <Text style={[AccountsStyles.textBold]}>{I18n("ACCOUNTS_SELECT_BANK")}</Text>
               </View>
-              <View style={AccountsStyles.checkMarkCon}>
-                <View style={AccountsStyles.loaderCon}>
-                  {this.state.loading ? <Loader size={35} color="#008142" /> : <Text></Text>}
-                </View>
-                <View style={AccountsStyles.BtnCon}>
-                </View>
+              <View style={AccountsStyles.bankCardTxtAndIcon}>
+                <Text style={[AccountsStyles.textLeft, AccountsStyles.text]}>{this.state.bank.label || I18n("ACCOUNTS_SELECT_BANK")}</Text>
+                <Icon size={10} name="down-arrow" style={AccountsStyles.iconRight} />
               </View>
             </View>
-          </Image>
-          <FabButton iconName="check" iconColor="#fff" onPress={this.submit.bind(this)} disabled={this.state.loading}/>
-          <Modal style={AccountsStyles.modal} position={"bottom"} ref={"modal"} swipeArea={20}>
-            <View style={AccountsStyles.renderListCon}>
-              {this.getCountries()}
+            {!this.state.checked ?
+                <View style={AccountsStyles.bankIconsCon}>
+                  <ScrollView style={AccountsStyles.scrollViewCon}>{this.state.bankIcons}</ScrollView>
+                </View>
+                :
+                <View style={AccountsStyles.loaderBank}><ActivityIndicator size="large" color="#008142" /></View>
+            }
+            <View style={AccountsStyles.accountNoCon}>
+              <View style={AccountsStyles.labelCon}>
+                <Text style={[AccountsStyles.textBold]}>{I18n("ACCOUNTS_ACCOUNT_NUMBER")}</Text>
+              </View>
+              <KeyboardAvoidingView behavior={'padding'} >
+                <TextInput
+                    placeholder={capitalizeFirstLetter(I18n("ACCOUNTS_ACCOUNT_NUMBER_"))}
+                    style={AccountsStyles.input}
+                    maxLength = {30}
+                    autoCorrect={false}
+                    onChangeText={number => this.setState({number})}
+                    underlineColorAndroid="transparent"
+                    keyboardType="numeric"
+                />
+              </KeyboardAvoidingView>
             </View>
-          </Modal>
-        </ViewContainer>
+            <View style={AccountsStyles.checkMarkCon}>
+              <View style={AccountsStyles.loaderCon}>
+                {this.state.loading ? <Loader size={35} color="#008142" /> : <Text></Text>}
+              </View>
+              <View style={AccountsStyles.BtnCon}>
+              </View>
+            </View>
+          </View>
+        </Image>
+        <FabButton iconName="check" iconColor="#fff" onPress={this.submit.bind(this)} disabled={this.state.loading}/>
+        <Modal style={AccountsStyles.modal} position={"bottom"} ref={"modal"} swipeArea={20}>
+          <View style={AccountsStyles.renderListCon}>
+            {this.getCountries()}
+          </View>
+        </Modal>
+      </ViewContainer>
     );
   }
 }

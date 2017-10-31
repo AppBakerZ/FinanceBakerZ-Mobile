@@ -33,7 +33,7 @@ export const SubCategoryStyles = StyleSheet.create({
     },
 
     categoryChild: {
-        justifyContent: 'center',
+        justifyContent: 'center'
     },
 
     scroll:{
@@ -55,10 +55,10 @@ export const SubCategoryStyles = StyleSheet.create({
         height : null
     },
     categoryChildren :{
-        fontFamily: 'QuicksandBook-Regular',
+        fontFamily: 'QuicksandBook-Regular'
     },
     noCategoryChildren:{
-        alignItems:'center',
+        alignItems:'center'
     },
     subCategoryChildren :{
         flex : 1,
@@ -77,7 +77,7 @@ export const SubCategoryStyles = StyleSheet.create({
         borderRightColor: '#dadada',
         borderRightWidth: 1,
         borderBottomColor: '#dadada',
-        borderBottomWidth: 1,
+        borderBottomWidth: 1
     },
     itemsText:{
         fontSize : 15
@@ -87,24 +87,24 @@ export const SubCategoryStyles = StyleSheet.create({
     },
     addCategoryMain:{
         flex : 1,
-        flexDirection : 'row',
+        flexDirection : 'row'
     },
     addCategorySub:{
         flex : 1
     },
     addCategoryContainer:{
-        flex : 1.3
+        flex : 1.6,
+        paddingHorizontal: 20
     },
     categoryNameField: {
-        flex : 2,
+        //flex : 2,
         borderBottomWidth: 1,
         borderBottomColor: '#dadada',
-        justifyContent: 'flex-end',
+        //justifyContent: 'flex-end'
     },
-    labelContainer:{
-        flex :1,
-        justifyContent : 'flex-end'
-
+    SelParentCategoryLabel:{
+        borderBottomWidth: 1,
+        borderBottomColor: '#dadada'
     },
     categoryStyle:{
         flex : 1
@@ -115,13 +115,14 @@ export const SubCategoryStyles = StyleSheet.create({
     input:{
         fontFamily: 'QuicksandBook-Regular',
         fontSize: 15,
-        height: 50,
-        paddingLeft: 15,
-        paddingRight: 15,
+        height: 48,
+        //paddingLeft: 15,
+        //paddingRight: 15,
     },
     iconParent: {
         flex:1.2,
-        paddingLeft : 5,
+        paddingHorizontal: 20
+        //paddingLeft : 5,
     },
     febButton:{
         flex : 1.8
@@ -130,7 +131,8 @@ export const SubCategoryStyles = StyleSheet.create({
         flex: 5,
         borderColor: '#cdcdcd',
         borderWidth: 1,
-        margin : 15
+        marginHorizontal : 20,
+        marginVertical: 15
     },
     modal: {
         justifyContent: 'center',
@@ -140,37 +142,40 @@ export const SubCategoryStyles = StyleSheet.create({
     SelectCategoryIcon:{
         flex : 1,
         justifyContent: 'center',
+        paddingHorizontal: 20
     },
     SelectCategoryIconLabel:{
         flex : 0.5,
         justifyContent: 'flex-end',
     },
     categorySelectLabel:{
-     flex : 0.6,
+        flex : 0.6,
         justifyContent : 'flex-end'
     },
     selectParentText:{
         fontFamily: 'QuicksandBold-Regular',
-        paddingLeft : 15,
-        paddingRight : 15,
+        //paddingLeft : 15,
+        //paddingRight : 15,
         paddingTop : 15,
     },
     categorySelectionIcon: {
         flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'space-between'
     },
     categorySelectionParentIcon:{
         flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'space-between'
     },
     categoryIcons:{
         flexDirection : 'row',
         flex : 1,
     },
     textLeft: {
-        paddingLeft: 15,
+        //paddingLeft: 15,
         fontFamily: 'QuicksandBook-Regular',
     },
     textLeftUrdu:{
@@ -178,9 +183,9 @@ export const SubCategoryStyles = StyleSheet.create({
         fontFamily: 'QuicksandBook-Regular',
     },
     iconRight: {
-        flex: 1,
-        textAlign: 'right',
-        paddingRight: 19,
+        //flex: 1,
+        //textAlign: 'right',
+        paddingRight: 20
     },
     ParentCategoryText: {
         justifyContent: 'center',
@@ -199,6 +204,7 @@ export const SubCategoryStyles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'space-between',
         borderBottomWidth: 1,
         borderBottomColor: '#dadada'
     },
@@ -206,8 +212,8 @@ export const SubCategoryStyles = StyleSheet.create({
         flex : 1
     },
     picker:{
-        marginLeft : 8,
-        marginRight : 15
+        //marginLeft : 8
+        //marginRight : 15
     }
 
 });

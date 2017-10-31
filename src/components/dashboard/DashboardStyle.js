@@ -43,8 +43,7 @@ export const DashboardStyles = StyleSheet.create({
     flex: 1.5,
     margin: 10,
     flexDirection: 'row',
-    paddingTop: 5,
-    paddingBottom: 5
+    paddingVertical: 10
   },
 
   text: {
@@ -162,7 +161,4 @@ export const DashboardStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   }
-
-
-
 });

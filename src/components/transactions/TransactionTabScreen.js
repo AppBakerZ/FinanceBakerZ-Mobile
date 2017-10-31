@@ -25,10 +25,7 @@ export default class TransactionTabScreen extends  Component {
           <View style={TransactionsStyles.listViewContentLeft}>
             <Icon name={rowData.category ? 'left-arrow' : 'right-arrow'} color={rowData.category ?  '#C81113' : '#008041'} style={TransactionsStyles.icons} />
             <Text style={TransactionsStyles.iconText}>
-              {capitalizeFirstLetter(rowData.transactionAt ?
-                  (rowData.type == "project" ?
-                      (rowData.project && rowData.project.name || rowData.project) : rowData.type) :
-                  (rowData.category ? rowData.category.name : rowData.category))}
+              {capitalizeFirstLetter(rowData.type === "income" ? (rowData.project && rowData.project.name || rowData.creditType || rowData.type) : (rowData.category && rowData.category.name || rowData.type))}
             </Text>
           </View>
           <View style={TransactionsStyles.listViewContentRight}>

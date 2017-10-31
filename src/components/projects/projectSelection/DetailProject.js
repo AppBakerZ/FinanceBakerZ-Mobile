@@ -57,7 +57,7 @@ export default class DetailProject extends  Component {
                 showAlert('Success', name + ' project has been deleted.');
                 goBack();
             }else{
-                console.warn(err.reason)
+                showAlert('Error', err.reason);
             }
         });
     }

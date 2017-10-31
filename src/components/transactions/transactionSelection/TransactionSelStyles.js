@@ -7,14 +7,14 @@ setTheme({checkboxStyle: {
   fillColor: MKColor.Green,
   borderOnColor: MKColor.Green,
   borderOffColor: MKColor.Green,
-  rippleColor: `rgba(${MKColor.RGBTeal},.15)`,
+  rippleColor: `rgba(${MKColor.RGBTeal},.15)`
 }});
 
 setTheme({radioStyle: {
   fillColor: `rgba(0, 86, 47, 1)`,
   borderOnColor: `rgba(149, 165, 166,.5)`,
   borderOffColor: `rgba(149, 165, 166,.5)`,
-  rippleColor: `rgba(0, 86, 47, .15)`,
+  rippleColor: `rgba(0, 86, 47, .15)`
 }});
 
 
@@ -22,35 +22,57 @@ export const TransactionSelStyles = StyleSheet.create({
 
 
   DbSelectionContainer: {
-    flex: 1,
+    //flex: 1,
     paddingLeft: 20,
     paddingRight: 20,
     backgroundColor: '#fff'
   },
 
   DbSelectionTabContainer: {
-    flex: 2.5
+    flex: 1
   },
 
   DbSelectionAccAndWeek: {
-    flex: 1,
+    //flex: 1,
     borderBottomColor: '#cbcbcb',
     borderBottomWidth: 1,
     justifyContent: 'center',
+    paddingBottom: 15
   },
 
   DbSelectionBankAcc: {
-    flex: 1,
-    justifyContent: 'center'
+    //flex: 1,
+    justifyContent: 'center',
+    marginBottom: 25
+  },
+
+  DbSelectionBankAccBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    borderBottomColor: '#cbcbcb',
+    borderBottomWidth: 1,
+    paddingLeft: 25,
+    paddingTop: 20,
+    paddingBottom: 5
+  },
+
+  DbSelectionBankAccText: {
+    //flex: 1
+  },
+
+  DbSelectionBankAccIcon: {
+    //flex: 1,
+    //textAlign: 'right'
   },
 
   DbSelectionText: {
     fontFamily: 'QuicksandBook-Regular',
-    fontSize: 15,
+    fontSize: 15
   },
 
   DbSelectionCardTagCon: {
-    flexWrap: 'wrap',
+    flexWrap: 'wrap'
   },
 
   DbSelectionCardTag: {
@@ -73,8 +95,9 @@ export const TransactionSelStyles = StyleSheet.create({
   DbSelectionAccountsCon: {
     flexWrap: 'wrap',
     flexDirection: 'row',
-      alignItems: 'flex-start'
-
+    alignItems: 'flex-start',
+    paddingTop : 20,
+    paddingBottom: 5
   },
 
   DbSelectionPicker: {
@@ -84,24 +107,6 @@ export const TransactionSelStyles = StyleSheet.create({
 
   DbSelectionPickerItem: {
     fontFamily: 'QuicksandBook-Regular'
-  },
-
-  DbSelectionBankAccBtn: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderBottomColor: '#cbcbcb',
-    borderBottomWidth: 1,
-    paddingLeft: 25,
-    paddingBottom: 10
-  },
-
-  DbSelectionBankAccText: {
-    flex: 1
-  },
-
-  DbSelectionBankAccIcon: {
-    flex: 1,
-    textAlign: 'right'
   },
 
   modal: {
@@ -196,7 +201,7 @@ export const TransactionSelStyles = StyleSheet.create({
 
   btn: {
     backgroundColor: '#008142',
-    padding: 20,
+    padding: 20
   },
 
   modalText: {
@@ -206,7 +211,5 @@ export const TransactionSelStyles = StyleSheet.create({
     justifyContent: 'flex-end',
     fontSize: 25
   }
-
-
 });
 

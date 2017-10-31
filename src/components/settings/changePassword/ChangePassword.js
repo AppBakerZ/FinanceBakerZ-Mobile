@@ -6,6 +6,7 @@ import Button from 'FinanceBakerZ/src/components/button/Button';
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
 import {I18n, showAlert} from 'FinanceBakerZ/src/customLibrary';
 import  {Accounts} from 'react-native-meteor';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 export default class ChangePassword extends Component {
     constructor(props) {
@@ -54,48 +55,49 @@ export default class ChangePassword extends Component {
         return (
             <ViewContainer>
                 <Image source = {require('FinanceBakerZ/src/images/app-background.png')} style = {ChangePasswordStyle.backgroundImage}>
-                    <View style = {ChangePasswordStyle.inputContainer}>
-                        <View style = {ChangePasswordStyle.borderBottom}>
-                            <Icon size = {18} name = "password" style = {ChangePasswordStyle.inputIcon}></Icon>
-                            <TextInput
-                                placeholder = {I18n("SETTINGS_CURRENT_PASSWORD")}
-                                style = {[ChangePasswordStyle.input]}
-                                returnKeyType = "next"
-                                maxLength = {30}
-                                autoCorrect = {false}
-                                onChangeText = {this.onChange.bind(this, 'oldPassword')}
-                                underlineColorAndroid = "transparent"
-                                value = {this.state.oldPassword}
-                            />
+                    <KeyboardAwareScrollView>
+                        <View style = {ChangePasswordStyle.inputContainer}>
+                            <View style = {ChangePasswordStyle.borderBottom}>
+                                <Icon size = {18} name = "password" style = {ChangePasswordStyle.inputIcon}/>
+                                <TextInput
+                                    placeholder = {I18n("SETTINGS_CURRENT_PASSWORD")}
+                                    style = {[ChangePasswordStyle.input]}
+                                    returnKeyType = "next"
+                                    maxLength = {30}
+                                    autoCorrect = {false}
+                                    onChangeText = {this.onChange.bind(this, 'oldPassword')}
+                                    underlineColorAndroid = "transparent"
+                                    value = {this.state.oldPassword}
+                                />
+                            </View>
+                            <View style = {ChangePasswordStyle.borderBottom}>
+                                <Icon size = {18} name = "password" style = {ChangePasswordStyle.inputIcon}/>
+                                <TextInput
+                                    placeholder = {I18n("SETTINGS_NEW_PASSWORD")}
+                                    style = {[ChangePasswordStyle.input]}
+                                    returnKeyType = "next"
+                                    maxLength = {30}
+                                    autoCorrect = {false}
+                                    onChangeText = {this.onChange.bind(this, 'newPassword')}
+                                    underlineColorAndroid = "transparent"
+                                    value = {this.state.newPassword}
+                                />
+                            </View>
+                            <View style = {ChangePasswordStyle.borderBottom}>
+                                <Icon size = {18} name = "password" style = {ChangePasswordStyle.inputIcon}/>
+                                <TextInput
+                                    placeholder = {I18n("SETTINGS_REPEAT_NEW_PASSWORD")}
+                                    style = {[ChangePasswordStyle.input]}
+                                    returnKeyType = "next"
+                                    maxLength = {30}
+                                    autoCorrect = {false}
+                                    onChangeText = {this.onChange.bind(this, 'alterPassword')}
+                                    underlineColorAndroid = "transparent"
+                                    value = {this.state.alterPassword}
+                                />
+                            </View>
                         </View>
-                        <View style = {ChangePasswordStyle.borderBottom}>
-                            <Icon size = {18} name = "password" style = {ChangePasswordStyle.inputIcon}></Icon>
-                            <TextInput
-                                placeholder = {I18n("SETTINGS_NEW_PASSWORD")}
-                                style = {[ChangePasswordStyle.input]}
-                                returnKeyType = "next"
-                                maxLength = {30}
-                                autoCorrect = {false}
-                                onChangeText = {this.onChange.bind(this, 'newPassword')}
-                                underlineColorAndroid = "transparent"
-                                value = {this.state.newPassword}
-                            />
-                        </View>
-                        <View style = {ChangePasswordStyle.borderBottom}>
-                            <Icon size = {18} name = "password" style = {ChangePasswordStyle.inputIcon}></Icon>
-                            <TextInput
-                                placeholder = {I18n("SETTINGS_REPEAT_NEW_PASSWORD")}
-                                style = {[ChangePasswordStyle.input]}
-                                returnKeyType = "next"
-                                maxLength = {30}
-                                autoCorrect = {false}
-                                onChangeText = {this.onChange.bind(this, 'alterPassword')}
-                                underlineColorAndroid = "transparent"
-                                value = {this.state.alterPassword}
-                            />
-                        </View>
-
-                    </View>
+                    </KeyboardAwareScrollView>
 
                     <View style={ChangePasswordStyle.btnContainer}>
                         <Button

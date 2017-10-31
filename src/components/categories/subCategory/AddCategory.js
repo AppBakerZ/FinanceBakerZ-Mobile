@@ -17,15 +17,21 @@ class AddCategory extends Component{
     constructor(props){
         super(props);
         this.state = {
-            parent: '',
+            parent: null,
             renderCategoryIcon: this.renderCategoryIcon()
         };
     }
     submit(){
         let {name, icon, parent} = this.state;
+        if(parent) {
+            parent = {id: parent};
+            let parentExists = Meteor.collection('categories').findOne({_id: parent.id});
+            if(parentExists) {
+                parent.name = parentExists.name
+            }
+        }
         if(name && icon){
           icon = icon.value;
-
           Meteor.call('categories.insert', {
             category: {
                 name,
@@ -72,7 +78,7 @@ class AddCategory extends Component{
 
     getParentCategory(){
         let categories = this.props.categories;
-        let category = categories.map((categoryParent, i) =>  <Picker.Item key={i} label={categoryParent.name} value={i === 0 ? '' : categoryParent.name}/>);
+        let category = categories.map((categoryParent, i) =>  <Picker.Item key={i} label={categoryParent.name} value={i === 0 ? '' : categoryParent._id}/>);
         return(
             <Picker
                 style={SubCategoryStyles.picker}
@@ -107,9 +113,8 @@ class AddCategory extends Component{
             <ViewContainer style = {SubCategoryStyles.addCategoryMain}>
                 <Image source = {require('FinanceBakerZ/src/images/app-background.png')} style={SubCategoryStyles.backgroundImage}>
                     <View style = {SubCategoryStyles.addCategorySub}>
-                        <ViewContainer  style = {SubCategoryStyles.addCategoryContainer}>
+                        <View style = {SubCategoryStyles.addCategoryContainer}>
                             <View style={SubCategoryStyles.categoryNameField}>
-
                                 <KeyboardAvoidingView behavior={'padding'}>
                                     <Text style={SubCategoryStyles.selectParentText}>{I18n("CATEGORIES_CATEGORY_NAME")}</Text>
                                     <TextInput
@@ -121,10 +126,9 @@ class AddCategory extends Component{
                                         onChangeText={name => this.setState({name})}
                                     />
                                 </KeyboardAvoidingView>
-
                             </View>
+                        </View>
 
-                        </ViewContainer>
                         <View style={SubCategoryStyles.SelectCategoryIcon}>
                             <Text style={SubCategoryStyles.selectParentText}>{I18n("CATEGORIES_CATEGORY_ICON")}</Text>
                             <View style={SubCategoryStyles.categorySelectionIcon}>
@@ -132,6 +136,7 @@ class AddCategory extends Component{
                                 <Icon size={10} name="down-arrow" style={SubCategoryStyles.iconRight} />
                             </View>
                         </View>
+
                         <View style={SubCategoryStyles.CategoryIconList}>
                             <ScrollView>
                                 <View>
@@ -141,11 +146,20 @@ class AddCategory extends Component{
                                 </View>
                             </ScrollView>
                         </View>
+
+
                         <View style={SubCategoryStyles.iconParent}>
-                            {(Platform.OS !== 'ios') ? <View><Text style={SubCategoryStyles.selectParentText}>{I18n("CATEGORIES_PARENT_CATEGORY")}</Text>{this.getParentCategory()}</View> :
-                                <TouchableOpacity style={SubCategoryStyles.ParentCategory} activeOpacity={0.75}
-                                                  onPress={() => this.refs.modal.open()}>
-                                    <Text style={[SubCategoryStyles.textBold, SubCategoryStyles.textLeft]}></Text>
+                            {(Platform.OS !== 'ios') ?
+                                <View style={SubCategoryStyles.SelParentCategoryLabel}>
+                                    <Text style={SubCategoryStyles.selectParentText}>{I18n("CATEGORIES_PARENT_CATEGORY")}</Text>
+                                    {this.getParentCategory()}
+                                </View>
+                                :
+                                <TouchableOpacity
+                                    style={SubCategoryStyles.ParentCategory}
+                                    activeOpacity={0.75}
+                                    onPress={() => this.refs.modal.open()}>
+                                    <Text style={[SubCategoryStyles.textBold, SubCategoryStyles.textLeft]}/>
                                     <View style={SubCategoryStyles.categorySelectionParentIcon}>
                                         <Text style={[SubCategoryStyles.textBold, SubCategoryStyles.textLeft]}>{this.state.parent || 'Select Parent Category'}</Text>
                                         <Icon size={10} name="down-arrow" style={SubCategoryStyles.iconRight}/>

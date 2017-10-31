@@ -3,7 +3,7 @@ import { View, Text, Image,  TextInput, ScrollView, TouchableOpacity, KeyboardAv
 import { LoginStyles } from 'FinanceBakerZ/src/components/login/LoginStyle';
 import ViewContainer from 'FinanceBakerZ/src/components/viewContainer/viewContainer';
 import Button from 'FinanceBakerZ/src/components/button/Button';
-import {showAlert} from 'FinanceBakerZ/src/customLibrary';
+import {showAlert, validateEmail} from 'FinanceBakerZ/src/customLibrary';
 
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
 
@@ -14,8 +14,8 @@ export default class Login extends Component {
         super(props);
 
         this.state = {
-            usernameOrEmail: 'raza2022',
-            password: '123456',
+            email: '',
+            password: '',
             loading: false
         };
     }
@@ -23,28 +23,29 @@ export default class Login extends Component {
         this.setState({[stateName]: val});
     }
     onSubmit(){
-        const {usernameOrEmail, password} = this.state;
+        let user;
+        const {email, password} = this.state;
         this.setState({loading: true});
+        if(email.length && password.length){
+            if(validateEmail(email)) {
+                user = {email: email};
+                Meteor.loginWithPassword(user, password, (err) => {
+                    if(err){
+                        showAlert('Error', err.reason);
+                        this.setState({loading: false});
+                    }else{
+                        this.setState({loading: false});
+                        var useraccount = {account: {owner: Meteor.user()._id}};
+                        Meteor.call('profileAssets', useraccount, function (err, result) {
+                        });
+                    }
+                });
+            }
+            else {
+                showAlert('Invalid format', 'Invalid email format.');
+                this.setState({loading: false});
+            }
 
-        if(usernameOrEmail.length && password.length){
-            let user;
-            if (typeof usernameOrEmail === 'string')
-                if (usernameOrEmail.indexOf('@') === -1)
-                    user = {username: usernameOrEmail};
-                else
-                    user = {email: usernameOrEmail};
-
-            Meteor.loginWithPassword(user, password, (err) => {
-                if(err){
-                    showAlert('Error', err.reason);
-                    this.setState({loading: false});
-                }else{
-                    this.setState({loading: false});
-                    var useraccount = {account: {owner: Meteor.user()._id}};
-                    Meteor.call('profileAssets', useraccount, function (err, result) {
-                    });
-                }
-            });
         }else {
             showAlert('Warning', 'All fields are required.');
             this.setState({loading: false});
@@ -64,22 +65,23 @@ export default class Login extends Component {
                     <View style={LoginStyles.formContainer}>
                         <KeyboardAvoidingView>
                             <View style={LoginStyles.borderBottom}>
-                                <Icon size={18}  name="person" style={LoginStyles.inputIcon} ></Icon>
+                                <Icon size={18}  name="email" style={LoginStyles.inputIcon}/>
                                 <TextInput
-                                    placeholder='Username'
+                                    placeholder='Email'
                                     style={[LoginStyles.input]}
+                                    keyboardType="email-address"
                                     returnKeyType="next"
                                     onSubmitEditing={() => {(this.state.password.length ?  this.onSubmit.bind(this)() : this.pass.focus() )}}
                                     maxLength = {30}
-                                    value={this.state.usernameOrEmail}
+                                    value={this.state.email}
                                     autoCorrect={false}
-                                    onChangeText={this.onChange.bind(this, 'usernameOrEmail')}
+                                    onChangeText={this.onChange.bind(this, 'email')}
                                     ref={(ref) => this.username = ref}
                                     underlineColorAndroid="transparent"
                                     />
                             </View>
                             <View style={LoginStyles.borderBottom}>
-                                <Icon size={18} name="email"  style={LoginStyles.inputIcon} ></Icon>
+                                <Icon size={18} name="password"  style={LoginStyles.inputIcon}/>
                                 <TextInput
                                     placeholder='Password'
                                     style={LoginStyles.input}
@@ -90,7 +92,7 @@ export default class Login extends Component {
                                     maxLength = {20}
                                     autoCorrect={false}
                                     onChangeText={this.onChange.bind(this, 'password')}
-                                    onSubmitEditing={() => {(this.state.usernameOrEmail.length ? this.onSubmit.bind(this)() : this.username.focus() )}}
+                                    onSubmitEditing={() => {(this.state.email.length ? this.onSubmit.bind(this)() : this.username.focus() )}}
                                     underlineColorAndroid="transparent"
                                 />
                             </View>

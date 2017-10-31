@@ -114,7 +114,7 @@ export default class CreateProject extends Component {
         <ViewContainer>
           <Image source={require('FinanceBakerZ/src/images/app-background.png')} style={ProjectsStyles.backgroundImage}>
             <ScrollView>
-              <View style={[ProjectsStyles.inputProjectNameCon, ProjectsStyles.inputBorderBottom]}>
+              <View style={[ProjectsStyles.inputBorderBottom, ProjectsStyles.inputContainer]}>
                 <KeyboardAvoidingView>
                   <TextInput
                       placeholder={I18n('PROJECTS_PROJECT_NAME')}
@@ -123,12 +123,11 @@ export default class CreateProject extends Component {
                       autoCorrect={false}
                       onChangeText={this.onChange.bind(this, 'name')}
                       underlineColorAndroid="transparent"
-                      value={this.state.name}
-                  />
+                      value={this.state.name}/>
                 </KeyboardAvoidingView>
               </View>
 
-              <View style={[ProjectsStyles.inputProjectNameCon, ProjectsStyles.inputBorderBottom]}>
+              <View style={[ProjectsStyles.inputBorderBottom, ProjectsStyles.inputContainer]}>
                 <KeyboardAvoidingView>
                   <TextInput
                       placeholder={I18n('PROJECTS_PROJECT_DESCRIPTION')}
@@ -137,12 +136,11 @@ export default class CreateProject extends Component {
                       autoCorrect={false}
                       onChangeText={this.onChange.bind(this, 'description')}
                       underlineColorAndroid="transparent"
-                      value={this.state.description}
-                  />
+                      value={this.state.description}/>
                 </KeyboardAvoidingView>
               </View>
 
-              <View style={[ProjectsStyles.inputClientName, ProjectsStyles.inputBorderBottom]}>
+              <View style={[ProjectsStyles.inputBorderBottom, ProjectsStyles.inputContainer]}>
                 <KeyboardAvoidingView>
                   <TextInput
                       placeholder={I18n('PROJECTS_CLIENT_NAME')}
@@ -151,26 +149,21 @@ export default class CreateProject extends Component {
                       autoCorrect={false}
                       onChangeText={this.onChange.bind(this, 'clientName')}
                       value={this.state.clientName}
-                      underlineColorAndroid="transparent"
-                  />
+                      underlineColorAndroid="transparent"/>
                 </KeyboardAvoidingView>
               </View>
 
-              <View style={[ProjectsStyles.inputTypeCon, ProjectsStyles.inputBorderBottom]}>
-                {(Platform.OS !== 'ios') ?
-                    <View style={ProjectsStyles.statusTextView}>
-                      <Text style={ProjectsStyles.BankText}>{I18n('PROJECTS_PROJECT_TYPE')}</Text>
-                      {this.renderPicker('type')}
-                    </View>
-                    :
-                    <TouchableOpacity style={ProjectsStyles.projectCardTxtAndIcon} activeOpacity={0.75} onPress={() => {this.refs.typesModal.open(); this.setState({modalVisible: true})}}>
-                      <Text style={[ProjectsStyles.BankText, ProjectsStyles.textLeft]}>{I18n('PROJECTS_PROJECT_TYPE')}</Text>
-                      <Icon size={10} name="down-arrow" style={ProjectsStyles.iconRight} />
-                    </TouchableOpacity>
+              <View style={[ProjectsStyles.statusTextView, ProjectsStyles.inputBorderBottom]}>
+                <Text style={ProjectsStyles.BankText}>{I18n('PROJECTS_PROJECT_TYPE')}</Text>
+                {(Platform.OS !== 'ios') ? this.renderPicker('type') :
+                  <TouchableOpacity style={ProjectsStyles.projectCardTxtAndIcon} activeOpacity={0.75} onPress={() => {this.refs.typesModal.open(); this.setState({modalVisible: true})}}>
+                    <Text style={[ProjectsStyles.BankText, ProjectsStyles.pickerBtnText]}>{I18n('PROJECTS_PROJECT_TYPE')}</Text>
+                    <Icon size={10} name="down-arrow" style={ProjectsStyles.iconRight} />
+                  </TouchableOpacity>
                 }
               </View>
 
-              <View style={[ProjectsStyles.inputAmountCon, ProjectsStyles.inputBorderBottom]}>
+              <View style={[ProjectsStyles.inputBorderBottom, ProjectsStyles.inputContainer]}>
                 <KeyboardAvoidingView>
                   <TextInput
                       placeholder={I18n('PROJECTS_PROJECT_AMOUNT')}
@@ -180,32 +173,26 @@ export default class CreateProject extends Component {
                       onChangeText={this.onChange.bind(this, 'amount')}
                       value={this.state.amount}
                       underlineColorAndroid="transparent"
-                      keyboardType="numeric"
-                  />
+                      keyboardType="numeric"/>
                 </KeyboardAvoidingView>
               </View>
 
-              <View style={[ProjectsStyles.inputPickerCon, ProjectsStyles.inputBorderBottom]}>
-                {(Platform.OS !== 'ios') ?
-                    <View style={ProjectsStyles.statusTextView}>
-                      <Text style={ProjectsStyles.BankText}>{I18n('PROJECTS_STATUS')}</Text>
-                      {this.renderPicker('status')}
-                    </View>
-                    :
-                    <TouchableOpacity style={ProjectsStyles.projectCardTxtAndIcon} activeOpacity={0.75} onPress={() => {this.refs.statusModal.open(); this.setState({modalVisible: true})}}>
-                      <Text style={[ProjectsStyles.BankText, ProjectsStyles.textLeft]}>{this.state.status ? findStatusLabel(this.state.status) : 'Select Status'}</Text>
-                      <Icon size={10} name="down-arrow" style={ProjectsStyles.iconRight} />
-                    </TouchableOpacity>
+              <View style={[ProjectsStyles.statusTextView, ProjectsStyles.inputBorderBottom]}>
+                <Text style={ProjectsStyles.BankText}>{I18n('PROJECTS_STATUS')}</Text>
+                {(Platform.OS !== 'ios') ? this.renderPicker('status') :
+                  <TouchableOpacity style={ProjectsStyles.projectCardTxtAndIcon} activeOpacity={0.75} onPress={() => {this.refs.statusModal.open(); this.setState({modalVisible: true})}}>
+                    <Text style={[ProjectsStyles.BankText, ProjectsStyles.pickerBtnText]}>{this.state.status ? findStatusLabel(this.state.status) : 'Select Status'}</Text>
+                    <Icon size={10} name="down-arrow" style={ProjectsStyles.iconRight} />
+                  </TouchableOpacity>
                 }
               </View>
 
-              <View style={[ProjectsStyles.inputDateCon, ProjectsStyles.inputBorderBottom]}>
-                <TouchableOpacity style={ProjectsStyles.projectCardTxtAndIcon} activeOpacity={0.75} onPress={() => {Platform.OS !== 'ios' ? this.showPicker.bind(this, 'startAt', {date: this.state.date})() : this.showModal.bind(this)()}}>
+              <View style={[ProjectsStyles.inputBorderBottom]}>
+                <TouchableOpacity style={[ProjectsStyles.projectCardTxtAndIcon, ProjectsStyles.datePickerBtn]} activeOpacity={0.75} onPress={() => {Platform.OS !== 'ios' ? this.showPicker.bind(this, 'startAt', {date: this.state.date})() : this.showModal.bind(this)()}}>
                   <Text style={[ProjectsStyles.BankText, ProjectsStyles.inputDateSelected]}>{this.state.startAt ? formatDate({type: 'getCustomDate', date: this.state.startAt, format: 'MMMM DD, YYYY'}) : I18n('PROJECTS_START_DATE')}</Text>
                   <Icon size={10} name="down-arrow" style={ProjectsStyles.iconRight} />
                 </TouchableOpacity>
               </View>
-              <View style={ProjectsStyles.bottomCon}/>
             </ScrollView>
           </Image>
 

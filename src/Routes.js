@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, Platform} from 'react-native';
+import {Text, Platform, TouchableOpacity, Image, View} from 'react-native';
 
 
 import LoginScreen from 'FinanceBakerZ/src/screens/auth/Login';
@@ -28,6 +28,8 @@ import SettingsScreen from 'FinanceBakerZ/src/screens/Settings';
 import ChangePasswordScreen from 'FinanceBakerZ/src/components/settings/changePassword/ChangePassword';
 import AccountSettingsScreen from 'FinanceBakerZ/src/components/settings/accountSettings/AccountSettings';
 import PersonalInformationScreen from 'FinanceBakerZ/src/components/settings/personalInformation/PersonalInformation';
+import ReportsScreen from 'FinanceBakerZ/src/screens/Reports';
+import ReportSelection from 'FinanceBakerZ/src/components/reports/reportSelection/ReportSelection';
 import Icon from 'FinanceBakerZ/src/icons/CustomIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import DrawerItems, {DrawerItemIcon} from 'FinanceBakerZ/src/components/drawerItems/DrawerItems';
@@ -56,50 +58,70 @@ export const Auth = StackNavigator({
 
 
 // The navigation prop has functions like setParams, goBack, and navigate.
-const header = ({ navigation }) => {
+const header = ({ navigation, screenProps }) => {
   let {state, navigate} = navigation;
   let headerLeft  = (
-      <Icon  name="menu"
-             color="#45A27A"
-             size={32}
-             style={{marginLeft: 5, padding: 10}}
-             onPress={() => {
-               navigate('DrawerOpen')
-             }}
-      />
+      <TouchableOpacity onPress={() => navigate('DrawerOpen')} activeOpacity={0.7}>
+        <MaterialIcons name="menu" size={32} color='#45A27A' style={{marginLeft: 5, padding: 10}}/>
+      </TouchableOpacity>
   );
 
   let headerTitle  = (
-      <Text style={{fontSize: 20, fontFamily: 'QuicksandBold-Regular', color: '#00562E', paddingLeft: 20}}>{(state.routeName != 'Dashboard') ? state.routeName : ''}</Text>
+      <View style={{flex: 1, width: '95%', alignItems: 'center', justifyContent: 'center'}}>
+        <Text style={{fontSize: 20, fontFamily: 'QuicksandBold-Regular', color: '#00562E'}}>{state.routeName}</Text>
+      </View>
+  );
+
+  let { user } = screenProps;
+  let headerRight = (
+      <TouchableOpacity
+          style={{width: 45, height: 45, marginRight: 10}}
+          activeOpacity={0.7}
+          onPress={() => {navigate('Settings')}}
+      >
+        <Image style={{width: '100%', height: '100%', borderRadius: Platform.OS === 'ios' ? 25 : 100}}
+               source={user.profile.avatar && user.profile.avatar.length ? {uri: user.profile.avatar} : require('./images/default-avatar.gif')}/>
+      </TouchableOpacity>
   );
 
   let  headerStyle  = {
-    height: 70,
+    height: 60,
     backgroundColor: '#ffffff'
   };
 
-  return { headerLeft , headerTitle , headerStyle };
+  return { headerLeft , headerTitle , headerStyle, headerRight };
 };
 
 function nestingHeaders(routeName, renderRightIcon) {
 
-  let header = ({navigation}) => {
+  let header = ({navigation, screenProps}) => {
     let headerRight ;
-    let {state} = navigation;
+    let {state, navigate} = navigation;
     if(renderRightIcon && renderRightIcon.iconChecked){
-      headerRight  =  (<Icon
-          name="checked"
-          size={28}
-          style={{paddingRight: 15}}
-          onPress={() => {state.params.submit()}}
-      />);
-    }else if (renderRightIcon && renderRightIcon.iconDelete) {
+      headerRight  =  (<MaterialIcons name="check" size={30} style={{paddingRight: 15}} onPress={() => {state.params.submit()}}/>);
+    } else if (renderRightIcon && renderRightIcon.iconDelete) {
       headerRight  =  (<MaterialIcons
           name="delete"
           size={35}
-          style={{paddingRight: 15,}}
+          style={{paddingRight: 15}}
           onPress={() => {state.params.submit()}}
       />);
+    } else if (renderRightIcon && renderRightIcon.userAvatar) {
+      let { user } = screenProps;
+      headerRight = (
+          <TouchableOpacity
+              style={{width: 40, height: 40, marginRight: 10}}
+              activeOpacity={0.7}
+              onPress={() => {navigate('Settings')}}
+          >
+            <Image style={{width: '100%', height: '100%', borderRadius: Platform.OS === 'ios' ? 25 : 100}}
+                   source={user.profile.avatar && user.profile.avatar.length ? {uri: user.profile.avatar} : require('./images/default-avatar.gif')}/>
+          </TouchableOpacity>
+      );
+    } else if (renderRightIcon && renderRightIcon.empty) {
+      headerRight = (
+          <View style={{width: 50, height: 40}}/>
+      );
     }
     return {
       title: (state.params && state.params.myTitle) || routeName,
@@ -107,10 +129,13 @@ function nestingHeaders(routeName, renderRightIcon) {
       headerTitleStyle: {
         fontWeight: Platform.OS === 'ios' ? '500' : '200',
         fontFamily: 'QuicksandBold-Regular',
-        fontSize: 20
+        fontSize: 20,
+        width: '95%',
+        textAlign: 'center',
+        marginLeft: -1
       },
       headerStyle: {
-        height: 70,
+        height: 60,
         backgroundColor: '#fff'
       },
       headerTintColor: '#00562E'
@@ -140,7 +165,7 @@ const ProjectsStack = StackNavigator({
   },
   CreateProject: {
     screen: CreateProject,
-    navigationOptions: nestingHeaders('Create Project')
+    navigationOptions: nestingHeaders('Create Project', {userAvatar: true})
   },
   DetailProject:{
     screen: DetailProject,
@@ -148,7 +173,7 @@ const ProjectsStack = StackNavigator({
   },
   UpdateProject: {
     screen: UpdateProject,
-    navigationOptions: nestingHeaders('Update Project')
+    navigationOptions: nestingHeaders('Update Project', {userAvatar: true})
   },
   ProjectSelection: {
     screen: ProjectSelectionScreen,
@@ -160,7 +185,6 @@ const TransactionsStack = StackNavigator({
   Transactions: {
     screen: TransactionsScreen,
     navigationOptions: header
-
   },
   Selection: {
     screen: TransactionSelection,
@@ -172,7 +196,7 @@ const TransactionsStack = StackNavigator({
   },
   UpdateTransaction: {
     screen: AddOrUpdateTransaction,
-    navigationOptions: nestingHeaders('Transaction')
+    navigationOptions: nestingHeaders('Transaction', {userAvatar: true})
   }
 });
 
@@ -183,7 +207,7 @@ const AccountsStack = StackNavigator({
   },
   AddAccount: {
     screen: AddAccount,
-    navigationOptions: nestingHeaders('Add Account')
+    navigationOptions: nestingHeaders('Add Account', {userAvatar: true})
   },
   UpdateAccount:{
     screen: UpdateAccount,
@@ -198,7 +222,7 @@ const CategoriesStack = StackNavigator({
   },
   SubCategories: {
     screen: SubCategory,
-    navigationOptions: nestingHeaders('Categories')
+    navigationOptions: nestingHeaders('Categories', {userAvatar: true})
   },
   UpdateCategory: {
     screen: UpdateCategory,
@@ -206,7 +230,7 @@ const CategoriesStack = StackNavigator({
   },
   AddCategory : {
     screen : AddCategory,
-    navigationOptions : nestingHeaders('Add Category')
+    navigationOptions : nestingHeaders('Add Category', {userAvatar: true})
   }
 });
 
@@ -217,15 +241,26 @@ const SettingsStack = StackNavigator({
   },
   ChangePassword: {
     screen: ChangePasswordScreen,
-    navigationOptions: nestingHeaders('Change Password')
+    navigationOptions: nestingHeaders('Change Password', {empty: true})
   },
   AccountSettings: {
     screen: AccountSettingsScreen,
-    navigationOptions: nestingHeaders('Account Settings')
+    navigationOptions: nestingHeaders('Account Settings', {empty: true})
   },
   PersonalInformation: {
     screen: PersonalInformationScreen,
-    navigationOptions: nestingHeaders('Personal Info')
+    navigationOptions: nestingHeaders('Personal Info', {empty: true})
+  }
+});
+
+const ReportsStack = StackNavigator({
+  Reports: {
+    screen: ReportsScreen,
+    navigationOptions: header
+  },
+  Selection: {
+    screen: ReportSelection,
+    navigationOptions: nestingHeaders('Selection', {iconChecked: true})
   }
 });
 
@@ -254,6 +289,10 @@ export const Drawer = DrawerNavigator({
   Settings: {
     screen: SettingsStack,
     drawer: DrawerItemIcon('setting')
+  },
+  Reports: {
+    screen: ReportsStack,
+    drawer: DrawerItemIcon('sign-in')
   },
   Logout: {
     screen: SettingsStack,

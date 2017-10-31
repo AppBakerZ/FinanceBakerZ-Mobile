@@ -50,8 +50,8 @@ export default class ProjectSelectionScreen extends Component{
 
   onChangeFilter(name, val){
     let copyQuery = updatedQuery.get('query'),
-      label = name,
-      filter = _.extend(this.state.filter, this.state.filter);
+        label = name,
+        filter = _.extend(this.state.filter, this.state.filter);
     filter[label] = val;
     if(label == 'client.name'){
       filter['client']['name'] = val;
@@ -72,8 +72,8 @@ export default class ProjectSelectionScreen extends Component{
     return(
       <Picker
           style={ProjectSelectionStyles.picker}
-        selectedValue={this.state.filter.status}
-        onValueChange={this.onChangeFilter.bind(this, 'status')}>
+          selectedValue={this.state.filter.status}
+          onValueChange={this.onChangeFilter.bind(this, 'status')}>
         {statuses}
       </Picker>
     );
@@ -87,53 +87,54 @@ export default class ProjectSelectionScreen extends Component{
     return(
       <ViewContainer style={ProjectSelectionStyles.container}>
         <View style={ProjectSelectionStyles.filterShowContainer}>
-          <Text style={ProjectSelectionStyles.text}>{I18n('PROJECTS_PROJECT_NAME')}: {filter.name}</Text>
-          <Text style={ProjectSelectionStyles.text}>{I18n('PROJECTS_CLIENT_NAME')}: {filter.client.name}</Text>
-          <Text style={ProjectSelectionStyles.text}>{I18n('PROJECTS_STATUS')} {findStatusLabel(filter.status)}</Text>
+          <View style={ProjectSelectionStyles.filterShowText}>
+            <Text style={ProjectSelectionStyles.text}>{I18n('PROJECTS_PROJECT_NAME')}: {filter.name}</Text>
+          </View>
+          <View style={ProjectSelectionStyles.filterShowText}>
+            <Text style={ProjectSelectionStyles.text}>{I18n('PROJECTS_CLIENT_NAME')}: {filter.client.name}</Text>
+          </View>
+          <View style={ProjectSelectionStyles.filterShowText}>
+            <Text style={ProjectSelectionStyles.text}>{I18n('PROJECTS_STATUS')} {findStatusLabel(filter.status)}</Text>
+          </View>
         </View>
         <View style={ProjectSelectionStyles.filterCon}>
-          <View style={ProjectSelectionStyles.projectNameCon}>
+          <View style={ProjectSelectionStyles.inputContainer}>
             <KeyboardAvoidingView>
-              <View style={ProjectSelectionStyles.inputContainer}>
-                <TextInput
-                  placeholder={I18n('PROJECTS_PROJECT_NAME')}
-                  style={ProjectSelectionStyles.input}
-                  returnKeyType="next"
-                  maxLength = {30}
-                  autoCorrect={false}
-                  onChangeText={this.onChangeFilter.bind(this, 'name')}
-                  underlineColorAndroid="transparent"
-                  value={filter.name}
-                />
-              </View>
+              <TextInput
+                placeholder={I18n('PROJECTS_PROJECT_NAME')}
+                style={ProjectSelectionStyles.input}
+                returnKeyType="next"
+                maxLength = {30}
+                autoCorrect={false}
+                onChangeText={this.onChangeFilter.bind(this, 'name')}
+                underlineColorAndroid="transparent"
+                value={filter.name}
+              />
             </KeyboardAvoidingView>
           </View>
-          <View style={ProjectSelectionStyles.clientNameCon}>
+          <View style={ProjectSelectionStyles.inputContainer}>
             <KeyboardAvoidingView>
-              <View style={ProjectSelectionStyles.inputContainer}>
-                <TextInput
-                  placeholder={I18n('PROJECTS_CLIENT_NAME')}
-                  style={ProjectSelectionStyles.input}
-                  maxLength = {30}
-                  autoCorrect={false}
-                  onChangeText={this.onChangeFilter.bind(this, 'client.name')}
-                  underlineColorAndroid="transparent"
-                  value={filter.client.name}
-                />
-              </View>
+              <TextInput
+                placeholder={I18n('PROJECTS_CLIENT_NAME')}
+                style={ProjectSelectionStyles.input}
+                maxLength = {30}
+                autoCorrect={false}
+                onChangeText={this.onChangeFilter.bind(this, 'client.name')}
+                underlineColorAndroid="transparent"
+                value={filter.client.name}
+              />
             </KeyboardAvoidingView>
           </View>
           <View style={ProjectSelectionStyles.filterStatus}>
             <Text style={[ProjectSelectionStyles.text, ProjectSelectionStyles.textLeft]}>{I18n('PROJECTS_STATUS')}</Text>
             {(Platform.OS !== 'ios') ? this.renderPicker() :
               <TouchableOpacity style={ProjectSelectionStyles.bankCardTxtAndIcon} activeOpacity={0.75} onPress={() => this.refs.modal.open()}>
-                <Text style={[ProjectSelectionStyles.text, ProjectSelectionStyles.textLeft]}>{findStatusLabel(filter.status) || 'All'}</Text>
+                <Text style={[ProjectSelectionStyles.text, ProjectSelectionStyles.textLeft, ProjectSelectionStyles.statusBtnText]}>{findStatusLabel(filter.status) || 'All'}</Text>
                 <Icon size={10} name="down-arrow" style={ProjectSelectionStyles.iconRight} />
               </TouchableOpacity>
             }
           </View>
         </View>
-        <View style={ProjectSelectionStyles.bottomCon}></View>
         <Modal style={ProjectSelectionStyles.modal} position={"bottom"} ref={"modal"} swipeArea={20}>
           <View style={ProjectSelectionStyles.renderPickerCon}>
             {this.renderPicker()}

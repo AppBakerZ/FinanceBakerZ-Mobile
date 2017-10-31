@@ -6,6 +6,7 @@ import SplashScreen from 'react-native-smart-splash-screen';
 import Meteor, { createContainer } from 'react-native-meteor';
 
 const SERVER_URL = 'ws://development-financebakerz.herokuapp.com/websocket';
+//const SERVER_URL = 'ws://192.168.100.21:3000/websocket';
 
 class FinanceBakerZ extends Component {
 
@@ -14,7 +15,7 @@ class FinanceBakerZ extends Component {
     SplashScreen.close({
       animationType: SplashScreen.animationType.scale,
       duration: 850,
-      delay: 500,
+      delay: 500
     })
   }
 
@@ -23,7 +24,7 @@ class FinanceBakerZ extends Component {
     }
     render() {
         console.log('this.props.user ', this.props.user);
-        return this.props.user ? <Drawer /> : <Auth />
+        return this.props.user ? <Drawer screenProps={{...this.props}}/> : <Auth />
     }
 }
 

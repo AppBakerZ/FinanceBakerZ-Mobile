@@ -15,6 +15,7 @@ import CategoryIcon from 'FinanceBakerZ/src/icons/CategoryIcon';
 import ImagePicker from 'react-native-image-picker';
 import { RNS3 } from 'react-native-aws3';
 import Settings from 'FinanceBakerZ/settings.json';
+import _ from 'underscore';
 
 class AddOrUpdateTransaction extends Component{
   constructor(props){
@@ -599,6 +600,10 @@ class AddOrUpdateTransaction extends Component{
 
   createIncome(){
     let {account, amount, receivedAt, receivedTime, creditType, project, projects} = this.state;
+    if(creditType === "project" && ((project === null) || !project)){
+      showAlert('Error', 'You must select a project.');
+      return false;
+    }
     account = {_id: account};
     type = 'income';
     let accountExists = Meteor.collection('accounts').findOne({_id: account._id});
@@ -729,7 +734,13 @@ class AddOrUpdateTransaction extends Component{
 
   render(){
     let {selectedTransaction} = this.props.navigation.state.params;
-    let {projects, accounts, types, loading, modalVisible, categories} = this.state;
+    let {projects, accounts, types, loading, modalVisible, categories, project} = this.state;
+    if(!project){
+      let index = _.findIndex(projects, { _id: null });
+      if(index === -1) {
+        projects.unshift({_id: null, name: 'Select Project'});
+      }
+    }
     let data = {selectedTransaction, projects, accounts, types, categories};
 
     if(!loading){
